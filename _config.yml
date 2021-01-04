@@ -4,10 +4,10 @@
 # ---------------------------------------------------------------
 
 # Site
-title: Nikhil's Cybersec Blog
-subtitle: Walkthroughs for HTB retired machines,Vulnhub and other CTF Challenges.
-description: Cyber Security Enthusiast | eJPT
-author: Nikhil
+title: Pentest Blog
+subtitle: CTF walkthroughs from Try Hack Me, Hack The Box, and Cyber Sec Labs.
+description: Penetration
+author: Justin
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: en
 date_format: '%Y-%m-%d'
