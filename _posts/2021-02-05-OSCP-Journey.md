@@ -1,7 +1,7 @@
 ---
-title:     "Hack The Box - Poison"
-tags: [freebsd,medium,vnc,lfi,race_condition]
-categories: HackTheBox OSCP-Like
+title:     "Tips to Conquer the OSCP"
+tags: [oscp,tryharder,oscpjourney]
+categories: General
 ---
 
 ![https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-poison/Untitled.png](https://raw.githubusercontent.com/0xw0lf/0xw0lf.github.io/master/img/htb-poison/Untitled.png)
