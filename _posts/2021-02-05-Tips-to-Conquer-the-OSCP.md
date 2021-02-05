@@ -64,11 +64,11 @@ I started my exam at **6:00pm** on a Friday (January 29th, 2021 to be exact). As
 - **10:30pm** -- Switched to a different machine. Fully rooted a 20 point machine (45 points down, 25 points to go).
 - **10:30pm - 11:30pm** -- Went back to the 10 point machine. Guess who STILL couldn't figure it out? Yep, yours truly.
 - **11:45pm - 6:15am** -- Went to sleep, but that's both a lie and an overstatement. There wasn't much "sleeping" as it mainly consisted of me laying there angry with myself over the 10 point machine. I busted out the "Critical Names to Call Yourself When You're Really Angry For Not Figuring Something Out and Laying in Bed Wide-Awake" book. Even though I had plenty of time, I was being extremely critical on myself since the "easy" machine was supposed to be, well, easy. In addition to self-inflicted verbal wounds, I started to have an existetial crisis:
-- Why couldn't I figure this out?
-- What am I doing with my life?
-- Is this even what I'm supposed to be doing?
-- Is cereal soup; why or why not?
-- Just who killed JFK?!?!
+  - Why couldn't I figure this out?
+  - What am I doing with my life?
+  - Is this even what I'm supposed to be doing?
+  - Is cereal soup; why or why not?
+  - Just who killed JFK?!?!
 - **6:30am** -- Decided to quit being so critical, suck it up, and attack the 25 point machine.
 - **7:00am - 1:00pm** -- Found a good vulnerability, but otherwise got nowhere with a low-privilege shell on the hard machine. Existential Crisis Part Deux sets in. This is where I take my first real break, 0/10 would not recommend. Frequent breaks are a *must*!
 - **1:30pm** -- While on break, the clouds opened and a bright white light appeared with my beautiful, angelic inner-voice saying, "Justin, you know you found this vulnerability, why not try to get a shell by chaining the `<REDACTED>` vulnerability on port `<REDACTED>` to try and enumerate the `<REDACTED>` service on port `<REDACTED>` using the `<REDACTED>` method?"
