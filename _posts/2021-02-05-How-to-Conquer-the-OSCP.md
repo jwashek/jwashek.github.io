@@ -112,7 +112,9 @@ I started the report at about **4:00pm** on Saturday, January 30th or about 22 h
 #### Enumeration Tricks
 The biggest trick that I can give while enumerating is to use the proper keywords to your advantage. For example, if you found a service called VulnerableService 2.0.21, you can simply Google for:
 
-> VulnerableService 2.0.21 exploit
+```
+VulnerableService 2.0.21 exploit
+```
 
 Is that not giving you the results you want? Try something like:
 
