@@ -47,7 +47,7 @@ During the buffer overflow, however, is where my problems came crashing through 
 
 For some odd reason the night before my exam, I had a soul-altering revelation:
 
-> "Justin...", I said, "how about you take a snapshot in case the hell hounds are released against your whole entire existence before the exam?"
+> "Justin..." I said, "how about you take a snapshot in case the hell hounds are released against your whole entire existence before the exam?"
 
 Luckily, I was able to restore from a previous snapshot and like some sort of witchcraft, everything worked like nothing happened. Given the troubleshooting before I restored my snapshot (i.e., attempting to fix the dependency errors, installing Python modules and Ruby gems, etc.) I had wasted about 1 hour.
 
@@ -64,7 +64,7 @@ I started my exam at **6:00pm** on a Friday (January 29th, 2021 to be exact). As
 - **10:00pm** -- Yes, two hours later on the EASY machine... and I still didn't get anywhere. Justin, what are you doing, bro?!
 - **10:30pm** -- Switched to a different machine. Fully rooted a 20 point machine (45 points down, 25 points to go).
 - **10:30pm - 11:30pm** -- Went back to the 10 point machine. Guess who STILL couldn't figure it out? Yep, yours truly.
-- **11:45pm** -- Went to sleep, but that's both a lie and an overstatement. There wasn't much "sleeping" as it mainly consisted of me laying there angry with myself over the 10 point machine. I busted out the "Critical Names to Call Yourself When You're Really Angry For Not Figuring Something Out and Laying in Bed Wide-Awake" book. Even though I had plenty of time, I was being extremely critical on myself since the "easy" machine was supposed to be, well, easy. In addition to self-inflicted verbal wounds, I started to have an existential crisis:
+- **11:45pm** -- Went to sleep, but that's both a lie and an overstatement. There wasn't much "sleeping" going on as it mainly consisted of me laying there angry with myself over the 10 point machine. I busted out the "Critical Names to Call Yourself When You're Really Angry For Not Figuring Something Out and Laying in Bed Wide-Awake" book. Even though I had plenty of time, I was being extremely critical on myself since the "easy" machine was supposed to be, well, easy. In addition to self-inflicted verbal wounds, I started to have an existential crisis:
   - Why couldn't I figure this out?
   - What am I doing with my life?
   - Is this even what I'm supposed to be doing?
@@ -74,21 +74,21 @@ I started my exam at **6:00pm** on a Friday (January 29th, 2021 to be exact). As
 **Saturday, January 30th 2021**
 - **6:00am** -- Woke up. Heh, "woke up". I wish I actually slept that night.
 - **6:30am** -- I decided to take a breather, clear my head, and attack the 25 point machine.
-- **7:00am - 1:00pm** -- Found a good vulnerability, but otherwise got nowhere with a low-privilege shell on the hard machine. Existential Crisis Part Deux sets in. This is where I take my first real break, 0/10 would not recommend. Frequent breaks are a *must*!
+- **7:00am - 1:00pm** -- I found a good vulnerability, but otherwise got nowhere with a low-privilege shell on the hard machine. Existential Crisis Part Deux sets in. This is where I take my <u>first</u> (yes, first) real break, 0/10 would not recommend. Frequent breaks are a *must*!
 - **1:30pm** -- While on break, the clouds opened and a bright white light appeared with my beautiful, angelic inner-voice saying, "Justin, you know you found this vulnerability, why not try to get a shell by chaining the `<REDACTED>` vulnerability on port `<REDACTED>` to try and enumerate the `<REDACTED>` service on port `<REDACTED>` using the `<REDACTED>` method?"
   - "Oooh", thought I, "will that even work?"
 - **2:00pm** -- Why, yes, yes it did work! "Justin, forget all of those terrible things I said about you..." I fully rooted the 25 point machine (70 points down, 0 points to go) with a super awesome vulnerability chain that I had never done before.
 - **2:30pm** -- I fired up Metasploit (before you ask: Yes. I *100%* used Metasploit on the 10 point machine. I wasn't about to go out in defeat with the "easy" machine) and rooted the "TeN PoInT mAChiNe" (80 points down, -10 points to go).
-- **2:30pm - 3:30pm** -- I took a much needed mental break and decided against going for the remaining 20 points. The reasons were twofold: (1) I needed every last minute to write as detailed of a report as I could; and (2) I knew this machine was heavy on enumeration and I needed the remaining ~2 hours to get as many screenshots as I could.
+- **2:30pm - 3:30pm** -- I took a much needed mental break and decided against going for the remaining 20 points. The reasons were twofold: (1) I needed every last minute to write as detailed of a report as I could; and (2) I knew this machine was heavy on enumeration and I needed the remaining ~2 hours to get as many screenshots as I could and make sure that I submitted all my proofs in the Exam Panel.
 
 ## The Report
 ### My Experience
-I can honestly say that I underestimated the difficulty of writing a report after the 24 hour penetration test. That being said, it's just another one of those "Try Harder" moments that Offensive Security loves to sing about. Literally.
+I can honestly say that I underestimated the difficulty of writing a report after the 24 hour penetration test. I was exhausted both mentally and physically. My lack of sleep really started to hit me hard here. I knew that I had a lot of time to write the report, but I also knew that time was very valuable and quickly dwindling away. All of that being said, it's just another one of those "Try Harder" moments that Offensive Security loves to sing about. Literally.
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/t-bgRQfeW64" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### My Timeline
-Since I ended my exam slightly early, I had ~2.5 extra hours on the report -- something that I later found out was much needed in my personal experience.
+Since I ended my exam slightly early, I had ~2.5 extra hours to focus on the report -- something that I later found out was much needed in my personal experience.
 
 I started the report at about **4:00pm** on Saturday, January 30th or about 22 hours after my initial exam start time. I used up just about every last minute of this time and finished the report at **3:45pm** on Sunday, January 31st. I had 2 hours and 15 minutes to zip up my report and upload it to Offensive Security. I re-read my report (by "re-read", I actually meant to say that I "re-read it 1,000  more times, made minor adjustments, changed it back to how it was before, played with the formatting, spellchecked, then did one final proof-read"). After all was said and done with the report, I was able to have everything finalized and sent to Offensive Security for review by **4:30pm** on Sunday, January 31st.
 
@@ -106,6 +106,7 @@ I started the report at about **4:00pm** on Saturday, January 30th or about 22 h
 - **Create a screenshot directory.** If you follow the "Run Your Recon More Effectively" trick below, you'll already have separate directories for each unique host. This means you can (and should) create a separate directory specific to hosting your screenshots for each unique host. Make sure you're almost taking "too many" screenshots. Every machine, every step, be sure to be taking screenshots and plenty of them. 
 - **Watch/Read Hack The Box and TryHackMe walkthroughs.** This. Is. Important. Watch every Hack The Box video that ippsec and John Hammond has on their channels. Pay close attention to the methodology they use. In addition to this, read any additional writeups that you can find. Regardless of how easy you think a machine was, there's always another way to do it. There very well may be something that you might have missed or there's just a more advanced way to do things.
 - **Take a snapshot.** Prevent running into issues like I did. Make sure you take a snapshot before your exam, but more importantly, make sure that everything is working so your snapshot is not useless.
+- **If you think it sounds dumb, try it anyway.** So many times when doing Hack The Box or TryHackMe machines I've said to myself, "Nah, that's dumb, that won't work... wait, but will it?" It pays to try anyways because you never really know if that "dumb" turns into how you got the shell.
 
 ### Tricks
 #### Enumeration Tricks
@@ -115,15 +116,21 @@ The biggest trick that I can give while enumerating is to use the proper keyword
 
 Is that not giving you the results you want? Try something like:
 
-> VulnerableService 2.0.21 poc
+```
+VulnerableService 2.0.21 poc
+```
 
 Or even:
 
-> VulnerableService 2.0.21 github
+```
+VulnerableService 2.0.21 github
+```
 
 Or:
 
-> VulnerableService 2.0.21 python
+```
+VulnerableService 2.0.21 python
+```
 
 I can almost sense the, "Duh, this is so obvious" eye-rolls, but I can tell you that I have attempted Googling a specific service with using one keyword, coming up short and thinking nothing was there, only to come back later on using different keywords and finding exactly what I needed. Even more specific, and why I mentioned this, I was doing a machine on Hack The Box and Googled something like "VulnerableService 2.0.21 exploit". Nothing came up, so I moved on. When I couldn't get anywhere on the machine, I came back to the service and Googled for "VulnerableService 2.0.21 python" and was able to find a python script on Packet Storm which got me a low privilege shell.
 
@@ -150,14 +157,14 @@ interlace -tL targets.txt -threads 5 -c "bash nmapautomator.sh _target_ All" -v
 ```
 
 #### Go For the Buffer Overflow First
-By no means does this mean you have to do this. Do what you think will work best for you. At the end of the day, it's not about reading a blog post and doing everything they did, it's about tackling it in a way that is both effective and comfortable for you. Getting back on track, goind for the Buffer Overflow machine first is great for several reasons, but most importantly, you can run your recon in the background while you go for the buffer overflow. Not to mention, if you follow the steps in the tips section regarding Buffer Overflow, this should be your easiest machine worth the most points.
+By no means does this mean you have to do this. Do what you think will work best for you. At the end of the day, it's not about reading a blog post and doing everything they did, it's about tackling it in a way that is both effective and comfortable for you. Getting back on track, going for the Buffer Overflow machine first is great for several reasons, but most importantly, you can run your recon in the background while you go for the Buffer Overflow. Not to mention, if you follow the steps in the tips section regarding Buffer Overflows, this should be your easiest machine worth the most points.
 
 #### Report Writing
 Part of the report and what's needed from Offensive Security is to provide a detailed report which contains steps on how to reproduce your found vulnerabilities. Create a separate section in the report which fully details your steps taken, how you performed the steps, and *most importantly* how to reproduce. As I understand it, if your report isn't detailed enough to be reproduced by an Offensive Security team member, then you may lose points or receive zero points for a machine. Be sure to avoid this and be as detailed as possible.
 
 Still on the topic of report writing, make sure you're **not** writing it like a Hack The Box writeup. In other words, try to stray away from:
 
-**Machine 1 --> User Shell was obtained through 'x' --> Privilege Escalation was obtained through 'y'**
+> **Machine 1 --> User Shell was obtained through 'x' --> Privilege Escalation was obtained through 'y'**
 
 If you find a vulnerability, regardless of if it provided a shell to you, throw it in the report! At the end of the day, this is meant to be realistic and like a real penetration test report, so try to structure it as such. 
 
