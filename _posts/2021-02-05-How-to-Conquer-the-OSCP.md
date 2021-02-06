@@ -11,7 +11,7 @@ categories: General
 ## Quick Description
 This post is going to serve as my experience with the OSCP -- both with the labs and exam. I'm attempting to be as detailed and thorough in my descriptions, experience, and tooling as I can to help anyone and everyone who is thinking of taking the exam.
 
-> <u>**Note:**</u> Out of respect to Offensive Security, I cannot dive deep into the lab or exam machines, so do not expect to see specific vulnerabilities called out or any how-to's relevant to these machines. Obvious? Maybe. Needed to be said? ...also maybe.
+> <u><b>Note:</b></u> Out of respect to Offensive Security, I cannot dive deep into the lab or exam machines, so do not expect to see specific vulnerabilities called out or any how-to's relevant to these machines. Obvious? Maybe. Needed to be said? ...also maybe.
 
 ## The Labs
 Ask just about any OSCP-holder about the exam and you're more than likely to receive the same answer:  
