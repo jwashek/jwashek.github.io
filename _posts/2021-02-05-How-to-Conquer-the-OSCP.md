@@ -1,7 +1,7 @@
 ---
 title: "How to Conquer the OSCP"
 tags: [oscp,tryharder,oscpjourney]
-categories: How-To's, Certifications
+categories: [How-To's, Certifications]
 ---
 
 ![https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/oscp.png](https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/oscp.png)
