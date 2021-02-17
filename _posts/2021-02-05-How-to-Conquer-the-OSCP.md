@@ -40,7 +40,7 @@ The labs are no different, i.e., they're not meant to be done as trophies or as 
 - Do not just breeze through the course videos and PDF. They contain a great amount of content and have exercises for you to follow which help you to reinforce and retain the knowledge you gained throughout.
 - Complete all the course PDF exercises. Not only is this good experience, if you add the writeups into your report, you'll get an extra 5 points credited to your exam. This may not seem like a lot, but imagine having not done the exercises, getting stuck and running out of time, only to fail the exam by 5 points.  
 - I cannot recommend [TryHackMe](https://tryhackme.com/) enough. There are different [hacktivities](https://tryhackme.com/hacktivities) which are like mini practical courses which help you to understand the concepts you will be using during the exam.
-- Get very familiar with privilege escalation in both Linux and Windows hosts. There are tons of great resources, but if you ask me, I am a firm believer in "learning by doing". The only way to get exposure to a broad range of techniques is to practice different machines.
+- Get very familiar with privilege escalation in both [Linux](https://www.udemy.com/course/linux-privilege-escalation/) and [Windows](https://www.udemy.com/course/windows-privilege-escalation/) hosts. There are tons of great resources, but if you ask me, I am a firm believer in "learning by doing". The only way to get exposure to a broad range of techniques is to practice different machines.
 - Use supplemental learning like Hack The Box, TryHackMe, [CyberSecLabs](https://www.cyberseclabs.co.uk/), [Root-Me](https://www.root-me.org/?lang=en), etc. where you get to practice hacking machines. 
 - **Do not** only use the OSCP labs. They're great, don't get me wrong, but broadening your scope will help you become more well-rounded and see different vulnerabilities and paths to exploitation.
 
@@ -107,11 +107,30 @@ Note-taking is unfortunately one of those concepts that get lost in the exciteme
   ### Finding root.txt
   <describe the method, service, or vulnerability you exploited to escalate your privileges to a root/System user>
   ``` 
+- Take *tons* of notes. The more notes you take the better. This includes both before and during your exam. Remember, the more detailed your notes are, the easier the report writing phase will be for you.
 
 
 ### Your Exam
+Now comes the fun part: the exam. Is it intimidating? Yes. Is it impossible? Absolutely not. How you conquer the OSCP weighs heavily on your preparation and how well you did your preparation. This much is obvious, but what what may not be as obvious is your mindset going into the exam. Be as confident in your skillset,
+lab preparation, methodology, and note-taking abilities as you possibly can.
+
+> *"Every battle is won or lost before it is ever fought. - Sun Tzu"*
+
 #### Exam Tips:
-x
+**Before the Exam**
+- If you're not already subscribed, subscribe to Hack The Box so you have access to the retired machines. After this, make sure you add every machine you can from TJ Null's [OSCP-like machines](https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=1839402159). Don't be afraid if you have to read walkthroughs or watch video walkthroughs on some of the machines. Think of this whole process as the journey instead of just getting the certification.
+  - "Practice" the exam. Grab 4 random machines from the list at a time, give yourself 24 hours to try and hack into them, and practice writing a report on them. Seems like overkill, but it will *really* help you during exam time since you've done it several times already.
+- As a sort of follow-up to the last point, watch *every* video from ippsec's [OSCP Prep](youtube.com/watch?v=2DqdPcbYcy8&list=PLidcsTyj9JXK-fnabFLVEvHinQ14Jy5tf) playlist.
+- Specifically to Buffer Overflow: 
+  - Watch The Cyber Mentor's [Buffer Overflows Made Easy](https://www.youtube.com/watch?v=qSnPayW6F7U&list=PLLKT__MCUeix3O0DPbmuaRuR_4Hxo4m3G) playlist.
+  - Do the [Buffer Overflow Prep](https://tryhackme.com/room/bufferoverflowprep) room on TryHackMe. 
+
+  > <b><u>Note:</u></b> If you don't watch the videos listed above from The Cyber Mentor or if you did not go through any of the Buffer Overflow course materials provided from Offensive Security, this is an **absolute** must. Trust me. If you only could do one form of preparation for Buffer Overflows, do this room.
+
+** During the Exam**
+- a
+- b
+- c
 
 ### Your Report
 #### Report Tips:
