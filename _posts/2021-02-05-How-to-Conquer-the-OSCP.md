@@ -43,7 +43,11 @@ The labs are no different, i.e., they're not meant to be done as trophies or as 
   - Get very familiar with privilege escalation in both Linux and Windows hosts. There are tons of great resources, but if you ask me, I am a firm believer in "learning by doing". The only way to get exposure to a broad range of techniques is to practice different machines.
 
 ### Your Methodology
-The methodology you use during your exam is going to make or break your experience. I would recommend practicing this methodology on as many machines as you can. A very standard methodology would involve **reconnaissance**, **this**, **that**, and **the other**. 
+The methodology you use during your exam is going to make or break your experience. I would recommend finding what works best for you and tweaking the methodology to fit your personal approach to hacking a target. Practicing this methodology on as many machines as you can will only help to solidify your approach and will start to become muscle memory. A typical methodology would involve **Discovery**, **Assessment**, **Exploitation**, and **Reporting**, all of which will be used extensively during your exam. 
+
+![https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/pentest-methodology.png](https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/pentest-methodology.png)
+
+xxxxxxxxxxx
 
 #### Methodology Tips:
 - Get comfortable with your methodology
