@@ -154,7 +154,12 @@ Now that you've conquered the exam, it's time to conquer the report. Some think 
 
 ### Your Results
 #### Pass
-x
+You conquered the OSCP, congratulations!! This is certainly no easy feat, but how you can conquer your pass results is by giving back to the community. Give your advice, share your journey, and fill out the feedback survey from Offensive Security. This helps to ensure that the content and exam is up-to-date and relevant. Your voice matters and it may help and reach more people than you realize.
 
 #### Fail
-x
+Whether this is your first, second, ..., or tenth attempt, don't let defeat get the best of you. The OSCP is difficult, but it's not impossible. Make sure that you conquer your results in two ways:
+
+1. Just like in hacking, find your weaknesses and exploit them. Whatever caused your failure, you should know what it was. More importantly, know "how" this is a weakness and how it caused your setback. Focus on your weaknesses and have an attack plan to win the battle.
+2. Change your mindset. You may be upset with the results, but don't let this defeat you or make you want to quit. Only view it as a minor setback. Use it as motivation to not let the exam take control of you. Get revenge but coming at it stronger and harder than last time.
+
+So long as you're making progress and increasing your knowledge, you will have many more tools in your belt to beat the exam.
