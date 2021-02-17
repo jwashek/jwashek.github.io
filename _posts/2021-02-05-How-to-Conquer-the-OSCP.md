@@ -123,11 +123,11 @@ lab preparation, methodology, and note-taking abilities as you possibly can.
 - As a sort of follow-up to the last point, watch *every* video from ippsec's [OSCP Prep](youtube.com/watch?v=2DqdPcbYcy8&list=PLidcsTyj9JXK-fnabFLVEvHinQ14Jy5tf) playlist.
 - Specifically to Buffer Overflow: 
   - Watch The Cyber Mentor's [Buffer Overflows Made Easy](https://www.youtube.com/watch?v=qSnPayW6F7U&list=PLLKT__MCUeix3O0DPbmuaRuR_4Hxo4m3G) playlist.
-  - Do the [Buffer Overflow Prep](https://tryhackme.com/room/bufferoverflowprep) room on TryHackMe. 
+  - Do the [Buffer Overflow Prep](https://tryhackme.com/room/bufferoverflowprep) room on TryHackMe. <br>
 
   > <b><u>Note:</u></b> If you don't watch the videos listed above from The Cyber Mentor or if you did not go through any of the Buffer Overflow course materials provided from Offensive Security, this is an **absolute** must. Trust me. If you only could do one form of preparation for Buffer Overflows, do this room.
 
-** During the Exam**
+**During the Exam**
 - a
 - b
 - c
