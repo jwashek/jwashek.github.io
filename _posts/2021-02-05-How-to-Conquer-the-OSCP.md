@@ -19,7 +19,6 @@ The exam is broken down into 2 main phases. In the first phase the student has 2
 - One 10 point machine (easy)
  - In this machine the student will have to obtain a root/System shell on either a Linux or Windows based host and complete the objective(s) found in the Rules of Engagement letter.
 
-
 In the second phase of the exam the student has another 24 hours, after the assessment portion has ended, to write a professional penetration test report. In essence, this report should contain enough information to where a tech savvy reader could reproduce the steps from the student's descriptions. Additionally, the report *must* contain proof that the objectives were successfully obtained from each machine.
 
 ## How To Conquer:
@@ -45,14 +44,18 @@ The labs are no different, i.e., they're not meant to be done as trophies or as 
 ### Your Methodology
 The methodology you use during your exam is going to make or break your experience. I would recommend finding what works best for you and tweaking the methodology to fit your personal approach to hacking a target. Practicing this methodology on as many machines as you can will only help to solidify your approach and will start to become muscle memory. A typical methodology would involve **Discovery**, **Assessment**, **Exploitation**, and **Reporting**, all of which will be used extensively during your exam. 
 
-![https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/pentest-methodology.png](https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/pentest-methodology.png)
+![https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/pentest-methodology.jpg](https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/pentest-methodology.jpg)
 
-xxxxxxxxxxx
+Chances are high if you've participated in any CTFs that you've used a methodology similar to the above--maybe without even knowing it. You start out with finding what machine you want to hack (Host Discovery), run an **nmap** scan with default scripts (`-sC` option) and service detection (`-sV` option) against the target (Port Scanning, Host Fingerprinting, & Service Fingerprinting), then you run an enumeration tool against the service (Example:  directory bruteforcing with tools like [Gobuster](https://github.com/OJ/gobuster) or [dirsearch](https://github.com/maurosoria/dirsearch)) (Vulnerability Research and Cross Reference & Attack Method Selection), and test for any exploits you found along the way (Vulnerability Confirmation & Execution). Understanding your methodology and putting it to practice will help your assessment phase to be more efficient and organized. 
 
 #### Methodology Tips:
-- Get comfortable with your methodology
-- Take detailed notes throughout
-  - If it helps, have a template where you can just copy/paste your notes. The below example is typically my template that I use when hacking machines on Hack The Box, TryHackMe, or doing CTFs:
+- Get comfortable with your methodology. If it helps to create a [mindmap](https://www.xmind.net/), go for it! Sometimes visualizing the steps and referencing any notes you took along the way help you to stay on track.
+- Practice, practice, practice. It always helps to put your methodology to practice in CTFs and other hacking challenge labs. The more you do it, the better you'll become at it.
+- Make changes. Any methodology shouldn't be viewed as the only way to test a machine or network. Find what works best for you and build off of that. There's no sense in using a methodology that doesn't mesh with your personal approach to testing.
+
+### Your Note-taking
+Note-taking is sssssss
+#### Note-taking Tips:
   ```bash
   k
   k
@@ -71,6 +74,7 @@ xxxxxxxxxxx
   k
   k
   ``` 
+
 
 ### Your Exam
 #### Exam Tips:
