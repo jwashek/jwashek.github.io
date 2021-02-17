@@ -43,6 +43,8 @@ The labs are no different, i.e., they're not meant to be done as trophies or as 
 - Get very familiar with privilege escalation in both [Linux](https://www.udemy.com/course/linux-privilege-escalation/) and [Windows](https://www.udemy.com/course/windows-privilege-escalation/) hosts. There are tons of great resources, but if you ask me, I am a firm believer in "learning by doing". The only way to get exposure to a broad range of techniques is to practice different machines.
 - Use supplemental learning like Hack The Box, TryHackMe, [CyberSecLabs](https://www.cyberseclabs.co.uk/), [Root-Me](https://www.root-me.org/?lang=en), etc. where you get to practice hacking machines. 
 - **Do not** only use the OSCP labs. They're great, don't get me wrong, but broadening your scope will help you become more well-rounded and see different vulnerabilities and paths to exploitation.
+- Utilize the Offensive Security Forums. There is a plethora of fantastic information from other students in there and it helps you to sort of collaborate with others by receiving hints on a machine you've been stuck on.
+- (Optional) Share the knowledge. If there was a machine you've completed and you feel that you could give back by helping to provide a hint, by all means do it! This helps the community to learn and grow--including you.
 
 ### Your Methodology
 The methodology you use during your exam is going to make or break your experience. I would recommend finding what works best for you and tweaking the methodology to fit your personal approach to hacking a target. Practicing this methodology on as many machines as you can will only help to solidify your approach and will start to become muscle memory. A typical methodology would involve **Discovery**, **Assessment**, **Exploitation**, and **Reporting**, all of which will be used extensively during your exam. 
@@ -114,10 +116,11 @@ Note-taking is unfortunately one of those concepts that get lost in the exciteme
 Now comes the fun part: the exam. Is it intimidating? Yes. Is it impossible? Absolutely not. How you conquer the OSCP weighs heavily on your preparation and how well you did your preparation. This much is obvious, but what what may not be as obvious is your mindset going into the exam. Be as confident in your skillset,
 lab preparation, methodology, and note-taking abilities as you possibly can.
 
-> *"Every battle is won or lost before it is ever fought. - Sun Tzu"*
+> *"Every battle is won or lost before it is ever fought." - Sun Tzu*
 
 #### Exam Tips:
 **Before the Exam**
+- Take a snapshot. Prevent running into issues by ensuring you have a clean snapshot of a known-good working VM.
 - If you're not already subscribed, subscribe to Hack The Box so you have access to the retired machines. After this, make sure you add every machine you can from TJ Null's [OSCP-like machines](https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=1839402159). Don't be afraid if you have to read walkthroughs or watch video walkthroughs on some of the machines. Think of this whole process as the journey instead of just getting the certification.
   - "Practice" the exam. Grab 4 random machines from the list at a time, give yourself 24 hours to try and hack into them, and practice writing a report on them. Seems like overkill, but it will *really* help you during exam time since you've done it several times already.
 - As a sort of follow-up to the last point, watch *every* video from ippsec's [OSCP Prep](youtube.com/watch?v=2DqdPcbYcy8&list=PLidcsTyj9JXK-fnabFLVEvHinQ14Jy5tf) playlist.
@@ -128,9 +131,17 @@ lab preparation, methodology, and note-taking abilities as you possibly can.
   > <b><u>Note:</u></b> If you don't watch the videos listed above from The Cyber Mentor or if you did not go through any of the Buffer Overflow course materials provided from Offensive Security, this is an **absolute** must. Trust me. If you only could do one form of preparation for Buffer Overflows, do this room.
 
 **During the Exam**
-- a
-- b
-- c
+- **Take frequent breaks.** This one might be obvious, but it's easy to gloss over when you're deep in thought and you just want to make that major breakthrough on a machine.
+- **Relax.** Offensive Security didn't make the exam impossible; there's *at least* one way into every machine.
+- **Be efficient.** The assessment portion is 24 hours. Seems like a lot of time, but the truth is it flies by *very* quickly. For this reason, you <u>must</u> be efficient in your reconnaissance and enumeration. A good way to do this is to have recon going on in the background. Did you find SQLi, command injection, or a file upload vulnerability that you want to check manually? Make sure while you're manually testing that you have deeper enumeration running. Maybe this is another directory brute-forcing scan that includes other extensions (.php, .asp, .aspx, .html, .txt, .bak, .tar, .cgi, etc); maybe this is a Nikto scan on another service; maybe this is a Hydra brute-forcer against a login page; the point is to have something going on while you're doing your manual assessment. Do this very same thing when you tackle the Buffer Overflow machine. Start your recon and move on to the Buffer Overflow machine.
+- **Enumerate, enumerate, enumerate.** I'd be willing to bet that you've heard "enumerate" at least 1,000 times while going through the OSCP course. One thing that people don't say is what this actually means. Enumeration is the process of finding attack vectors on a given target. That being said, enumeration has no exact science, but it is an art-form that is learned over time. One big tip that I can give is to replace the word "enumerate" with "Google." For example, if you see a service that you want to "enumerate", Google it. Is there a specific version running on a service that you found? Google it. 
+- **Write detailed notes.** The idea here is to write the notes detailed enough where, if you didn't screenshot something that you knew you should have, you can consult your notes, grab what you need, and be on your way.
+- **Listen to music.** This helps to clear your mind and really focus on the exam. Grab your favorite playlist, let it run, and start hacking the machines.
+- **Create a screenshot directory.** To help stay organized, I'd recommend to create a unique directory for every machine. In each machine's directory, create a screenshot directory and place all screenshots in there.
+- **If you think it sounds dumb, try it anyway.** The worst that will happen is your exploit, payload, or whatever you're trying to accomplish won't work. The best that will happen is that it does.
+- **Run Interlace with nmapAutomator.** Running [Interlace](https://github.com/codingo/Interlace) in conjunction with [nmapAutomator](https://github.com/21y4d/nmapAutomator) will save you *tons* of time in your reconnaissance and enumeration. Interlace essentially enables single-threaded scripts or other applications to be multi-threaded. On the other hand, nmapAutomator (a single-threaded bash script) is a super underrated reconnaissance script that automatically runs Gobuster, all nmap scans (including UDP and script scans), DNS recon, SSL recon, and nikto. This is 100% acceptable to use on the exam, so use it to your advantage. If you let this run while you're attempting the Buffer Overflow machine, by the time you've completed it, a large majority of your recon will be done for you.
+
+> <u><b>Example use:</u></b> First, copy all of the IP addresses from the exam machines into a file named "targets.txt". Next, run `interlace -tL targets.txt -threads 5 -c "bash nmapautomator.sh _target_ All" -v`. This will create a separate directory for every machine found in "targets.txt". 
 
 ### Your Report
 #### Report Tips:
