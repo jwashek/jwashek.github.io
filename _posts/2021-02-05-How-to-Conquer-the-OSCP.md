@@ -30,16 +30,18 @@ Ask just about any OSCP-holder about the exam and you're more than likely to rec
 The labs are no different, i.e., they're not meant to be done as trophies or as a get-as-many-machines-as-you-can approach. Rather, they should serve as the main area of learning. This section was put first because it truly is the most important part of the journey. Think of the exam as the road and the labs as the car. The road is going to seem much more bumpy, curvy, and rough if you didn't test drive the car. The labs are there for you to practice and test what you've learned. Be sure to not waste *any* time, whether you have 30/60/90 day lab access.
 
 #### Lab Tips:
-- If you have experience in [CTFs](https://cybersecurity.att.com/blogs/security-essentials/capture-the-flag-ctf-what-is-it-for-a-newbie) (<b><u>Note:</u></b> This includes resources like [Hack The Box](https://www.hackthebox.eu) and [TryHackMe](https://tryhackme.com/)):
-  - Jump in the labs as soon as possible.
-  - Regardless of your confidence level, try to learn something from every machine.
-  - Try to avoid using [MetaSploit](https://www.metasploit.com/) as much as possible, but don't skip it entirely--it is still an incredibly useful and powerful tool. 
-  - Attempt the machines in different ways. If you found a vulnerability and exploited it using MetaSploit, try to hack the machine without it or by finding a new vulnerability.
-- If you have no experience in CTFs:
-  - Do not just breeze through the course videos and PDF. They contain a great amount of content and have exercises for you to follow which help you to reinforce and retain the knowledge you gained throughout.
-  - Complete all the course PDF exercises. Not only is this good experience, if you add the writeups into your report, you'll get an extra 5 points credited to your exam. This may not seem like a lot, but imagine having not done the exercises, getting stuck and running out of time, only to fail the exam by 5 points.  
-  - I cannot recommend [TryHackMe](https://tryhackme.com/) enough. There are different [hacktivities](https://tryhackme.com/hacktivities) which are like mini practical courses which help you to understand the concepts you will be using during the exam.
-  - Get very familiar with privilege escalation in both Linux and Windows hosts. There are tons of great resources, but if you ask me, I am a firm believer in "learning by doing". The only way to get exposure to a broad range of techniques is to practice different machines.
+<b>If you have experience in [CTFs](https://cybersecurity.att.com/blogs/security-essentials/capture-the-flag-ctf-what-is-it-for-a-newbie)</b>:
+- Jump in the labs as soon as possible.
+- Regardless of your confidence level, try to learn something from every machine.
+- Try to avoid using [MetaSploit](https://www.metasploit.com/) as much as possible, but don't skip it entirely--it is still an incredibly useful and powerful tool. 
+- Attempt the machines in different ways. If you found a vulnerability and exploited it using MetaSploit, try to hack the machine without it or by finding a new vulnerability.
+<b>If you have no experience in CTFs:</b>
+- Do not just breeze through the course videos and PDF. They contain a great amount of content and have exercises for you to follow which help you to reinforce and retain the knowledge you gained throughout.
+- Complete all the course PDF exercises. Not only is this good experience, if you add the writeups into your report, you'll get an extra 5 points credited to your exam. This may not seem like a lot, but imagine having not done the exercises, getting stuck and running out of time, only to fail the exam by 5 points.  
+- I cannot recommend [TryHackMe](https://tryhackme.com/) enough. There are different [hacktivities](https://tryhackme.com/hacktivities) which are like mini practical courses which help you to understand the concepts you will be using during the exam.
+- Get very familiar with privilege escalation in both Linux and Windows hosts. There are tons of great resources, but if you ask me, I am a firm believer in "learning by doing". The only way to get exposure to a broad range of techniques is to practice different machines.
+- Use supplemental learning like Hack The Box, TryHackMe, [CyberSecLabs](https://www.cyberseclabs.co.uk/), [Root-Me](https://www.root-me.org/?lang=en), etc. where you get to practice hacking machines. 
+- **Do not** only use the OSCP labs. They're great, don't get me wrong, but broadening your scope will help you become more well-rounded and see different vulnerabilities and paths to exploitation.
 
 ### Your Methodology
 The methodology you use during your exam is going to make or break your experience. I would recommend finding what works best for you and tweaking the methodology to fit your personal approach to hacking a target. Practicing this methodology on as many machines as you can will only help to solidify your approach and will start to become muscle memory. A typical methodology would involve **Discovery**, **Assessment**, **Exploitation**, and **Reporting**, all of which will be used extensively during your exam. 
@@ -49,30 +51,60 @@ The methodology you use during your exam is going to make or break your experien
 Chances are high if you've participated in any CTFs that you've used a methodology similar to the above--maybe without even knowing it. You start out with finding what machine you want to hack (Host Discovery), run an **nmap** scan with default scripts (`-sC` option) and service detection (`-sV` option) against the target (Port Scanning, Host Fingerprinting, & Service Fingerprinting), then you run an enumeration tool against the service (Example:  directory bruteforcing with tools like [Gobuster](https://github.com/OJ/gobuster) or [dirsearch](https://github.com/maurosoria/dirsearch)) (Vulnerability Research and Cross Reference & Attack Method Selection), and test for any exploits you found along the way (Vulnerability Confirmation & Execution). Understanding your methodology and putting it to practice will help your assessment phase to be more efficient and organized. 
 
 #### Methodology Tips:
-- Get comfortable with your methodology. If it helps to create a [mindmap](https://www.xmind.net/), go for it! Sometimes visualizing the steps and referencing any notes you took along the way help you to stay on track.
-- Practice, practice, practice. It always helps to put your methodology to practice in CTFs and other hacking challenge labs. The more you do it, the better you'll become at it.
-- Make changes. Any methodology shouldn't be viewed as the only way to test a machine or network. Find what works best for you and build off of that. There's no sense in using a methodology that doesn't mesh with your personal approach to testing.
+- Get comfortable with your methodology. If it helps to create a [mindmap](https://www.xmind.net/), go for it! Sometimes visualizing the steps and referencing any notes you took along the way help you to stay on track during the exam.
+- Practice, practice, practice. It always helps to put your methodology to practice in CTFs and other hacking challenge labs before integrating it for the first time during the exam. The more you do it, the better you'll become at it. This will make for a smoother transition during the exam.
+- Make changes. Any methodology shouldn't be viewed as the only way to test a machine or network. Find what works best for you and build off of that before your exam date. There's no sense in using a methodology that doesn't mesh with your personal approach to testing.
 
 ### Your Note-taking
-Note-taking is sssssss
+Note-taking is unfortunately one of those concepts that get lost in the excitement of finding and exploiting vulnerabilities. However, note-taking is *crucial* for your success during the exam. If it helps, use a mindmap like mentioned above or any other note-taking application that you're comfortable with. OneNote, EverNote, KeepNote, Cherrytree... one is not better than the other if it doesn't work the way you need it to. Find a note-taking application that you're comfortable with and use it heavily during your lab time and supplemental learning. My personal preference is [Joplin](https://joplinapp.org/) due to it's support of markdown, ease of use, and organizational capabilities. The main point here is simple:  don't skip this step -- especially for the exam. If your notes are detailed enough and your VPN access runs out, you shouldn't need to go back into a machine and take additional screenshots or grab extra proof, it should all be there in your notes already.
+
 #### Note-taking Tips:
-  ```bash
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
-  k
+- Create a template for your notes to follow along with your methodology. My personal template that I use for hacking challenges is simple and looks something like the following:
+  ```
+  # Enumeration
+  ## Nmap Results
+  <add in nmap results here>
+  
+  ## Service 1:  HTTP (port 80)
+  <describe any versions or applications running on this service>
+  
+  ## Service 2:  SMB (ports 139/445)
+  <describe any versions or potential findings>
+  
+  ## Service 3:  ...
+  <describe any versions or potential findings>
+  
+  # Exploitation
+  ## HTTP
+  ### Finding 1
+  <describe the finding and how you can potentially get a shell>
+  
+  ### Finding 2
+  <describe the finding and how you can potentially get a shell>
+    
+  ## SMB
+  ### Finding 1
+  <describe the finding and how you can potentially get a shell>
+  
+  ### Finding 2
+  <describe the finding and how you can potentially get a shell>
+  
+  # Post-Exploitation
+  ## Enumeration
+  <describe anything interesting that you found while enumerating on the machine>
+  
+  ### Finding 1
+  <describe this finding and if it has the potential of escalating your privileges>
+  
+  ### Finding 2
+  <describe this finding and if it has the potential of escalating your privileges>
+  
+  ## Privilege Escalation
+  ### Finding user.txt
+  <describe what vulnerability you exploited to find the user.txt
+   
+  ### Finding root.txt
+  <describe the method, service, or vulnerability you exploited to escalate your privileges to a root/System user>
   ``` 
 
 
