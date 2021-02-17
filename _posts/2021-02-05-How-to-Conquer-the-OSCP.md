@@ -27,9 +27,16 @@ Ask just about any OSCP-holder about the exam and you're more than likely to rec
 
 > *"It's not about the certification, it's about the journey."*
 
-The labs are no different, i.e., they're not meant to be done as trophies or as a get-as-many-machines-as-you-can approach. Rather, they should serve as the main area of learning. This section was put first because it truly is the most important part of the journey. Think of the exam as the road and the labs as the car. The road is going to seem much more bumpy, curvy, and rough if you didn't test drive the car. The labs are there for you to practice and test what you've learned. Be sure to not waste *any* time, whether you have 30/60/90 day lab access.
+The labs are no different, i.e., they're not meant to be done as trophies or as a get-as-many-machines-as-you-can approach. How you can conquer the lab time is by letting them serve as the main area of learning. This section was put first because it truly is the most important part of the journey. Think of the exam as the road and the labs as the car. The road is going to seem much more bumpy, curvy, and rough if you didn't test drive the car. The labs are there for you to practice and test what you've learned. Be sure to not waste *any* time, whether you have 30/60/90 day lab access.
 
 #### Lab Tips:
+<b>General</b>
+- Be prepared (and accepting) to fail. The labs are not impossible, but they're also not easy. You will hit roadblocks, you will have setbacks, but always remember to "try harder".
+- I cannot recommend [TryHackMe](https://tryhackme.com/) enough. There are different [hacktivities](https://tryhackme.com/hacktivities) which are like mini practical courses which help you to understand the concepts you will be using during the exam.
+- Use supplemental learning like Hack The Box, TryHackMe, [CyberSecLabs](https://www.cyberseclabs.co.uk/), [Root-Me](https://www.root-me.org/?lang=en), etc. where you get to practice hacking machines.
+- **Do not** only use the OSCP labs. They're great, don't get me wrong, but broadening your scope will help you become more well-rounded and see different vulnerabilities and paths to exploitation.
+- (Optional) Share the knowledge. If there was a machine you've completed and you feel that you could give back by helping to provide a hint, by all means do it! This helps the community to learn and grow--including you.
+
 <b>If you have experience in [CTFs](https://cybersecurity.att.com/blogs/security-essentials/capture-the-flag-ctf-what-is-it-for-a-newbie)</b>:
 - Jump in the labs as soon as possible.
 - Regardless of your confidence level, try to learn something from every machine.
@@ -39,15 +46,12 @@ The labs are no different, i.e., they're not meant to be done as trophies or as 
 <b>If you have no experience in CTFs:</b>
 - Do not just breeze through the course videos and PDF. They contain a great amount of content and have exercises for you to follow which help you to reinforce and retain the knowledge you gained throughout.
 - Complete all the course PDF exercises. Not only is this good experience, if you add the writeups into your report, you'll get an extra 5 points credited to your exam. This may not seem like a lot, but imagine having not done the exercises, getting stuck and running out of time, only to fail the exam by 5 points.  
-- I cannot recommend [TryHackMe](https://tryhackme.com/) enough. There are different [hacktivities](https://tryhackme.com/hacktivities) which are like mini practical courses which help you to understand the concepts you will be using during the exam.
 - Get very familiar with privilege escalation in both [Linux](https://www.udemy.com/course/linux-privilege-escalation/) and [Windows](https://www.udemy.com/course/windows-privilege-escalation/) hosts. There are tons of great resources, but if you ask me, I am a firm believer in "learning by doing". The only way to get exposure to a broad range of techniques is to practice different machines.
-- Use supplemental learning like Hack The Box, TryHackMe, [CyberSecLabs](https://www.cyberseclabs.co.uk/), [Root-Me](https://www.root-me.org/?lang=en), etc. where you get to practice hacking machines. 
-- **Do not** only use the OSCP labs. They're great, don't get me wrong, but broadening your scope will help you become more well-rounded and see different vulnerabilities and paths to exploitation.
 - Utilize the Offensive Security Forums. There is a plethora of fantastic information from other students in there and it helps you to sort of collaborate with others by receiving hints on a machine you've been stuck on.
-- (Optional) Share the knowledge. If there was a machine you've completed and you feel that you could give back by helping to provide a hint, by all means do it! This helps the community to learn and grow--including you.
+
 
 ### Your Methodology
-The methodology you use during your exam is going to make or break your experience. I would recommend finding what works best for you and tweaking the methodology to fit your personal approach to hacking a target. Practicing this methodology on as many machines as you can will only help to solidify your approach and will start to become muscle memory. A typical methodology would involve **Discovery**, **Assessment**, **Exploitation**, and **Reporting**, all of which will be used extensively during your exam. 
+The methodology you use during your exam is going to make or break your experience. How you can conquer your methodology is by finding what works best for you and tweaking the methodology to fit your personal approach to hacking a target. Practicing this methodology on as many machines as you can will only help to solidify your approach and will start to become muscle memory. A typical methodology would involve **Discovery**, **Assessment**, **Exploitation**, and **Reporting**, all of which will be used extensively during your exam. 
 
 ![https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/pentest-methodology.jpg](https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/pentest-methodology.jpg)
 
@@ -59,7 +63,7 @@ Chances are high if you've participated in any CTFs that you've used a methodolo
 - Make changes. Any methodology shouldn't be viewed as the only way to test a machine or network. Find what works best for you and build off of that before your exam date. There's no sense in using a methodology that doesn't mesh with your personal approach to testing.
 
 ### Your Note-taking
-Note-taking is unfortunately one of those concepts that get lost in the excitement of finding and exploiting vulnerabilities. However, note-taking is *crucial* for your success during the exam. If it helps, use a mindmap like mentioned above or any other note-taking application that you're comfortable with. OneNote, EverNote, KeepNote, Cherrytree... one is not better than the other if it doesn't work the way you need it to. Find a note-taking application that you're comfortable with and use it heavily during your lab time and supplemental learning. My personal preference is [Joplin](https://joplinapp.org/) due to it's support of markdown, ease of use, and organizational capabilities. The main point here is simple:  don't skip this step -- especially for the exam. If your notes are detailed enough and your VPN access runs out, you shouldn't need to go back into a machine and take additional screenshots or grab extra proof, it should all be there in your notes already.
+Note-taking is unfortunately one of those concepts that get lost in the excitement of finding and exploiting vulnerabilities. However, note-taking is *crucial* for your success during the exam. How you can conquer your note-taking is by using a mindmap like mentioned above or any other note-taking application that you're comfortable with. OneNote, EverNote, KeepNote, Cherrytree... one is not better than the other if it doesn't work the way you need it to. Find a note-taking application that you're comfortable with and use it heavily during your lab time and supplemental learning. My personal preference is [Joplin](https://joplinapp.org/) due to it's support of markdown, ease of use, and organizational capabilities. The main point here is simple:  don't skip this step -- especially for the exam. If your notes are detailed enough and your VPN access runs out, you shouldn't need to go back into a machine and take additional screenshots or grab extra proof, it should all be there in your notes already.
 
 #### Note-taking Tips:
 - Create a template for your notes to follow along with your methodology. My personal template that I use for hacking challenges is simple and looks something like the following:
@@ -113,7 +117,7 @@ Note-taking is unfortunately one of those concepts that get lost in the exciteme
 
 
 ### Your Exam
-Now comes the fun part: the exam. Is it intimidating? Yes. Is it impossible? Absolutely not. How you conquer the OSCP weighs heavily on your preparation and how well you did your preparation. This much is obvious, but what what may not be as obvious is your mindset going into the exam. Be as confident in your skillset,
+Now comes the fun part: the exam. Is it intimidating? Yes. Is it impossible? Absolutely not. How you conquer the OSCP weighs heavily on your preparation and how well you did your preparation. This much is obvious, but what what may not be as obvious is your mindset going into the exam. Conquer your mindset as well. Be as confident in your skillset,
 lab preparation, methodology, and note-taking abilities as you possibly can.
 
 > *"Every battle is won or lost before it is ever fought." - Sun Tzu*
@@ -163,3 +167,9 @@ Whether this is your first, second, ..., or tenth attempt, don't let defeat get 
 2. Change your mindset. You may be upset with the results, but don't let this defeat you or make you want to quit. Only view it as a minor setback. Use it as motivation to not let the exam take control of you. Get revenge but coming at it stronger and harder than last time.
 
 So long as you're making progress and increasing your knowledge, you will have many more tools in your belt to beat the exam.
+
+## Summary
+Conquering the OSCP can be done and can be done on the first try. Before conquering the exam, be sure to conquer your lab time, your methodology, and your note-taking. This will help tremendously come exam time.
+
+## Final Words
+If you're planning on taking the OSCP, best of luck! Remember:  it's not impossible, you got this! If I can do it, anyone can do it. Have fun and happy hacking :)
