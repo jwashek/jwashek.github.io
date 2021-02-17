@@ -120,6 +120,7 @@ lab preparation, methodology, and note-taking abilities as you possibly can.
 
 #### Exam Tips:
 **Before the Exam**
+- Thoroughly read the Exam Instructions in the Exam Panel and familiarize yourself with the [Exam Guide](https://help.offensive-security.com/hc/en-us/articles/360040165632-OSCP-Exam-Guide).
 - Take a snapshot. Prevent running into issues by ensuring you have a clean snapshot of a known-good working VM.
 - If you're not already subscribed, subscribe to Hack The Box so you have access to the retired machines. After this, make sure you add every machine you can from TJ Null's [OSCP-like machines](https://docs.google.com/spreadsheets/d/1dwSMIAPIam0PuRBkCiDI88pU3yzrqqHkDtBngUHNCw8/edit#gid=1839402159). Don't be afraid if you have to read walkthroughs or watch video walkthroughs on some of the machines. Think of this whole process as the journey instead of just getting the certification.
   - "Practice" the exam. Grab 4 random machines from the list at a time, give yourself 24 hours to try and hack into them, and practice writing a report on them. Seems like overkill, but it will *really* help you during exam time since you've done it several times already.
@@ -144,8 +145,12 @@ lab preparation, methodology, and note-taking abilities as you possibly can.
 > <u><b>Example use:</u></b> First, copy all of the IP addresses from the exam machines into a file named "targets.txt". Next, run `interlace -tL targets.txt -threads 5 -c "bash nmapautomator.sh _target_ All" -v`. This will create a separate directory for every machine found in "targets.txt". 
 
 ### Your Report
+Now that you've conquered the exam, it's time to conquer the report. Some think the hard part is only the challenge of hacking the 5 machines in the exam. An equally challenging aspect of the OSCP certification is the report phase. Do not overlook the report. Offensive Security can and will remove points if you are not detailed enough in your descriptions, screenshots, and proofs of exploitation. How you conquer the report depends on your note-taking (i.e., how detailed you were in documenting findings) as well as finding the right template. Offensive Security was gracious enough to provide a [template](https://www.offensive-security.com/pwk-online/PWKv1-REPORT.doc) to help out. But, just because they offer it, doesn't mean you have to use it.
+
 #### Report Tips:
-x
+- If you use markdown and are very comfortable with it, I would highly recommend checking out noraj's [OSCP-Exam-Report-Template-Markdown](https://github.com/noraj/OSCP-Exam-Report-Template-Markdown) repository. This is extremely easy to use and is much easier than relying on formatting in Microsoft Word or Libre Office.
+- Document all vulnerabilities in your report. Just because it wasn't used to get you a shell on the system, document it anyways. This is good practice for real-world penetration test reporting. 
+- (Optional) Create a "Steps to Reproduce" section for your vulnerabilities. This will ensure that you are being detailed enough for a tech-savvy reader to be able to reproduce your exploits. 
 
 ### Your Results
 #### Pass
