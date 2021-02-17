@@ -172,4 +172,4 @@ So long as you're making progress and increasing your knowledge, you will have m
 Conquering the OSCP can be done and can be done on the first try. Before conquering the exam, be sure to conquer your lab time, your methodology, and your note-taking. This will help tremendously come exam time.
 
 ## Final Words
-If you're planning on taking the OSCP, best of luck! Remember:  it's not impossible, you got this! If I can do it, anyone can do it. Have fun and happy hacking :)
+If you're planning on taking the OSCP, best of luck! Remember:  it's not impossible, you got this! If I can do it, anyone can do it. Have fun and happy hacking.
