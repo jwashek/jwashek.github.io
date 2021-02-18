@@ -4,29 +4,40 @@ tags: [oscp,tryharder,my-journey]
 categories: ["My Journeys"]
 ---
 
---ADD SOMETHING ABOUT THIS WAS MY FIRST TIME
---ADD SOMETHING ABOUT NOT DOING THE BONUS POINTS
---ADD SOMETHING ABOUT CHANGING MY METHODOLOGY
-
 ![https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/journey.png](https://raw.githubusercontent.com/jwashek/jwashek.github.io/master/img/oscp/journey.png)
 
 ## Introduction
-The [OSCP](https://www.offensive-security.com/pwk-oscp/) is a 100% hands-on certification where the student takes on the challenge to perform a penetration test against a network to simulate a real-world penetration test. The exam is broken down into 2 phases. The first phase, the student has 24 hours to complete the penetration test of several machines where they need to obtain at least 70 points in order to pass. The second phase, the student has another 24 hours to write a professional penetration testing report.
+If you haven't already read my other post about *"How to: Conquer the OSCP"*, make sure you [check it out](https://jwashek.github.io/certifications/2021/02/05/How-to-Conquer-the-OSCP/) as well. I tried to make a comprehensive post on how you can conquer the OSCP by providing beneficial tips that really helped me to pass the exam. If I can pass on my first try, I am confident that *anyone* can as well -- provided that you put in the right amount of effort and devotion to learning and practicing the material. 
 
-## Quick Description
-This post is going to serve as my experience with the OSCP -- both with the labs and exam. I'm attempting to be as detailed and thorough in my descriptions, experience, and tooling as I can to help anyone and everyone who is thinking of taking the exam.
+That being said, this post is going to differ from that one by serving as my personal journey both before and during the OSCP exam. There are tons of other OSCP journey posts out there and they can either tear down or build up your confidence level prior to the exam. My purpose for this post is to try to build you up. At the end of the day, reading negative posts about the exam can only impact your mood and mental state prior to taking the exam, which is something that you should try to avoid if possible. Just be confident, relax, practice the labs, and you'll be fine! 
 
-> <u><b>Note:</b></u> Out of respect to Offensive Security, I cannot dive deep into the lab or exam machines, so do not expect to see specific vulnerabilities called out or any how-to's relevant to these machines. Obvious? Maybe. Needed to be said? ...also maybe.
+> <u><b>Note:</b></u> Out of respect to Offensive Security, I cannot dive deep into the lab or exam machines, so do not expect to see specific vulnerabilities called out or any how-to's relevant to these machines.
+
+## Prior Experience
+### CTFs (2014)
+I always had an interest in penetration testing and knew I wanted to do it someday as a career -- ever since my senior year of High School -- but I didn't really get into it until I discovered [boot2root](https://www.reddit.com/r/AskNetsec/comments/45lr09/starting_with_boot2root_challenges/) challenges on [VulnHub](https://www.vulnhub.com/) several years ago (~2014). From then on, I have been practicing on similar platforms to VulnHub like [Hack The Box](https://www.hackthebox.eu/), [TryHackMe](https://tryhackme.com/), and others. Around the time I really started getting deeper into these platforms (~2017), I discovered the absolute best YouTube channel that I could ever recommend for penetration testing and CTF walkthroughs:  [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA). I still watch every new video he releases and I still learn something new every time.
+
+### Bug Bounty (2019)
+I got into [Bug Bounty Hunting](https://www.hackerone.com/blog/become-a-successful-bug-bounty-hunter) back in August of 2019 and used my previous CTF experience to see if I could find real vulnerabilities in real companies. I found quite a few bugs from Cross-Site Scripting to Remote Code Execution, but I wanted to use this experience to grow, learn, assist with bettering my reporting for the OSCP, and land my dream job in penetration testing -- not just to make an extra buck.
+
+### Dream Job (2020)
+It was around March of 2020 that I 
 
 ## The Labs
-Ask just about any OSCP-holder about the exam and you're more than likely to receive the same answer:  
-
-> *"It's not about the certification, it's about the journey."*
-
-After taking the exam, I can say that I 100% agree. The labs served as the main area of learning. Offensive Security put together a fantastic course with highly detailed videos and PDF content; however, the bulk of the learning will absolutely be "by doing" in a hands-on approach with hacking in the labs. The lab machines consisted of both Linux and Windows hosts, which gives the student a well-rounded approach in hacking different technologies.
-
 ### My Experience
-Just after I received my VPN connectivity pack, I decided to go against what was recommended (i.e., read the PDF and do the course work first) and decided to go straight to the labs. Having done this, I'd recommend against doing what I did since there were certain machines that needed to be hacked in a certain order (vague, I know). Without giving too much away, there is more information contained within the PDF for tackling this.
+Just after I received my VPN connectivity pack from Offensive Security, I wrote a quick bash one-liner against the IP range to probe for live hosts. From the alive hosts, I ran nmap to do basic reconnaissance and let that run all night. Basically, it was something like:
+
+```bash
+for i in $(seq 0 255); do ping -c 1 -W 1 IPRANGE.$i; done | grep -i "from" | awk -F ' ' '{print $4}' | tr -d ':' | tee -a targets.txt && for targs in $(cat targets.txt); do nmap -sC -sV -p- $targs -oN $targs-results.txt
+```
+
+
+
+
+
+
+
+decided to go against what was recommended (i.e., read the PDF and do the course work first) and decided to go straight to the labs. My thought was, "I can't waste any of my 90 day lab time, I want to tackle as many labs as I can in those 90 days." That was my first mistake. Thinking of the labs as trophies to be earned is not the right way to 
 
 #### My Timeline
 All of that being said, I started my course in late August 2020 and started hacking in the labs the very same night. I grabbed a random machine from the list, not paying attention to what the course materials or PDF had mentioned (way to go Justin), and go figure it was one of the "Big 4" machines -- **Pain** to be exact. This was a huge **Pain** (pun intended) and hit to my pride as I, at that point, had rooted ~25 [Hack The Box](https://www.hackthebox.eu/) machines and ~15 [TryHackMe](https://tryhackme.com/) machines. At this stage, I hit a wall and just decided to take as detailed of notes that I could and move onto another machine. The next machine went much more smooth and I ended up rooting it in under 2 hours. This was a big boost in confidence and I decided to keep doing the pick-a-machine-any-machine approach.
@@ -96,86 +107,3 @@ I can honestly say that I underestimated the difficulty of writing a report afte
 Since I ended my exam slightly early, I had ~2.5 extra hours to focus on the report -- something that I later found out was much needed in my personal experience.
 
 I started the report at about **4:00pm** on Saturday, January 30th or about 22 hours after my initial exam start time. I used up just about every last minute of this time and finished the report at **3:45pm** on Sunday, January 31st. I had 2 hours and 15 minutes to zip up my report and upload it to Offensive Security. I re-read my report (by "re-read", I actually meant to say that I "re-read it 1,000  more times, made minor adjustments, changed it back to how it was before, played with the formatting, spellchecked, then did one final proof-read"). After all was said and done with the report, I was able to have everything finalized and sent to Offensive Security for review by **4:30pm** on Sunday, January 31st.
-
-## Tips and Tricks
-### Tips
-- **Take frequent breaks.** This one might be obvious, but it's easy to gloss over when you're deep in thought and you just want to make that major breakthrough on a machine. In my case, I credit a large portion of why I was able to root the 25 point machine because of that break. Conversely, I credit a large portion of why I struggled where I did to not taking breaks when I got frustrated or when I was mentally drained and needed to clear my thoughts. It's important... just do it.
-- **Relax.** Is the OSCP tough? Yes, absolutely. Is it impossible? Not at all! If I can do it, anyone can do it. Just remember: Offensive Security didn't make the exam impossible; there's at least one way into every machine.
-- **Be efficient.** The assessment portion is 24 hours. Seems like a lot of time, right? It flies by *very* quickly. For this reason, you <u>must</u> be efficient in your reconnaissance and enumeration. A good way to do this is to have recon going on in the background. Did you find SQLi, command injection, or a file upload vulnerability that you want to check manually? Make sure while you're manually testing that you have deeper enumeration running. Maybe this is another directory brute-forcing scan that includes other extensions (.php, .asp, .aspx, .html, .txt, .bak, .tar, .cgi, etc); maybe this is a Nikto scan on another service; maybe this is a Hydra brute-forcer against a login page; the point is to have something going on while you're doing your manual assessment. Not only will this save time, but it may just give you that extra push into getting a shell.
-- **Enumerate, enumerate, enumerate.** I'd be willing to bet that you've heard "enumerate" at least 1,000 times while going through the OSCP course. One thing that people don't say is what this actually means. Enumeration (I guess you've heard it 1,001 times now) is the process of finding attack vectors on a given target. That being said, enumeration has no exact science, but it is an art-form that is learned over time. One big tip that I can give is to replace the word "enumerate" with "Google." For example, if you see a service that you want to "enumerate", Google it. Is there a specific version running on a service that you found? Google it. 
-- **Write detailed notes.** The idea here is to write the notes detailed enough where, if you didn't screenshot something that you knew you should have, you can consult your notes, grab what you need, and be on your way. Is this an oddly specific tip? Yes, I totally forgot a screenshot in my report, but I had more than enough notes to build that section in a still really detailed manner.
-- **Listen to music.** I will be the first to admit of my nerdy-ness in what type of music helps me to concentrate. This includes game OSTs like from Silent Hill ([Silent Chill](https://www.youtube.com/watch?v=vteCosE9qnM)), [Skyrim](https://www.youtube.com/watch?v=aQeIYVM3YBM), and [Oblivion](https://www.youtube.com/watch?v=SpqSdORmCX4). My specific playlist I used for the OSCP consisted of all of the above and one my favorite YouTubers, [Marc Rebillet](https://www.youtube.com/channel/UCXgxNzAgZ1GExhTW4X1mUrg). Hey, whatever works, right?
-- **Get comfortable with buffer overflows.** Another seemingly obvious "tip", but the tip here is the specific resource I wanted to mention. If you were like me and are very weak in Buffer Overflows, please do yourself a favor and follow these two steps:
-  - Step 1:  Go through The Cyber Mentor's buffer overflow [playlist](https://www.youtube.com/watch?v=qSnPayW6F7U&list=PLLKT__MCUeix3O0DPbmuaRuR_4Hxo4m3G).
-  - Step 2:  Do this [Buffer Overflow prep](https://tryhackme.com/room/bufferoverflowprep) room on TryHackMe. Without giving anything away, just trust me when I say this is all you'll need for your OSCP buffer overflow prep. Additionally, Tib3rius does a phenomenal job in explaining each step. It's created to be more of a walkthrough instead of you being thrown to the wolves and not really knowing where to begin.
-- **Create a screenshot directory.** If you follow the "Run Your Recon More Effectively" trick below, you'll already have separate directories for each unique host. This means you can (and should) create a separate directory specific to hosting your screenshots for each unique host. Make sure you're almost taking "too many" screenshots. Every machine, every step, be sure to be taking screenshots and plenty of them. 
-- **Watch/Read Hack The Box and TryHackMe walkthroughs.** This. Is. Important. Watch every Hack The Box video that ippsec and John Hammond has on their channels. Pay close attention to the methodology they use. In addition to this, read any additional writeups that you can find. Regardless of how easy you think a machine was, there's always another way to do it. There very well may be something that you might have missed or there's just a more advanced way to do things.
-- **Take a snapshot.** Prevent running into issues like I did. Make sure you take a snapshot before your exam, but more importantly, make sure that everything is working so your snapshot is not useless.
-- **If you think it sounds dumb, try it anyway.** So many times when doing Hack The Box or TryHackMe machines I've said to myself, "Nah, that's dumb, that won't work... wait, but will it?" It pays to try anyways because you never really know if that "dumb" turns into how you got the shell.
-
-### Tricks
-#### Enumeration Tricks
-The biggest trick that I can give while enumerating is to use the proper keywords to your advantage. For example, if you found a service called VulnerableService 2.0.21, you can simply Google for:
-
-```
-VulnerableService 2.0.21 exploit
-```
-
-Is that not giving you the results you want? Try something like:
-
-```
-VulnerableService 2.0.21 poc
-```
-
-Or even:
-
-```
-VulnerableService 2.0.21 github
-```
-
-Or:
-
-```
-VulnerableService 2.0.21 python
-```
-
-I can almost sense the, "Duh, this is so obvious" eye-rolls, but I can tell you that I have attempted Googling a specific service with using one keyword, coming up short and thinking nothing was there, only to come back later on using different keywords and finding exactly what I needed. Even more specific, and why I mentioned this, I was doing a machine on Hack The Box and Googled something like "VulnerableService 2.0.21 exploit". Nothing came up, so I moved on. When I couldn't get anywhere on the machine, I came back to the service and Googled for "VulnerableService 2.0.21 python" and was able to find a python script on Packet Storm which got me a low privilege shell.
-
-#### Run Your Recon More Effectively
-Probably my favorite trick which helped me save tons of time was running [Interlace](https://github.com/codingo/Interlace) in conjunction with [nmapAutomator](https://github.com/21y4d/nmapAutomator). Interlace essentially enables single-threaded scripts or other applications to be multi-threaded. On the other hand, nmapAutomator is a super underrated reconnaissance script. To highlight some of its features:
-
-* Runs Gobuster for you (automatically appends different extensions such as .php, .asp, etc depending on the application's response)...
-* Runs all types of nmap scans for you (including UDP, script, vuln, and all ports)...
-* Runs wpscan for you...
-* Runs DNS recon for you...
-* Runs nikto for you... 
-
-
-Should I keep going? The point is, it's a fantastic tool and a massive time-saver -- especially when time is of the essence like in the OSCP exam. Just to further emphasize this point, the primitive way of running nmapAutomator (or any similar script, really) would be to run a bash one-liner on all your targets as follows:
-
-```bash
-for i in $(cat domains.txt); do bash nmapautomator.sh $i All; done
-```
-
-Instead of the above, we can use Interlace to our advantage and spawn different threads for each line in domains.txt and have them finish much faster! It's very easy to do since Interlace's syntax is incredibly easy. What specifically helped me was to run Interlace like so: 
-
-```bash
-interlace -tL targets.txt -threads 5 -c "bash nmapautomator.sh _target_ All" -v
-```
-
-#### Go For the Buffer Overflow First
-By no means does this mean you have to do this. Do what you think will work best for you. At the end of the day, it's not about reading a blog post and doing everything they did, it's about tackling it in a way that is both effective and comfortable for you. Getting back on track, going for the Buffer Overflow machine first is great for several reasons, but most importantly, you can run your recon in the background while you go for the Buffer Overflow. Not to mention, if you follow the steps in the tips section regarding Buffer Overflows, this should be your easiest machine worth the most points.
-
-#### Report Writing
-Part of the report and what's needed from Offensive Security is to provide a detailed report which contains steps on how to reproduce your found vulnerabilities. Create a separate section in the report which fully details your steps taken, how you performed the steps, and *most importantly* how to reproduce. As I understand it, if your report isn't detailed enough to be reproduced by an Offensive Security team member, then you may lose points or receive zero points for a machine. Be sure to avoid this and be as detailed as possible.
-
-Still on the topic of report writing, make sure you're **not** writing it like a Hack The Box writeup. In other words, try to stray away from:
-
-> **Machine 1 --> User Shell was obtained through 'x' --> Privilege Escalation was obtained through 'y'**
-
-If you find a vulnerability, regardless of if it provided a shell to you, throw it in the report! At the end of the day, this is meant to be realistic and like a real penetration test report, so try to structure it as such. 
-
-Finally, the report is not meant to be glossed over. Make sure you spend a lot of time on it, there's a reason you're provided 24 hours. I remember reading one or two OSCP blogs prior to me taking my exam that mentioned they had more than enough points, but failed due to the report. It definitely can and does happen, it's your job to avoid it by being as detailed as possible.
-
-## Final Notes
-Stay calm and relax; you got this! It's not impossible, it's hard, but it's absolutely doable. Put in the work, study, enumerate and, of course, try harder! Good luck and happy hacking.
