@@ -49,19 +49,13 @@ export default async function handler(req, res) {
       .map(function(page, i) {
         const props = page.properties;
 
-        // Debug: on first item expose raw prop types so we can see what Notion is sending
-        const debug = i === 0 ? Object.keys(props).reduce(function(acc, key) {
-          acc[key] = props[key].type;
-          return acc;
-        }, {}) : undefined;
-
         const topic     = extractText(props['TAG']).trim();
         const quote     = extractText(props['Full Quote and Reference']).trim();
         const reference = extractText(props['Reference']).trim();
         const saint     = extractText(props['Saint']).replace(/,\s*$/, '').trim();
         const tags      = (props['Various tag'] && props['Various tag'].multi_select || []).map(function(t){ return t.name.trim(); }).filter(Boolean);
 
-        return { id: i, topic: topic, quote: quote, reference: reference, saint: saint, tags: tags, _debug: debug };
+        return { id: i, topic: topic, quote: quote, reference: reference, saint: saint, tags: tags };
       })
       .filter(function(q){ return q.quote; });
 
