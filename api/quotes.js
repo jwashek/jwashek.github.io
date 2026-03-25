@@ -1,6 +1,17 @@
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const DATABASE_ID  = process.env.NOTION_DATABASE_ID;
 
+function extractText(prop) {
+  if (!prop) return '';
+  if (prop.select && prop.select.name) return prop.select.name;
+  if (prop.multi_select && prop.multi_select.length) return prop.multi_select[0].name;
+  if (prop.title && prop.title.length) return prop.title.map(function(r){ return r.plain_text; }).join('');
+  if (prop.rich_text && prop.rich_text.length) return prop.rich_text.map(function(r){ return r.plain_text; }).join('');
+  if (prop.formula && prop.formula.string) return prop.formula.string;
+  if (prop.rollup && prop.rollup.array && prop.rollup.array.length) return extractText(prop.rollup.array[0]);
+  return '';
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -37,12 +48,20 @@ export default async function handler(req, res) {
     const quotes = allResults
       .map(function(page, i) {
         const props = page.properties;
-        const topic     = (props['TAG'] && props['TAG'].select && props['TAG'].select.name || '').trim();
-        const quote     = (props['Full Quote and Reference'] && props['Full Quote and Reference'].rich_text || []).map(function(r){ return r.plain_text; }).join('').trim();
-        const reference = (props['Reference'] && props['Reference'].rich_text || []).map(function(r){ return r.plain_text; }).join('').trim();
-        const saint     = (props['Saint'] && props['Saint'].rich_text || []).map(function(r){ return r.plain_text; }).join('').replace(/,\s*$/, '').trim();
+
+        // Debug: on first item expose raw prop types so we can see what Notion is sending
+        const debug = i === 0 ? Object.keys(props).reduce(function(acc, key) {
+          acc[key] = props[key].type;
+          return acc;
+        }, {}) : undefined;
+
+        const topic     = extractText(props['TAG']).trim();
+        const quote     = extractText(props['Full Quote and Reference']).trim();
+        const reference = extractText(props['Reference']).trim();
+        const saint     = extractText(props['Saint']).replace(/,\s*$/, '').trim();
         const tags      = (props['Various tag'] && props['Various tag'].multi_select || []).map(function(t){ return t.name.trim(); }).filter(Boolean);
-        return { id: i, topic: topic, quote: quote, reference: reference, saint: saint, tags: tags };
+
+        return { id: i, topic: topic, quote: quote, reference: reference, saint: saint, tags: tags, _debug: debug };
       })
       .filter(function(q){ return q.quote; });
 
