@@ -252,6 +252,8 @@ header {
 
 .saint-name { font-size: 12.5px; font-weight: 500; color: var(--accent); }
 .saint-ref  { font-size: 11px; color: var(--text3); margin-top: 2px; font-family: 'Geist Mono', monospace; }
+.ref-link   { color: var(--text3); text-decoration: none; margin-left: 6px; transition: color .1s; font-family: 'Geist', sans-serif; }
+.ref-link:hover { color: var(--text2); }
 
 .card-tags  { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; max-width: 55%; }
 .card-tag {
@@ -397,13 +399,13 @@ function renderQuotes() {
     const sc = q.saint.replace(/,\s*$/,'').trim();
     return `<div class="quote-card">
       <div class="card-eyebrow">
-        <span class="topic-pill${activeTopic===q.topic?' active':''}" onclick="setTopic('${esc(q.topic)}')">${q.topic}</span>
+        <span class="topic-pill${activeTopic===q.topic?' active':''}" onclick="setTopic('${esc(q.topic)}')">${q.topic || 'Uncategorized'}</span>
       </div>
       <div class="card-quote">${hl(q.quote)}</div>
       <div class="card-foot">
         <div>
           <div class="saint-name">${sc}</div>
-          <div class="saint-ref">${q.reference}</div>
+          <div class="saint-ref">${q.reference}${q.url ? ` <a href="${q.url}" target="_blank" rel="noopener" class="ref-link">↗ Source</a>` : ''}</div>
         </div>
         <div class="card-tags">${q.tags.map(t =>
           `<span class="card-tag${activeTags.has(t)?' active':''}" onclick="toggleTag('${esc(t)}')">${t}</span>`
