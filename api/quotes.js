@@ -54,8 +54,9 @@ export default async function handler(req, res) {
         const reference = extractText(props['Reference']).trim();
         const saint     = extractText(props['Saint']).replace(/,\s*$/, '').trim();
         const tags      = (props['Various tag'] && props['Various tag'].multi_select || []).map(function(t){ return t.name.trim(); }).filter(Boolean);
+        const url       = (props['URL'] && props['URL'].url) || '';
 
-        return { id: i, topic: topic, quote: quote, reference: reference, saint: saint, tags: tags };
+        return { id: i, topic: topic, quote: quote, reference: reference, saint: saint, tags: tags, url: url };
       })
       .filter(function(q){ return q.quote; });
 
