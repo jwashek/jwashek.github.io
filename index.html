@@ -35,6 +35,30 @@
   --shadow-glow: 0 0 20px rgba(212,165,116,.06);
 }
 
+[data-theme="light"] {
+  --bg:          #f8f7f4;
+  --bg-card:     #ffffff;
+  --bg-elevated: #f0eeeb;
+  --bg-hover:    #e8e6e2;
+  --bg-glass:    rgba(248,247,244,.85);
+  --border:      rgba(0,0,0,.08);
+  --border-subtle: rgba(0,0,0,.05);
+  --border-glow: rgba(139,107,71,.15);
+  --text:        #1a1a1a;
+  --text-2:      #5a5a5a;
+  --text-3:      #8a8a8a;
+  --accent:      #8b5e3c;
+  --accent-soft: rgba(139,94,60,.06);
+  --accent-mid:  rgba(139,94,60,.12);
+  --accent-dim:  #6b4a2e;
+  --tag-bg:      rgba(0,0,0,.03);
+  --tag-border:  rgba(0,0,0,.08);
+  --shadow-sm:   0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.04);
+  --shadow-lg:   0 8px 40px rgba(0,0,0,.1), 0 2px 6px rgba(0,0,0,.05);
+  --shadow-glow: 0 0 20px rgba(139,94,60,.04);
+}
+
 html, body { height: 100%; overflow: hidden; }
 
 body {
@@ -66,12 +90,17 @@ body::after {
   pointer-events: none;
   z-index: 0;
 }
+[data-theme="light"] body::before,
+[data-theme="light"] body::after { display: none; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.14); }
+
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.2); }
 
 /* ── Header ── */
 header {
@@ -80,7 +109,7 @@ header {
   align-items: center;
   padding: 14px 24px;
   border-bottom: 1px solid var(--border);
-  background: rgba(8,8,10,.85);
+  background: var(--bg-glass);
   backdrop-filter: blur(20px) saturate(1.2);
   z-index: 100;
   position: relative;
@@ -95,6 +124,7 @@ header {
   border-radius: 11px;
   box-shadow: 0 2px 12px rgba(212,165,116,.1), inset 0 1px 0 rgba(255,255,255,.05);
   transition: all .3s ease;
+  color: white;
 }
 .logo-icon:hover { box-shadow: 0 4px 20px rgba(212,165,116,.18), inset 0 1px 0 rgba(255,255,255,.05); }
 .logo-icon svg { width: 18px; height: 18px; }
@@ -111,6 +141,28 @@ header {
   border: 1px solid var(--border);
   letter-spacing: .01em;
 }
+.quote-count:empty { display: none; }
+
+/* Theme Toggle */
+.theme-toggle {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  cursor: pointer;
+  color: var(--text-2);
+  transition: all .2s ease;
+}
+.theme-toggle:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-glow); }
+
+/* Show/hide sun and moon icons based on theme */
+.icon-sun { display: none; }
+.icon-moon { display: block; }
+[data-theme="light"] .icon-sun { display: block; }
+[data-theme="light"] .icon-moon { display: none; }
+
+[data-theme="light"] .logo-icon { color: #3d2e1e; }
 
 /* ── Layout ── */
 .shell { display: flex; flex: 1; overflow: hidden; min-height: 0; position: relative; z-index: 1; }
@@ -119,7 +171,7 @@ header {
 .sidebar {
   width: 270px;
   flex-shrink: 0;
-  background: rgba(10,10,12,.6);
+  background: var(--bg-glass);
   backdrop-filter: blur(12px);
   border-right: 1px solid var(--border);
   display: flex;
@@ -440,7 +492,7 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
 <header>
   <div class="logo">
     <div class="logo-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <line x1="12" y1="2" x2="12" y2="22"/>
         <line x1="7" y1="5" x2="17" y2="5"/>
         <line x1="4" y1="9" x2="20" y2="9"/>
@@ -454,6 +506,10 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
   </div>
   <div class="header-right">
     <span class="quote-count" id="quote-count"></span>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
   </div>
 </header>
 
@@ -511,7 +567,24 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
 </div>
 
 <script>
-const SAMPLE_QUOTES = [{"id":0,"topic":"On Repentance","quote":"\u201cThe only safe thing is repentance. Any spiritual structure must be built on it. We ceaselessly ask God for repentance and for nothing else. We shouldn\u2019t ask for light, miracles, prophesies and other gifts, but repentance. Repentance brings humility, and humility will bring grace of God, because it is a law: grace of God always comes to the humble.\u201d","reference":"On Spiritual Life, Section 13","saint":"Saint Paisios (1924-1994 AD)","tags":["humility","repentance","salvation"],"url":""},{"id":1,"topic":"On Suffering and Trials","quote":"\"What are you telling me, the apostle seems to say [Romans 8:18], about wounds, torturers, punishments, hunger, deprivation, prisons, and chains? All these, and more besides are not even worth comparing to the glory, the reward, and the crowns prepared for us. For these trials end with this present life, but the heavenly joy is without end.\"","reference":"Homilies on Romans, Homily 8","saint":"Saint John Chrysostom (347-407 AD)","tags":["afflictions","crowns","suffering","trials"],"url":""},{"id":2,"topic":"On Parenting","quote":"\"Generally the parents are to blame for the bad behavior of the children. And their behavior is not improved by reprimands, disciplining, or strictness. If the parents do not pursue a life of holiness and if they don\u2019t engage in spiritual struggle, they make great mistakes and transmit the faults they have within them.\"","reference":"Wounded By Love, On the Upbringing of Children, Page 196","saint":"Saint Porphyrios (1906-1991 AD)","tags":["children","discipline","holiness","parenting","spiritual warfare"],"url":""},{"id":3,"topic":"On Prayer","quote":"\u201cThose whose mind has learned true prayer converse with the Lord face to face, as if speaking into the ear of the Emperor. Those who make vocal prayer fall down before Him as if in the presence of the whole senate. But those who live in the world petition the Emperor amidst the clamor of all the crowds.\u201d","reference":"The Ladder of Divine Ascent, Step 27, Section 21","saint":"Saint John of the Ladder (579-649 AD)","tags":["prayer"],"url":""},{"id":4,"topic":"On Despair and Despondency","quote":"\"It is bad to despair, because someone who despairs becomes embittered and loses his willingness and strength. Someone who has hope, on the contrary, advances forward.\"","reference":"Wounded By Love, On Divine Eros, Page 98","saint":"Saint Porphyrios (1906-1991 AD)","tags":["despair","hope"],"url":""},{"id":5,"topic":"On Silence","quote":"\"Talkativeness is the throne of vainglory on which it loves to show itself and make a display. Talkativeness is a sign of ignorance, a door to slander, a guide to jesting, a servant of falsehood, the ruin of compunction, a creator of despondency, a precursor of sleep, the dissipation of recollection, the abolition of watchfulness, the cooling of ardor, the darkening of prayer.\"","reference":"The Ladder of Divine Ascent, Step 11, Section 2","saint":"Saint John of the Ladder (579-649 AD)","tags":["despondency","silence","talkativeness","vainglory"],"url":""},{"id":6,"topic":"On Judgmentalism","quote":"\"Do not regard the feelings of a person who speaks to you about his neighbor disparagingly, but rather say to him: 'Stop, brother! I fall into graver sins every day, so how can I criticize him?'\"","reference":"The Ladder of Divine Ascent, Step 10, Section 7","saint":"Saint John of the Ladder (579-649 AD)","tags":["gossip","judgmentalism","slander"],"url":""},{"id":7,"topic":"On Faith and Works","quote":"\"True faith cannot be without works; one who truly believes will unfailingly have works as well.\"","reference":"Little Russian Philokalia (Vol. I), 4 - Faith, Paragraph 3","saint":"Saint Seraphim of Sarov (1754-1833 AD)","tags":["faith alone","works"],"url":""},{"id":8,"topic":"On Love and Mercy","quote":"\"Love sinners, but hate their works; and do not despise them for their faults, lest you be tempted by the same.\"","reference":"Ascetical Homilies, Homily 5, Page 51","saint":"Saint Isaac the Syrian (613-700 AD)","tags":["love","loving others","sin","sinners","temptations"],"url":""},{"id":9,"topic":"On Confession","quote":"\"God forgives everything with confession. We mustn\u2019t turn back and enmesh ourselves in despair. We need to be humble servants before God and have a sense of gratitude for the forgiveness of our sins.\"","reference":"Wounded by Love, God Forgives Everything with Confession, Page 176","saint":"Saint Porphyrios (1906-1991 AD)","tags":["confession","despair","forgiveness","gratitude"],"url":""}];
+// Suppress unhandled promise rejections in sandboxed environments
+window.addEventListener('unhandledrejection', e => e.preventDefault());
+
+// ── Theme Toggle ──────────────────────────────────────────────────────────────
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'light' ? 'dark' : 'light';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+}
+// Apply saved theme on load
+(function() {
+  const saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+})();
+
+const SAMPLE_QUOTES = [{"id":0,"topic":"On Repentance","quote":"\u201cThe only safe thing is repentance. Any spiritual structure must be built on it. We ceaselessly ask God for repentance and for nothing else. We shouldn\u2019t ask for light, miracles, prophesies and other gifts, but repentance. Repentance brings humility, and humility will bring grace of God, because it is a law: grace of God always comes to the humble.\u201d","reference":"On Spiritual Life, Section 13","saint":"Saint Paisios (1924-1994 AD)","tags":["humility","repentance","salvation"],"url":""},{"id":1,"topic":"On Suffering and Trials","quote":"What are you telling me, the apostle seems to say [Romans 8:18], about wounds, torturers, punishments, hunger, deprivation, prisons, and chains? All these, and more besides are not even worth comparing to the glory, the reward, and the crowns prepared for us. For these trials end with this present life, but the heavenly joy is without end.","reference":"Homilies on Romans, Homily 8","saint":"Saint John Chrysostom (347-407 AD)","tags":["afflictions","crowns","suffering","trials"],"url":""},{"id":2,"topic":"On Parenting","quote":"Generally the parents are to blame for the bad behavior of the children. And their behavior is not improved by reprimands, disciplining, or strictness. If the parents do not pursue a life of holiness and if they don\u2019t engage in spiritual struggle, they make great mistakes and transmit the faults they have within them.","reference":"Wounded By Love, On the Upbringing of Children, Page 196","saint":"Saint Porphyrios (1906-1991 AD)","tags":["children","discipline","holiness","parenting","spiritual warfare"],"url":""},{"id":3,"topic":"On Prayer","quote":"\u201cThose whose mind has learned true prayer converse with the Lord face to face, as if speaking into the ear of the Emperor. Those who make vocal prayer fall down before Him as if in the presence of the whole senate. But those who live in the world petition the Emperor amidst the clamor of all the crowds.\u201d","reference":"The Ladder of Divine Ascent, Step 27, Section 21","saint":"Saint John of the Ladder (579-649 AD)","tags":["prayer"],"url":""},{"id":4,"topic":"On Despair and Despondency","quote":"It is bad to despair, because someone who despairs becomes embittered and loses his willingness and strength. Someone who has hope, on the contrary, advances forward.","reference":"Wounded By Love, On Divine Eros, Page 98","saint":"Saint Porphyrios (1906-1991 AD)","tags":["despair","hope"],"url":""},{"id":5,"topic":"On Silence","quote":"Talkativeness is the throne of vainglory on which it loves to show itself and make a display. Talkativeness is a sign of ignorance, a door to slander, a guide to jesting, a servant of falsehood, the ruin of compunction, a creator of despondency, a precursor of sleep, the dissipation of recollection, the abolition of watchfulness, the cooling of ardor, the darkening of prayer.","reference":"The Ladder of Divine Ascent, Step 11, Section 2","saint":"Saint John of the Ladder (579-649 AD)","tags":["despondency","silence","talkativeness","vainglory"],"url":""},{"id":6,"topic":"On Judgmentalism","quote":"Do not regard the feelings of a person who speaks to you about his neighbor disparagingly, but rather say to him: Stop, brother! I fall into graver sins every day, so how can I criticize him?","reference":"The Ladder of Divine Ascent, Step 10, Section 7","saint":"Saint John of the Ladder (579-649 AD)","tags":["gossip","judgmentalism","slander"],"url":""},{"id":7,"topic":"On Faith and Works","quote":"True faith cannot be without works; one who truly believes will unfailingly have works as well.","reference":"Little Russian Philokalia (Vol. I), 4 - Faith, Paragraph 3","saint":"Saint Seraphim of Sarov (1754-1833 AD)","tags":["faith alone","works"],"url":""},{"id":8,"topic":"On Love and Mercy","quote":"Love sinners, but hate their works; and do not despise them for their faults, lest you be tempted by the same.","reference":"Ascetical Homilies, Homily 5, Page 51","saint":"Saint Isaac the Syrian (613-700 AD)","tags":["love","loving others","sin","sinners","temptations"],"url":""},{"id":9,"topic":"On Confession","quote":"God forgives everything with confession. We mustn\u2019t turn back and enmesh ourselves in despair. We need to be humble servants before God and have a sense of gratitude for the forgiveness of our sins.","reference":"Wounded by Love, God Forgives Everything with Confession, Page 176","saint":"Saint Porphyrios (1906-1991 AD)","tags":["confession","despair","forgiveness","gratitude"],"url":""}];
 
 const QUOTES_URL = './quotes.json';
 
@@ -707,17 +780,15 @@ async function loadEmbeddings() {
 async function loadAIModel() {
   if (aiPipeline || aiLoading) return;
   aiLoading = true;
-  statusEl().textContent = 'Loading AI model (first time only)…';
-  statusEl().className = 'ai-status loading';
+  const s = statusEl();
+  if (s) { s.textContent = 'Loading AI model (first time only)\u2026'; s.className = 'ai-status loading'; }
 
   try {
     const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
     aiPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-    statusEl().textContent = 'AI ready — ask a question about the Saints';
-    statusEl().className = 'ai-status ready';
+    if (s) { s.textContent = 'AI ready \u2014 ask a question about the Saints'; s.className = 'ai-status ready'; }
   } catch(e) {
-    statusEl().textContent = 'AI unavailable — using keyword search as fallback';
-    statusEl().className = 'ai-status';
+    if (s) { s.textContent = ''; s.className = 'ai-status'; }
     console.error('Model load failed:', e);
   }
   aiLoading = false;
@@ -736,11 +807,13 @@ function cosineSim(a, b) {
 
 // Run semantic search
 async function runAISearch() {
-  const query = document.getElementById('ai-input').value.trim();
+  const inp = document.getElementById('ai-input');
+  if (!inp) return;
+  const query = inp.value.trim();
   if (!query) return;
 
   if (!aiPipeline) {
-    await loadAIModel();
+    try { await loadAIModel(); } catch(e) {}
     if (!aiPipeline) { /* fallback to keyword */ search = query; render(); return; }
   }
   if (!embeddings || embeddings.length !== Q.length) { search = query; render(); return; }
@@ -788,12 +861,15 @@ async function runAISearch() {
 }
 
 // Enter key triggers AI search
-document.getElementById('ai-input').addEventListener('keydown', e => {
-  if (e.key === 'Enter') runAISearch();
-});
+const aiInput = document.getElementById('ai-input');
+if (aiInput) {
+  aiInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') runAISearch();
+  });
+}
 
 // Start loading embeddings + model in background after page loads
-setTimeout(() => { loadEmbeddings(); loadAIModel(); }, 1000);
+try { setTimeout(() => { loadEmbeddings().catch(() => {}); }, 1000); } catch(e) {}
 </script>
 </body>
 </html>
