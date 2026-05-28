@@ -143,6 +143,48 @@ header {
 }
 .quote-count:empty { display: none; }
 
+/* Sidebar Toggle */
+.sidebar-header {
+  padding: 10px 14px 0;
+  flex-shrink: 0;
+}
+.sidebar-toggle {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  cursor: pointer;
+  color: var(--text-3);
+  transition: all .2s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  padding: 5px 10px;
+}
+.sidebar-toggle:hover { background: var(--bg-hover); color: var(--text-2); border-color: var(--border-glow); }
+
+/* Show sidebar button (visible only when sidebar is hidden) */
+.sidebar-show-btn {
+  display: none;
+  position: absolute;
+  top: 12px; left: 12px;
+  width: 32px; height: 32px;
+  align-items: center; justify-content: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-3);
+  transition: all .2s ease;
+  z-index: 10;
+}
+.sidebar-show-btn:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-glow); }
+.shell.sidebar-hidden .sidebar-show-btn { display: flex; }
+
+/* Sidebar collapsed state */
+.shell.sidebar-hidden .sidebar { display: none; }
+.shell.sidebar-hidden .main .quote-list { max-width: 960px; }
+.shell.sidebar-hidden .main { position: relative; }
+
 /* Theme Toggle */
 .theme-toggle {
   display: flex; align-items: center; justify-content: center;
@@ -515,6 +557,12 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
 
 <div class="shell">
   <aside class="sidebar">
+    <div class="sidebar-header">
+      <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" aria-label="Hide sidebar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        <span>Hide sidebar</span>
+      </button>
+    </div>
     <div class="sidebar-search">
       <div class="search-box">
         <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -545,6 +593,9 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
   </aside>
 
   <main class="main">
+    <button class="sidebar-show-btn" id="sidebar-show-btn" onclick="toggleSidebar()" aria-label="Show sidebar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+    </button>
     <div class="ai-search-bar" id="ai-search-bar">
       <div class="ai-search-inner">
         <div class="ai-icon">
@@ -584,7 +635,19 @@ function toggleTheme() {
   document.documentElement.setAttribute('data-theme', saved);
 })();
 
-const SAMPLE_QUOTES = [{"id":0,"topic":"On Repentance","quote":"\u201cThe only safe thing is repentance. Any spiritual structure must be built on it. We ceaselessly ask God for repentance and for nothing else. We shouldn\u2019t ask for light, miracles, prophesies and other gifts, but repentance. Repentance brings humility, and humility will bring grace of God, because it is a law: grace of God always comes to the humble.\u201d","reference":"On Spiritual Life, Section 13","saint":"Saint Paisios (1924-1994 AD)","tags":["humility","repentance","salvation"],"url":""},{"id":1,"topic":"On Suffering and Trials","quote":"What are you telling me, the apostle seems to say [Romans 8:18], about wounds, torturers, punishments, hunger, deprivation, prisons, and chains? All these, and more besides are not even worth comparing to the glory, the reward, and the crowns prepared for us. For these trials end with this present life, but the heavenly joy is without end.","reference":"Homilies on Romans, Homily 8","saint":"Saint John Chrysostom (347-407 AD)","tags":["afflictions","crowns","suffering","trials"],"url":""},{"id":2,"topic":"On Parenting","quote":"Generally the parents are to blame for the bad behavior of the children. And their behavior is not improved by reprimands, disciplining, or strictness. If the parents do not pursue a life of holiness and if they don\u2019t engage in spiritual struggle, they make great mistakes and transmit the faults they have within them.","reference":"Wounded By Love, On the Upbringing of Children, Page 196","saint":"Saint Porphyrios (1906-1991 AD)","tags":["children","discipline","holiness","parenting","spiritual warfare"],"url":""},{"id":3,"topic":"On Prayer","quote":"\u201cThose whose mind has learned true prayer converse with the Lord face to face, as if speaking into the ear of the Emperor. Those who make vocal prayer fall down before Him as if in the presence of the whole senate. But those who live in the world petition the Emperor amidst the clamor of all the crowds.\u201d","reference":"The Ladder of Divine Ascent, Step 27, Section 21","saint":"Saint John of the Ladder (579-649 AD)","tags":["prayer"],"url":""},{"id":4,"topic":"On Despair and Despondency","quote":"It is bad to despair, because someone who despairs becomes embittered and loses his willingness and strength. Someone who has hope, on the contrary, advances forward.","reference":"Wounded By Love, On Divine Eros, Page 98","saint":"Saint Porphyrios (1906-1991 AD)","tags":["despair","hope"],"url":""},{"id":5,"topic":"On Silence","quote":"Talkativeness is the throne of vainglory on which it loves to show itself and make a display. Talkativeness is a sign of ignorance, a door to slander, a guide to jesting, a servant of falsehood, the ruin of compunction, a creator of despondency, a precursor of sleep, the dissipation of recollection, the abolition of watchfulness, the cooling of ardor, the darkening of prayer.","reference":"The Ladder of Divine Ascent, Step 11, Section 2","saint":"Saint John of the Ladder (579-649 AD)","tags":["despondency","silence","talkativeness","vainglory"],"url":""},{"id":6,"topic":"On Judgmentalism","quote":"Do not regard the feelings of a person who speaks to you about his neighbor disparagingly, but rather say to him: Stop, brother! I fall into graver sins every day, so how can I criticize him?","reference":"The Ladder of Divine Ascent, Step 10, Section 7","saint":"Saint John of the Ladder (579-649 AD)","tags":["gossip","judgmentalism","slander"],"url":""},{"id":7,"topic":"On Faith and Works","quote":"True faith cannot be without works; one who truly believes will unfailingly have works as well.","reference":"Little Russian Philokalia (Vol. I), 4 - Faith, Paragraph 3","saint":"Saint Seraphim of Sarov (1754-1833 AD)","tags":["faith alone","works"],"url":""},{"id":8,"topic":"On Love and Mercy","quote":"Love sinners, but hate their works; and do not despise them for their faults, lest you be tempted by the same.","reference":"Ascetical Homilies, Homily 5, Page 51","saint":"Saint Isaac the Syrian (613-700 AD)","tags":["love","loving others","sin","sinners","temptations"],"url":""},{"id":9,"topic":"On Confession","quote":"God forgives everything with confession. We mustn\u2019t turn back and enmesh ourselves in despair. We need to be humble servants before God and have a sense of gratitude for the forgiveness of our sins.","reference":"Wounded by Love, God Forgives Everything with Confession, Page 176","saint":"Saint Porphyrios (1906-1991 AD)","tags":["confession","despair","forgiveness","gratitude"],"url":""}];
+// ── Sidebar Toggle ────────────────────────────────────────────────────────────
+function toggleSidebar() {
+  const shell = document.querySelector('.shell');
+  shell.classList.toggle('sidebar-hidden');
+  localStorage.setItem('sidebar', shell.classList.contains('sidebar-hidden') ? 'hidden' : 'visible');
+}
+// Apply saved sidebar state
+(function() {
+  const saved = localStorage.getItem('sidebar');
+  if (saved === 'hidden') document.querySelector('.shell')?.classList.add('sidebar-hidden');
+})();
+
+const SAMPLE_QUOTES =
 
 const QUOTES_URL = './quotes.json';
 
@@ -828,13 +891,28 @@ async function runAISearch() {
   const scored = Q.map((q, i) => ({ ...q, score: cosineSim(queryEmb, embeddings[i]) }));
   scored.sort((a, b) => b.score - a.score);
 
-  // Show top 10 results
-  const top = scored.slice(0, 10);
-  statusEl().textContent = `Found ${top.length} relevant quotes for: "${query}"`;
+  // Filter by relevance threshold and boost saint name matches
+  const queryLower = query.toLowerCase();
+  const boosted = scored.map(q => {
+    let bonus = 0;
+    // Boost if query mentions this saint's name
+    const saintLower = q.saint.toLowerCase();
+    if (queryLower.split(' ').some(w => w.length > 3 && saintLower.includes(w))) bonus = 0.08;
+    return { ...q, score: q.score + bonus };
+  });
+  boosted.sort((a, b) => b.score - a.score);
+
+  // Only show results above a relevance threshold (0.35) — max 10
+  const top = boosted.filter(q => q.score > 0.35).slice(0, 10);
+  statusEl().textContent = top.length ? `Found ${top.length} relevant quotes for: "${query}"` : `No closely matching quotes found for: "${query}"`;
   statusEl().className = 'ai-status ready';
 
   // Render AI results directly
   const el = document.getElementById('quote-list');
+  if (!top.length) {
+    el.innerHTML = '<div class="state"><p>No closely matching quotes found. Try rephrasing your question or using the keyword search.</p></div>';
+    return;
+  }
   el.innerHTML = top.map(q => {
     const sc = q.saint.replace(/,\s*$/,'').trim();
     const pct = Math.round(q.score * 100);
