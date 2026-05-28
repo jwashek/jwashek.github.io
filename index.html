@@ -10,23 +10,29 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:          #0a0a0b;
-  --bg-card:     #111113;
-  --bg-elevated: #18181b;
-  --bg-hover:    #1f1f23;
-  --border:      #1f1f23;
-  --border-subtle: #27272a;
-  --text:        #fafafa;
-  --text-2:      #a1a1aa;
-  --text-3:      #52525b;
+  --bg:          #08080a;
+  --bg-card:     #0f0f12;
+  --bg-elevated: #141418;
+  --bg-hover:    #1a1a20;
+  --bg-glass:    rgba(20,20,24,.7);
+  --border:      rgba(255,255,255,.06);
+  --border-subtle: rgba(255,255,255,.04);
+  --border-glow: rgba(212,165,116,.12);
+  --text:        #ededef;
+  --text-2:      #9d9da5;
+  --text-3:      #55555e;
   --accent:      #d4a574;
+  --accent-soft: rgba(212,165,116,.08);
+  --accent-mid:  rgba(212,165,116,.15);
   --accent-dim:  #8b6b47;
-  --gold:        #f5c542;
-  --tag-bg:      #18181b;
-  --tag-border:  #27272a;
-  --radius:      12px;
-  --radius-sm:   8px;
-  --shadow:      0 1px 3px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.3);
+  --tag-bg:      rgba(255,255,255,.03);
+  --tag-border:  rgba(255,255,255,.06);
+  --radius:      14px;
+  --radius-sm:   10px;
+  --shadow-sm:   0 1px 2px rgba(0,0,0,.3);
+  --shadow-md:   0 4px 16px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3);
+  --shadow-lg:   0 8px 40px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.3);
+  --shadow-glow: 0 0 20px rgba(212,165,116,.06);
 }
 
 html, body { height: 100%; overflow: hidden; }
@@ -41,54 +47,80 @@ body {
   flex-direction: column;
 }
 
+/* Ambient background glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: -40%; left: -20%;
+  width: 80%; height: 80%;
+  background: radial-gradient(ellipse, rgba(212,165,116,.03) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -30%; right: -10%;
+  width: 60%; height: 60%;
+  background: radial-gradient(ellipse, rgba(100,130,180,.02) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-3); }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.14); }
 
 /* ── Header ── */
 header {
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  padding: 16px 24px;
+  padding: 14px 24px;
   border-bottom: 1px solid var(--border);
-  background: var(--bg);
-  backdrop-filter: blur(12px);
-  z-index: 10;
+  background: rgba(8,8,10,.85);
+  backdrop-filter: blur(20px) saturate(1.2);
+  z-index: 100;
+  position: relative;
 }
 
 .logo { display: flex; align-items: center; gap: 14px; }
 .logo-icon {
-  width: 36px; height: 36px;
+  width: 38px; height: 38px;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--accent-dim) 0%, var(--accent) 100%);
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(212,165,116,.2);
+  background: linear-gradient(145deg, rgba(212,165,116,.2) 0%, rgba(212,165,116,.05) 100%);
+  border: 1px solid rgba(212,165,116,.2);
+  border-radius: 11px;
+  box-shadow: 0 2px 12px rgba(212,165,116,.1), inset 0 1px 0 rgba(255,255,255,.05);
+  transition: all .3s ease;
 }
+.logo-icon:hover { box-shadow: 0 4px 20px rgba(212,165,116,.18), inset 0 1px 0 rgba(255,255,255,.05); }
 .logo-icon svg { width: 18px; height: 18px; }
-.logo-text h1 { font-size: 16px; font-weight: 600; letter-spacing: -.02em; color: var(--text); }
-.logo-text p { font-size: 11px; color: var(--text-3); font-weight: 400; margin-top: 1px; }
+.logo-text h1 { font-size: 16px; font-weight: 600; letter-spacing: -.03em; color: var(--text); }
+.logo-text p { font-size: 11px; color: var(--text-3); font-weight: 400; margin-top: 1px; letter-spacing: .01em; }
 
 .header-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
 .quote-count {
-  font-size: 12px; color: var(--text-3);
+  font-size: 11px; color: var(--text-3);
   font-variant-numeric: tabular-nums;
   background: var(--bg-elevated);
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 5px 12px;
+  border-radius: 8px;
   border: 1px solid var(--border);
+  letter-spacing: .01em;
 }
 
 /* ── Layout ── */
-.shell { display: flex; flex: 1; overflow: hidden; min-height: 0; }
+.shell { display: flex; flex: 1; overflow: hidden; min-height: 0; position: relative; z-index: 1; }
 
 /* ── Sidebar ── */
 .sidebar {
-  width: 260px;
+  width: 270px;
   flex-shrink: 0;
-  background: var(--bg);
+  background: rgba(10,10,12,.6);
+  backdrop-filter: blur(12px);
   border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
@@ -104,11 +136,17 @@ header {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  padding: 9px 12px;
-  transition: all .2s ease;
+  padding: 10px 13px;
+  transition: all .25s ease;
+  box-shadow: var(--shadow-sm);
 }
-.search-box:focus-within { border-color: var(--accent-dim); box-shadow: 0 0 0 3px rgba(212,165,116,.08); }
-.search-box svg { color: var(--text-3); flex-shrink: 0; }
+.search-box:focus-within {
+  border-color: rgba(212,165,116,.3);
+  box-shadow: 0 0 0 3px rgba(212,165,116,.06), var(--shadow-sm);
+  background: var(--bg-hover);
+}
+.search-box svg { color: var(--text-3); flex-shrink: 0; transition: color .2s; }
+.search-box:focus-within svg { color: var(--accent); }
 .search-box input {
   background: none; border: none; outline: none;
   font-family: 'Inter', sans-serif; font-size: 13px;
@@ -132,11 +170,12 @@ header {
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
-  padding: 10px 12px 9px;
+  padding: 11px 12px 10px;
   cursor: pointer;
-  transition: all .15s;
+  transition: all .2s;
   margin-bottom: -1px;
   white-space: nowrap;
+  position: relative;
 }
 .tab-btn:hover { color: var(--text-2); }
 .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
@@ -150,35 +189,36 @@ header {
 
 .filter-item {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 7px 10px; border-radius: var(--radius-sm);
-  cursor: pointer; transition: all .12s; gap: 8px;
-  border: none; background: none; width: 100%; text-align: left;
+  padding: 8px 11px; border-radius: var(--radius-sm);
+  cursor: pointer; transition: all .15s ease; gap: 8px;
+  border: 1px solid transparent; background: none; width: 100%; text-align: left;
   font-family: 'Inter', sans-serif;
 }
-.filter-item:hover { background: var(--bg-hover); }
-.filter-item.active { background: var(--bg-hover); }
+.filter-item:hover { background: var(--bg-hover); border-color: var(--border); }
+.filter-item.active { background: var(--accent-soft); border-color: var(--border-glow); }
 .filter-item .fi-label {
   font-size: 12.5px; color: var(--text-2);
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  flex: 1; transition: color .1s;
+  flex: 1; transition: color .15s;
 }
-.filter-item:hover .fi-label, .filter-item.active .fi-label { color: var(--text); }
+.filter-item:hover .fi-label { color: var(--text); }
+.filter-item.active .fi-label { color: var(--accent); }
 .filter-item .fi-count {
   font-size: 10px; color: var(--text-3);
   font-variant-numeric: tabular-nums; flex-shrink: 0;
-  background: var(--bg-elevated); padding: 1px 6px; border-radius: 4px;
+  background: rgba(255,255,255,.04); padding: 2px 7px; border-radius: 5px;
 }
 
 /* Tags */
 .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 4px; }
 .tag-chip {
-  font-size: 11px; padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; padding: 5px 11px; border-radius: 20px;
   background: var(--tag-bg); color: var(--text-3);
   cursor: pointer; border: 1px solid var(--tag-border);
-  transition: all .15s; font-family: 'Inter', sans-serif;
+  transition: all .2s ease; font-family: 'Inter', sans-serif;
 }
-.tag-chip:hover { background: var(--bg-hover); color: var(--text-2); border-color: var(--border-subtle); }
-.tag-chip.active { background: var(--bg-hover); color: var(--accent); border-color: var(--accent-dim); }
+.tag-chip:hover { background: var(--bg-hover); color: var(--text-2); border-color: rgba(255,255,255,.1); transform: translateY(-1px); }
+.tag-chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--border-glow); box-shadow: var(--shadow-glow); }
 
 .no-results-filter { font-size: 12px; color: var(--text-3); padding: 16px 10px; }
 
@@ -186,13 +226,12 @@ header {
 .sidebar-foot {
   flex-shrink: 0; padding: 10px 14px;
   border-top: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
 }
 .clear-btn {
   font-family: 'Inter', sans-serif; font-size: 11px;
   color: var(--text-3); background: none; border: none;
-  cursor: pointer; padding: 4px 8px; border-radius: 6px;
-  transition: all .12s;
+  cursor: pointer; padding: 5px 10px; border-radius: 7px;
+  transition: all .15s;
 }
 .clear-btn:hover { color: var(--text-2); background: var(--bg-hover); }
 
@@ -202,19 +241,37 @@ header {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  background: var(--bg);
+  background: transparent;
 }
 
-.quote-list { flex: 1; padding: 0; max-width: 800px; margin: 0 auto; width: 100%; }
+.quote-list { flex: 1; padding: 20px 40px; max-width: 840px; margin: 0 auto; width: 100%; }
 
 /* Quote Cards */
 .quote-card {
-  padding: 28px 32px;
-  border-bottom: 1px solid var(--border);
-  transition: background .15s;
+  padding: 28px 30px;
+  margin-bottom: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  transition: all .25s ease;
+  position: relative;
+  overflow: hidden;
 }
-.quote-card:hover { background: rgba(255,255,255,.01); }
-.quote-card:first-child { margin-top: 0; }
+.quote-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px; height: 100%;
+  background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+.quote-card:hover {
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  transform: translateY(-1px);
+}
+.quote-card:hover::before { opacity: 1; }
 
 .card-header {
   display: flex; align-items: center; justify-content: space-between;
@@ -224,30 +281,33 @@ header {
   font-size: 10px; font-weight: 500;
   letter-spacing: .06em; text-transform: uppercase;
   color: var(--accent);
-  background: rgba(212,165,116,.08);
-  border: 1px solid rgba(212,165,116,.15);
-  padding: 3px 10px; border-radius: 20px;
-  cursor: pointer; transition: all .15s;
+  background: var(--accent-soft);
+  border: 1px solid rgba(212,165,116,.12);
+  padding: 4px 12px; border-radius: 20px;
+  cursor: pointer; transition: all .2s ease;
   font-family: 'Inter', sans-serif;
   display: inline-flex; align-items: center;
 }
-.topic-pill:hover { background: rgba(212,165,116,.14); border-color: rgba(212,165,116,.3); }
-.topic-pill.active { background: rgba(212,165,116,.18); border-color: var(--accent-dim); }
+.topic-pill:hover { background: var(--accent-mid); border-color: rgba(212,165,116,.25); box-shadow: var(--shadow-glow); }
+.topic-pill.active { background: var(--accent-mid); border-color: rgba(212,165,116,.3); }
 
 .card-quote {
   font-family: 'Newsreader', Georgia, serif;
-  font-size: 17px;
-  line-height: 1.8;
+  font-size: 16.5px;
+  line-height: 1.85;
   color: var(--text);
-  margin-bottom: 20px;
+  margin-bottom: 22px;
   font-weight: 400;
+  letter-spacing: .005em;
 }
 
 .card-attribution {
   display: flex; align-items: flex-start; justify-content: space-between;
   gap: 16px; flex-wrap: wrap;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
-.card-meta { display: flex; flex-direction: column; gap: 3px; }
+.card-meta { display: flex; flex-direction: column; gap: 4px; }
 .saint-name {
   font-size: 13px; font-weight: 500; color: var(--accent);
   display: flex; align-items: center; gap: 6px;
@@ -257,20 +317,37 @@ header {
 }
 .ref-link {
   color: var(--text-3); text-decoration: none;
-  margin-left: 6px; transition: color .15s;
-  font-size: 11px;
+  margin-left: 6px; transition: all .2s;
+  font-size: 11px; padding: 2px 6px; border-radius: 4px;
 }
-.ref-link:hover { color: var(--accent); }
+.ref-link:hover { color: var(--accent); background: var(--accent-soft); }
 
-.card-tags { display: flex; flex-wrap: wrap; gap: 4px; justify-content: flex-end; max-width: 50%; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; max-width: 50%; }
 .card-tag {
-  font-size: 10px; padding: 3px 8px; border-radius: 12px;
+  font-size: 10px; padding: 3px 9px; border-radius: 12px;
   background: var(--tag-bg); color: var(--text-3);
   cursor: pointer; border: 1px solid var(--tag-border);
-  transition: all .12s; font-family: 'Inter', sans-serif;
+  transition: all .15s ease; font-family: 'Inter', sans-serif;
 }
-.card-tag:hover { color: var(--text-2); border-color: var(--border-subtle); }
-.card-tag.active { color: var(--accent); border-color: var(--accent-dim); background: rgba(212,165,116,.06); }
+.card-tag:hover { color: var(--text-2); border-color: rgba(255,255,255,.1); background: var(--bg-hover); }
+.card-tag.active { color: var(--accent); border-color: var(--border-glow); background: var(--accent-soft); }
+
+/* Copy button */
+.copy-btn {
+  display: flex; align-items: center; gap: 5px;
+  font-family: 'Inter', sans-serif; font-size: 11px;
+  color: var(--text-3); background: var(--tag-bg);
+  border: 1px solid var(--tag-border); border-radius: 7px;
+  padding: 5px 10px; cursor: pointer;
+  transition: all .2s ease;
+  white-space: nowrap;
+}
+.copy-btn:hover { color: var(--text-2); background: var(--bg-hover); border-color: rgba(255,255,255,.1); }
+.copy-btn.copied {
+  color: #6ecf8a; border-color: rgba(110,207,138,.2);
+  background: rgba(110,207,138,.06);
+}
+.copy-btn .copy-label { pointer-events: none; }
 
 /* ── States ── */
 .state {
@@ -279,14 +356,14 @@ header {
 }
 .state p { font-size: 13px; }
 .spinner {
-  width: 20px; height: 20px;
-  border: 2px solid var(--border-subtle);
+  width: 22px; height: 22px;
+  border: 2px solid rgba(255,255,255,.06);
   border-top-color: var(--accent);
-  border-radius: 50%; animation: spin .7s linear infinite;
+  border-radius: 50%; animation: spin .8s cubic-bezier(.5,.1,.5,.9) infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-mark { background: rgba(212,165,116,.15); color: inherit; border-radius: 2px; padding: 0 2px; }
+mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; padding: 0 2px; }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
@@ -294,7 +371,8 @@ mark { background: rgba(212,165,116,.15); color: inherit; border-radius: 2px; pa
   .shell { flex-direction: column; overflow: visible; }
   .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); max-height: 40vh; }
   .main { overflow: visible; }
-  .quote-card { padding: 24px 20px; }
+  .quote-list { padding: 16px 16px; }
+  .quote-card { padding: 22px 20px; }
   .card-tags { max-width: 100%; justify-content: flex-start; }
   .card-attribution { flex-direction: column; }
 }
@@ -359,6 +437,8 @@ mark { background: rgba(212,165,116,.15); color: inherit; border-radius: 2px; pa
 </div>
 
 <script>
+const SAMPLE_QUOTES = [{"id":0,"topic":"On Repentance","quote":"\u201cThe only safe thing is repentance. Any spiritual structure must be built on it. We ceaselessly ask God for repentance and for nothing else. We shouldn\u2019t ask for light, miracles, prophesies and other gifts, but repentance. Repentance brings humility, and humility will bring grace of God, because it is a law: grace of God always comes to the humble.\u201d","reference":"On Spiritual Life, Section 13","saint":"Saint Paisios (1924-1994 AD)","tags":["humility","repentance","salvation"],"url":""},{"id":1,"topic":"On Suffering and Trials","quote":"\"What are you telling me, the apostle seems to say [Romans 8:18], about wounds, torturers, punishments, hunger, deprivation, prisons, and chains? All these, and more besides are not even worth comparing to the glory, the reward, and the crowns prepared for us. For these trials end with this present life, but the heavenly joy is without end.\"","reference":"Homilies on Romans, Homily 8","saint":"Saint John Chrysostom (347-407 AD)","tags":["afflictions","crowns","suffering","trials"],"url":""},{"id":2,"topic":"On Parenting","quote":"\"Generally the parents are to blame for the bad behavior of the children. And their behavior is not improved by reprimands, disciplining, or strictness. If the parents do not pursue a life of holiness and if they don\u2019t engage in spiritual struggle, they make great mistakes and transmit the faults they have within them.\"","reference":"Wounded By Love, On the Upbringing of Children, Page 196","saint":"Saint Porphyrios (1906-1991 AD)","tags":["children","discipline","holiness","parenting","spiritual warfare"],"url":""},{"id":3,"topic":"On Prayer","quote":"\u201cThose whose mind has learned true prayer converse with the Lord face to face, as if speaking into the ear of the Emperor. Those who make vocal prayer fall down before Him as if in the presence of the whole senate. But those who live in the world petition the Emperor amidst the clamor of all the crowds.\u201d","reference":"The Ladder of Divine Ascent, Step 27, Section 21","saint":"Saint John of the Ladder (579-649 AD)","tags":["prayer"],"url":""},{"id":4,"topic":"On Despair and Despondency","quote":"\"It is bad to despair, because someone who despairs becomes embittered and loses his willingness and strength. Someone who has hope, on the contrary, advances forward.\"","reference":"Wounded By Love, On Divine Eros, Page 98","saint":"Saint Porphyrios (1906-1991 AD)","tags":["despair","hope"],"url":""},{"id":5,"topic":"On Silence","quote":"\"Talkativeness is the throne of vainglory on which it loves to show itself and make a display. Talkativeness is a sign of ignorance, a door to slander, a guide to jesting, a servant of falsehood, the ruin of compunction, a creator of despondency, a precursor of sleep, the dissipation of recollection, the abolition of watchfulness, the cooling of ardor, the darkening of prayer.\"","reference":"The Ladder of Divine Ascent, Step 11, Section 2","saint":"Saint John of the Ladder (579-649 AD)","tags":["despondency","silence","talkativeness","vainglory"],"url":""},{"id":6,"topic":"On Judgmentalism","quote":"\"Do not regard the feelings of a person who speaks to you about his neighbor disparagingly, but rather say to him: 'Stop, brother! I fall into graver sins every day, so how can I criticize him?'\"","reference":"The Ladder of Divine Ascent, Step 10, Section 7","saint":"Saint John of the Ladder (579-649 AD)","tags":["gossip","judgmentalism","slander"],"url":""},{"id":7,"topic":"On Faith and Works","quote":"\"True faith cannot be without works; one who truly believes will unfailingly have works as well.\"","reference":"Little Russian Philokalia (Vol. I), 4 - Faith, Paragraph 3","saint":"Saint Seraphim of Sarov (1754-1833 AD)","tags":["faith alone","works"],"url":""},{"id":8,"topic":"On Love and Mercy","quote":"\"Love sinners, but hate their works; and do not despise them for their faults, lest you be tempted by the same.\"","reference":"Ascetical Homilies, Homily 5, Page 51","saint":"Saint Isaac the Syrian (613-700 AD)","tags":["love","loving others","sin","sinners","temptations"],"url":""},{"id":9,"topic":"On Confession","quote":"\"God forgives everything with confession. We mustn\u2019t turn back and enmesh ourselves in despair. We need to be humble servants before God and have a sense of gratitude for the forgiveness of our sins.\"","reference":"Wounded by Love, God Forgives Everything with Confession, Page 176","saint":"Saint Porphyrios (1906-1991 AD)","tags":["confession","despair","forgiveness","gratitude"],"url":""}];
+
 const QUOTES_URL = './quotes.json';
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -407,15 +487,20 @@ function renderQuotes() {
   }
   el.innerHTML = filtered.map(q => {
     const sc = q.saint.replace(/,\s*$/,'').trim();
-    return `<div class="quote-card">
+    const fullText = q.quote + ' -- ' + sc + ', ' + q.reference;
+    return `<div class="quote-card" data-quote="${fullText.replace(/"/g,'&quot;')}">
       <div class="card-header">
         <span class="topic-pill${activeTopic===q.topic?' active':''}" onclick="setTopic('${esc(q.topic)}')">${q.topic || 'Uncategorized'}</span>
+        <button class="copy-btn" onclick="copyQuote(this)" aria-label="Copy quote">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="copy-label">Copy</span>
+        </button>
       </div>
-      <div class="card-quote">${hl(q.quote)}</div>
+      <div class="card-quote">${hl(q.quote)} -- ${sc}, ${q.reference}</div>
       <div class="card-attribution">
         <div class="card-meta">
           <span class="saint-name">${sc}</span>
-          <span class="saint-ref">${q.reference}${q.url ? ` <a href="${q.url}" target="_blank" rel="noopener" class="ref-link">↗</a>` : ''}</span>
+          <span class="saint-ref">${q.reference}${q.url ? ` <a href="${q.url}" target="_blank" rel="noopener" class="ref-link">\u2197</a>` : ''}</span>
         </div>
         <div class="card-tags">${q.tags.map(t =>
           `<span class="card-tag${activeTags.has(t)?' active':''}" onclick="toggleTag('${esc(t)}')">${t}</span>`
@@ -486,6 +571,19 @@ function setTopic(t) { activeTopic = activeTopic===t ? null : t; render(); }
 function setSaint(s) { activeSaint = activeSaint===s ? null : s; render(); }
 function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); render(); }
 
+function copyQuote(btn) {
+  const card = btn.closest('.quote-card');
+  const text = card.getAttribute('data-quote');
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.querySelector('.copy-label').textContent = 'Copied!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.querySelector('.copy-label').textContent = 'Copy';
+    }, 2000);
+  });
+}
+
 document.getElementById('search').addEventListener('input', e => { search = e.target.value; render(); });
 document.getElementById('clear-btn').addEventListener('click', () => {
   activeTopic = null; activeSaint = null; activeTags.clear(); search = '';
@@ -501,12 +599,12 @@ async function loadQuotes() {
     return await r.json();
   } catch(e) {
     console.error('Load error:', e);
-    return [];
+    return SAMPLE_QUOTES;
   }
 }
 
 (async () => {
-  document.getElementById('quote-list').innerHTML = '<div class="state"><div class="spinner"></div><p>Loading quotes…</p></div>';
+  document.getElementById('quote-list').innerHTML = '<div class="state"><div class="spinner"></div><p>Loading quotes\u2026</p></div>';
   Q = await loadQuotes();
   render();
 })();
