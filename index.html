@@ -279,9 +279,20 @@ header {
 .card-quote { font-family: 'Newsreader', Georgia, serif; font-size: 16.5px; line-height: 1.85; margin-bottom: 22px; }
 .card-attribution { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
 .saint-name { font-size: 13px; font-weight: 500; color: var(--accent); }
-.saint-ref { font-size: 11px; color: var(--text-3); margin-top: 3px; }
-.ref-link { color: var(--text-3); text-decoration: none; margin-left: 6px; }
-.ref-link:hover { color: var(--accent); }
+.saint-ref-work { font-size: 12px; color: var(--text-2); margin-top: 3px; font-weight: 500; }
+.saint-ref-loc { font-size: 11px; color: var(--text-3); margin-top: 2px; }
+.saint-ref-loc a { color: var(--accent); text-decoration: none; transition: opacity .15s; }
+.saint-ref-loc a:hover { opacity: .8; text-decoration: underline; }
+
+/* Card header actions */
+.card-actions { display: flex; align-items: center; gap: 6px; }
+.source-btn {
+  font-family: 'Inter', sans-serif; font-size: 11px;
+  color: var(--text-3); background: var(--tag-bg);
+  border: 1px solid var(--tag-border); border-radius: 7px;
+  padding: 5px 10px; text-decoration: none; transition: all .2s;
+}
+.source-btn:hover { color: var(--text-2); background: var(--bg-hover); }
 .card-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; max-width: 50%; }
 .card-tag {
   font-size: 10px; padding: 3px 9px; border-radius: 12px;
@@ -466,11 +477,14 @@ function renderQuotes() {
     return '<div class="quote-card" data-quote="'+q.quote.replace(/"/g,'&quot;')+'">' +
       '<div class="card-header">' +
         '<span class="topic-pill'+(activeTopic===q.topic?' active':'')+'" onclick="setTopic(\''+esc(q.topic)+'\')">'+( q.topic||'Uncategorized')+'</span>' +
-        '<button class="copy-btn" onclick="copyQuote(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="copy-label">Copy</span></button>' +
+        '<div class="card-actions">' +
+          (q.url ? '<a href="'+q.url+'" target="_blank" class="source-btn">Source</a>' : '') +
+          '<button class="copy-btn" onclick="copyQuote(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="copy-label">Copy</span></button>' +
+        '</div>' +
       '</div>' +
       '<div class="card-quote">'+hl(q.quote)+'</div>' +
       '<div class="card-attribution">' +
-        '<div class="card-meta"><span class="saint-name">'+sc+'</span><span class="saint-ref">'+q.reference+(q.url?' <a href="'+q.url+'" target="_blank" class="ref-link">\u2197</a>':'')+'</span></div>' +
+        '<div class="card-meta"><div class="saint-name">'+sc+'</div><div class="saint-ref-work">'+q.reference.split(',')[0]+'</div>'+(q.reference.split(',').length > 1 ? '<div class="saint-ref-loc">'+(q.url ? '<a href="'+q.url+'" target="_blank">'+q.reference.split(',').slice(1).join(',').trim()+'</a>' : q.reference.split(',').slice(1).join(',').trim())+'</div>' : '')+'</div>' +
         '<div class="card-tags">'+q.tags.map(function(t){return '<span class="card-tag'+(activeTags.has(t)?' active':'')+'" onclick="toggleTag(\''+esc(t)+'\')">'+t+'</span>';}).join('')+'</div>' +
       '</div></div>';
   }).join('');
@@ -584,10 +598,13 @@ async function runAISearch() {
   el.innerHTML = top.map(function(q) {
     var sc = q.saint.replace(/,\s*$/,'').trim();
     return '<div class="quote-card" data-quote="'+q.quote.replace(/"/g,'&quot;')+'">' +
-      '<div class="card-header"><span class="topic-pill" onclick="setTopic(\''+esc(q.topic)+'\')">'+( q.topic||'Uncategorized')+'</span>' +
-      '<button class="copy-btn" onclick="copyQuote(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="copy-label">Copy</span></button></div>' +
+      '<div class="card-header"><span class="topic-pill" onclick="setTopic(\''+esc(q.topic)+'\')">'+( q.topic||'Uncategorized')+'</span><div class="card-actions">' +
+      (q.url ? '<a href="'+q.url+'" target="_blank" class="source-btn">Source</a>' : '') +
+      '<button class="copy-btn" onclick="copyQuote(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="copy-label">Copy</span></button></div></div>' +
       '<div class="card-quote">'+q.quote+'</div>' +
-      '<div class="card-attribution"><div class="card-meta"><span class="saint-name">'+sc+'</span><span class="saint-ref">'+q.reference+'</span></div>' +
+      '<div class="card-attribution"><div class="card-meta"><div class="saint-name">'+sc+'</div><div class="saint-ref-work">'+q.reference.split(',')[0]+'</div>' +
+      (q.reference.split(',').length > 1 ? '<div class="saint-ref-loc">'+(q.url ? '<a href="'+q.url+'" target="_blank">'+q.reference.split(',').slice(1).join(',').trim()+'</a>' : q.reference.split(',').slice(1).join(',').trim())+'</div>' : '') +
+      '</div>' +
       '<div class="card-tags">'+q.tags.map(function(t){return '<span class="card-tag" onclick="toggleTag(\''+esc(t)+'\')">'+t+'</span>';}).join('')+'</div></div></div>';
   }).join('');
 }
