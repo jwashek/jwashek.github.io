@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,58 +9,55 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-  --bg:          #08080a;
-  --bg-card:     #0f0f12;
+:root, [data-theme="dark"] {
+  --bg: #08080a;
+  --bg-card: #0f0f12;
   --bg-elevated: #141418;
-  --bg-hover:    #1a1a20;
-  --bg-glass:    rgba(20,20,24,.7);
-  --border:      rgba(255,255,255,.06);
-  --border-subtle: rgba(255,255,255,.04);
+  --bg-hover: #1a1a20;
+  --bg-glass: rgba(20,20,24,.8);
+  --border: rgba(255,255,255,.06);
   --border-glow: rgba(212,165,116,.12);
-  --text:        #ededef;
-  --text-2:      #9d9da5;
-  --text-3:      #55555e;
-  --accent:      #d4a574;
+  --text: #ededef;
+  --text-2: #9d9da5;
+  --text-3: #55555e;
+  --accent: #d4a574;
   --accent-soft: rgba(212,165,116,.08);
-  --accent-mid:  rgba(212,165,116,.15);
-  --accent-dim:  #8b6b47;
-  --tag-bg:      rgba(255,255,255,.03);
-  --tag-border:  rgba(255,255,255,.06);
-  --radius:      14px;
-  --radius-sm:   10px;
-  --shadow-sm:   0 1px 2px rgba(0,0,0,.3);
-  --shadow-md:   0 4px 16px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3);
-  --shadow-lg:   0 8px 40px rgba(0,0,0,.5), 0 2px 6px rgba(0,0,0,.3);
+  --accent-mid: rgba(212,165,116,.15);
+  --accent-dim: #8b6b47;
+  --tag-bg: rgba(255,255,255,.03);
+  --tag-border: rgba(255,255,255,.06);
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3);
   --shadow-glow: 0 0 20px rgba(212,165,116,.06);
+  --logo-color: white;
 }
 
 [data-theme="light"] {
-  --bg:          #f8f7f4;
-  --bg-card:     #ffffff;
+  --bg: #f8f7f4;
+  --bg-card: #ffffff;
   --bg-elevated: #f0eeeb;
-  --bg-hover:    #e8e6e2;
-  --bg-glass:    rgba(248,247,244,.85);
-  --border:      rgba(0,0,0,.08);
-  --border-subtle: rgba(0,0,0,.05);
+  --bg-hover: #e8e6e2;
+  --bg-glass: rgba(248,247,244,.9);
+  --border: rgba(0,0,0,.08);
   --border-glow: rgba(139,107,71,.15);
-  --text:        #1a1a1a;
-  --text-2:      #5a5a5a;
-  --text-3:      #8a8a8a;
-  --accent:      #8b5e3c;
+  --text: #1a1a1a;
+  --text-2: #5a5a5a;
+  --text-3: #8a8a8a;
+  --accent: #8b5e3c;
   --accent-soft: rgba(139,94,60,.06);
-  --accent-mid:  rgba(139,94,60,.12);
-  --accent-dim:  #6b4a2e;
-  --tag-bg:      rgba(0,0,0,.03);
-  --tag-border:  rgba(0,0,0,.08);
-  --shadow-sm:   0 1px 2px rgba(0,0,0,.06);
-  --shadow-md:   0 4px 16px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.04);
-  --shadow-lg:   0 8px 40px rgba(0,0,0,.1), 0 2px 6px rgba(0,0,0,.05);
+  --accent-mid: rgba(139,94,60,.12);
+  --accent-dim: #6b4a2e;
+  --tag-bg: rgba(0,0,0,.03);
+  --tag-border: rgba(0,0,0,.08);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.04);
   --shadow-glow: 0 0 20px rgba(139,94,60,.04);
+  --logo-color: #3d2e1e;
 }
 
 html, body { height: 100%; overflow: hidden; }
-
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   background: var(--bg);
@@ -71,50 +68,28 @@ body {
   flex-direction: column;
 }
 
-/* Ambient background glow */
-body::before {
+/* Ambient glow (dark only) */
+[data-theme="dark"] body::before {
   content: '';
-  position: fixed;
-  top: -40%; left: -20%;
+  position: fixed; top: -40%; left: -20%;
   width: 80%; height: 80%;
   background: radial-gradient(ellipse, rgba(212,165,116,.03) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
+  pointer-events: none; z-index: 0;
 }
-body::after {
-  content: '';
-  position: fixed;
-  bottom: -30%; right: -10%;
-  width: 60%; height: 60%;
-  background: radial-gradient(ellipse, rgba(100,130,180,.02) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-[data-theme="light"] body::before,
-[data-theme="light"] body::after { display: none; }
 
-/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,.08); border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,.14); }
-
-[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,.12); }
-[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,.2); }
+::-webkit-scrollbar-thumb { background: var(--text-3); border-radius: 4px; opacity: .3; }
 
 /* ── Header ── */
 header {
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
+  flex-shrink: 0; display: flex; align-items: center;
   padding: 14px 24px;
   border-bottom: 1px solid var(--border);
   background: var(--bg-glass);
-  backdrop-filter: blur(20px) saturate(1.2);
-  z-index: 100;
-  position: relative;
+  backdrop-filter: blur(20px);
+  z-index: 100; position: relative;
 }
-
 .logo { display: flex; align-items: center; gap: 14px; }
 .logo-icon {
   width: 38px; height: 38px;
@@ -122,407 +97,221 @@ header {
   background: linear-gradient(145deg, rgba(212,165,116,.2) 0%, rgba(212,165,116,.05) 100%);
   border: 1px solid rgba(212,165,116,.2);
   border-radius: 11px;
-  box-shadow: 0 2px 12px rgba(212,165,116,.1), inset 0 1px 0 rgba(255,255,255,.05);
-  transition: all .3s ease;
-  color: white;
+  color: var(--logo-color);
+  box-shadow: 0 2px 12px rgba(212,165,116,.1);
 }
-.logo-icon:hover { box-shadow: 0 4px 20px rgba(212,165,116,.18), inset 0 1px 0 rgba(255,255,255,.05); }
 .logo-icon svg { width: 18px; height: 18px; }
-.logo-text h1 { font-size: 16px; font-weight: 600; letter-spacing: -.03em; color: var(--text); }
-.logo-text p { font-size: 11px; color: var(--text-3); font-weight: 400; margin-top: 1px; letter-spacing: .01em; }
-
-.header-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
+.logo-text h1 { font-size: 16px; font-weight: 600; letter-spacing: -.03em; }
+.logo-text p { font-size: 11px; color: var(--text-3); margin-top: 1px; }
+.header-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
 .quote-count {
-  font-size: 11px; color: var(--text-3);
-  font-variant-numeric: tabular-nums;
-  background: var(--bg-elevated);
-  padding: 5px 12px;
-  border-radius: 8px;
+  font-size: 11px; color: var(--text-3); font-variant-numeric: tabular-nums;
+  background: var(--bg-elevated); padding: 5px 12px; border-radius: 8px;
   border: 1px solid var(--border);
-  letter-spacing: .01em;
 }
 .quote-count:empty { display: none; }
 
-/* Sidebar Toggle */
-.sidebar-header {
-  padding: 10px 14px 0;
-  flex-shrink: 0;
-}
-.sidebar-toggle {
-  display: flex; align-items: center; gap: 6px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 7px;
-  cursor: pointer;
-  color: var(--text-3);
-  transition: all .2s ease;
-  font-family: 'Inter', sans-serif;
-  font-size: 11px;
-  padding: 5px 10px;
-}
-.sidebar-toggle:hover { background: var(--bg-hover); color: var(--text-2); border-color: var(--border-glow); }
-
-/* Show sidebar button (visible only when sidebar is hidden) */
-.sidebar-show-btn {
-  display: none;
-  position: absolute;
-  top: 12px; left: 12px;
-  width: 32px; height: 32px;
-  align-items: center; justify-content: center;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  cursor: pointer;
-  color: var(--text-3);
-  transition: all .2s ease;
-  z-index: 10;
-}
-.sidebar-show-btn:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-glow); }
-.shell.sidebar-hidden .sidebar-show-btn { display: flex; }
-
-/* Sidebar collapsed state */
-.shell.sidebar-hidden .sidebar { display: none; }
-.shell.sidebar-hidden .main .quote-list { max-width: 960px; }
-.shell.sidebar-hidden .main { position: relative; }
-
-/* Theme Toggle */
-.theme-toggle {
+/* Header buttons */
+.hdr-btn {
   display: flex; align-items: center; justify-content: center;
   width: 34px; height: 34px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  cursor: pointer;
-  color: var(--text-2);
-  transition: all .2s ease;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: 9px; cursor: pointer; color: var(--text-2); transition: all .2s;
 }
-.theme-toggle:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-glow); }
-
-/* Show/hide sun and moon icons based on theme */
+.hdr-btn:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-glow); }
 .icon-sun { display: none; }
 .icon-moon { display: block; }
 [data-theme="light"] .icon-sun { display: block; }
 [data-theme="light"] .icon-moon { display: none; }
-
-[data-theme="light"] .logo-icon { color: #3d2e1e; }
 
 /* ── Layout ── */
 .shell { display: flex; flex: 1; overflow: hidden; min-height: 0; position: relative; z-index: 1; }
 
 /* ── Sidebar ── */
 .sidebar {
-  width: 270px;
-  flex-shrink: 0;
-  background: var(--bg-glass);
-  backdrop-filter: blur(12px);
+  width: 270px; flex-shrink: 0;
+  background: var(--bg-glass); backdrop-filter: blur(12px);
   border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  display: flex; flex-direction: column; overflow: hidden;
+  transition: margin .25s ease, opacity .25s ease;
 }
+.shell.sidebar-hidden .sidebar { display: none; }
+.shell.sidebar-hidden .quote-list { max-width: 960px; }
+.shell.sidebar-hidden .ai-search-bar { max-width: 960px; }
+.shell.sidebar-hidden .sidebar-show-btn { display: flex; }
+
+/* Sidebar show btn (main area) */
+.sidebar-show-btn {
+  display: none; position: absolute; top: 12px; left: 12px;
+  width: 32px; height: 32px; align-items: center; justify-content: center;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 8px; cursor: pointer; color: var(--text-3); z-index: 10; transition: all .2s;
+}
+.sidebar-show-btn:hover { background: var(--bg-hover); color: var(--text); }
+
+/* Sidebar header */
+.sidebar-hdr { padding: 10px 14px 0; flex-shrink: 0; }
+.sidebar-hide-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-3); font-family: 'Inter', sans-serif; font-size: 11px;
+  padding: 4px 0; transition: color .15s;
+}
+.sidebar-hide-btn:hover { color: var(--text-2); }
 
 /* Search */
-.sidebar-search { padding: 16px 14px 12px; flex-shrink: 0; }
+.sidebar-search { padding: 12px 14px 10px; flex-shrink: 0; }
 .search-box {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 13px;
-  transition: all .25s ease;
-  box-shadow: var(--shadow-sm);
+  display: flex; align-items: center; gap: 8px;
+  background: var(--bg-elevated); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 10px 13px;
+  transition: all .25s; box-shadow: var(--shadow-sm);
 }
-.search-box:focus-within {
-  border-color: rgba(212,165,116,.3);
-  box-shadow: 0 0 0 3px rgba(212,165,116,.06), var(--shadow-sm);
-  background: var(--bg-hover);
-}
-.search-box svg { color: var(--text-3); flex-shrink: 0; transition: color .2s; }
+.search-box:focus-within { border-color: rgba(212,165,116,.3); box-shadow: 0 0 0 3px rgba(212,165,116,.06); }
+.search-box svg { color: var(--text-3); flex-shrink: 0; }
 .search-box:focus-within svg { color: var(--accent); }
 .search-box input {
   background: none; border: none; outline: none;
-  font-family: 'Inter', sans-serif; font-size: 13px;
-  color: var(--text); width: 100%;
+  font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text); width: 100%;
 }
 .search-box input::placeholder { color: var(--text-3); }
 
 /* Tabs */
-.sidebar-tabs {
-  display: flex;
-  padding: 0 14px;
-  gap: 2px;
-  flex-shrink: 0;
-  border-bottom: 1px solid var(--border);
-}
+.sidebar-tabs { display: flex; padding: 0 14px; gap: 2px; flex-shrink: 0; border-bottom: 1px solid var(--border); }
 .tab-btn {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-3);
-  background: none;
-  border: none;
-  border-bottom: 2px solid transparent;
-  padding: 11px 12px 10px;
-  cursor: pointer;
-  transition: all .2s;
-  margin-bottom: -1px;
-  white-space: nowrap;
-  position: relative;
+  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
+  color: var(--text-3); background: none; border: none;
+  border-bottom: 2px solid transparent; padding: 11px 12px 10px;
+  cursor: pointer; transition: all .2s; margin-bottom: -1px;
 }
 .tab-btn:hover { color: var(--text-2); }
 .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
-.tab-btn .tab-count {
-  font-size: 10px; color: var(--text-3);
-  margin-left: 5px; font-variant-numeric: tabular-nums;
-}
+.tab-btn .tab-count { font-size: 10px; color: var(--text-3); margin-left: 5px; }
 
 /* Panel */
 .sidebar-panel { flex: 1; overflow-y: auto; padding: 8px 10px 16px; }
-
 .filter-item {
   display: flex; align-items: center; justify-content: space-between;
-  padding: 8px 11px; border-radius: var(--radius-sm);
-  cursor: pointer; transition: all .15s ease; gap: 8px;
-  border: 1px solid transparent; background: none; width: 100%; text-align: left;
-  font-family: 'Inter', sans-serif;
+  padding: 8px 11px; border-radius: var(--radius-sm); cursor: pointer;
+  transition: all .15s; gap: 8px; border: 1px solid transparent;
+  background: none; width: 100%; text-align: left; font-family: 'Inter', sans-serif;
 }
 .filter-item:hover { background: var(--bg-hover); border-color: var(--border); }
 .filter-item.active { background: var(--accent-soft); border-color: var(--border-glow); }
-.filter-item .fi-label {
-  font-size: 12.5px; color: var(--text-2);
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  flex: 1; transition: color .15s;
-}
+.filter-item .fi-label { font-size: 12.5px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
 .filter-item:hover .fi-label { color: var(--text); }
 .filter-item.active .fi-label { color: var(--accent); }
-.filter-item .fi-count {
-  font-size: 10px; color: var(--text-3);
-  font-variant-numeric: tabular-nums; flex-shrink: 0;
-  background: rgba(255,255,255,.04); padding: 2px 7px; border-radius: 5px;
-}
-
-/* Tags */
+.filter-item .fi-count { font-size: 10px; color: var(--text-3); background: rgba(255,255,255,.04); padding: 2px 7px; border-radius: 5px; }
 .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 4px; }
 .tag-chip {
   font-size: 11px; padding: 5px 11px; border-radius: 20px;
-  background: var(--tag-bg); color: var(--text-3);
-  cursor: pointer; border: 1px solid var(--tag-border);
-  transition: all .2s ease; font-family: 'Inter', sans-serif;
+  background: var(--tag-bg); color: var(--text-3); cursor: pointer;
+  border: 1px solid var(--tag-border); transition: all .2s; font-family: 'Inter', sans-serif;
 }
-.tag-chip:hover { background: var(--bg-hover); color: var(--text-2); border-color: rgba(255,255,255,.1); transform: translateY(-1px); }
-.tag-chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--border-glow); box-shadow: var(--shadow-glow); }
-
+.tag-chip:hover { background: var(--bg-hover); color: var(--text-2); }
+.tag-chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--border-glow); }
 .no-results-filter { font-size: 12px; color: var(--text-3); padding: 16px 10px; }
 
 /* Sidebar footer */
-.sidebar-foot {
-  flex-shrink: 0; padding: 10px 14px;
-  border-top: 1px solid var(--border);
-}
+.sidebar-foot { flex-shrink: 0; padding: 10px 14px; border-top: 1px solid var(--border); }
 .clear-btn {
-  font-family: 'Inter', sans-serif; font-size: 11px;
-  color: var(--text-3); background: none; border: none;
-  cursor: pointer; padding: 5px 10px; border-radius: 7px;
-  transition: all .15s;
+  font-family: 'Inter', sans-serif; font-size: 11px; color: var(--text-3);
+  background: none; border: none; cursor: pointer; padding: 5px 10px; border-radius: 7px; transition: all .15s;
 }
 .clear-btn:hover { color: var(--text-2); background: var(--bg-hover); }
 
-/* ── Main Content ── */
-.main {
-  flex: 1; min-width: 0;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  background: transparent;
-}
+/* ── Main ── */
+.main { flex: 1; min-width: 0; overflow-y: auto; display: flex; flex-direction: column; position: relative; }
 
-.quote-list { flex: 1; padding: 20px 40px; max-width: 840px; margin: 0 auto; width: 100%; }
-
-/* AI Search Bar */
-.ai-search-bar {
-  padding: 20px 40px 0;
-  max-width: 840px;
-  margin: 0 auto;
-  width: 100%;
-}
+/* AI Search */
+.ai-search-bar { padding: 20px 40px 0; max-width: 840px; margin: 0 auto; width: 100%; }
 .ai-search-inner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-glow);
-  border-radius: var(--radius);
-  padding: 12px 16px;
-  box-shadow: var(--shadow-md), var(--shadow-glow);
-  transition: all .25s ease;
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg-card); border: 1px solid var(--border-glow);
+  border-radius: var(--radius); padding: 12px 16px;
+  box-shadow: var(--shadow-md), var(--shadow-glow); transition: all .25s;
 }
-.ai-search-inner:focus-within {
-  border-color: rgba(212,165,116,.3);
-  box-shadow: 0 0 0 3px rgba(212,165,116,.06), var(--shadow-md), 0 0 30px rgba(212,165,116,.08);
-}
-.ai-icon {
-  flex-shrink: 0;
-  color: var(--accent);
-  opacity: .7;
-  transition: opacity .2s;
-}
+.ai-search-inner:focus-within { border-color: rgba(212,165,116,.3); box-shadow: 0 0 0 3px rgba(212,165,116,.06), var(--shadow-md); }
+.ai-icon { flex-shrink: 0; color: var(--accent); opacity: .7; }
 .ai-search-inner:focus-within .ai-icon { opacity: 1; }
-.ai-search-inner input {
-  background: none; border: none; outline: none;
-  font-family: 'Inter', sans-serif; font-size: 14px;
-  color: var(--text); width: 100%;
-}
+.ai-search-inner input { background: none; border: none; outline: none; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text); width: 100%; }
 .ai-search-inner input::placeholder { color: var(--text-3); }
 .ai-search-btn {
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
   width: 32px; height: 32px;
-  background: linear-gradient(135deg, var(--accent-dim) 0%, var(--accent) 100%);
-  border: none; border-radius: 8px;
-  color: white; cursor: pointer;
-  transition: all .2s ease;
-  box-shadow: 0 2px 8px rgba(212,165,116,.2);
+  background: linear-gradient(135deg, var(--accent-dim), var(--accent));
+  border: none; border-radius: 8px; color: white; cursor: pointer; transition: all .2s;
 }
-.ai-search-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(212,165,116,.3); }
-.ai-search-btn:active { transform: scale(.95); }
-.ai-status {
-  font-size: 11px;
-  color: var(--text-3);
-  padding: 6px 4px 0;
-  min-height: 20px;
-  transition: color .2s;
-}
+.ai-search-btn:hover { transform: scale(1.05); }
+.ai-status { font-size: 11px; color: var(--text-3); padding: 6px 4px 0; min-height: 20px; }
 .ai-status.loading { color: var(--accent); }
-.ai-status.ready { color: var(--text-3); }
 
-/* Quote Cards */
+/* Quote list */
+.quote-list { flex: 1; padding: 20px 40px; max-width: 840px; margin: 0 auto; width: 100%; }
+
+/* Cards */
 .quote-card {
-  padding: 28px 30px;
-  margin-bottom: 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: all .25s ease;
-  position: relative;
-  overflow: hidden;
+  padding: 28px 30px; margin-bottom: 16px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); transition: all .25s; position: relative; overflow: hidden;
 }
 .quote-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
+  content: ''; position: absolute; top: 0; left: 0;
   width: 3px; height: 100%;
   background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
-  opacity: 0;
-  transition: opacity .25s ease;
+  opacity: 0; transition: opacity .25s;
 }
-.quote-card:hover {
-  border-color: var(--border-glow);
-  box-shadow: var(--shadow-md), var(--shadow-glow);
-  transform: translateY(-1px);
-}
+.quote-card:hover { border-color: var(--border-glow); box-shadow: var(--shadow-md), var(--shadow-glow); transform: translateY(-1px); }
 .quote-card:hover::before { opacity: 1; }
-
-.card-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 16px;
-}
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
 .topic-pill {
-  font-size: 10px; font-weight: 500;
-  letter-spacing: .06em; text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-soft);
-  border: 1px solid rgba(212,165,116,.12);
-  padding: 4px 12px; border-radius: 20px;
-  cursor: pointer; transition: all .2s ease;
-  font-family: 'Inter', sans-serif;
-  display: inline-flex; align-items: center;
+  font-size: 10px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent); background: var(--accent-soft);
+  border: 1px solid rgba(212,165,116,.12); padding: 4px 12px; border-radius: 20px;
+  cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif;
 }
-.topic-pill:hover { background: var(--accent-mid); border-color: rgba(212,165,116,.25); box-shadow: var(--shadow-glow); }
+.topic-pill:hover { background: var(--accent-mid); }
 .topic-pill.active { background: var(--accent-mid); border-color: rgba(212,165,116,.3); }
-
-.card-quote {
-  font-family: 'Newsreader', Georgia, serif;
-  font-size: 16.5px;
-  line-height: 1.85;
-  color: var(--text);
-  margin-bottom: 22px;
-  font-weight: 400;
-  letter-spacing: .005em;
-}
-
-.card-attribution {
-  display: flex; align-items: flex-start; justify-content: space-between;
-  gap: 16px; flex-wrap: wrap;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-.card-meta { display: flex; flex-direction: column; gap: 4px; }
-.saint-name {
-  font-size: 13px; font-weight: 500; color: var(--accent);
-  display: flex; align-items: center; gap: 6px;
-}
-.saint-ref {
-  font-size: 11px; color: var(--text-3); font-family: 'Inter', sans-serif;
-}
-.ref-link {
-  color: var(--text-3); text-decoration: none;
-  margin-left: 6px; transition: all .2s;
-  font-size: 11px; padding: 2px 6px; border-radius: 4px;
-}
-.ref-link:hover { color: var(--accent); background: var(--accent-soft); }
-
+.card-quote { font-family: 'Newsreader', Georgia, serif; font-size: 16.5px; line-height: 1.85; margin-bottom: 22px; }
+.card-attribution { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
+.saint-name { font-size: 13px; font-weight: 500; color: var(--accent); }
+.saint-ref { font-size: 11px; color: var(--text-3); margin-top: 3px; }
+.ref-link { color: var(--text-3); text-decoration: none; margin-left: 6px; }
+.ref-link:hover { color: var(--accent); }
 .card-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; max-width: 50%; }
 .card-tag {
   font-size: 10px; padding: 3px 9px; border-radius: 12px;
-  background: var(--tag-bg); color: var(--text-3);
-  cursor: pointer; border: 1px solid var(--tag-border);
-  transition: all .15s ease; font-family: 'Inter', sans-serif;
+  background: var(--tag-bg); color: var(--text-3); cursor: pointer;
+  border: 1px solid var(--tag-border); transition: all .15s; font-family: 'Inter', sans-serif;
 }
-.card-tag:hover { color: var(--text-2); border-color: rgba(255,255,255,.1); background: var(--bg-hover); }
+.card-tag:hover { color: var(--text-2); border-color: var(--tag-border); }
 .card-tag.active { color: var(--accent); border-color: var(--border-glow); background: var(--accent-soft); }
 
-/* Copy button */
+/* Copy btn */
 .copy-btn {
   display: flex; align-items: center; gap: 5px;
   font-family: 'Inter', sans-serif; font-size: 11px;
   color: var(--text-3); background: var(--tag-bg);
   border: 1px solid var(--tag-border); border-radius: 7px;
-  padding: 5px 10px; cursor: pointer;
-  transition: all .2s ease;
-  white-space: nowrap;
+  padding: 5px 10px; cursor: pointer; transition: all .2s;
 }
-.copy-btn:hover { color: var(--text-2); background: var(--bg-hover); border-color: rgba(255,255,255,.1); }
-.copy-btn.copied {
-  color: #6ecf8a; border-color: rgba(110,207,138,.2);
-  background: rgba(110,207,138,.06);
-}
-.copy-btn .copy-label { pointer-events: none; }
+.copy-btn:hover { color: var(--text-2); background: var(--bg-hover); }
+.copy-btn.copied { color: #6ecf8a; border-color: rgba(110,207,138,.2); background: rgba(110,207,138,.06); }
 
-/* ── States ── */
-.state {
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; padding: 80px 24px; color: var(--text-3); gap: 12px;
-}
+/* States */
+.state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 24px; color: var(--text-3); gap: 12px; }
 .state p { font-size: 13px; }
-.spinner {
-  width: 22px; height: 22px;
-  border: 2px solid rgba(255,255,255,.06);
-  border-top-color: var(--accent);
-  border-radius: 50%; animation: spin .8s cubic-bezier(.5,.1,.5,.9) infinite;
-}
+.spinner { width: 22px; height: 22px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
-
 mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; padding: 0 2px; }
 
-/* ── Responsive ── */
+/* Responsive */
 @media (max-width: 768px) {
   html, body { overflow: auto; }
   .shell { flex-direction: column; overflow: visible; }
   .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); max-height: 40vh; }
   .main { overflow: visible; }
-  .quote-list { padding: 16px 16px; }
+  .quote-list { padding: 16px; }
   .quote-card { padding: 22px 20px; }
   .card-tags { max-width: 100%; justify-content: flex-start; }
   .card-attribution { flex-direction: column; }
@@ -548,62 +337,46 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
   </div>
   <div class="header-right">
     <span class="quote-count" id="quote-count"></span>
-    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" aria-label="Toggle light/dark mode">
+    <button class="hdr-btn" onclick="toggleTheme()" aria-label="Toggle theme">
       <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     </button>
   </div>
 </header>
 
-<div class="shell">
+<div class="shell" id="shell">
   <aside class="sidebar">
-    <div class="sidebar-header">
-      <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()" aria-label="Hide sidebar">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-        <span>Hide sidebar</span>
+    <div class="sidebar-hdr">
+      <button class="sidebar-hide-btn" onclick="toggleSidebar()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+        Hide sidebar
       </button>
     </div>
     <div class="sidebar-search">
       <div class="search-box">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
-          <line x1="11" y1="11" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="11" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
         <input type="text" id="search" placeholder="Search quotes, saints, tags…" autocomplete="off" spellcheck="false">
       </div>
     </div>
-
     <div class="sidebar-tabs">
-      <button class="tab-btn active" data-tab="topic" onclick="switchTab('topic')">
-        Topics <span class="tab-count" id="tab-count-topic"></span>
-      </button>
-      <button class="tab-btn" data-tab="saint" onclick="switchTab('saint')">
-        Saints <span class="tab-count" id="tab-count-saint"></span>
-      </button>
-      <button class="tab-btn" data-tab="tag" onclick="switchTab('tag')">
-        Tags <span class="tab-count" id="tab-count-tag"></span>
-      </button>
+      <button class="tab-btn active" data-tab="topic" onclick="switchTab('topic')">Topics <span class="tab-count" id="tab-count-topic"></span></button>
+      <button class="tab-btn" data-tab="saint" onclick="switchTab('saint')">Saints <span class="tab-count" id="tab-count-saint"></span></button>
+      <button class="tab-btn" data-tab="tag" onclick="switchTab('tag')">Tags <span class="tab-count" id="tab-count-tag"></span></button>
     </div>
-
     <div class="sidebar-panel" id="sidebar-panel"></div>
-
     <div class="sidebar-foot">
       <button class="clear-btn" id="clear-btn">✕ Clear filters</button>
     </div>
   </aside>
 
   <main class="main">
-    <button class="sidebar-show-btn" id="sidebar-show-btn" onclick="toggleSidebar()" aria-label="Show sidebar">
+    <button class="sidebar-show-btn" id="sidebar-show-btn" onclick="toggleSidebar()">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
     </button>
-    <div class="ai-search-bar" id="ai-search-bar">
+    <div class="ai-search-bar">
       <div class="ai-search-inner">
         <div class="ai-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-            <path d="M2 17l10 5 10-5"/>
-            <path d="M2 12l10 5 10-5"/>
-          </svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
         </div>
         <input type="text" id="ai-input" placeholder="Ask a question… e.g. 'What did the Saints say about raising children?'" autocomplete="off" spellcheck="false">
         <button class="ai-search-btn" id="ai-search-btn" onclick="runAISearch()">
@@ -612,69 +385,62 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
       </div>
       <div class="ai-status" id="ai-status"></div>
     </div>
-
     <div class="quote-list" id="quote-list"></div>
   </main>
 </div>
 
 <script>
-// Suppress unhandled promise rejections in sandboxed environments
-window.addEventListener('unhandledrejection', e => e.preventDefault());
+// Suppress sandbox errors from AI model import
+window.addEventListener('unhandledrejection', function(e) { e.preventDefault(); });
 
-// ── Theme Toggle ──────────────────────────────────────────────────────────────
+// ── Theme ─────────────────────────────────────────────────────────────────────
+(function() {
+  var saved = localStorage.getItem('theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+})();
 function toggleTheme() {
-  const html = document.documentElement;
-  const current = html.getAttribute('data-theme');
-  const next = current === 'light' ? 'dark' : 'light';
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
   html.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
 }
-// Apply saved theme on load
-(function() {
-  const saved = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
-})();
 
 // ── Sidebar Toggle ────────────────────────────────────────────────────────────
+(function() {
+  if (localStorage.getItem('sidebar') === 'hidden') {
+    document.getElementById('shell').classList.add('sidebar-hidden');
+  }
+})();
 function toggleSidebar() {
-  const shell = document.querySelector('.shell');
+  var shell = document.getElementById('shell');
   shell.classList.toggle('sidebar-hidden');
   localStorage.setItem('sidebar', shell.classList.contains('sidebar-hidden') ? 'hidden' : 'visible');
 }
-// Apply saved sidebar state
-(function() {
-  const saved = localStorage.getItem('sidebar');
-  if (saved === 'hidden') document.querySelector('.shell')?.classList.add('sidebar-hidden');
-})();
 
-const SAMPLE_QUOTES =
+// ── Data ──────────────────────────────────────────────────────────────────────
+var QUOTES_URL = './quotes.json';
+var Q = [], activeTopic = null, activeSaint = null, activeTags = new Set();
+var search = '', activeTab = 'topic';
 
-const QUOTES_URL = './quotes.json';
-
-// ── State ─────────────────────────────────────────────────────────────────────
-let Q = [], activeTopic = null, activeSaint = null, activeTags = new Set();
-let search = '', activeTab = 'topic';
-
-const norm = s => s.toLowerCase().replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim();
-const esc = s => s.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+function norm(s) { return s.toLowerCase().replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim(); }
+function esc(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
 
 function visibleQuotes() {
-  return Q.filter(q => {
+  return Q.filter(function(q) {
     if (activeTopic && q.topic !== activeTopic) return false;
     if (activeSaint && q.saint.replace(/,\s*$/,'').trim() !== activeSaint) return false;
-    for (const t of activeTags) if (!q.tags.includes(t)) return false;
+    for (var t of activeTags) if (!q.tags.includes(t)) return false;
     if (search) {
-      const h = norm(q.quote+' '+q.saint+' '+q.reference+' '+q.tags.join(' '));
+      var h = norm(q.quote+' '+q.saint+' '+q.reference+' '+q.tags.join(' '));
       if (!h.includes(norm(search))) return false;
     }
     return true;
   });
 }
-
 function searchMatched() {
   if (!search) return Q;
-  return Q.filter(q => {
-    const h = norm(q.quote+' '+q.saint+' '+q.reference+' '+q.tags.join(' '));
+  return Q.filter(function(q) {
+    var h = norm(q.quote+' '+q.saint+' '+q.reference+' '+q.tags.join(' '));
     return h.includes(norm(search));
   });
 }
@@ -682,272 +448,148 @@ function searchMatched() {
 // ── Render ────────────────────────────────────────────────────────────────────
 function hl(s) {
   if (!search) return s;
-  const e = search.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  return s.replace(new RegExp(`(${e})`,'gi'),'<mark>$1</mark>');
+  var e = search.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return s.replace(new RegExp('('+e+')','gi'),'<mark>$1</mark>');
 }
 
 function renderQuotes() {
-  const filtered = visibleQuotes();
+  var filtered = visibleQuotes();
   document.getElementById('quote-count').textContent = filtered.length + ' of ' + Q.length + ' quotes';
-
-  const el = document.getElementById('quote-list');
-  if (!filtered.length) {
-    el.innerHTML = '<div class="state"><p>No quotes match your search.</p></div>';
-    return;
-  }
-  el.innerHTML = filtered.map(q => {
-    const sc = q.saint.replace(/,\s*$/,'').trim();
-    return `<div class="quote-card" data-quote="${q.quote.replace(/"/g,'&quot;')}">
-      <div class="card-header">
-        <span class="topic-pill${activeTopic===q.topic?' active':''}" onclick="setTopic('${esc(q.topic)}')">${q.topic || 'Uncategorized'}</span>
-        <button class="copy-btn" onclick="copyQuote(this)" aria-label="Copy quote">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          <span class="copy-label">Copy</span>
-        </button>
-      </div>
-      <div class="card-quote">${hl(q.quote)}</div>
-      <div class="card-attribution">
-        <div class="card-meta">
-          <span class="saint-name">${sc}</span>
-          <span class="saint-ref">${q.reference}${q.url ? ` <a href="${q.url}" target="_blank" rel="noopener" class="ref-link">\u2197</a>` : ''}</span>
-        </div>
-        <div class="card-tags">${q.tags.map(t =>
-          `<span class="card-tag${activeTags.has(t)?' active':''}" onclick="toggleTag('${esc(t)}')">${t}</span>`
-        ).join('')}</div>
-      </div>
-    </div>`;
+  var el = document.getElementById('quote-list');
+  if (!filtered.length) { el.innerHTML = '<div class="state"><p>No quotes match your search.</p></div>'; return; }
+  el.innerHTML = filtered.map(function(q) {
+    var sc = q.saint.replace(/,\s*$/,'').trim();
+    return '<div class="quote-card" data-quote="'+q.quote.replace(/"/g,'&quot;')+'">' +
+      '<div class="card-header">' +
+        '<span class="topic-pill'+(activeTopic===q.topic?' active':'')+'" onclick="setTopic(\''+esc(q.topic)+'\')">'+( q.topic||'Uncategorized')+'</span>' +
+        '<button class="copy-btn" onclick="copyQuote(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="copy-label">Copy</span></button>' +
+      '</div>' +
+      '<div class="card-quote">'+hl(q.quote)+'</div>' +
+      '<div class="card-attribution">' +
+        '<div class="card-meta"><span class="saint-name">'+sc+'</span><span class="saint-ref">'+q.reference+(q.url?' <a href="'+q.url+'" target="_blank" class="ref-link">\u2197</a>':'')+'</span></div>' +
+        '<div class="card-tags">'+q.tags.map(function(t){return '<span class="card-tag'+(activeTags.has(t)?' active':'')+'" onclick="toggleTag(\''+esc(t)+'\')">'+t+'</span>';}).join('')+'</div>' +
+      '</div></div>';
   }).join('');
 }
 
 function renderPanel() {
-  const matched = searchMatched();
-
-  const topicCounts = {};
-  matched.forEach(q => { topicCounts[q.topic] = (topicCounts[q.topic]||0)+1; });
-  const topics = Object.keys(topicCounts).sort();
-
-  const saintCounts = {};
-  matched.forEach(q => {
-    const s = q.saint.replace(/,\s*$/,'').trim();
-    saintCounts[s] = (saintCounts[s]||0)+1;
-  });
-  const saints = Object.keys(saintCounts).sort();
-
-  const tagSet = new Set(matched.flatMap(q => q.tags));
-  const tags = [...tagSet].sort();
+  var matched = searchMatched();
+  var topicCounts = {}, saintCounts = {};
+  matched.forEach(function(q) { topicCounts[q.topic] = (topicCounts[q.topic]||0)+1; });
+  matched.forEach(function(q) { var s = q.saint.replace(/,\s*$/,'').trim(); saintCounts[s] = (saintCounts[s]||0)+1; });
+  var topics = Object.keys(topicCounts).sort();
+  var saints = Object.keys(saintCounts).sort();
+  var tagSet = new Set(matched.flatMap(function(q){ return q.tags; }));
+  var tags = Array.from(tagSet).sort();
 
   document.getElementById('tab-count-topic').textContent = topics.length;
   document.getElementById('tab-count-saint').textContent = saints.length;
   document.getElementById('tab-count-tag').textContent = tags.length;
-
-  const panel = document.getElementById('sidebar-panel');
+  var panel = document.getElementById('sidebar-panel');
 
   if (activeTab === 'topic') {
-    if (!topics.length) { panel.innerHTML = '<div class="no-results-filter">No matching topics</div>'; return; }
-    panel.innerHTML = topics.map(t =>
-      `<button class="filter-item${activeTopic===t?' active':''}" onclick="setTopic('${esc(t)}')">
-        <span class="fi-label">${t}</span>
-        <span class="fi-count">${topicCounts[t]}</span>
-      </button>`
-    ).join('');
-
+    panel.innerHTML = topics.length ? topics.map(function(t){ return '<button class="filter-item'+(activeTopic===t?' active':'')+'" onclick="setTopic(\''+esc(t)+'\')"><span class="fi-label">'+t+'</span><span class="fi-count">'+topicCounts[t]+'</span></button>'; }).join('') : '<div class="no-results-filter">No matching topics</div>';
   } else if (activeTab === 'saint') {
-    if (!saints.length) { panel.innerHTML = '<div class="no-results-filter">No matching saints</div>'; return; }
-    panel.innerHTML = saints.map(s =>
-      `<button class="filter-item${activeSaint===s?' active':''}" onclick="setSaint('${esc(s)}')">
-        <span class="fi-label">${s.replace('Saint ','St. ')}</span>
-        <span class="fi-count">${saintCounts[s]}</span>
-      </button>`
-    ).join('');
-
+    panel.innerHTML = saints.length ? saints.map(function(s){ return '<button class="filter-item'+(activeSaint===s?' active':'')+'" onclick="setSaint(\''+esc(s)+'\')"><span class="fi-label">'+s.replace('Saint ','St. ')+'</span><span class="fi-count">'+saintCounts[s]+'</span></button>'; }).join('') : '<div class="no-results-filter">No matching saints</div>';
   } else {
-    if (!tags.length) { panel.innerHTML = '<div class="no-results-filter">No matching tags</div>'; return; }
-    panel.innerHTML = `<div class="tag-cloud">${tags.map(t =>
-      `<span class="tag-chip${activeTags.has(t)?' active':''}" onclick="toggleTag('${esc(t)}')">${t}</span>`
-    ).join('')}</div>`;
+    panel.innerHTML = tags.length ? '<div class="tag-cloud">'+tags.map(function(t){ return '<span class="tag-chip'+(activeTags.has(t)?' active':'')+'" onclick="toggleTag(\''+esc(t)+'\')">'+t+'</span>'; }).join('')+'</div>' : '<div class="no-results-filter">No matching tags</div>';
   }
 }
-
 function render() { renderQuotes(); renderPanel(); }
 
 // ── Actions ───────────────────────────────────────────────────────────────────
-function switchTab(tab) {
-  activeTab = tab;
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
-  renderPanel();
-}
+function switchTab(tab) { activeTab = tab; document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.tab===tab); }); renderPanel(); }
 function setTopic(t) { activeTopic = activeTopic===t ? null : t; render(); }
 function setSaint(s) { activeSaint = activeSaint===s ? null : s; render(); }
 function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); render(); }
-
 function copyQuote(btn) {
-  const card = btn.closest('.quote-card');
-  const text = card.getAttribute('data-quote');
-  navigator.clipboard.writeText(text).then(() => {
-    btn.classList.add('copied');
-    btn.querySelector('.copy-label').textContent = 'Copied!';
-    setTimeout(() => {
-      btn.classList.remove('copied');
-      btn.querySelector('.copy-label').textContent = 'Copy';
-    }, 2000);
+  var card = btn.closest('.quote-card');
+  navigator.clipboard.writeText(card.getAttribute('data-quote')).then(function(){
+    btn.classList.add('copied'); btn.querySelector('.copy-label').textContent = 'Copied!';
+    setTimeout(function(){ btn.classList.remove('copied'); btn.querySelector('.copy-label').textContent = 'Copy'; }, 2000);
   });
 }
 
-document.getElementById('search').addEventListener('input', e => { search = e.target.value; render(); });
-document.getElementById('clear-btn').addEventListener('click', () => {
-  activeTopic = null; activeSaint = null; activeTags.clear(); search = '';
-  document.getElementById('search').value = '';
-  render();
-});
+document.getElementById('search').addEventListener('input', function(e) { search = e.target.value; render(); });
+document.getElementById('clear-btn').addEventListener('click', function() { activeTopic = null; activeSaint = null; activeTags.clear(); search = ''; document.getElementById('search').value = ''; render(); });
 
-// ── Load from static JSON ─────────────────────────────────────────────────────
-async function loadQuotes() {
-  try {
-    const r = await fetch(QUOTES_URL);
-    if (!r.ok) throw new Error('Failed to load quotes');
-    return await r.json();
-  } catch(e) {
-    console.error('Load error:', e);
-    return SAMPLE_QUOTES;
-  }
-}
-
-(async () => {
+// ── Load ──────────────────────────────────────────────────────────────────────
+(async function() {
   document.getElementById('quote-list').innerHTML = '<div class="state"><div class="spinner"></div><p>Loading quotes\u2026</p></div>';
-  Q = await loadQuotes();
+  try {
+    var r = await fetch(QUOTES_URL);
+    if (r.ok) Q = await r.json();
+  } catch(e) {}
+  if (!Q.length) Q = [];
   render();
 })();
 
-// ── AI Semantic Search ────────────────────────────────────────────────────────
-const EMBEDDINGS_URL = './embeddings.json';
-let embeddings = null;
-let aiPipeline = null;
-let aiLoading = false;
-let aiMode = false; // when true, show AI results instead of normal filters
+// ── AI Search ─────────────────────────────────────────────────────────────────
+var embeddings = null, aiPipeline = null, aiLoading = false;
+var EMBEDDINGS_URL = './embeddings.json';
 
-const statusEl = () => document.getElementById('ai-status');
+(async function() {
+  try { var r = await fetch(EMBEDDINGS_URL); if (r.ok) embeddings = await r.json(); } catch(e) {}
+})();
 
-// Load embeddings in background
-async function loadEmbeddings() {
-  try {
-    const r = await fetch(EMBEDDINGS_URL);
-    if (!r.ok) throw new Error('No embeddings file');
-    embeddings = await r.json();
-    console.log(`Loaded ${embeddings.length} embeddings`);
-  } catch(e) {
-    console.warn('Embeddings not available:', e.message);
-  }
-}
-
-// Load AI model in background
 async function loadAIModel() {
   if (aiPipeline || aiLoading) return;
   aiLoading = true;
-  const s = statusEl();
+  var s = document.getElementById('ai-status');
   if (s) { s.textContent = 'Loading AI model (first time only)\u2026'; s.className = 'ai-status loading'; }
-
   try {
-    const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
-    aiPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-    if (s) { s.textContent = 'AI ready \u2014 ask a question about the Saints'; s.className = 'ai-status ready'; }
-  } catch(e) {
-    if (s) { s.textContent = ''; s.className = 'ai-status'; }
-    console.error('Model load failed:', e);
-  }
+    var mod = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+    aiPipeline = await mod.pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    if (s) { s.textContent = 'AI ready'; s.className = 'ai-status'; }
+  } catch(e) { if (s) { s.textContent = ''; s.className = 'ai-status'; } }
   aiLoading = false;
 }
 
-// Cosine similarity
 function cosineSim(a, b) {
-  let dot = 0, normA = 0, normB = 0;
-  for (let i = 0; i < a.length; i++) {
-    dot += a[i] * b[i];
-    normA += a[i] * a[i];
-    normB += b[i] * b[i];
-  }
-  return dot / (Math.sqrt(normA) * Math.sqrt(normB));
+  var dot=0, nA=0, nB=0;
+  for (var i=0; i<a.length; i++) { dot+=a[i]*b[i]; nA+=a[i]*a[i]; nB+=b[i]*b[i]; }
+  return dot/(Math.sqrt(nA)*Math.sqrt(nB));
 }
 
-// Run semantic search
 async function runAISearch() {
-  const inp = document.getElementById('ai-input');
+  var inp = document.getElementById('ai-input');
   if (!inp) return;
-  const query = inp.value.trim();
+  var query = inp.value.trim();
   if (!query) return;
-
-  if (!aiPipeline) {
-    try { await loadAIModel(); } catch(e) {}
-    if (!aiPipeline) { /* fallback to keyword */ search = query; render(); return; }
-  }
+  if (!aiPipeline) { await loadAIModel(); if (!aiPipeline) { search = query; render(); return; } }
   if (!embeddings || embeddings.length !== Q.length) { search = query; render(); return; }
 
-  statusEl().textContent = 'Searching…';
-  statusEl().className = 'ai-status loading';
+  var s = document.getElementById('ai-status');
+  if (s) { s.textContent = 'Searching\u2026'; s.className = 'ai-status loading'; }
+  var output = await aiPipeline(query, { pooling: 'mean', normalize: true });
+  var queryEmb = Array.from(output.data);
 
-  const output = await aiPipeline(query, { pooling: 'mean', normalize: true });
-  const queryEmb = Array.from(output.data);
-
-  // Score each quote
-  const scored = Q.map((q, i) => ({ ...q, score: cosineSim(queryEmb, embeddings[i]) }));
-  scored.sort((a, b) => b.score - a.score);
-
-  // Filter by relevance threshold and boost saint name matches
-  const queryLower = query.toLowerCase();
-  const boosted = scored.map(q => {
-    let bonus = 0;
-    // Boost if query mentions this saint's name
-    const saintLower = q.saint.toLowerCase();
-    if (queryLower.split(' ').some(w => w.length > 3 && saintLower.includes(w))) bonus = 0.08;
-    return { ...q, score: q.score + bonus };
+  var queryLower = query.toLowerCase();
+  var scored = Q.map(function(q, i) {
+    var score = cosineSim(queryEmb, embeddings[i]);
+    var saintLower = q.saint.toLowerCase();
+    if (queryLower.split(' ').some(function(w){ return w.length > 3 && saintLower.includes(w); })) score += 0.08;
+    return Object.assign({}, q, { score: score });
   });
-  boosted.sort((a, b) => b.score - a.score);
+  scored.sort(function(a,b){ return b.score - a.score; });
+  var top = scored.filter(function(q){ return q.score > 0.35; }).slice(0, 10);
 
-  // Only show results above a relevance threshold (0.35) — max 10
-  const top = boosted.filter(q => q.score > 0.35).slice(0, 10);
-  statusEl().textContent = top.length ? `Found ${top.length} relevant quotes for: "${query}"` : `No closely matching quotes found for: "${query}"`;
-  statusEl().className = 'ai-status ready';
-
-  // Render AI results directly
-  const el = document.getElementById('quote-list');
-  if (!top.length) {
-    el.innerHTML = '<div class="state"><p>No closely matching quotes found. Try rephrasing your question or using the keyword search.</p></div>';
-    return;
-  }
-  el.innerHTML = top.map(q => {
-    const sc = q.saint.replace(/,\s*$/,'').trim();
-    const pct = Math.round(q.score * 100);
-    return `<div class="quote-card" data-quote="${q.quote.replace(/"/g,'&quot;')}">
-      <div class="card-header">
-        <span class="topic-pill" onclick="setTopic('${esc(q.topic)}')">${q.topic || 'Uncategorized'}</span>
-        <button class="copy-btn" onclick="copyQuote(this)" aria-label="Copy quote">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-          <span class="copy-label">Copy</span>
-        </button>
-      </div>
-      <div class="card-quote">${q.quote}</div>
-      <div class="card-attribution">
-        <div class="card-meta">
-          <span class="saint-name">${sc}</span>
-          <span class="saint-ref">${q.reference}${q.url ? ` <a href="${q.url}" target="_blank" rel="noopener" class="ref-link">↗</a>` : ''}</span>
-        </div>
-        <div class="card-tags">${q.tags.map(t =>
-          `<span class="card-tag" onclick="toggleTag('${esc(t)}')">${t}</span>`
-        ).join('')}</div>
-      </div>
-    </div>`;
+  if (s) { s.textContent = top.length ? 'Found '+top.length+' relevant quotes' : 'No closely matching quotes found'; s.className = 'ai-status'; }
+  var el = document.getElementById('quote-list');
+  if (!top.length) { el.innerHTML = '<div class="state"><p>No closely matching quotes found. Try rephrasing or use keyword search.</p></div>'; return; }
+  el.innerHTML = top.map(function(q) {
+    var sc = q.saint.replace(/,\s*$/,'').trim();
+    return '<div class="quote-card" data-quote="'+q.quote.replace(/"/g,'&quot;')+'">' +
+      '<div class="card-header"><span class="topic-pill" onclick="setTopic(\''+esc(q.topic)+'\')">'+( q.topic||'Uncategorized')+'</span>' +
+      '<button class="copy-btn" onclick="copyQuote(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="copy-label">Copy</span></button></div>' +
+      '<div class="card-quote">'+q.quote+'</div>' +
+      '<div class="card-attribution"><div class="card-meta"><span class="saint-name">'+sc+'</span><span class="saint-ref">'+q.reference+'</span></div>' +
+      '<div class="card-tags">'+q.tags.map(function(t){return '<span class="card-tag" onclick="toggleTag(\''+esc(t)+'\')">'+t+'</span>';}).join('')+'</div></div></div>';
   }).join('');
 }
 
-// Enter key triggers AI search
-const aiInput = document.getElementById('ai-input');
-if (aiInput) {
-  aiInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') runAISearch();
-  });
-}
-
-// Start loading embeddings + model in background after page loads
-try { setTimeout(() => { loadEmbeddings().catch(() => {}); }, 1000); } catch(e) {}
+var aiInputEl = document.getElementById('ai-input');
+if (aiInputEl) aiInputEl.addEventListener('keydown', function(e) { if (e.key === 'Enter') runAISearch(); });
 </script>
 </body>
 </html>
