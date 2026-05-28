@@ -1,9 +1,9 @@
 {
-  "name": "wisdom-of-the-saints",
+  "name": "golden-mouth-database",
   "version": "1.0.0",
   "type": "module",
   "private": true,
-  "description": "Build tools for Wisdom of the Saints quote database",
+  "description": "Build tools for the Golden Mouth database",
   "scripts": {
     "build": "node build-quotes.js && node build-embeddings.js"
   },
