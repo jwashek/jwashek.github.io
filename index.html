@@ -246,6 +246,63 @@ header {
 
 .quote-list { flex: 1; padding: 20px 40px; max-width: 840px; margin: 0 auto; width: 100%; }
 
+/* AI Search Bar */
+.ai-search-bar {
+  padding: 20px 40px 0;
+  max-width: 840px;
+  margin: 0 auto;
+  width: 100%;
+}
+.ai-search-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  box-shadow: var(--shadow-md), var(--shadow-glow);
+  transition: all .25s ease;
+}
+.ai-search-inner:focus-within {
+  border-color: rgba(212,165,116,.3);
+  box-shadow: 0 0 0 3px rgba(212,165,116,.06), var(--shadow-md), 0 0 30px rgba(212,165,116,.08);
+}
+.ai-icon {
+  flex-shrink: 0;
+  color: var(--accent);
+  opacity: .7;
+  transition: opacity .2s;
+}
+.ai-search-inner:focus-within .ai-icon { opacity: 1; }
+.ai-search-inner input {
+  background: none; border: none; outline: none;
+  font-family: 'Inter', sans-serif; font-size: 14px;
+  color: var(--text); width: 100%;
+}
+.ai-search-inner input::placeholder { color: var(--text-3); }
+.ai-search-btn {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--accent-dim) 0%, var(--accent) 100%);
+  border: none; border-radius: 8px;
+  color: white; cursor: pointer;
+  transition: all .2s ease;
+  box-shadow: 0 2px 8px rgba(212,165,116,.2);
+}
+.ai-search-btn:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(212,165,116,.3); }
+.ai-search-btn:active { transform: scale(.95); }
+.ai-status {
+  font-size: 11px;
+  color: var(--text-3);
+  padding: 6px 4px 0;
+  min-height: 20px;
+  transition: color .2s;
+}
+.ai-status.loading { color: var(--accent); }
+.ai-status.ready { color: var(--text-3); }
+
 /* Quote Cards */
 .quote-card {
   padding: 28px 30px;
@@ -432,6 +489,23 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
   </aside>
 
   <main class="main">
+    <div class="ai-search-bar" id="ai-search-bar">
+      <div class="ai-search-inner">
+        <div class="ai-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <input type="text" id="ai-input" placeholder="Ask a question… e.g. 'What did the Saints say about raising children?'" autocomplete="off" spellcheck="false">
+        <button class="ai-search-btn" id="ai-search-btn" onclick="runAISearch()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+      <div class="ai-status" id="ai-status"></div>
+    </div>
+
     <div class="quote-list" id="quote-list"></div>
   </main>
 </div>
@@ -608,6 +682,120 @@ async function loadQuotes() {
   Q = await loadQuotes();
   render();
 })();
+
+// ── AI Semantic Search ────────────────────────────────────────────────────────
+const EMBEDDINGS_URL = './embeddings.json';
+let embeddings = null;
+let aiPipeline = null;
+let aiLoading = false;
+let aiMode = false; // when true, show AI results instead of normal filters
+
+const statusEl = () => document.getElementById('ai-status');
+
+// Load embeddings in background
+async function loadEmbeddings() {
+  try {
+    const r = await fetch(EMBEDDINGS_URL);
+    if (!r.ok) throw new Error('No embeddings file');
+    embeddings = await r.json();
+    console.log(`Loaded ${embeddings.length} embeddings`);
+  } catch(e) {
+    console.warn('Embeddings not available:', e.message);
+  }
+}
+
+// Load AI model in background
+async function loadAIModel() {
+  if (aiPipeline || aiLoading) return;
+  aiLoading = true;
+  statusEl().textContent = 'Loading AI model (first time only)…';
+  statusEl().className = 'ai-status loading';
+
+  try {
+    const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+    aiPipeline = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+    statusEl().textContent = 'AI ready — ask a question about the Saints';
+    statusEl().className = 'ai-status ready';
+  } catch(e) {
+    statusEl().textContent = 'AI unavailable — using keyword search as fallback';
+    statusEl().className = 'ai-status';
+    console.error('Model load failed:', e);
+  }
+  aiLoading = false;
+}
+
+// Cosine similarity
+function cosineSim(a, b) {
+  let dot = 0, normA = 0, normB = 0;
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    normA += a[i] * a[i];
+    normB += b[i] * b[i];
+  }
+  return dot / (Math.sqrt(normA) * Math.sqrt(normB));
+}
+
+// Run semantic search
+async function runAISearch() {
+  const query = document.getElementById('ai-input').value.trim();
+  if (!query) return;
+
+  if (!aiPipeline) {
+    await loadAIModel();
+    if (!aiPipeline) { /* fallback to keyword */ search = query; render(); return; }
+  }
+  if (!embeddings || embeddings.length !== Q.length) { search = query; render(); return; }
+
+  statusEl().textContent = 'Searching…';
+  statusEl().className = 'ai-status loading';
+
+  const output = await aiPipeline(query, { pooling: 'mean', normalize: true });
+  const queryEmb = Array.from(output.data);
+
+  // Score each quote
+  const scored = Q.map((q, i) => ({ ...q, score: cosineSim(queryEmb, embeddings[i]) }));
+  scored.sort((a, b) => b.score - a.score);
+
+  // Show top 10 results
+  const top = scored.slice(0, 10);
+  statusEl().textContent = `Found ${top.length} relevant quotes for: "${query}"`;
+  statusEl().className = 'ai-status ready';
+
+  // Render AI results directly
+  const el = document.getElementById('quote-list');
+  el.innerHTML = top.map(q => {
+    const sc = q.saint.replace(/,\s*$/,'').trim();
+    const fullText = q.quote + ' -- ' + sc + ', ' + q.reference;
+    const pct = Math.round(q.score * 100);
+    return `<div class="quote-card" data-quote="${fullText.replace(/"/g,'&quot;')}">
+      <div class="card-header">
+        <span class="topic-pill" onclick="setTopic('${esc(q.topic)}')">${q.topic || 'Uncategorized'}</span>
+        <button class="copy-btn" onclick="copyQuote(this)" aria-label="Copy quote">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span class="copy-label">Copy</span>
+        </button>
+      </div>
+      <div class="card-quote">${q.quote} -- ${sc}, ${q.reference}</div>
+      <div class="card-attribution">
+        <div class="card-meta">
+          <span class="saint-name">${sc}</span>
+          <span class="saint-ref">${q.reference}${q.url ? ` <a href="${q.url}" target="_blank" rel="noopener" class="ref-link">↗</a>` : ''}</span>
+        </div>
+        <div class="card-tags">${q.tags.map(t =>
+          `<span class="card-tag" onclick="toggleTag('${esc(t)}')">${t}</span>`
+        ).join('')}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// Enter key triggers AI search
+document.getElementById('ai-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') runAISearch();
+});
+
+// Start loading embeddings + model in background after page loads
+setTimeout(() => { loadEmbeddings(); loadAIModel(); }, 1000);
 </script>
 </body>
 </html>
