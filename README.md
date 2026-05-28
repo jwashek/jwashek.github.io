@@ -60,4 +60,4 @@ The AI search uses [Transformers.js](https://huggingface.co/docs/transformers.js
 
 ## Source
 
-Content: All quotes are attributed to their respective Saints and sources and pulled generally from [New Advent](https://www.newadvent.org/fathers/) and [CCEL](https://ccel.org/fathers). Other quotes have been pulled directly from public PDFs of Saint's works which are all linked as sources in the quotes themselves.
+All quotes are attributed to their respective Saints and sources and pulled generally from [New Advent](https://www.newadvent.org/fathers/) and [CCEL](https://ccel.org/fathers). Other quotes have been pulled directly from public PDFs of Saint's works which are all linked as sources in the quotes themselves.
