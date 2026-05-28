@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wisdom of the Saints</title>
+<title>Golden Mouth Database</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
@@ -448,8 +448,8 @@ mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; pa
       </svg>
     </div>
     <div class="logo-text">
-      <h1>Wisdom of the Saints</h1>
-      <p>Holy Fathers of the Eastern Orthodox Church</p>
+      <h1>Golden Mouth Database</h1>
+      <p>Quotes from the Holy Saints of the Eastern Orthodox Church</p>
     </div>
   </div>
   <div class="header-right">
@@ -561,8 +561,7 @@ function renderQuotes() {
   }
   el.innerHTML = filtered.map(q => {
     const sc = q.saint.replace(/,\s*$/,'').trim();
-    const fullText = q.quote + ' -- ' + sc + ', ' + q.reference;
-    return `<div class="quote-card" data-quote="${fullText.replace(/"/g,'&quot;')}">
+    return `<div class="quote-card" data-quote="${q.quote.replace(/"/g,'&quot;')}">
       <div class="card-header">
         <span class="topic-pill${activeTopic===q.topic?' active':''}" onclick="setTopic('${esc(q.topic)}')">${q.topic || 'Uncategorized'}</span>
         <button class="copy-btn" onclick="copyQuote(this)" aria-label="Copy quote">
@@ -570,7 +569,7 @@ function renderQuotes() {
           <span class="copy-label">Copy</span>
         </button>
       </div>
-      <div class="card-quote">${hl(q.quote)} -- ${sc}, ${q.reference}</div>
+      <div class="card-quote">${hl(q.quote)}</div>
       <div class="card-attribution">
         <div class="card-meta">
           <span class="saint-name">${sc}</span>
@@ -765,9 +764,8 @@ async function runAISearch() {
   const el = document.getElementById('quote-list');
   el.innerHTML = top.map(q => {
     const sc = q.saint.replace(/,\s*$/,'').trim();
-    const fullText = q.quote + ' -- ' + sc + ', ' + q.reference;
     const pct = Math.round(q.score * 100);
-    return `<div class="quote-card" data-quote="${fullText.replace(/"/g,'&quot;')}">
+    return `<div class="quote-card" data-quote="${q.quote.replace(/"/g,'&quot;')}">
       <div class="card-header">
         <span class="topic-pill" onclick="setTopic('${esc(q.topic)}')">${q.topic || 'Uncategorized'}</span>
         <button class="copy-btn" onclick="copyQuote(this)" aria-label="Copy quote">
@@ -775,7 +773,7 @@ async function runAISearch() {
           <span class="copy-label">Copy</span>
         </button>
       </div>
-      <div class="card-quote">${q.quote} -- ${sc}, ${q.reference}</div>
+      <div class="card-quote">${q.quote}</div>
       <div class="card-attribution">
         <div class="card-meta">
           <span class="saint-name">${sc}</span>
