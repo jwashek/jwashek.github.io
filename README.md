@@ -25,6 +25,7 @@ In addition to this, and maybe more importantly, I want to prevent "cherry-picki
 1. Providing sources for every quote.
 2. Intentionally not redirecting the source to the exact word-for-word quote, but linking to the main, general source. This forces readers to find the quote and hopefully read some of the context in the process.
 3. Adding context. You might notice some quotes have `[i.e., {some background}]` text. This is to add context on arguments, why the quote(s) was made, or to provide some historical basis for the quote(s). This also serves an additional purpose: for readers not to take my word for it, but to verify the quote for themselves.
+4. Keeping some quotes lengthy, so this provides surrounding context to the quote as a whole.
 
 ### Why "Golden Mouth"? 
 Saint John Chrysostom is my [Patron Saint](https://orthodoxwiki.org/Patron_saint) and was rightly given the name "Chrysostom", meaning "[golden-mouthed](https://en.wikipedia.org/wiki/John_Chrysostom#:~:text=mouthed)", due to his eloquent preaching. He holds a very dear place in my heart and is one of the reasons I fell in love with the Saints and found the Church. Not only is this app paying respect to him by taking his name, but also to all Saints who--in my opinion--have "golden-mouths" of their own. 
