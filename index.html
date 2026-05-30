@@ -758,6 +758,10 @@
     .modal-url a:hover { opacity: 1; text-decoration: underline; }
     .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
     .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); }
+    .modal-actions { display: flex; gap: 8px; margin-top: 20px; }
+    .modal-actions .copy-btn, .modal-actions .source-link-btn { font-size: 12px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-input); color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: var(--transition); }
+    .modal-actions .copy-btn:hover, .modal-actions .source-link-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .modal-actions .copy-btn.copied { border-color: #4caf50; color: #4caf50; }
 
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
@@ -873,6 +877,7 @@
       <div class="modal-reference" id="modalReference"></div>
       <div class="modal-url" id="modalUrl"></div>
       <div class="modal-tags" id="modalTags"></div>
+      <div class="modal-actions" id="modalActions"></div>
     </div>
   </div>
 
@@ -1384,6 +1389,24 @@
         : '';
       document.getElementById('modalTags').innerHTML = (q.tags || [])
         .map(t => `<span class="modal-tag">${escHtml(t)}</span>`).join('');
+      // Actions: Source + Copy
+      let actionsHtml = '';
+      if (q.url) {
+        actionsHtml += `<a class="source-link-btn" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source ↗</a>`;
+      }
+      actionsHtml += `<button class="copy-btn" id="modalCopyBtn">Copy Quote</button>`;
+      document.getElementById('modalActions').innerHTML = actionsHtml;
+
+      // Attach modal copy handler
+      document.getElementById('modalCopyBtn').addEventListener('click', () => {
+        navigator.clipboard.writeText(q.quote).then(() => {
+          const btn = document.getElementById('modalCopyBtn');
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = 'Copy Quote'; btn.classList.remove('copied'); }, 2000);
+        });
+      });
+
       modal.classList.add('active');
     }
 
