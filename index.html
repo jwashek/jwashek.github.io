@@ -758,7 +758,7 @@
     .modal-url a:hover { opacity: 1; text-decoration: underline; }
     .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
     .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); }
-    .modal-actions { display: flex; gap: 8px; margin-top: 20px; }
+    .modal-actions { display: flex; gap: 8px; margin-bottom: 16px; }
     .modal-actions .copy-btn, .modal-actions .source-link-btn { font-size: 12px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-input); color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: var(--transition); }
     .modal-actions .copy-btn:hover, .modal-actions .source-link-btn:hover { border-color: var(--accent); color: var(--accent); }
     .modal-actions .copy-btn.copied { border-color: #4caf50; color: #4caf50; }
@@ -871,13 +871,13 @@
   <div class="modal-overlay" id="quoteModal">
     <div class="modal-content">
       <button class="modal-close" id="modalClose">×</button>
+      <div class="modal-actions" id="modalActions"></div>
       <div class="modal-topic" id="modalTopic"></div>
       <div class="modal-quote" id="modalQuote"></div>
       <div class="modal-source" id="modalSource"></div>
       <div class="modal-reference" id="modalReference"></div>
       <div class="modal-url" id="modalUrl"></div>
       <div class="modal-tags" id="modalTags"></div>
-      <div class="modal-actions" id="modalActions"></div>
     </div>
   </div>
 
