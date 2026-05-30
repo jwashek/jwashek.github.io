@@ -57,19 +57,22 @@ async function fetchAllPages(databaseId) {
 }
 
 /**
- * Extract plain text from a Notion rich_text array
+ * Extract text from any Notion property (handles all types)
  */
-function extractRichText(richTextArray) {
-  if (!richTextArray || !Array.isArray(richTextArray)) return '';
-  return richTextArray.map(t => t.plain_text || '').join('');
-}
-
-/**
- * Extract value from a select property
- */
-function extractSelect(prop) {
-  if (!prop || !prop.select) return '';
-  return prop.select.name || '';
+function extractText(prop) {
+  if (!prop) return '';
+  if (prop.type === 'select' && prop.select) return prop.select.name || '';
+  if (prop.type === 'multi_select' && prop.multi_select) return prop.multi_select.map(s => s.name).join(', ');
+  if (prop.type === 'title' && prop.title) return prop.title.map(t => t.plain_text || '').join('');
+  if (prop.type === 'rich_text' && prop.rich_text) return prop.rich_text.map(t => t.plain_text || '').join('');
+  if (prop.type === 'url') return prop.url || '';
+  if (prop.type === 'formula' && prop.formula) return prop.formula.string || '';
+  if (prop.type === 'rollup' && prop.rollup?.array?.length) return extractText(prop.rollup.array[0]);
+  // Fallback: try common shapes
+  if (prop.select) return prop.select.name || '';
+  if (prop.rich_text) return prop.rich_text.map(t => t.plain_text || '').join('');
+  if (prop.title) return prop.title.map(t => t.plain_text || '').join('');
+  return '';
 }
 
 /**
@@ -80,13 +83,6 @@ function extractMultiSelect(prop) {
   return prop.multi_select.map(s => s.name).filter(Boolean);
 }
 
-/**
- * Extract URL from a url property
- */
-function extractUrl(prop) {
-  if (!prop) return '';
-  return prop.url || '';
-}
 
 /**
  * Process Saints database pages
@@ -95,12 +91,12 @@ function processSaints(pages) {
   return pages.map((page, index) => {
     const props = page.properties;
 
-    const topic = extractSelect(props['TAG']) || '';
+    const topic = extractText(props['TAG']).trim();
     const tags = extractMultiSelect(props['Various tag']);
-    const quote = extractRichText(props['Full Quote and Reference']?.rich_text);
-    const reference = extractRichText(props['Reference']?.rich_text);
-    const saint = extractRichText(props['Saint']?.rich_text);
-    const url = extractUrl(props['URL']);
+    const quote = extractText(props['Full Quote and Reference']).trim();
+    const reference = extractText(props['Reference']).trim();
+    const saint = extractText(props['Saint']).replace(/,\s*$/, '').trim();
+    const url = (props['URL'] && props['URL'].url) || '';
 
     return {
       id: `saint-${index}`,
@@ -122,18 +118,12 @@ function processTexts(pages) {
   return pages.map((page, index) => {
     const props = page.properties;
 
-    const document = extractSelect(props['TAG']) || '';
+    const document = extractText(props['TAG']).trim();
     const tags = extractMultiSelect(props['Various tag']);
-    // Topic can be select or rich_text
-    let topic = '';
-    if (props['Topic']?.select) {
-      topic = extractSelect(props['Topic']);
-    } else if (props['Topic']?.rich_text) {
-      topic = extractRichText(props['Topic'].rich_text);
-    }
-    const chapterSection = extractRichText(props['Chapter and Section']?.rich_text);
-    const quote = extractRichText(props['Full Quote and Reference']?.rich_text);
-    const url = extractUrl(props['URL']);
+    const topic = extractText(props['Topic']).trim();
+    const chapterSection = extractText(props['Chapter and Section']).trim();
+    const quote = extractText(props['Full Quote and Reference']).trim();
+    const url = (props['URL'] && props['URL'].url) || '';
 
     return {
       id: `text-${index}`,
@@ -156,12 +146,12 @@ function processCouncils(pages) {
   return pages.map((page, index) => {
     const props = page.properties;
 
-    const council = extractSelect(props['TAG']) || '';
+    const council = extractText(props['TAG']).trim();
     const tags = extractMultiSelect(props['Various tag']);
-    const councilType = extractSelect(props['Type']) || '';
-    const reference = extractRichText(props['Reference']?.rich_text);
-    const quote = extractRichText(props['Full Quote and Reference']?.rich_text);
-    const url = extractUrl(props['URL']);
+    const councilType = extractText(props['Type']).trim();
+    const reference = extractText(props['Reference']).trim();
+    const quote = extractText(props['Full Quote and Reference']).trim();
+    const url = (props['URL'] && props['URL'].url) || '';
 
     return {
       id: `council-${index}`,
