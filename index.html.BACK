@@ -594,10 +594,6 @@
       line-height: 1.7;
       color: var(--text-primary);
       margin-bottom: 16px;
-      display: -webkit-box;
-      -webkit-line-clamp: 6;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
     }
 
     .card-divider {
@@ -736,7 +732,7 @@
     <!-- Header -->
     <header class="header">
       <div class="logo">
-        <span class="logo-icon">☦</span>
+        <span class="logo-icon">&#9766;</span>
         <span>Golden Mouth Database</span>
       </div>
 
@@ -748,7 +744,7 @@
 
       <div class="header-right">
         <span class="quote-count" id="quoteCount">Loading...</span>
-        <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">&#127769;</button>
       </div>
     </header>
 
@@ -758,7 +754,7 @@
       <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
           <span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Filters</span>
-          <button class="sidebar-toggle" id="sidebarHide" title="Hide sidebar">◀</button>
+          <button class="sidebar-toggle" id="sidebarHide" title="Hide sidebar">&#9664;</button>
         </div>
 
         <!-- Saints Filters -->
@@ -795,14 +791,14 @@
         </div>
       </aside>
 
-      <button class="sidebar-show-btn" id="sidebarShow" title="Show sidebar">▶</button>
+      <button class="sidebar-show-btn" id="sidebarShow" title="Show sidebar">&#9654;</button>
 
       <!-- Content -->
       <main class="content">
         <div class="search-bar-container">
           <div class="search-bar">
             <input type="text" id="aiSearch" placeholder="AI semantic search across all sections...">
-            <button id="aiSearchBtn" title="Search">→</button>
+            <button id="aiSearchBtn" title="Search">&rarr;</button>
           </div>
           <div class="search-status" id="searchStatus"></div>
         </div>
@@ -827,7 +823,8 @@
     let modelLoading = false;
 
     let activeSection = 'saint';
-    let activeFilters = { saint: { tab: 'topics', value: null }, text: { tab: 'documents', value: null }, council: { tab: 'councils', value: null } };
+    // CHANGE 1: Multi-filter state (one value per filter category)
+    let activeFilters = { saint: { tab: 'topics', topics: null, saints: null, tags: null }, text: { tab: 'documents', documents: null, topics: null, tags: null }, council: { tab: 'councils', councils: null, type: null, tags: null } };
     let aiSearchActive = false;
     let aiResults = [];
 
@@ -847,7 +844,7 @@
 
     function updateThemeIcon() {
       const theme = document.documentElement.getAttribute('data-theme');
-      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+      themeToggle.textContent = theme === 'dark' ? '\u2600\uFE0F' : '\u{1F319}';
     }
 
     // ========== Sidebar Toggle ==========
@@ -886,6 +883,7 @@
           document.getElementById('searchStatus').textContent = '';
         }
 
+        renderFilterList(activeSection);
         renderCards();
         updateQuoteCount();
       });
@@ -899,8 +897,8 @@
         tab.classList.add('active');
 
         const section = panel.dataset.panel;
+        // CHANGE 4: removed activeFilters[section].value = null;
         activeFilters[section].tab = tab.dataset.filter;
-        activeFilters[section].value = null;
 
         renderFilterList(section);
         renderCards();
@@ -942,7 +940,7 @@
         console.error('Failed to load data:', err);
         document.getElementById('cardsContainer').innerHTML = `
           <div class="empty-state">
-            <div class="empty-state-icon">⚠️</div>
+            <div class="empty-state-icon">\u26A0\uFE0F</div>
             <h3>Failed to load quotes</h3>
             <p>Make sure saints.json, texts.json, and councils.json are available.</p>
           </div>`;
@@ -993,23 +991,53 @@
       filterData.council = { councils: councilNames, type: councilTypes, tags: councilTags };
     }
 
+    // CHANGE 3: Cascading renderFilterList
     function renderFilterList(section) {
       const listEl = document.querySelector(`[data-list="${section}"]`);
       const searchInput = document.querySelector(`[data-search="${section}"]`);
       const searchTerm = (searchInput?.value || '').toLowerCase();
       const tabName = activeFilters[section].tab;
-      const data = filterData[section][tabName] || {};
+
+      // Get base items for this section
+      let items;
+      if (section === 'saint') items = allSaints;
+      else if (section === 'text') items = allTexts;
+      else items = allCouncils;
+
+      // Apply all OTHER active filters (not the current tab) — cascading!
+      const filter = activeFilters[section];
+      items = items.filter(q => {
+        if (tabName !== 'topics' && filter.topics && q.topic !== filter.topics) return false;
+        if (tabName !== 'saints' && filter.saints && q.source !== filter.saints) return false;
+        if (tabName !== 'documents' && filter.documents && q.source !== filter.documents) return false;
+        if (tabName !== 'councils' && filter.councils && q.source !== filter.councils) return false;
+        if (tabName !== 'type' && filter.type && q.councilType !== filter.type) return false;
+        if (tabName !== 'tags' && filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        return true;
+      });
+
+      // Build counts from narrowed items
+      const data = {};
+      items.forEach(q => {
+        if (tabName === 'topics' && q.topic) data[q.topic] = (data[q.topic] || 0) + 1;
+        else if (tabName === 'saints' && q.source) data[q.source] = (data[q.source] || 0) + 1;
+        else if (tabName === 'documents' && q.source) data[q.source] = (data[q.source] || 0) + 1;
+        else if (tabName === 'councils' && q.source) data[q.source] = (data[q.source] || 0) + 1;
+        else if (tabName === 'type' && q.councilType) data[q.councilType] = (data[q.councilType] || 0) + 1;
+        else if (tabName === 'tags') (q.tags || []).forEach(t => { data[t] = (data[t] || 0) + 1; });
+      });
 
       const entries = Object.entries(data)
         .filter(([name]) => name.toLowerCase().includes(searchTerm))
         .sort((a, b) => b[1] - a[1]);
 
-      let html = `<div class="filter-item ${activeFilters[section].value === null ? 'active' : ''}" data-value="__all__">
+      const activeValue = filter[tabName];
+      let html = `<div class="filter-item ${activeValue === null ? 'active' : ''}" data-value="__all__">
         <span>All</span><span class="filter-item-count">${Object.keys(data).length}</span>
       </div>`;
 
       entries.forEach(([name, count]) => {
-        const isActive = activeFilters[section].value === name;
+        const isActive = activeValue === name;
         html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
           <span>${name}</span><span class="filter-item-count">${count}</span>
         </div>`;
@@ -1021,7 +1049,7 @@
       listEl.querySelectorAll('.filter-item').forEach(item => {
         item.addEventListener('click', () => {
           const val = item.dataset.value;
-          activeFilters[section].value = val === '__all__' ? null : val;
+          activeFilters[section][tabName] = val === '__all__' ? null : val;
 
           // Clear AI search when using filters
           if (aiSearchActive) {
@@ -1039,6 +1067,7 @@
     }
 
     // ========== Rendering ==========
+    // CHANGE 2: Multi-filter getFilteredQuotes
     function getFilteredQuotes() {
       if (aiSearchActive) return aiResults;
 
@@ -1048,17 +1077,14 @@
       else items = allCouncils;
 
       const filter = activeFilters[activeSection];
-      if (!filter.value) return items;
 
       return items.filter(q => {
-        const tab = filter.tab;
-        const val = filter.value;
-        if (tab === 'topics') return q.topic === val;
-        if (tab === 'saints') return q.source === val;
-        if (tab === 'documents') return q.source === val;
-        if (tab === 'councils') return q.source === val;
-        if (tab === 'type') return q.councilType === val;
-        if (tab === 'tags') return (q.tags || []).includes(val);
+        if (filter.topics && q.topic !== filter.topics) return false;
+        if (filter.saints && q.source !== filter.saints) return false;
+        if (filter.documents && q.source !== filter.documents) return false;
+        if (filter.councils && q.source !== filter.councils) return false;
+        if (filter.type && q.councilType !== filter.type) return false;
+        if (filter.tags && !(q.tags || []).includes(filter.tags)) return false;
         return true;
       });
     }
@@ -1081,7 +1107,7 @@
       if (quotes.length === 0) {
         container.innerHTML = `
           <div class="empty-state">
-            <div class="empty-state-icon">📜</div>
+            <div class="empty-state-icon">\u{1F4DC}</div>
             <h3>No quotes found</h3>
             <p>Try adjusting your filters or search terms.</p>
           </div>`;
@@ -1120,12 +1146,12 @@
       } else if (q.reference) {
         locationHtml = `<span class="attr-location">${escHtml(q.reference)}</span>`;
       } else if (q.url) {
-        locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source ↗</a></span>`;
+        locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a></span>`;
       }
 
       const tagsHtml = (q.tags || []).slice(0, 3).map(t => `<span class="card-tag">${escHtml(t)}</span>`).join('');
 
-      const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source ↗</a>` : '';
+      const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a>` : '';
 
       return `
         <div class="card">
@@ -1224,13 +1250,10 @@
           const item = allQuotes[s.idx];
           if (!item || !item.source) return;
           const sourceLower = item.source.toLowerCase();
-          // Strong boost: if query mentions this source by name (any significant word matches)
           const nameMatches = queryWords.filter(w => sourceLower.includes(w));
           if (nameMatches.length >= 2) {
-            // Multiple words match (e.g., "John" + "Chrysostom") — strong boost + penalize non-matches
             s.score += 0.15;
           } else if (nameMatches.length === 1 && nameMatches[0].length > 5) {
-            // One significant word matches (e.g., "Chrysostom", "Paisios")
             s.score += 0.08;
           }
         });
@@ -1243,7 +1266,7 @@
           scores.forEach(s => {
             const item = allQuotes[s.idx];
             if (item && item.source !== mentionedSource) {
-              s.score -= 0.05; // slight penalty for non-matching sources
+              s.score -= 0.05;
             }
           });
         }
