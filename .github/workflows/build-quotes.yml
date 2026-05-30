@@ -1,45 +1,41 @@
-# .github/workflows/build-quotes.yml
-#
-# Rebuilds quotes.json + embeddings.json from Notion and commits them.
-# Runs daily at 6 AM UTC, or manually via workflow_dispatch.
-#
-# Required repository secrets:
-#   NOTION_TOKEN       - Your Notion integration token
-#   NOTION_DATABASE_ID - Your Notion database ID
-
 name: Build Quotes
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # Daily at 6 AM UTC (2 AM ET)
-  workflow_dispatch:       # Manual trigger from GitHub UI
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: npm install @xenova/transformers
+        run: npm install
 
-      - name: Fetch quotes from Notion
+      - name: Build quotes from Notion
+        run: node build-quotes.js
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
-          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        run: node build-quotes.js
+          NOTION_SAINTS_DATABASE_ID: ${{ secrets.NOTION_SAINTS_DATABASE_ID }}
+          NOTION_TEXTS_DATABASE_ID: ${{ secrets.NOTION_TEXTS_DATABASE_ID }}
+          NOTION_COUNCILS_DATABASE_ID: ${{ secrets.NOTION_COUNCILS_DATABASE_ID }}
 
-      - name: Generate embeddings
+      - name: Build embeddings
         run: node build-embeddings.js
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add quotes.json embeddings.json
-          git diff --staged --quiet || git commit -m "chore: rebuild quotes + embeddings from Notion [skip ci]"
-          git push
+          git add saints.json texts.json councils.json embeddings.json
+          git diff --cached --quiet || (git commit -m "Update quotes and embeddings [automated]" && git push)
