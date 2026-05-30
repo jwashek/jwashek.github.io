@@ -1089,6 +1089,11 @@
         if (tabName !== 'councils' && filter.councils && q.source !== filter.councils) return false;
         if (tabName !== 'type' && filter.type && q.councilType !== filter.type) return false;
         if (tabName !== 'tags' && filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        // Also apply keyword search to narrow visible filter options
+        if (sidebarSearchTerm) {
+          const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
+          if (!haystack.includes(sidebarSearchTerm)) return false;
+        }
         return true;
       });
 
@@ -1104,7 +1109,6 @@
       });
 
       const entries = Object.entries(data)
-        .filter(([name]) => name.toLowerCase().includes(searchTerm))
         .sort((a, b) => b[1] - a[1]);
 
       const activeValue = filter[tabName];
