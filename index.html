@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Mouth Database</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ========== CSS Variables ========== */
+    :root {
+      --font-ui: 'Inter', -apple-system, sans-serif;
+      --font-quote: 'Newsreader', Georgia, serif;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --sidebar-width: 300px;
+      --header-height: 64px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-primary: #08080a;
+      --bg-secondary: #111114;
+      --bg-card: rgba(20, 20, 24, 0.8);
+      --bg-card-hover: rgba(28, 28, 34, 0.9);
+      --bg-glass: rgba(16, 16, 20, 0.85);
+      --bg-input: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(212, 165, 116, 0.4);
+      --text-primary: #f0ede8;
+      --text-secondary: #9a9690;
+      --text-muted: #5a5650;
+      --accent: #d4a574;
+      --accent-dim: rgba(212, 165, 116, 0.15);
+      --accent-glow: rgba(212, 165, 116, 0.3);
+      --scrollbar-thumb: rgba(255, 255, 255, 0.12);
+      --scrollbar-hover: rgba(255, 255, 255, 0.25);
+      --badge-saint: rgba(76, 175, 80, 0.15);
+      --badge-saint-text: #81c784;
+      --badge-text: rgba(33, 150, 243, 0.15);
+      --badge-text-text: #64b5f6;
+      --badge-council: rgba(156, 39, 176, 0.15);
+      --badge-council-text: #ce93d8;
+      --ambient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(212, 165, 116, 0.03) 0%, transparent 70%);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #f8f7f4;
+      --bg-secondary: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-card-hover: rgba(255, 255, 255, 1);
+      --bg-glass: rgba(255, 255, 255, 0.9);
+      --bg-input: rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(180, 130, 70, 0.4);
+      --text-primary: #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --text-muted: #999999;
+      --accent: #b8864a;
+      --accent-dim: rgba(184, 134, 74, 0.1);
+      --accent-glow: rgba(184, 134, 74, 0.2);
+      --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+      --scrollbar-hover: rgba(0, 0, 0, 0.3);
+      --badge-saint: rgba(76, 175, 80, 0.1);
+      --badge-saint-text: #388e3c;
+      --badge-text: rgba(33, 150, 243, 0.1);
+      --badge-text-text: #1976d2;
+      --badge-council: rgba(156, 39, 176, 0.1);
+      --badge-council-text: #7b1fa2;
+      --ambient-glow: none;
+    }
+
+    /* ========== Reset & Base ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== Scrollbars ========== */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border: 4px solid transparent;
+      background-clip: content-box;
+      border-radius: 12px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-hover);
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
+
+    /* ========== Layout ========== */
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .main-wrapper {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .main-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--ambient-glow);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ========== Header ========== */
+    .header {
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      gap: 20px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .logo-icon {
+      font-size: 24px;
+      color: var(--accent);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-input);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+    }
+
+    .nav-tab {
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border: none;
+      background: none;
+      transition: var(--transition);
+    }
+
+    .nav-tab:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-tab.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .quote-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ========== Sidebar ========== */
+    .sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      transition: var(--transition);
+      overflow: hidden;
+    }
+
+    .sidebar.hidden {
+      width: 0;
+      min-width: 0;
+      border-right: none;
+    }
+
+    .sidebar-header {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .sidebar-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .sidebar-show-btn {
+      position: absolute;
+      left: 12px;
+      top: 80px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-glass);
+      backdrop-filter: blur(10px);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      z-index: 20;
+      transition: var(--transition);
+    }
+
+    .sidebar-show-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .sidebar.hidden ~ .sidebar-show-btn {
+      display: flex;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 2px;
+      padding: 0 16px;
+      margin-bottom: 0;
+    }
+
+    .filter-tab {
+      flex: 1;
+      padding: 8px 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+
+    .filter-tab:hover { color: var(--text-secondary); }
+    .filter-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .sidebar-search {
+      padding: 12px 16px;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: var(--font-ui);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .sidebar-search input:focus {
+      border-color: var(--accent);
+    }
+
+    .sidebar-search input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .filter-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 8px 16px;
+    }
+
+    .filter-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+
+    .sidebar-foot {
+      flex-shrink: 0; padding: 10px 14px;
+      border-top: 1px solid var(--border);
+    }
+    .clear-btn {
+      font-family: 'Inter', sans-serif; font-size: 11px;
+      color: var(--text-3); background: none; border: none;
+      cursor: pointer; padding: 5px 10px; border-radius: 7px;
+      transition: all .15s;
+    }
+    .clear-btn:hover { color: var(--text-2); background: var(--bg-hover); }
+
+    .filter-item:hover {
+      background: var(-
+      color: var(--text-primary);
+    }
+
+    .filter-item.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .filter-item-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-input);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* ========== Main Content ========== */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .search-bar-container {
+      padding: 20px 24px 12px;
+    }
+
+    .search-bar {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 14px 50px 14px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 15px;
+      font-family: var(--font-ui);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-bar input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim), 0 0 20px var(--accent-glow);
+    }
+
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-bar button {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent);
+      color: #08080a;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .search-bar button:hover {
+      opacity: 0.85;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .search-status {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 4px 0 8px;
+      min-height: 24px;
+    }
+
+    /* ========== Cards Grid ========== */
+    .cards-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 24px 24px;
+    }
+
+    .cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 840px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: transparent;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(212, 165, 116, 0.08);
+    }
+
+    .card:hover::before {
+      background: var(--accent);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .topic-pill {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .type-badge {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 7px;
+      border-radius: 4px;
+    }
+
+    .type-badge.saint {
+      background: var(--badge-saint);
+      color: var(--badge-saint-text);
+    }
+
+    .type-badge.text {
+      background: var(--badge-text);
+      color: var(--badge-text-text);
+    }
+
+    .type-badge.council {
+      background: var(--badge-council);
+      color: var(--badge-council-text);
+    }
+
+    .card-header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .source-link {
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+
+    .source-link:hover { opacity: 1; }
+
+    .copy-btn {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .copy-btn.copied {
+      border-color: #4caf50;
+      color: #4caf50;
+    }
+
+    .card-quote {
+      font-family: var(--font-quote);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 12px;
+    }
+
+    .card-attribution {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .attribution-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .attr-source {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .attr-reference {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .attr-location {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .attr-location a {
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .attr-location a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-self: flex-end;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: var(--bg-input);
+      color: var(--text-muted);
+    }
+
+    /* ========== Empty State ========== */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+    }
+
+    /* ========== Loading ========== */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    .loading-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border);
+      border-top: 2px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 768px) {
+      .header { padding: 0 12px; gap: 8px; }
+      .logo span { display: none; }
+      .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
+      .sidebar.hidden { width: 0; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .search-bar-container { padding: 12px; }
+      .cards-container { padding: 0 12px 12px; }
+      .nav-tab { padding: 6px 10px; font-size: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .card { padding: 14px; }
+    }
+
+    /* ========== Section Panels ========== */
+    .section-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+    .section-panel.active { display: flex; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">☦</span>
+        <span>Golden Mouth Database</span>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-section="saint">Saints</button>
+        <button class="nav-tab" data-section="text">Texts</button>
+        <button class="nav-tab" data-section="council">Councils</button>
+      </nav>
+
+      <div class="header-right">
+        <span class="quote-count" id="quoteCount">Loading...</span>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <div class="main-wrapper">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Filters</span>
+          <button class="sidebar-toggle" id="sidebarHide" title="Hide sidebar">◀</button>
+        </div>
+
+        <!-- Saints Filters -->
+        <div class="section-panel active" data-panel="saint">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="topics">Topics</button>
+            <button class="filter-tab" data-filter="saints">Saints</button>
+            <button class="filter-tab" data-filter="tags">Tags</button>
+          </div>
+          <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="saint"></div>
+          <div class="filter-list" data-list="saint"></div>
+        </div>
+
+        <!-- Texts Filters -->
+        <div class="section-panel" data-panel="text">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="documents">Documents</button>
+            <button class="filter-tab" data-filter="topics">Topics</button>
+            <button class="filter-tab" data-filter="tags">Tags</button>
+          </div>
+          <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="text"></div>
+          <div class="filter-list" data-list="text"></div>
+        </div>
+
+        <!-- Councils Filters -->
+        <div class="section-panel" data-panel="council">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="councils">Councils</button>
+            <button class="filter-tab" data-filter="type">Type</button>
+            <button class="filter-tab" data-filter="tags">Tags</button>
+          </div>
+          <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="council"></div>
+          <div class="filter-list" data-list="council"></div>
+        </div>
+        <div class="sidebar-foot"><button class="clear-btn" id="clearFilters">✕ Clear all filters</button></div>
+      </aside>
+
+      <button class="sidebar-show-btn" id="sidebarShow" title="Show sidebar">▶</button>
+
+      <!-- Content -->
+      <main class="content">
+        <div class="search-bar-container">
+          <div class="search-bar">
+            <input type="text" id="aiSearch" placeholder="AI semantic search across all sections...">
+            <button id="aiSearchBtn" title="Search">→</button>
+          </div>
+          <div class="search-status" id="searchStatus"></div>
+        </div>
+        <div class="cards-container" id="cardsContainer">
+          <div class="loading"><div class="loading-spinner"></div><span>Loading quotes...</span></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    // Suppress unhandled promise rejections (sandbox compat)
+    window.addEventListener('unhandledrejection', e => e.preventDefault());
+
+    // ========== State ==========
+    let allSaints = [];
+    let allTexts = [];
+    let allCouncils = [];
+    let allQuotes = []; // combined
+    let embeddings = null;
+    let extractor = null;
+    let modelLoading = false;
+
+    let activeSection = 'saint';
+activeFilters = {
+      saint: { tab: 'topics', topics: null, saints: null, tags: null },
+      text: { tab: 'documents', documents: null, topics: null, tags: null },
+      council: { tab: 'councils', councils: null, type: null, tags: null }
+    };
+    let aiSearchActive = false;
+    let aiResults = [];
+
+    // ========== Theme ==========
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('gm-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon();
+
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('gm-theme', next);
+      updateThemeIcon();
+    });
+
+    function updateThemeIcon() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // ========== Sidebar Toggle ==========
+    const sidebar = document.getElementById('sidebar');
+    const sidebarHide = document.getElementById('sidebarHide');
+    const sidebarShow = document.getElementById('sidebarShow');
+    const sidebarState = localStorage.getItem('gm-sidebar');
+    if (sidebarState === 'hidden') sidebar.classList.add('hidden');
+
+    sidebarHide.addEventListener('click', () => {
+      sidebar.classList.add('hidden');
+      localStorage.setItem('gm-sidebar', 'hidden');
+    });
+
+    sidebarShow.addEventListener('click', () => {
+      sidebar.classList.remove('hidden');
+      localStorage.setItem('gm-sidebar', 'visible');
+    });
+
+    // ========== Nav Tabs ==========
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeSection = tab.dataset.section;
+
+        // Switch sidebar panel
+        document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+        document.querySelector(`[data-panel="${activeSection}"]`).classList.add('active');
+
+        // Clear AI search
+        if (aiSearchActive) {
+          aiSearchActive = false;
+          aiResults = [];
+          document.getElementById('aiSearch').value = '';
+          document.getElementById('searchStatus').textContent = '';
+        }
+
+        renderCards();
+        updateQuoteCount();
+      });
+    });
+
+    // ========== Filter Tabs (within sidebar panels) ==========
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const panel = tab.closest('.section-panel');
+        panel.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+
+        const section = panel.dataset.panel;
+        activeFilters[section].tab = tab.dataset.filter;
+
+        renderFilterList(section);
+        renderCards();
+      });
+    });
+
+    // ========== Sidebar Search ==========
+    document.querySelectorAll('[data-search]').forEach(input => {
+      input.addEventListener('input', () => {
+        const section = input.dataset.search;
+        renderFilterList(section);
+      });
+    });
+
+    // ========== Data Loading ==========
+    async function loadData() {
+      try {
+        const [saintsRes, textsRes, councilsRes] = await Promise.all([
+          fetch('saints.json').then(r => r.ok ? r.json() : []),
+          fetch('texts.json').then(r => r.ok ? r.json() : []),
+          fetch('councils.json').then(r => r.ok ? r.json() : [])
+        ]);
+
+        allSaints = saintsRes;
+        allTexts = textsRes;
+        allCouncils = councilsRes;
+        allQuotes = [...allSaints, ...allTexts, ...allCouncils];
+
+        updateQuoteCount();
+        buildFilterData();
+        renderFilterList('saint');
+        renderFilterList('text');
+        renderFilterList('council');
+        renderCards();
+
+        // Load embeddings in background
+        loadEmbeddings();
+      } catch (err) {
+        console.error('Failed to load data:', err);
+        document.getElementById('cardsContainer').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">⚠️</div>
+            <h3>Failed to load quotes</h3>
+            <p>Make sure saints.json, texts.json, and councils.json are available.</p>
+          </div>`;
+      }
+    }
+
+    async function loadEmbeddings() {
+      try {
+        const res = await fetch('embeddings.json');
+        if (res.ok) {
+          embeddings = await res.json();
+          console.log(`Loaded ${embeddings.length} embeddings`);
+        }
+      } catch (err) {
+        console.warn('Embeddings not available:', err.message);
+      }
+    }
+
+    // ========== Filter Data ==========
+    let filterData = { saint: {}, text: {}, council: {} };
+
+    function buildFilterData() {
+      // Saints: topics, saints, tags
+      const saintTopics = {}, saintSources = {}, saintTags = {};
+      allSaints.forEach(q => {
+        if (q.topic) saintTopics[q.topic] = (saintTopics[q.topic] || 0) + 1;
+        if (q.source) saintSources[q.source] = (saintSources[q.source] || 0) + 1;
+        (q.tags || []).forEach(t => { saintTags[t] = (saintTags[t] || 0) + 1; });
+      });
+      filterData.saint = { topics: saintTopics, saints: saintSources, tags: saintTags };
+
+      // Texts: documents, topics, tags
+      const textDocs = {}, textTopics = {}, textTags = {};
+      allTexts.forEach(q => {
+        if (q.source) textDocs[q.source] = (textDocs[q.source] || 0) + 1;
+        if (q.topic) textTopics[q.topic] = (textTopics[q.topic] || 0) + 1;
+        (q.tags || []).forEach(t => { textTags[t] = (textTags[t] || 0) + 1; });
+      });
+      filterData.text = { documents: textDocs, topics: textTopics, tags: textTags };
+
+      // Councils: councils, type, tags
+      const councilNames = {}, councilTypes = {}, councilTags = {};
+      allCouncils.forEach(q => {
+        if (q.source) councilNames[q.source] = (councilNames[q.source] || 0) + 1;
+        if (q.councilType) councilTypes[q.councilType] = (councilTypes[q.councilType] || 0) + 1;
+        (q.tags || []).forEach(t => { councilTags[t] = (councilTags[t] || 0) + 1; });
+      });
+      filterData.council = { councils: councilNames, type: councilTypes, tags: councilTags };
+    }
+
+    function renderFilterList(section) {
+      const listEl = document.querySelector(`[data-list="${section}"]`);
+      const searchInput = document.querySelector(`[data-search="${section}"]`);
+      const searchTerm = (searchInput?.value || '').toLowerCase();
+      const tabName = activeFilters[section].tab;
+
+      // Get the base items for this section
+      let items;
+      if (section === 'saint') items = allSaints;
+      else if (section === 'text') items = allTexts;
+      else items = allCouncils;
+
+      // Apply all OTHER filters (not the current tab) to narrow down what's shown
+      const filter = activeFilters[section];
+      items = items.filter(q => {
+        if (tabName !== 'topics' && filter.topics && q.topic !== filter.topics) return false;
+        if (tabName !== 'saints' && filter.saints && q.source !== filter.saints) return false;
+        if (tabName !== 'documents' && filter.documents && q.source !== filter.documents) return false;
+        if (tabName !== 'councils' && filter.councils && q.source !== filter.councils) return false;
+        if (tabName !== 'type' && filter.type && q.councilType !== filter.type) return false;
+        if (tabName !== 'tags' && filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        return true;
+      });
+
+      // Build counts from the narrowed items
+      const data = {};
+      items.forEach(q => {
+        if (tabName === 'topics' && q.topic) data[q.topic] = (data[q.topic] || 0) + 1;
+        else if (tabName === 'saints' && q.source) data[q.source] = (data[q.source] || 0) + 1;
+        else if (tabName === 'documents' && q.source) data[q.source] = (data[q.source] || 0) + 1;
+        else if (tabName === 'councils' && q.source) data[q.source] = (data[q.source] || 0) + 1;
+        else if (tabName === 'type' && q.councilType) data[q.councilType] = (data[q.councilType] || 0) + 1;
+        else if (tabName === 'tags') (q.tags || []).forEach(t => { data[t] = (data[t] || 0) + 1; });
+      });
+
+      const entries = Object.entries(data)
+        .filter(([name]) => name.toLowerCase().includes(searchTerm))
+        .sort((a, b) => b[1] - a[1]);
+
+      const activeValue = activeFilters[section][tabName];
+      let html = `<div class="filter-item ${activeValue === null ? 'active' : ''}" data-value="__all__">
+        <span>All</span><span class="filter-item-count">${Object.keys(data).length}</span>
+      </div>`;
+
+      entries.forEach(([name, count]) => {
+        const isActive = activeValue === name;
+        html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
+          <span>${name}</span><span class="filter-item-count">${count}</span>
+        </div>`;
+      });
+
+      listEl.innerHTML = html;
+
+      // Attach click handlers
+      listEl.querySelectorAll('.filter-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const val = item.dataset.value;
+          const tabName = activeFilters[section].tab;
+          activeFilters[section][tabName] = val === '__all__' ? null : val;
+
+          // Clear AI search when using filters
+          if (aiSearchActive) {
+            aiSearchActive = false;
+            aiResults = [];
+            document.getElementById('aiSearch').value = '';
+            document.getElementById('searchStatus').textContent = '';
+          }
+
+          renderFilterList(section);
+          renderCards();
+          updateQuoteCount();
+        });
+      });
+    }
+
+    // ========== Rendering ==========
+    function getFilteredQuotes() {
+      if (aiSearchActive) return aiResults;
+
+      let items;
+      if (activeSection === 'saint') items = allSaints;
+      else if (activeSection === 'text') items = allTexts;
+      else items = allCouncils;
+
+      const filter = activeFilters[activeSection];
+
+      return items.filter(q => {
+        // Apply ALL active filters (AND logic)
+        if (filter.topics && q.topic !== filter.topics) return false;
+        if (filter.saints && q.source !== filter.saints) return false;
+        if (filter.documents && q.source !== filter.documents) return false;
+        if (filter.councils && q.source !== filter.councils) return false;
+        if (filter.type && q.councilType !== filter.type) return false;
+        if (filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        return true;
+      });
+    }
+
+    function updateQuoteCount() {
+      const filtered = getFilteredQuotes();
+      const total = allQuotes.length;
+      const el = document.getElementById('quoteCount');
+      if (aiSearchActive) {
+        el.textContent = `${filtered.length} results found`;
+      } else {
+        el.textContent = `${filtered.length} of ${total} quotes`;
+      }
+    }
+
+    function renderCards() {
+      const container = document.getElementById('cardsContainer');
+      const quotes = getFilteredQuotes();
+
+      if (quotes.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📜</div>
+            <h3>No quotes found</h3>
+            <p>Try adjusting your filters or search terms.</p>
+          </div>`;
+        updateQuoteCount();
+        return;
+      }
+
+      const html = `<div class="cards-grid">${quotes.map(renderCard).join('')}</div>`;
+      container.innerHTML = html;
+      updateQuoteCount();
+
+      // Attach copy handlers
+      container.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const text = btn.dataset.quote;
+          navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copied');
+            }, 2000);
+          });
+        });
+      });
+    }
+
+    function renderCard(q) {
+      const typeLabel = q.type === 'saint' ? 'Quote' : q.type === 'text' ? 'Text' : 'Council';
+      const typeClass = q.type;
+      const showTypeBadge = aiSearchActive;
+
+      let locationHtml = '';
+      if (q.reference && q.url) {
+        locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">${escHtml(q.reference)}</a></span>`;
+      } else if (q.reference) {
+        locationHtml = `<span class="attr-location">${escHtml(q.reference)}</span>`;
+      } else if (q.url) {
+        locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source ↗</a></span>`;
+      }
+
+      const tagsHtml = (q.tags || []).slice(0, 3).map(t => `<span class="card-tag">${escHtml(t)}</span>`).join('');
+
+      const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source ↗</a>` : '';
+
+      return `
+        <div class="card">
+          <div class="card-header">
+            ${q.topic ? `<span class="topic-pill">${escHtml(q.topic)}</span>` : ''}
+            ${showTypeBadge ? `<span class="type-badge ${typeClass}">${typeLabel}</span>` : ''}
+            <div class="card-header-right">
+              ${sourceLink}
+              <button class="copy-btn" data-quote="${escAttr(q.quote)}">Copy</button>
+            </div>
+          </div>
+          <div class="card-quote">${escHtml(q.quote)}</div>
+          <div class="card-divider"></div>
+          <div class="card-attribution">
+            <div class="attribution-text">
+              <span class="attr-source">${escHtml(q.source || 'Unknown')}</span>
+              ${locationHtml}
+            </div>
+            ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
+          </div>
+        </div>`;
+    }
+
+    function escHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function escAttr(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // ========== AI Search ==========
+    const aiSearchInput = document.getElementById('aiSearch');
+    const aiSearchBtn = document.getElementById('aiSearchBtn');
+    const searchStatus = document.getElementById('searchStatus');
+
+    aiSearchBtn.addEventListener('click', doAiSearch);
+    aiSearchInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') doAiSearch();
+    });
+
+    // Clear all filters button
+    document.getElementById('clearFilters').addEventListener('click', () => {
+      // Reset all filter values for the active section
+      const filter = activeFilters[activeSection];
+      Object.keys(filter).forEach(key => {
+        if (key !== 'tab') filter[key] = null;
+      });
+      // Also clear AI search
+      aiSearchActive = false;
+      aiResults = [];
+      document.getElementById('aiSearch').value = '';
+      document.getElementById('searchStatus').textContent = '';
+      renderFilterList(activeSection);
+      renderCards();
+      updateQuoteCount();
+    });
+
+    async function doAiSearch() {
+      const query = aiSearchInput.value.trim();
+      if (!query) {
+        aiSearchActive = false;
+        aiResults = [];
+        searchStatus.textContent = '';
+        renderCards();
+        return;
+      }
+
+      if (!embeddings || embeddings.length === 0) {
+        searchStatus.textContent = 'Embeddings not loaded. Please wait...';
+        return;
+      }
+
+      // Load model on first use
+      if (!extractor) {
+        if (modelLoading) return;
+        modelLoading = true;
+        searchStatus.textContent = 'Loading AI model (first time only)...';
+        try {
+          const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+          extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+          searchStatus.textContent = '';
+        } catch (err) {
+          searchStatus.textContent = 'Failed to load AI model. Try again.';
+          modelLoading = false;
+          console.error(err);
+          return;
+        }
+        modelLoading = false;
+      }
+
+      searchStatus.textContent = 'Searching...';
+
+      try {
+        const output = await extractor(query, { pooling: 'mean', normalize: true });
+        const queryVec = Array.from(output.data);
+
+        // Compute cosine similarity with all embeddings
+        const scores = embeddings.map((emb, idx) => {
+          let dot = 0;
+          for (let i = 0; i < queryVec.length; i++) {
+            dot += queryVec[i] * (emb[i] || 0);
+          }
+          return { idx, score: dot };
+        });
+
+        // Apply saint name boosting
+        const queryLower = query.toLowerCase();
+        const queryWords = queryLower.split(/\s+/).filter(w => w.length > 3);
+        scores.forEach(s => {
+          const item = allQuotes[s.idx];
+          if (!item || !item.source) return;
+          const sourceLower = item.source.toLowerCase();
+          // Strong boost: if query mentions this source by name (any significant word matches)
+          const nameMatches = queryWords.filter(w => sourceLower.includes(w));
+          if (nameMatches.length >= 2) {
+            // Multiple words match (e.g., "John" + "Chrysostom") — strong boost + penalize non-matches
+            s.score += 0.15;
+          } else if (nameMatches.length === 1 && nameMatches[0].length > 5) {
+            // One significant word matches (e.g., "Chrysostom", "Paisios")
+            s.score += 0.08;
+          }
+        });
+
+        // Penalize results from OTHER sources when a specific source is mentioned
+        const mentionedSource = allQuotes.map(q => q.source || '').find(src =>
+          src && queryWords.filter(w => src.toLowerCase().includes(w)).length >= 2
+        );
+        if (mentionedSource) {
+          scores.forEach(s => {
+            const item = allQuotes[s.idx];
+            if (item && item.source !== mentionedSource) {
+              s.score -= 0.05; // slight penalty for non-matching sources
+            }
+          });
+        }
+
+        // Filter and sort
+        const threshold = 0.35;
+        const results = scores
+          .filter(s => s.score >= threshold)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 50)
+          .map(s => allQuotes[s.idx]);
+
+        aiSearchActive = true;
+        aiResults = results;
+        searchStatus.textContent = `${results.length} results found across all sections`;
+        renderCards();
+      } catch (err) {
+        searchStatus.textContent = 'Search failed. Please try again.';
+        console.error(err);
+      }
+    }
+
+    // ========== Initialize ==========
+    loadData();
+  </script>
+</body>
+</html>
+
+
