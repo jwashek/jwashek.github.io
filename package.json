@@ -2,8 +2,7 @@
   "name": "golden-mouth-database",
   "version": "1.0.0",
   "type": "module",
-  "private": true,
-  "description": "Build tools for the Golden Mouth database",
+  "description": "Golden Mouth Database - Orthodox Christian quote collection with AI-powered semantic search",
   "scripts": {
     "build": "node build-quotes.js && node build-embeddings.js"
   },
