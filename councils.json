@@ -2,6 +2,139 @@
   {
     "id": "council-0",
     "type": "council",
+    "topic": "Letter",
+    "quote": "\"When the question relative to the sacred festival of Easter arose, it was universally thought that it would be convenient that all should keep the feast on one day; for what could be more beautiful and more desirable, than to see this festival, through which we receive the hope of immortality, celebrated by all with one accord, and in the same manner?\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, On the Keeping of Easter",
+    "reference": "On the Keeping of Easter",
+    "source": "First Council of Nicaea (325 AD)",
+    "tags": [
+      "Easter",
+      "Pascha",
+      "when to celebrate Easter",
+      "feast day"
+    ],
+    "url": "https://orthodoxchurchfathers.com/fathers/npnf214/npnf2127.html",
+    "councilType": "Letter"
+  },
+  {
+    "id": "council-1",
+    "type": "council",
+    "topic": "Letter",
+    "quote": "\"Through the grace of Christ and our most religious Sovereign Constantine, who brought us together from our several provinces and cities, has considered matters which concern the faith of the Church, it seemed to us to be necessary that certain things should be communicated from us to you in writing, so that you might have the means of knowing what has been mooted and investigated, and also what has been decreed and confirmed.\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, The Synodal Letter",
+    "reference": "The Synodal Letter",
+    "source": "First Council of Nicaea (325 AD)",
+    "tags": [
+      "Saint Constantine",
+      "faith",
+      "decree",
+      "Church order"
+    ],
+    "url": "https://orthodoxchurchfathers.com/fathers/npnf214/npnf2126.html#TopOfPage",
+    "councilType": "Letter"
+  },
+  {
+    "id": "council-2",
+    "type": "council",
+    "topic": "Creed",
+    "quote": "\"We believe in one God, the Father Almighty, maker of all things visible and invisible; and in one Lord Jesus Christ, the Son of God, the only-begotten of his Father, of the substance of the Father, God of God, Light of Light, very God of very God, begotten, not made, being of one substance with the Father. By whom all things were made, both which be in heaven and in earth. Who for us men and for our salvation came down [from heaven] and was incarnate and was made man. He suffered and the third day he rose again, and ascended into heaven. And he shall come again to judge both the quick and the dead. And [we believe] in the Holy Ghost. And whosoever shall say that there was a time when the Son of God was not, or that before he was begotten he was not, or that he was made of things that were not, or that he is of a different substance or essence [from the Father] or that he is a creature, or subject to change or conversion -all that so say, the Catholic and Apostolic Church anathematizes them.\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, The Nicene Creed",
+    "reference": "The Nicene Creed (and Anathemas)",
+    "source": "First Council of Nicaea (325 AD)",
+    "tags": [
+      "The Nicene Creed",
+      "Original Creed",
+      "anathema",
+      "Arianism",
+      "homoousios"
+    ],
+    "url": "https://orthodoxchurchfathers.com/fathers/npnf214/npnf2149.html",
+    "councilType": "Creed"
+  },
+  {
+    "id": "council-3",
+    "type": "council",
+    "topic": "Canon",
+    "quote": "\"Let the ancient customs in Egypt, Libya and Pentapolis prevail, that the Bishop of Alexandria have jurisdiction in all these, since the like is customary for the Bishop of Rome also. Likewise in Antioch and the other provinces, let the Churches retain their privileges. And this is to be universally understood, that if any one be made bishop without the consent of the Metropolitan, the great Synod has declared that such a man ought not to be a bishop. If, however, two or three bishops shall from natural love of contradiction, oppose the common suffrage of the rest, it being reasonable and in accordance with the ecclesiastical law, then let the choice of the majority prevail.\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, Canon 6",
+    "reference": "Canon 6",
+    "source": "First Council of Nicaea (325 AD)",
+    "tags": [
+      "tradition",
+      "bishop",
+      "jurisdiction",
+      "ordination",
+      "Church order"
+    ],
+    "url": "https://orthodoxchurchfathers.com/fathers/npnf214/npnf2114.html#TopOfPage",
+    "councilType": "Canon"
+  },
+  {
+    "id": "council-4",
+    "type": "council",
+    "topic": "Canon",
+    "quote": "\"Concerning those, whether of the clergy or of the laity, who have been excommunicated in the several provinces, let the provision of the canon be observed by the bishops which provides that persons cast out by some be not readmitted by others. Nevertheless, inquiry should be made whether they have been excommunicated through captiousness, or contentiousness, or any such like ungracious disposition in the bishop. And, that this matter may have due investigation, it is decreed that in every province synods shall be held twice a year, in order that when all the bishops of the province are assembled together, such questions may by them be thoroughly examined, that so those who have confessedly offended against their bishop, may be seen by all to be for just cause excommunicated, until it shall seem fit to a general meeting of the bishops to pronounce a milder sentence upon them. And let these synods be held, the one before Lent, (that the pure Gift may be offered to God after all bitterness has been put away), and let the second be held about autumn.\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, Canon 5",
+    "reference": "Canon 5",
+    "source": "First Council of Nicaea (325 AD)",
+    "tags": [
+      "clergy",
+      "laity",
+      "excommunication",
+      "reentrance to the Church",
+      "discipline",
+      "Great Lent"
+    ],
+    "url": "https://orthodoxchurchfathers.com/fathers/npnf214/npnf2113.html#P598_140499",
+    "councilType": "Canon"
+  },
+  {
+    "id": "council-5",
+    "type": "council",
+    "topic": "Canon",
+    "quote": "\"It is by all means proper that a bishop should be appointed by all the bishops in the province; but should this be difficult, either on account of urgent necessity or because of distance, three at least should meet together, and the suffrages of the absent [bishops] also being given and communicated in writing, then the ordination should take place. But in every province the ratification of what is done should be left to the Metropolitan.\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, Canon 4",
+    "reference": "Canon 4",
+    "source": "First Council of Nicaea (325 AD)",
+    "tags": [
+      "bishop",
+      "ordination",
+      "jurisdiction"
+    ],
+    "url": "https://orthodoxchurchfathers.com/fathers/npnf214/npnf2113.html#P598_140499",
+    "councilType": "Canon"
+  },
+  {
+    "id": "council-6",
+    "type": "council",
+    "topic": "Canon",
+    "quote": "\"The great Synod has stringently forbidden any bishop, presbyter, deacon, or any one of the clergy whatever, to have a subintroducta dwelling [i.e., a “spiritual marriage” lacking sexual intercourse that many early ascetics engaged in] with him, except only a mother, or sister, or aunt, or such persons only as are beyond all suspicion.\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, Canon 3",
+    "reference": "Canon 3",
+    "source": "First Council of Nicaea (325 AD)",
+    "tags": [
+      "bishop",
+      "deacons",
+      "clergy",
+      "episcopacy",
+      "spiritual marriage"
+    ],
+    "url": "https://orthodoxchurchfathers.com/fathers/npnf214/npnf2113.html#P598_140499",
+    "councilType": "Canon"
+  },
+  {
+    "id": "council-7",
+    "type": "council",
+    "topic": "Canon",
+    "quote": "\"Forasmuch as, either from necessity, or through the urgency of individuals, many things have been done contrary to the Ecclesiastical canon, so that men just converted from heathenism to the faith, and who have been instructed but a little while, are straightway brought to the spiritual layer, and as soon as they have been baptized, are advanced to the episcopate or the presbyterate, it has seemed right to us that for the time to come no such thing shall be done. For to the catechumen himself there is need of time and of a longer trial after baptism. For the apostolical saying is clear, ‘Not a novice; lest, being lifted up with pride, he fall into condemnation and the snare of the devil.’ But if, as time goes on, any sensual sin should be found out about the person, and he should be convicted by two or three witnesses, let him cease from the clerical office. And whoso shall transgress these [enactments] will imperil his own clerical position, as a person who presumes to disobey the great Synod.\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, Canon 2",
+    "reference": "Canon 2",
+    "source": "First Council of Nicaea (325 AD)",
+    "tags": [
+      "conversion",
+      "ecclesiology",
+      "baptism",
+      "catechumenate",
+      "catechumens"
+    ],
+    "url": "https://orthodoxchurchfathers.com/fathers/npnf214/npnf2113.html#P598_140499",
+    "councilType": "Canon"
+  },
+  {
+    "id": "council-8",
+    "type": "council",
     "topic": "Canon",
     "quote": "\"If any one in sickness has been subjected by physicians to a surgical operation, or if he has been castrated by barbarians, let him remain among the clergy; but, if any one in sound health has castrated himself, it behoves that such an one, if [already] enrolled among the clergy, should cease [from his ministry], and that from henceforth no such person should be promoted. But, as it is evident that this is said of those who wilfully do the thing and presume to castrate themselves, so if any have been made eunuchs by barbarians, or by their masters, and should otherwise be found worthy, such men the Canon admits to the clergy.\" -- First Council of Nicaea (325 AD), The Canons of the 318 Holy Fathers, Canon 1",
     "reference": "Canon 1",
