@@ -468,10 +468,10 @@
     }
 
     .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-      gap: 16px;
-      max-width: 1400px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-width: 840px;
       margin: 0 auto;
     }
 
@@ -1005,7 +1005,7 @@
         .sort((a, b) => b[1] - a[1]);
 
       let html = `<div class="filter-item ${activeFilters[section].value === null ? 'active' : ''}" data-value="__all__">
-        <span>All</span><span class="filter-item-count">${Object.values(data).reduce((a, b) => a + b, 0)}</span>
+        <span>All</span><span class="filter-item-count">${Object.keys(data).length}</span>
       </div>`;
 
       entries.forEach(([name, count]) => {
@@ -1219,12 +1219,34 @@
 
         // Apply saint name boosting
         const queryLower = query.toLowerCase();
+        const queryWords = queryLower.split(/\s+/).filter(w => w.length > 3);
         scores.forEach(s => {
           const item = allQuotes[s.idx];
-          if (item && item.source && item.source.toLowerCase().includes(queryLower)) {
-            s.score += 0.1;
+          if (!item || !item.source) return;
+          const sourceLower = item.source.toLowerCase();
+          // Strong boost: if query mentions this source by name (any significant word matches)
+          const nameMatches = queryWords.filter(w => sourceLower.includes(w));
+          if (nameMatches.length >= 2) {
+            // Multiple words match (e.g., "John" + "Chrysostom") — strong boost + penalize non-matches
+            s.score += 0.15;
+          } else if (nameMatches.length === 1 && nameMatches[0].length > 5) {
+            // One significant word matches (e.g., "Chrysostom", "Paisios")
+            s.score += 0.08;
           }
         });
+
+        // Penalize results from OTHER sources when a specific source is mentioned
+        const mentionedSource = allQuotes.map(q => q.source || '').find(src =>
+          src && queryWords.filter(w => src.toLowerCase().includes(w)).length >= 2
+        );
+        if (mentionedSource) {
+          scores.forEach(s => {
+            const item = allQuotes[s.idx];
+            if (item && item.source !== mentionedSource) {
+              s.score -= 0.05; // slight penalty for non-matching sources
+            }
+          });
+        }
 
         // Filter and sort
         const threshold = 0.35;
