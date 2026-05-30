@@ -1,120 +1,219 @@
-#!/usr/bin/env node
 /**
  * build-quotes.js
- * 
- * Fetches all quotes from your Notion database and writes them to
- * a static quotes.json file. Run this:
- *   - Manually after adding quotes: `node build-quotes.js`
- *   - On a schedule via GitHub Actions (see workflow below)
- *   - Via Vercel cron (see vercel.json config below)
- * 
- * Required env vars:
- *   NOTION_TOKEN        - Your Notion integration token
- *   NOTION_DATABASE_ID  - Your Notion database ID
+ * Fetches quotes from three Notion databases (Saints, Texts, Councils)
+ * and outputs saints.json, texts.json, councils.json
  */
 
-const NOTION_TOKEN = process.env.NOTION_TOKEN;
-const DATABASE_ID  = process.env.NOTION_DATABASE_ID;
+import { writeFileSync } from 'fs';
 
-if (!NOTION_TOKEN || !DATABASE_ID) {
-  console.error('❌ Missing NOTION_TOKEN or NOTION_DATABASE_ID env vars');
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
+const NOTION_SAINTS_DATABASE_ID = process.env.NOTION_SAINTS_DATABASE_ID;
+const NOTION_TEXTS_DATABASE_ID = process.env.NOTION_TEXTS_DATABASE_ID;
+const NOTION_COUNCILS_DATABASE_ID = process.env.NOTION_COUNCILS_DATABASE_ID;
+
+if (!NOTION_TOKEN || !NOTION_SAINTS_DATABASE_ID || !NOTION_TEXTS_DATABASE_ID || !NOTION_COUNCILS_DATABASE_ID) {
+  console.error('Missing required environment variables:');
+  console.error('  NOTION_TOKEN, NOTION_SAINTS_DATABASE_ID, NOTION_TEXTS_DATABASE_ID, NOTION_COUNCILS_DATABASE_ID');
   process.exit(1);
 }
 
-function extractText(prop) {
-  if (!prop) return '';
-  if (prop.select && prop.select.name) return prop.select.name;
-  if (prop.multi_select && prop.multi_select.length) return prop.multi_select[0].name;
-  if (prop.title && prop.title.length) return prop.title.map(r => r.plain_text).join('');
-  if (prop.rich_text && prop.rich_text.length) return prop.rich_text.map(r => r.plain_text).join('');
-  if (prop.formula && prop.formula.string) return prop.formula.string;
-  if (prop.rollup && prop.rollup.array && prop.rollup.array.length) return extractText(prop.rollup.array[0]);
-  return '';
-}
+const NOTION_API = 'https://api.notion.com/v1';
+const headers = {
+  'Authorization': `Bearer ${NOTION_TOKEN}`,
+  'Notion-Version': '2022-06-28',
+  'Content-Type': 'application/json'
+};
 
-async function fetchAllQuotes() {
-  let allResults = [];
-  let cursor = undefined;
-  let page = 0;
+/**
+ * Fetch all pages from a Notion database using pagination
+ */
+async function fetchAllPages(databaseId) {
+  const pages = [];
+  let hasMore = true;
+  let startCursor = undefined;
 
-  do {
-    page++;
+  while (hasMore) {
     const body = { page_size: 100 };
-    if (cursor) body.start_cursor = cursor;
+    if (startCursor) body.start_cursor = startCursor;
 
-    console.log(`  Fetching page ${page}...`);
-
-    const res = await fetch(`https://api.notion.com/v1/databases/${DATABASE_ID}/query`, {
+    const response = await fetch(`${NOTION_API}/databases/${databaseId}/query`, {
       method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${NOTION_TOKEN}`,
-        'Notion-Version': '2022-06-28',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
+      headers,
+      body: JSON.stringify(body)
     });
 
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(`Notion API error (${res.status}): ${err}`);
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Notion API error (${response.status}): ${error}`);
     }
 
-    const data = await res.json();
-    allResults = allResults.concat(data.results);
-    cursor = data.has_more ? data.next_cursor : undefined;
+    const data = await response.json();
+    pages.push(...data.results);
+    hasMore = data.has_more;
+    startCursor = data.next_cursor;
+  }
 
-    console.log(`  Got ${data.results.length} results (total: ${allResults.length})`);
-  } while (cursor);
-
-  return allResults;
+  return pages;
 }
 
-function transformQuotes(results) {
-  return results
-    .map((page, i) => {
-      const props = page.properties;
+/**
+ * Extract plain text from a Notion rich_text array
+ */
+function extractRichText(richTextArray) {
+  if (!richTextArray || !Array.isArray(richTextArray)) return '';
+  return richTextArray.map(t => t.plain_text || '').join('');
+}
 
-      const topic     = extractText(props['TAG']).trim();
-      const quote     = extractText(props['Full Quote and Reference']).trim();
-      const reference = extractText(props['Reference']).trim();
-      const saint     = extractText(props['Saint']).replace(/,\s*$/, '').trim();
-      const tags      = (props['Various tag'] && props['Various tag'].multi_select || [])
-                          .map(t => t.name.trim()).filter(Boolean);
-      const url       = (props['URL'] && props['URL'].url) || '';
+/**
+ * Extract value from a select property
+ */
+function extractSelect(prop) {
+  if (!prop || !prop.select) return '';
+  return prop.select.name || '';
+}
 
-      return { id: i, topic, quote, reference, saint, tags, url };
-    })
-    .filter(q => q.quote);
+/**
+ * Extract values from a multi-select property
+ */
+function extractMultiSelect(prop) {
+  if (!prop || !prop.multi_select) return [];
+  return prop.multi_select.map(s => s.name).filter(Boolean);
+}
+
+/**
+ * Extract URL from a url property
+ */
+function extractUrl(prop) {
+  if (!prop) return '';
+  return prop.url || '';
+}
+
+/**
+ * Process Saints database pages
+ */
+function processSaints(pages) {
+  return pages.map((page, index) => {
+    const props = page.properties;
+
+    const topic = extractSelect(props['TAG']) || '';
+    const tags = extractMultiSelect(props['Various tag']);
+    const quote = extractRichText(props['Full Quote and Reference']?.rich_text);
+    const reference = extractRichText(props['Reference']?.rich_text);
+    const saint = extractRichText(props['Saint']?.rich_text);
+    const url = extractUrl(props['URL']);
+
+    return {
+      id: `saint-${index}`,
+      type: 'saint',
+      topic,
+      quote,
+      reference,
+      source: saint,
+      tags,
+      url
+    };
+  }).filter(item => item.quote.trim() !== '');
+}
+
+/**
+ * Process Texts database pages
+ */
+function processTexts(pages) {
+  return pages.map((page, index) => {
+    const props = page.properties;
+
+    const document = extractSelect(props['TAG']) || '';
+    const tags = extractMultiSelect(props['Various tag']);
+    // Topic can be select or rich_text
+    let topic = '';
+    if (props['Topic']?.select) {
+      topic = extractSelect(props['Topic']);
+    } else if (props['Topic']?.rich_text) {
+      topic = extractRichText(props['Topic'].rich_text);
+    }
+    const chapterSection = extractRichText(props['Chapter and Section']?.rich_text);
+    const quote = extractRichText(props['Full Quote and Reference']?.rich_text);
+    const url = extractUrl(props['URL']);
+
+    return {
+      id: `text-${index}`,
+      type: 'text',
+      topic,
+      quote,
+      reference: chapterSection,
+      source: document,
+      tags,
+      url,
+      chapterSection
+    };
+  }).filter(item => item.quote.trim() !== '');
+}
+
+/**
+ * Process Councils database pages
+ */
+function processCouncils(pages) {
+  return pages.map((page, index) => {
+    const props = page.properties;
+
+    const council = extractSelect(props['TAG']) || '';
+    const tags = extractMultiSelect(props['Various tag']);
+    const councilType = extractSelect(props['Type']) || '';
+    const reference = extractRichText(props['Reference']?.rich_text);
+    const quote = extractRichText(props['Full Quote and Reference']?.rich_text);
+    const url = extractUrl(props['URL']);
+
+    return {
+      id: `council-${index}`,
+      type: 'council',
+      topic: councilType,
+      quote,
+      reference,
+      source: council,
+      tags,
+      url,
+      councilType
+    };
+  }).filter(item => item.quote.trim() !== '');
 }
 
 async function main() {
-  console.log('🔄 Fetching quotes from Notion...\n');
+  console.log('🏗️  Golden Mouth Database — Build Quotes');
+  console.log('=========================================\n');
 
-  const results = await fetchAllQuotes();
-  const quotes = transformQuotes(results);
+  // Fetch Saints
+  console.log('📖 Fetching Saints database...');
+  const saintsPages = await fetchAllPages(NOTION_SAINTS_DATABASE_ID);
+  console.log(`   Found ${saintsPages.length} pages`);
+  const saints = processSaints(saintsPages);
+  console.log(`   Processed ${saints.length} valid quotes\n`);
 
-  console.log(`\n✅ Processed ${quotes.length} quotes`);
+  // Fetch Texts
+  console.log('📜 Fetching Texts database...');
+  const textsPages = await fetchAllPages(NOTION_TEXTS_DATABASE_ID);
+  console.log(`   Found ${textsPages.length} pages`);
+  const texts = processTexts(textsPages);
+  console.log(`   Processed ${texts.length} valid quotes\n`);
 
-  // Write to quotes.json in the same directory (repo root or public/)
-  const fs = await import('fs');
-  const path = await import('path');
-  
-  const outPath = path.default.join(process.cwd(), 'quotes.json');
-  fs.default.writeFileSync(outPath, JSON.stringify(quotes, null, 0));
-  
-  const sizeKB = (Buffer.byteLength(JSON.stringify(quotes)) / 1024).toFixed(1);
-  console.log(`📄 Written to: ${outPath} (${sizeKB} KB)`);
+  // Fetch Councils
+  console.log('⚖️  Fetching Councils database...');
+  const councilsPages = await fetchAllPages(NOTION_COUNCILS_DATABASE_ID);
+  console.log(`   Found ${councilsPages.length} pages`);
+  const councils = processCouncils(councilsPages);
+  console.log(`   Processed ${councils.length} valid quotes\n`);
 
-  // Stats
-  const topics = [...new Set(quotes.map(q => q.topic))].filter(Boolean);
-  const saints = [...new Set(quotes.map(q => q.saint))].filter(Boolean);
-  const tags   = [...new Set(quotes.flatMap(q => q.tags))].filter(Boolean);
-  
-  console.log(`\n📊 Stats:`);
-  console.log(`   ${quotes.length} quotes`);
-  console.log(`   ${topics.length} topics`);
-  console.log(`   ${saints.length} saints`);
-  console.log(`   ${tags.length} unique tags`);
+  // Write output files
+  writeFileSync('saints.json', JSON.stringify(saints, null, 2));
+  console.log(`✅ saints.json written (${saints.length} items)`);
+
+  writeFileSync('texts.json', JSON.stringify(texts, null, 2));
+  console.log(`✅ texts.json written (${texts.length} items)`);
+
+  writeFileSync('councils.json', JSON.stringify(councils, null, 2));
+  console.log(`✅ councils.json written (${councils.length} items)`);
+
+  const total = saints.length + texts.length + councils.length;
+  console.log(`\n🎉 Total: ${total} quotes across all sections`);
 }
 
 main().catch(err => {
