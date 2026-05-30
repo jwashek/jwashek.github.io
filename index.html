@@ -1,616 +1,1251 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Golden Mouth Database</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Newsreader:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Mouth Database</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    /* ========== CSS Variables ========== */
+    :root {
+      --font-ui: 'Inter', -apple-system, sans-serif;
+      --font-quote: 'Newsreader', Georgia, serif;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --sidebar-width: 300px;
+      --header-height: 64px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-:root, [data-theme="dark"] {
-  --bg: #08080a;
-  --bg-card: #0f0f12;
-  --bg-elevated: #141418;
-  --bg-hover: #1a1a20;
-  --bg-glass: rgba(20,20,24,.8);
-  --border: rgba(255,255,255,.06);
-  --border-glow: rgba(212,165,116,.12);
-  --text: #ededef;
-  --text-2: #9d9da5;
-  --text-3: #55555e;
-  --accent: #d4a574;
-  --accent-soft: rgba(212,165,116,.08);
-  --accent-mid: rgba(212,165,116,.15);
-  --accent-dim: #8b6b47;
-  --tag-bg: rgba(255,255,255,.03);
-  --tag-border: rgba(255,255,255,.06);
-  --radius: 14px;
-  --radius-sm: 10px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.3);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.4), 0 1px 3px rgba(0,0,0,.3);
-  --shadow-glow: 0 0 20px rgba(212,165,116,.06);
-  --logo-color: white;
-}
+    [data-theme="dark"] {
+      --bg-primary: #08080a;
+      --bg-secondary: #111114;
+      --bg-card: rgba(20, 20, 24, 0.8);
+      --bg-card-hover: rgba(28, 28, 34, 0.9);
+      --bg-glass: rgba(16, 16, 20, 0.85);
+      --bg-input: rgba(255, 255, 255, 0.04);
+      --border: rgba(255, 255, 255, 0.06);
+      --border-hover: rgba(212, 165, 116, 0.4);
+      --text-primary: #f0ede8;
+      --text-secondary: #9a9690;
+      --text-muted: #5a5650;
+      --accent: #d4a574;
+      --accent-dim: rgba(212, 165, 116, 0.15);
+      --accent-glow: rgba(212, 165, 116, 0.3);
+      --scrollbar-thumb: rgba(255, 255, 255, 0.12);
+      --scrollbar-hover: rgba(255, 255, 255, 0.25);
+      --badge-saint: rgba(76, 175, 80, 0.15);
+      --badge-saint-text: #81c784;
+      --badge-text: rgba(33, 150, 243, 0.15);
+      --badge-text-text: #64b5f6;
+      --badge-council: rgba(156, 39, 176, 0.15);
+      --badge-council-text: #ce93d8;
+      --ambient-glow: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(212, 165, 116, 0.03) 0%, transparent 70%);
+    }
 
-[data-theme="light"] {
-  --bg: #f8f7f4;
-  --bg-card: #ffffff;
-  --bg-elevated: #f0eeeb;
-  --bg-hover: #e8e6e2;
-  --bg-glass: rgba(248,247,244,.9);
-  --border: rgba(0,0,0,.08);
-  --border-glow: rgba(139,107,71,.15);
-  --text: #1a1a1a;
-  --text-2: #5a5a5a;
-  --text-3: #8a8a8a;
-  --accent: #8b5e3c;
-  --accent-soft: rgba(139,94,60,.06);
-  --accent-mid: rgba(139,94,60,.12);
-  --accent-dim: #6b4a2e;
-  --tag-bg: rgba(0,0,0,.03);
-  --tag-border: rgba(0,0,0,.08);
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 3px rgba(0,0,0,.04);
-  --shadow-glow: 0 0 20px rgba(139,94,60,.04);
-  --logo-color: #3d2e1e;
-}
+    [data-theme="light"] {
+      --bg-primary: #f8f7f4;
+      --bg-secondary: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-card-hover: rgba(255, 255, 255, 1);
+      --bg-glass: rgba(255, 255, 255, 0.9);
+      --bg-input: rgba(0, 0, 0, 0.03);
+      --border: rgba(0, 0, 0, 0.08);
+      --border-hover: rgba(180, 130, 70, 0.4);
+      --text-primary: #1a1a1a;
+      --text-secondary: #5a5a5a;
+      --text-muted: #999999;
+      --accent: #b8864a;
+      --accent-dim: rgba(184, 134, 74, 0.1);
+      --accent-glow: rgba(184, 134, 74, 0.2);
+      --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+      --scrollbar-hover: rgba(0, 0, 0, 0.3);
+      --badge-saint: rgba(76, 175, 80, 0.1);
+      --badge-saint-text: #388e3c;
+      --badge-text: rgba(33, 150, 243, 0.1);
+      --badge-text-text: #1976d2;
+      --badge-council: rgba(156, 39, 176, 0.1);
+      --badge-council-text: #7b1fa2;
+      --ambient-glow: none;
+    }
 
-html, body { height: 100%; overflow: hidden; }
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  font-size: 14px;
-  line-height: 1.6;
-  display: flex;
-  flex-direction: column;
-}
+    /* ========== Reset & Base ========== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Ambient glow (dark only) */
-[data-theme="dark"] body::before {
-  content: '';
-  position: fixed; top: -40%; left: -20%;
-  width: 80%; height: 80%;
-  background: radial-gradient(ellipse, rgba(212,165,116,.03) 0%, transparent 70%);
-  pointer-events: none; z-index: 0;
-}
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
 
-::-webkit-scrollbar { width: 12px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb {
-  background: var(--text-3); border-radius: 6px;
-  border: 4px solid transparent; background-clip: padding-box;
-}
-::-webkit-scrollbar-thumb:hover { border-width: 2px; background-color: var(--text-2); }
+    body {
+      font-family: var(--font-ui);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-/* ── Header ── */
-header {
-  flex-shrink: 0; display: flex; align-items: center;
-  padding: 14px 24px;
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  z-index: 100; position: relative;
-}
-.logo { display: flex; align-items: center; gap: 14px; }
-.logo-icon {
-  width: 38px; height: 38px;
-  display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(145deg, rgba(212,165,116,.2) 0%, rgba(212,165,116,.05) 100%);
-  border: 1px solid rgba(212,165,116,.2);
-  border-radius: 11px;
-  color: var(--logo-color);
-  box-shadow: 0 2px 12px rgba(212,165,116,.1);
-}
-.logo-icon svg { width: 18px; height: 18px; }
-.logo-text h1 { font-size: 16px; font-weight: 600; letter-spacing: -.03em; }
-.logo-text p { font-size: 11px; color: var(--text-3); margin-top: 1px; }
-.header-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
-.quote-count {
-  font-size: 11px; color: var(--text-3); font-variant-numeric: tabular-nums;
-  background: var(--bg-elevated); padding: 5px 12px; border-radius: 8px;
-  border: 1px solid var(--border);
-}
-.quote-count:empty { display: none; }
+    /* ========== Scrollbars ========== */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border: 4px solid transparent;
+      background-clip: content-box;
+      border-radius: 12px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--scrollbar-hover);
+      border: 3px solid transparent;
+      background-clip: content-box;
+    }
 
-/* Header buttons */
-.hdr-btn {
-  display: flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px;
-  background: var(--bg-elevated); border: 1px solid var(--border);
-  border-radius: 9px; cursor: pointer; color: var(--text-2); transition: all .2s;
-}
-.hdr-btn:hover { background: var(--bg-hover); color: var(--text); border-color: var(--border-glow); }
-.icon-sun { display: block; }
-.icon-moon { display: none; }
-[data-theme="light"] .icon-sun { display: none; }
-[data-theme="light"] .icon-moon { display: block; }
+    /* ========== Layout ========== */
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
 
-/* ── Layout ── */
-.shell { display: flex; flex: 1; overflow: hidden; min-height: 0; position: relative; z-index: 1; }
+    .main-wrapper {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
 
-/* ── Sidebar ── */
-.sidebar {
-  width: 270px; flex-shrink: 0;
-  background: var(--bg-glass); backdrop-filter: blur(12px);
-  border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; overflow: hidden;
-  transition: margin .25s ease, opacity .25s ease;
-}
-.shell.sidebar-hidden .sidebar { display: none; }
-.shell.sidebar-hidden .quote-list { max-width: 960px; }
-.shell.sidebar-hidden .ai-search-bar { max-width: 960px; }
-.shell.sidebar-hidden .sidebar-show-btn { display: flex; }
+    .main-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--ambient-glow);
+      pointer-events: none;
+      z-index: 0;
+    }
 
-/* Sidebar show btn (main area) */
-.sidebar-show-btn {
-  display: none; position: absolute; top: 12px; left: 12px;
-  width: 32px; height: 32px; align-items: center; justify-content: center;
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 8px; cursor: pointer; color: var(--text-3); z-index: 10; transition: all .2s;
-}
-.sidebar-show-btn:hover { background: var(--bg-hover); color: var(--text); }
+    /* ========== Header ========== */
+    .header {
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      gap: 20px;
+    }
 
-/* Sidebar header */
-.sidebar-hdr { padding: 10px 14px 0; flex-shrink: 0; }
-.sidebar-hide-btn {
-  display: flex; align-items: center; gap: 6px;
-  background: none; border: none; cursor: pointer;
-  color: var(--text-3); font-family: 'Inter', sans-serif; font-size: 11px;
-  padding: 4px 0; transition: color .15s;
-}
-.sidebar-hide-btn:hover { color: var(--text-2); }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
 
-/* Search */
-.sidebar-search { padding: 12px 14px 10px; flex-shrink: 0; }
-.search-box {
-  display: flex; align-items: center; gap: 8px;
-  background: var(--bg-elevated); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); padding: 10px 13px;
-  transition: all .25s; box-shadow: var(--shadow-sm);
-}
-.search-box:focus-within { border-color: rgba(212,165,116,.3); box-shadow: 0 0 0 3px rgba(212,165,116,.06); }
-.search-box svg { color: var(--text-3); flex-shrink: 0; }
-.search-box:focus-within svg { color: var(--accent); }
-.search-box input {
-  background: none; border: none; outline: none;
-  font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text); width: 100%;
-}
-.search-box input::placeholder { color: var(--text-3); }
+    .logo-icon {
+      font-size: 24px;
+      color: var(--accent);
+    }
 
-/* Tabs */
-.sidebar-tabs { display: flex; padding: 0 14px; gap: 2px; flex-shrink: 0; border-bottom: 1px solid var(--border); }
-.tab-btn {
-  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500;
-  color: var(--text-3); background: none; border: none;
-  border-bottom: 2px solid transparent; padding: 11px 12px 10px;
-  cursor: pointer; transition: all .2s; margin-bottom: -1px;
-}
-.tab-btn:hover { color: var(--text-2); }
-.tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
-.tab-btn .tab-count { font-size: 10px; color: var(--text-3); margin-left: 5px; }
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-input);
+      border-radius: var(--radius-sm);
+      padding: 4px;
+    }
 
-/* Panel */
-.sidebar-panel { flex: 1; overflow-y: auto; padding: 8px 10px 16px; }
-.filter-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 8px 11px; border-radius: var(--radius-sm); cursor: pointer;
-  transition: all .15s; gap: 8px; border: 1px solid transparent;
-  background: none; width: 100%; text-align: left; font-family: 'Inter', sans-serif;
-}
-.filter-item:hover { background: var(--bg-hover); border-color: var(--border); }
-.filter-item.active { background: var(--accent-soft); border-color: var(--border-glow); }
-.filter-item .fi-label { font-size: 12.5px; color: var(--text-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; flex: 1; }
-.filter-item:hover .fi-label { color: var(--text); }
-.filter-item.active .fi-label { color: var(--accent); }
-.filter-item .fi-count { font-size: 10px; color: var(--text-3); background: rgba(255,255,255,.04); padding: 2px 7px; border-radius: 5px; }
-.tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; padding: 6px 4px; }
-.tag-chip {
-  font-size: 11px; padding: 5px 11px; border-radius: 20px;
-  background: var(--tag-bg); color: var(--text-3); cursor: pointer;
-  border: 1px solid var(--tag-border); transition: all .2s; font-family: 'Inter', sans-serif;
-}
-.tag-chip:hover { background: var(--bg-hover); color: var(--text-2); }
-.tag-chip.active { background: var(--accent-soft); color: var(--accent); border-color: var(--border-glow); }
-.no-results-filter { font-size: 12px; color: var(--text-3); padding: 16px 10px; }
+    .nav-tab {
+      padding: 6px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border: none;
+      background: none;
+      transition: var(--transition);
+    }
 
-/* Sidebar footer */
-.sidebar-foot { flex-shrink: 0; padding: 10px 14px; border-top: 1px solid var(--border); }
-.clear-btn {
-  font-family: 'Inter', sans-serif; font-size: 11px; color: var(--text-3);
-  background: none; border: none; cursor: pointer; padding: 5px 10px; border-radius: 7px; transition: all .15s;
-}
-.clear-btn:hover { color: var(--text-2); background: var(--bg-hover); }
+    .nav-tab:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
 
-/* ── Main ── */
-.main { flex: 1; min-width: 0; overflow-y: auto; display: flex; flex-direction: column; position: relative; }
+    .nav-tab.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
 
-/* AI Search */
-.ai-search-bar { padding: 20px 40px 0; max-width: 840px; margin: 0 auto; width: 100%; }
-.ai-search-inner {
-  display: flex; align-items: center; gap: 10px;
-  background: var(--bg-card); border: 1px solid var(--border-glow);
-  border-radius: var(--radius); padding: 12px 16px;
-  box-shadow: var(--shadow-md), var(--shadow-glow); transition: all .25s;
-}
-.ai-search-inner:focus-within { border-color: rgba(212,165,116,.3); box-shadow: 0 0 0 3px rgba(212,165,116,.06), var(--shadow-md); }
-.ai-icon { flex-shrink: 0; color: var(--accent); opacity: .7; }
-.ai-search-inner:focus-within .ai-icon { opacity: 1; }
-.ai-search-inner input { background: none; border: none; outline: none; font-family: 'Inter', sans-serif; font-size: 14px; color: var(--text); width: 100%; }
-.ai-search-inner input::placeholder { color: var(--text-3); }
-.ai-search-btn {
-  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  width: 32px; height: 32px;
-  background: linear-gradient(135deg, var(--accent-dim), var(--accent));
-  border: none; border-radius: 8px; color: white; cursor: pointer; transition: all .2s;
-}
-.ai-search-btn:hover { transform: scale(1.05); }
-.ai-status { font-size: 11px; color: var(--text-3); padding: 6px 4px 0; min-height: 20px; }
-.ai-status.loading { color: var(--accent); }
+    .header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
 
-/* Quote list */
-.quote-list { flex: 1; padding: 20px 40px; max-width: 840px; margin: 0 auto; width: 100%; }
+    .quote-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
 
-/* Cards */
-.quote-card {
-  padding: 28px 30px; margin-bottom: 16px;
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: var(--radius); transition: all .25s; position: relative; overflow: hidden;
-}
-.quote-card::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 3px; height: 100%;
-  background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
-  opacity: 0; transition: opacity .25s;
-}
-.quote-card:hover { border-color: var(--border-glow); box-shadow: var(--shadow-md), var(--shadow-glow); transform: translateY(-1px); }
-.quote-card:hover::before { opacity: 1; }
-.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-.topic-pill {
-  font-size: 10px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase;
-  color: var(--accent); background: var(--accent-soft);
-  border: 1px solid rgba(212,165,116,.12); padding: 4px 12px; border-radius: 20px;
-  cursor: pointer; transition: all .2s; font-family: 'Inter', sans-serif;
-}
-.topic-pill:hover { background: var(--accent-mid); }
-.topic-pill.active { background: var(--accent-mid); border-color: rgba(212,165,116,.3); }
-.card-quote { font-family: 'Newsreader', Georgia, serif; font-size: 16.5px; line-height: 1.85; margin-bottom: 22px; }
-.card-attribution { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 16px; border-top: 1px solid var(--border); }
-.saint-name { font-size: 13px; font-weight: 500; color: var(--accent); }
-.saint-ref-work { font-size: 12px; color: var(--text-2); margin-top: 3px; font-weight: 500; }
-.saint-ref-loc { font-size: 11px; color: var(--text-3); margin-top: 2px; }
-.saint-ref-loc a { color: var(--accent); text-decoration: none; transition: opacity .15s; }
-.saint-ref-loc a:hover { opacity: .8; text-decoration: underline; }
+    .theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: var(--transition);
+    }
 
-/* Card header actions */
-.card-actions { display: flex; align-items: center; gap: 6px; }
-.source-btn {
-  font-family: 'Inter', sans-serif; font-size: 11px;
-  color: var(--text-3); background: var(--tag-bg);
-  border: 1px solid var(--tag-border); border-radius: 7px;
-  padding: 5px 10px; text-decoration: none; transition: all .2s;
-}
-.source-btn:hover { color: var(--text-2); background: var(--bg-hover); }
-.card-tags { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; max-width: 50%; }
-.card-tag {
-  font-size: 10px; padding: 3px 9px; border-radius: 12px;
-  background: var(--tag-bg); color: var(--text-3); cursor: pointer;
-  border: 1px solid var(--tag-border); transition: all .15s; font-family: 'Inter', sans-serif;
-}
-.card-tag:hover { color: var(--text-2); border-color: var(--tag-border); }
-.card-tag.active { color: var(--accent); border-color: var(--border-glow); background: var(--accent-soft); }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
-/* Copy btn */
-.copy-btn {
-  display: flex; align-items: center; gap: 5px;
-  font-family: 'Inter', sans-serif; font-size: 11px;
-  color: var(--text-3); background: var(--tag-bg);
-  border: 1px solid var(--tag-border); border-radius: 7px;
-  padding: 5px 10px; cursor: pointer; transition: all .2s;
-}
-.copy-btn:hover { color: var(--text-2); background: var(--bg-hover); }
-.copy-btn.copied { color: #6ecf8a; border-color: rgba(110,207,138,.2); background: rgba(110,207,138,.06); }
+    /* ========== Sidebar ========== */
+    .sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      z-index: 10;
+      transition: var(--transition);
+      overflow: hidden;
+    }
 
-/* States */
-.state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 24px; color: var(--text-3); gap: 12px; }
-.state p { font-size: 13px; }
-.spinner { width: 22px; height: 22px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-mark { background: rgba(212,165,116,.18); color: inherit; border-radius: 3px; padding: 0 2px; }
+    .sidebar.hidden {
+      width: 0;
+      min-width: 0;
+      border-right: none;
+    }
 
-/* Responsive */
-@media (max-width: 768px) {
-  html, body { overflow: auto; }
-  .shell { flex-direction: column; overflow: visible; }
-  .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 1px solid var(--border); max-height: 40vh; }
-  .main { overflow: visible; }
-  .quote-list { padding: 16px; }
-  .quote-card { padding: 22px 20px; }
-  .card-tags { max-width: 100%; justify-content: flex-start; }
-  .card-attribution { flex-direction: column; }
-}
-</style>
+    .sidebar-header {
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sidebar-toggle {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: var(--transition);
+    }
+
+    .sidebar-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .sidebar-show-btn {
+      position: absolute;
+      left: 12px;
+      top: 80px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-glass);
+      backdrop-filter: blur(10px);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      z-index: 20;
+      transition: var(--transition);
+    }
+
+    .sidebar-show-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .sidebar.hidden ~ .sidebar-show-btn {
+      display: flex;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 2px;
+      padding: 0 16px;
+      margin-bottom: 0;
+    }
+
+    .filter-tab {
+      flex: 1;
+      padding: 8px 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-muted);
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: var(--transition);
+    }
+
+    .filter-tab:hover { color: var(--text-secondary); }
+    .filter-tab.active {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .sidebar-search {
+      padding: 12px 16px;
+    }
+
+    .sidebar-search input {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-primary);
+      font-size: 13px;
+      font-family: var(--font-ui);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .sidebar-search input:focus {
+      border-color: var(--accent);
+    }
+
+    .sidebar-search input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .filter-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 8px 16px;
+    }
+
+    .filter-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+
+    .filter-item:hover {
+      background: var(--accent-dim);
+      color: var(--text-primary);
+    }
+
+    .filter-item.active {
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .filter-item-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      background: var(--bg-input);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* ========== Main Content ========== */
+    .content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .search-bar-container {
+      padding: 20px 24px 12px;
+    }
+
+    .search-bar {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 14px 50px 14px 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 15px;
+      font-family: var(--font-ui);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .search-bar input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim), 0 0 20px var(--accent-glow);
+    }
+
+    .search-bar input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .search-bar button {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: none;
+      background: var(--accent);
+      color: #08080a;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .search-bar button:hover {
+      opacity: 0.85;
+      transform: translateY(-50%) scale(1.05);
+    }
+
+    .search-status {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      padding: 4px 0 8px;
+      min-height: 24px;
+    }
+
+    /* ========== Cards Grid ========== */
+    .cards-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 24px 24px;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 16px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: transparent;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(212, 165, 116, 0.08);
+    }
+
+    .card:hover::before {
+      background: var(--accent);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .topic-pill {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--accent-dim);
+      color: var(--accent);
+    }
+
+    .type-badge {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 3px 7px;
+      border-radius: 4px;
+    }
+
+    .type-badge.saint {
+      background: var(--badge-saint);
+      color: var(--badge-saint-text);
+    }
+
+    .type-badge.text {
+      background: var(--badge-text);
+      color: var(--badge-text-text);
+    }
+
+    .type-badge.council {
+      background: var(--badge-council);
+      color: var(--badge-council-text);
+    }
+
+    .card-header-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .source-link {
+      font-size: 11px;
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+
+    .source-link:hover { opacity: 1; }
+
+    .copy-btn {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .copy-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .copy-btn.copied {
+      border-color: #4caf50;
+      color: #4caf50;
+    }
+
+    .card-quote {
+      font-family: var(--font-quote);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 12px;
+    }
+
+    .card-attribution {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .attribution-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .attr-source {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .attr-reference {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .attr-location {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .attr-location a {
+      color: var(--accent);
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    .attr-location a:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-self: flex-end;
+    }
+
+    .card-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      background: var(--bg-input);
+      color: var(--text-muted);
+    }
+
+    /* ========== Empty State ========== */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-state h3 {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+    }
+
+    /* ========== Loading ========== */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+
+    .loading-spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border);
+      border-top: 2px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ========== Responsive ========== */
+    @media (max-width: 768px) {
+      .header { padding: 0 12px; gap: 8px; }
+      .logo span { display: none; }
+      .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
+      .sidebar.hidden { width: 0; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .search-bar-container { padding: 12px; }
+      .cards-container { padding: 0 12px 12px; }
+      .nav-tab { padding: 6px 10px; font-size: 12px; }
+    }
+
+    @media (max-width: 480px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .card { padding: 14px; }
+    }
+
+    /* ========== Section Panels ========== */
+    .section-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+    .section-panel.active { display: flex; }
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="logo">
-    <div class="logo-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-        <line x1="12" y1="2" x2="12" y2="22"/>
-        <line x1="7" y1="5" x2="17" y2="5"/>
-        <line x1="4" y1="9" x2="20" y2="9"/>
-        <line x1="7" y1="16" x2="17" y2="18"/>
-      </svg>
-    </div>
-    <div class="logo-text">
-      <h1>Golden Mouth Database</h1>
-      <p>Quotes from the Holy Saints of the Eastern Orthodox Church</p>
-    </div>
-  </div>
-  <div class="header-right">
-    <span class="quote-count" id="quote-count"></span>
-    <button class="hdr-btn" onclick="toggleTheme()" aria-label="Toggle theme">
-      <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-  </div>
-</header>
-
-<div class="shell" id="shell">
-  <aside class="sidebar">
-    <div class="sidebar-hdr">
-      <button class="sidebar-hide-btn" onclick="toggleSidebar()">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-        Hide sidebar
-      </button>
-    </div>
-    <div class="sidebar-search">
-      <div class="search-box">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><line x1="11" y1="11" x2="14.5" y2="14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        <input type="text" id="search" placeholder="Search quotes, saints, tags…" autocomplete="off" spellcheck="false">
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <span class="logo-icon">☦</span>
+        <span>Golden Mouth Database</span>
       </div>
-    </div>
-    <div class="sidebar-tabs">
-      <button class="tab-btn active" data-tab="topic" onclick="switchTab('topic')">Topics <span class="tab-count" id="tab-count-topic"></span></button>
-      <button class="tab-btn" data-tab="saint" onclick="switchTab('saint')">Saints <span class="tab-count" id="tab-count-saint"></span></button>
-      <button class="tab-btn" data-tab="tag" onclick="switchTab('tag')">Tags <span class="tab-count" id="tab-count-tag"></span></button>
-    </div>
-    <div class="sidebar-panel" id="sidebar-panel"></div>
-    <div class="sidebar-foot">
-      <button class="clear-btn" id="clear-btn">✕ Clear filters</button>
-    </div>
-  </aside>
 
-  <main class="main">
-    <button class="sidebar-show-btn" id="sidebar-show-btn" onclick="toggleSidebar()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-    </button>
-    <div class="ai-search-bar">
-      <div class="ai-search-inner">
-        <div class="ai-icon">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-section="saint">Saints</button>
+        <button class="nav-tab" data-section="text">Texts</button>
+        <button class="nav-tab" data-section="council">Councils</button>
+      </nav>
+
+      <div class="header-right">
+        <span class="quote-count" id="quoteCount">Loading...</span>
+        <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <div class="main-wrapper">
+      <!-- Sidebar -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <span style="font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted)">Filters</span>
+          <button class="sidebar-toggle" id="sidebarHide" title="Hide sidebar">◀</button>
         </div>
-        <input type="text" id="ai-input" placeholder="Ask a question… e.g. 'What did the Saints say about God's love for mankind?'" autocomplete="off" spellcheck="false">
-        <button class="ai-search-btn" id="ai-search-btn" onclick="runAISearch()">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </button>
-      </div>
-      <div class="ai-status" id="ai-status"></div>
+
+        <!-- Saints Filters -->
+        <div class="section-panel active" data-panel="saint">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="topics">Topics</button>
+            <button class="filter-tab" data-filter="saints">Saints</button>
+            <button class="filter-tab" data-filter="tags">Tags</button>
+          </div>
+          <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="saint"></div>
+          <div class="filter-list" data-list="saint"></div>
+        </div>
+
+        <!-- Texts Filters -->
+        <div class="section-panel" data-panel="text">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="documents">Documents</button>
+            <button class="filter-tab" data-filter="topics">Topics</button>
+            <button class="filter-tab" data-filter="tags">Tags</button>
+          </div>
+          <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="text"></div>
+          <div class="filter-list" data-list="text"></div>
+        </div>
+
+        <!-- Councils Filters -->
+        <div class="section-panel" data-panel="council">
+          <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="councils">Councils</button>
+            <button class="filter-tab" data-filter="type">Type</button>
+            <button class="filter-tab" data-filter="tags">Tags</button>
+          </div>
+          <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="council"></div>
+          <div class="filter-list" data-list="council"></div>
+        </div>
+      </aside>
+
+      <button class="sidebar-show-btn" id="sidebarShow" title="Show sidebar">▶</button>
+
+      <!-- Content -->
+      <main class="content">
+        <div class="search-bar-container">
+          <div class="search-bar">
+            <input type="text" id="aiSearch" placeholder="AI semantic search across all sections...">
+            <button id="aiSearchBtn" title="Search">→</button>
+          </div>
+          <div class="search-status" id="searchStatus"></div>
+        </div>
+        <div class="cards-container" id="cardsContainer">
+          <div class="loading"><div class="loading-spinner"></div><span>Loading quotes...</span></div>
+        </div>
+      </main>
     </div>
-    <div class="quote-list" id="quote-list"></div>
-  </main>
-</div>
+  </div>
 
-<script>
-// Suppress sandbox errors from AI model import
-window.addEventListener('unhandledrejection', function(e) { e.preventDefault(); });
+  <script>
+    // Suppress unhandled promise rejections (sandbox compat)
+    window.addEventListener('unhandledrejection', e => e.preventDefault());
 
-// ── Theme ─────────────────────────────────────────────────────────────────────
-(function() {
-  var saved = localStorage.getItem('theme') || 'dark';
-  document.documentElement.setAttribute('data-theme', saved);
-})();
-function toggleTheme() {
-  var html = document.documentElement;
-  var next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('theme', next);
-}
+    // ========== State ==========
+    let allSaints = [];
+    let allTexts = [];
+    let allCouncils = [];
+    let allQuotes = []; // combined
+    let embeddings = null;
+    let extractor = null;
+    let modelLoading = false;
 
-// ── Sidebar Toggle ────────────────────────────────────────────────────────────
-(function() {
-  if (localStorage.getItem('sidebar') === 'hidden') {
-    document.getElementById('shell').classList.add('sidebar-hidden');
-  }
-})();
-function toggleSidebar() {
-  var shell = document.getElementById('shell');
-  shell.classList.toggle('sidebar-hidden');
-  localStorage.setItem('sidebar', shell.classList.contains('sidebar-hidden') ? 'hidden' : 'visible');
-}
+    let activeSection = 'saint';
+    let activeFilters = { saint: { tab: 'topics', value: null }, text: { tab: 'documents', value: null }, council: { tab: 'councils', value: null } };
+    let aiSearchActive = false;
+    let aiResults = [];
 
-// ── Data ──────────────────────────────────────────────────────────────────────
-var QUOTES_URL = './quotes.json';
-var Q = [], activeTopic = null, activeSaint = null, activeTags = new Set();
-var search = '', activeTab = 'topic';
+    // ========== Theme ==========
+    const themeToggle = document.getElementById('themeToggle');
+    const savedTheme = localStorage.getItem('gm-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon();
 
-function norm(s) { return s.toLowerCase().replace(/\u00a0/g,' ').replace(/\s+/g,' ').trim(); }
-function esc(s) { return s.replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('gm-theme', next);
+      updateThemeIcon();
+    });
 
-function visibleQuotes() {
-  return Q.filter(function(q) {
-    if (activeTopic && q.topic !== activeTopic) return false;
-    if (activeSaint && q.saint.replace(/,\s*$/,'').trim() !== activeSaint) return false;
-    for (var t of activeTags) if (!q.tags.includes(t)) return false;
-    if (search) {
-      var h = norm(q.quote+' '+q.saint+' '+q.reference+' '+q.tags.join(' '));
-      if (!h.includes(norm(search))) return false;
+    function updateThemeIcon() {
+      const theme = document.documentElement.getAttribute('data-theme');
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
     }
-    return true;
-  });
-}
-function searchMatched() {
-  if (!search) return Q;
-  return Q.filter(function(q) {
-    var h = norm(q.quote+' '+q.saint+' '+q.reference+' '+q.tags.join(' '));
-    return h.includes(norm(search));
-  });
-}
 
-// ── Render ────────────────────────────────────────────────────────────────────
-function hl(s) {
-  if (!search) return s;
-  var e = search.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  return s.replace(new RegExp('('+e+')','gi'),'<mark>$1</mark>');
-}
+    // ========== Sidebar Toggle ==========
+    const sidebar = document.getElementById('sidebar');
+    const sidebarHide = document.getElementById('sidebarHide');
+    const sidebarShow = document.getElementById('sidebarShow');
+    const sidebarState = localStorage.getItem('gm-sidebar');
+    if (sidebarState === 'hidden') sidebar.classList.add('hidden');
 
-function renderQuotes() {
-  var filtered = visibleQuotes();
-  document.getElementById('quote-count').textContent = filtered.length + ' of ' + Q.length + ' quotes';
-  var el = document.getElementById('quote-list');
-  if (!filtered.length) { el.innerHTML = '<div class="state"><p>No quotes match your search.</p></div>'; return; }
-  el.innerHTML = filtered.map(function(q) {
-    var sc = q.saint.replace(/,\s*$/,'').trim();
-    return '<div class="quote-card" data-quote="'+q.quote.replace(/"/g,'&quot;')+'">' +
-      '<div class="card-header">' +
-        '<span class="topic-pill'+(activeTopic===q.topic?' active':'')+'" onclick="setTopic(\''+esc(q.topic)+'\')">'+( q.topic||'Uncategorized')+'</span>' +
-        '<div class="card-actions">' +
-          (q.url ? '<a href="'+q.url+'" target="_blank" class="source-btn">Source</a>' : '') +
-          '<button class="copy-btn" onclick="copyQuote(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="copy-label">Copy</span></button>' +
-        '</div>' +
-      '</div>' +
-      '<div class="card-quote">'+hl(q.quote)+'</div>' +
-      '<div class="card-attribution">' +
-        '<div class="card-meta"><div class="saint-name">'+sc+'</div><div class="saint-ref-work">'+q.reference.split(',')[0]+'</div>'+(q.reference.split(',').length > 1 ? '<div class="saint-ref-loc">'+(q.url ? '<a href="'+q.url+'" target="_blank">'+q.reference.split(',').slice(1).join(',').trim()+'</a>' : q.reference.split(',').slice(1).join(',').trim())+'</div>' : '')+'</div>' +
-        '<div class="card-tags">'+q.tags.map(function(t){return '<span class="card-tag'+(activeTags.has(t)?' active':'')+'" onclick="toggleTag(\''+esc(t)+'\')">'+t+'</span>';}).join('')+'</div>' +
-      '</div></div>';
-  }).join('');
-}
+    sidebarHide.addEventListener('click', () => {
+      sidebar.classList.add('hidden');
+      localStorage.setItem('gm-sidebar', 'hidden');
+    });
 
-function renderPanel() {
-  var matched = searchMatched();
-  var topicCounts = {}, saintCounts = {};
-  matched.forEach(function(q) { topicCounts[q.topic] = (topicCounts[q.topic]||0)+1; });
-  matched.forEach(function(q) { var s = q.saint.replace(/,\s*$/,'').trim(); saintCounts[s] = (saintCounts[s]||0)+1; });
-  var topics = Object.keys(topicCounts).sort();
-  var saints = Object.keys(saintCounts).sort();
-  var tagSet = new Set(matched.flatMap(function(q){ return q.tags; }));
-  var tags = Array.from(tagSet).sort();
+    sidebarShow.addEventListener('click', () => {
+      sidebar.classList.remove('hidden');
+      localStorage.setItem('gm-sidebar', 'visible');
+    });
 
-  document.getElementById('tab-count-topic').textContent = topics.length;
-  document.getElementById('tab-count-saint').textContent = saints.length;
-  document.getElementById('tab-count-tag').textContent = tags.length;
-  var panel = document.getElementById('sidebar-panel');
+    // ========== Nav Tabs ==========
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        activeSection = tab.dataset.section;
 
-  if (activeTab === 'topic') {
-    panel.innerHTML = topics.length ? topics.map(function(t){ return '<button class="filter-item'+(activeTopic===t?' active':'')+'" onclick="setTopic(\''+esc(t)+'\')"><span class="fi-label">'+t+'</span><span class="fi-count">'+topicCounts[t]+'</span></button>'; }).join('') : '<div class="no-results-filter">No matching topics</div>';
-  } else if (activeTab === 'saint') {
-    panel.innerHTML = saints.length ? saints.map(function(s){ return '<button class="filter-item'+(activeSaint===s?' active':'')+'" onclick="setSaint(\''+esc(s)+'\')"><span class="fi-label">'+s.replace('Saint ','St. ')+'</span><span class="fi-count">'+saintCounts[s]+'</span></button>'; }).join('') : '<div class="no-results-filter">No matching saints</div>';
-  } else {
-    panel.innerHTML = tags.length ? '<div class="tag-cloud">'+tags.map(function(t){ return '<span class="tag-chip'+(activeTags.has(t)?' active':'')+'" onclick="toggleTag(\''+esc(t)+'\')">'+t+'</span>'; }).join('')+'</div>' : '<div class="no-results-filter">No matching tags</div>';
-  }
-}
-function render() { renderQuotes(); renderPanel(); }
+        // Switch sidebar panel
+        document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
+        document.querySelector(`[data-panel="${activeSection}"]`).classList.add('active');
 
-// ── Actions ───────────────────────────────────────────────────────────────────
-function switchTab(tab) { activeTab = tab; document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.tab===tab); }); renderPanel(); }
-function setTopic(t) { activeTopic = activeTopic===t ? null : t; render(); }
-function setSaint(s) { activeSaint = activeSaint===s ? null : s; render(); }
-function toggleTag(t) { activeTags.has(t) ? activeTags.delete(t) : activeTags.add(t); render(); }
-function copyQuote(btn) {
-  var card = btn.closest('.quote-card');
-  navigator.clipboard.writeText(card.getAttribute('data-quote')).then(function(){
-    btn.classList.add('copied'); btn.querySelector('.copy-label').textContent = 'Copied!';
-    setTimeout(function(){ btn.classList.remove('copied'); btn.querySelector('.copy-label').textContent = 'Copy'; }, 2000);
-  });
-}
+        // Clear AI search
+        if (aiSearchActive) {
+          aiSearchActive = false;
+          aiResults = [];
+          document.getElementById('aiSearch').value = '';
+          document.getElementById('searchStatus').textContent = '';
+        }
 
-document.getElementById('search').addEventListener('input', function(e) { search = e.target.value; render(); });
-document.getElementById('clear-btn').addEventListener('click', function() { activeTopic = null; activeSaint = null; activeTags.clear(); search = ''; document.getElementById('search').value = ''; render(); });
+        renderCards();
+        updateQuoteCount();
+      });
+    });
 
-// ── Load ──────────────────────────────────────────────────────────────────────
-(async function() {
-  document.getElementById('quote-list').innerHTML = '<div class="state"><div class="spinner"></div><p>Loading quotes\u2026</p></div>';
-  try {
-    var r = await fetch(QUOTES_URL);
-    if (r.ok) Q = await r.json();
-  } catch(e) {}
-  if (!Q.length) Q = [];
-  render();
-})();
+    // ========== Filter Tabs (within sidebar panels) ==========
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const panel = tab.closest('.section-panel');
+        panel.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
 
-// ── AI Search ─────────────────────────────────────────────────────────────────
-var embeddings = null, aiPipeline = null, aiLoading = false;
-var EMBEDDINGS_URL = './embeddings.json';
+        const section = panel.dataset.panel;
+        activeFilters[section].tab = tab.dataset.filter;
+        activeFilters[section].value = null;
 
-(async function() {
-  try { var r = await fetch(EMBEDDINGS_URL); if (r.ok) embeddings = await r.json(); } catch(e) {}
-})();
+        renderFilterList(section);
+        renderCards();
+      });
+    });
 
-async function loadAIModel() {
-  if (aiPipeline || aiLoading) return;
-  aiLoading = true;
-  var s = document.getElementById('ai-status');
-  if (s) { s.textContent = 'Loading AI model (first time only)\u2026'; s.className = 'ai-status loading'; }
-  try {
-    var mod = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
-    aiPipeline = await mod.pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-    if (s) { s.textContent = 'AI ready'; s.className = 'ai-status'; }
-  } catch(e) { if (s) { s.textContent = ''; s.className = 'ai-status'; } }
-  aiLoading = false;
-}
+    // ========== Sidebar Search ==========
+    document.querySelectorAll('[data-search]').forEach(input => {
+      input.addEventListener('input', () => {
+        const section = input.dataset.search;
+        renderFilterList(section);
+      });
+    });
 
-function cosineSim(a, b) {
-  var dot=0, nA=0, nB=0;
-  for (var i=0; i<a.length; i++) { dot+=a[i]*b[i]; nA+=a[i]*a[i]; nB+=b[i]*b[i]; }
-  return dot/(Math.sqrt(nA)*Math.sqrt(nB));
-}
+    // ========== Data Loading ==========
+    async function loadData() {
+      try {
+        const [saintsRes, textsRes, councilsRes] = await Promise.all([
+          fetch('saints.json').then(r => r.ok ? r.json() : []),
+          fetch('texts.json').then(r => r.ok ? r.json() : []),
+          fetch('councils.json').then(r => r.ok ? r.json() : [])
+        ]);
 
-async function runAISearch() {
-  var inp = document.getElementById('ai-input');
-  if (!inp) return;
-  var query = inp.value.trim();
-  if (!query) return;
-  if (!aiPipeline) { await loadAIModel(); if (!aiPipeline) { search = query; render(); return; } }
-  if (!embeddings || embeddings.length !== Q.length) { search = query; render(); return; }
+        allSaints = saintsRes;
+        allTexts = textsRes;
+        allCouncils = councilsRes;
+        allQuotes = [...allSaints, ...allTexts, ...allCouncils];
 
-  var s = document.getElementById('ai-status');
-  if (s) { s.textContent = 'Searching\u2026'; s.className = 'ai-status loading'; }
-  var output = await aiPipeline(query, { pooling: 'mean', normalize: true });
-  var queryEmb = Array.from(output.data);
+        updateQuoteCount();
+        buildFilterData();
+        renderFilterList('saint');
+        renderFilterList('text');
+        renderFilterList('council');
+        renderCards();
 
-  var queryLower = query.toLowerCase();
-  var scored = Q.map(function(q, i) {
-    var score = cosineSim(queryEmb, embeddings[i]);
-    var saintLower = q.saint.toLowerCase();
-    if (queryLower.split(' ').some(function(w){ return w.length > 3 && saintLower.includes(w); })) score += 0.08;
-    return Object.assign({}, q, { score: score });
-  });
-  scored.sort(function(a,b){ return b.score - a.score; });
-  var top = scored.filter(function(q){ return q.score > 0.35; }).slice(0, 10);
+        // Load embeddings in background
+        loadEmbeddings();
+      } catch (err) {
+        console.error('Failed to load data:', err);
+        document.getElementById('cardsContainer').innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">⚠️</div>
+            <h3>Failed to load quotes</h3>
+            <p>Make sure saints.json, texts.json, and councils.json are available.</p>
+          </div>`;
+      }
+    }
 
-  if (s) { s.textContent = top.length ? 'Found '+top.length+' relevant quotes' : 'No closely matching quotes found'; s.className = 'ai-status'; }
-  var el = document.getElementById('quote-list');
-  if (!top.length) { el.innerHTML = '<div class="state"><p>No closely matching quotes found. Try rephrasing or use keyword search.</p></div>'; return; }
-  el.innerHTML = top.map(function(q) {
-    var sc = q.saint.replace(/,\s*$/,'').trim();
-    return '<div class="quote-card" data-quote="'+q.quote.replace(/"/g,'&quot;')+'">' +
-      '<div class="card-header"><span class="topic-pill" onclick="setTopic(\''+esc(q.topic)+'\')">'+( q.topic||'Uncategorized')+'</span><div class="card-actions">' +
-      (q.url ? '<a href="'+q.url+'" target="_blank" class="source-btn">Source</a>' : '') +
-      '<button class="copy-btn" onclick="copyQuote(this)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg><span class="copy-label">Copy</span></button></div></div>' +
-      '<div class="card-quote">'+q.quote+'</div>' +
-      '<div class="card-attribution"><div class="card-meta"><div class="saint-name">'+sc+'</div><div class="saint-ref-work">'+q.reference.split(',')[0]+'</div>' +
-      (q.reference.split(',').length > 1 ? '<div class="saint-ref-loc">'+(q.url ? '<a href="'+q.url+'" target="_blank">'+q.reference.split(',').slice(1).join(',').trim()+'</a>' : q.reference.split(',').slice(1).join(',').trim())+'</div>' : '') +
-      '</div>' +
-      '<div class="card-tags">'+q.tags.map(function(t){return '<span class="card-tag" onclick="toggleTag(\''+esc(t)+'\')">'+t+'</span>';}).join('')+'</div></div></div>';
-  }).join('');
-}
+    async function loadEmbeddings() {
+      try {
+        const res = await fetch('embeddings.json');
+        if (res.ok) {
+          embeddings = await res.json();
+          console.log(`Loaded ${embeddings.length} embeddings`);
+        }
+      } catch (err) {
+        console.warn('Embeddings not available:', err.message);
+      }
+    }
 
-var aiInputEl = document.getElementById('ai-input');
-if (aiInputEl) aiInputEl.addEventListener('keydown', function(e) { if (e.key === 'Enter') runAISearch(); });
-</script>
+    // ========== Filter Data ==========
+    let filterData = { saint: {}, text: {}, council: {} };
+
+    function buildFilterData() {
+      // Saints: topics, saints, tags
+      const saintTopics = {}, saintSources = {}, saintTags = {};
+      allSaints.forEach(q => {
+        if (q.topic) saintTopics[q.topic] = (saintTopics[q.topic] || 0) + 1;
+        if (q.source) saintSources[q.source] = (saintSources[q.source] || 0) + 1;
+        (q.tags || []).forEach(t => { saintTags[t] = (saintTags[t] || 0) + 1; });
+      });
+      filterData.saint = { topics: saintTopics, saints: saintSources, tags: saintTags };
+
+      // Texts: documents, topics, tags
+      const textDocs = {}, textTopics = {}, textTags = {};
+      allTexts.forEach(q => {
+        if (q.source) textDocs[q.source] = (textDocs[q.source] || 0) + 1;
+        if (q.topic) textTopics[q.topic] = (textTopics[q.topic] || 0) + 1;
+        (q.tags || []).forEach(t => { textTags[t] = (textTags[t] || 0) + 1; });
+      });
+      filterData.text = { documents: textDocs, topics: textTopics, tags: textTags };
+
+      // Councils: councils, type, tags
+      const councilNames = {}, councilTypes = {}, councilTags = {};
+      allCouncils.forEach(q => {
+        if (q.source) councilNames[q.source] = (councilNames[q.source] || 0) + 1;
+        if (q.councilType) councilTypes[q.councilType] = (councilTypes[q.councilType] || 0) + 1;
+        (q.tags || []).forEach(t => { councilTags[t] = (councilTags[t] || 0) + 1; });
+      });
+      filterData.council = { councils: councilNames, type: councilTypes, tags: councilTags };
+    }
+
+    function renderFilterList(section) {
+      const listEl = document.querySelector(`[data-list="${section}"]`);
+      const searchInput = document.querySelector(`[data-search="${section}"]`);
+      const searchTerm = (searchInput?.value || '').toLowerCase();
+      const tabName = activeFilters[section].tab;
+      const data = filterData[section][tabName] || {};
+
+      const entries = Object.entries(data)
+        .filter(([name]) => name.toLowerCase().includes(searchTerm))
+        .sort((a, b) => b[1] - a[1]);
+
+      let html = `<div class="filter-item ${activeFilters[section].value === null ? 'active' : ''}" data-value="__all__">
+        <span>All</span><span class="filter-item-count">${Object.values(data).reduce((a, b) => a + b, 0)}</span>
+      </div>`;
+
+      entries.forEach(([name, count]) => {
+        const isActive = activeFilters[section].value === name;
+        html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
+          <span>${name}</span><span class="filter-item-count">${count}</span>
+        </div>`;
+      });
+
+      listEl.innerHTML = html;
+
+      // Attach click handlers
+      listEl.querySelectorAll('.filter-item').forEach(item => {
+        item.addEventListener('click', () => {
+          const val = item.dataset.value;
+          activeFilters[section].value = val === '__all__' ? null : val;
+
+          // Clear AI search when using filters
+          if (aiSearchActive) {
+            aiSearchActive = false;
+            aiResults = [];
+            document.getElementById('aiSearch').value = '';
+            document.getElementById('searchStatus').textContent = '';
+          }
+
+          renderFilterList(section);
+          renderCards();
+          updateQuoteCount();
+        });
+      });
+    }
+
+    // ========== Rendering ==========
+    function getFilteredQuotes() {
+      if (aiSearchActive) return aiResults;
+
+      let items;
+      if (activeSection === 'saint') items = allSaints;
+      else if (activeSection === 'text') items = allTexts;
+      else items = allCouncils;
+
+      const filter = activeFilters[activeSection];
+      if (!filter.value) return items;
+
+      return items.filter(q => {
+        const tab = filter.tab;
+        const val = filter.value;
+        if (tab === 'topics') return q.topic === val;
+        if (tab === 'saints') return q.source === val;
+        if (tab === 'documents') return q.source === val;
+        if (tab === 'councils') return q.source === val;
+        if (tab === 'type') return q.councilType === val;
+        if (tab === 'tags') return (q.tags || []).includes(val);
+        return true;
+      });
+    }
+
+    function updateQuoteCount() {
+      const filtered = getFilteredQuotes();
+      const total = allQuotes.length;
+      const el = document.getElementById('quoteCount');
+      if (aiSearchActive) {
+        el.textContent = `${filtered.length} results found`;
+      } else {
+        el.textContent = `${filtered.length} of ${total} quotes`;
+      }
+    }
+
+    function renderCards() {
+      const container = document.getElementById('cardsContainer');
+      const quotes = getFilteredQuotes();
+
+      if (quotes.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📜</div>
+            <h3>No quotes found</h3>
+            <p>Try adjusting your filters or search terms.</p>
+          </div>`;
+        updateQuoteCount();
+        return;
+      }
+
+      const html = `<div class="cards-grid">${quotes.map(renderCard).join('')}</div>`;
+      container.innerHTML = html;
+      updateQuoteCount();
+
+      // Attach copy handlers
+      container.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const text = btn.dataset.quote;
+          navigator.clipboard.writeText(text).then(() => {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copied');
+            }, 2000);
+          });
+        });
+      });
+    }
+
+    function renderCard(q) {
+      const typeLabel = q.type === 'saint' ? 'Quote' : q.type === 'text' ? 'Text' : 'Council';
+      const typeClass = q.type;
+      const showTypeBadge = aiSearchActive;
+
+      let locationHtml = '';
+      if (q.reference && q.url) {
+        locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">${escHtml(q.reference)}</a></span>`;
+      } else if (q.reference) {
+        locationHtml = `<span class="attr-location">${escHtml(q.reference)}</span>`;
+      } else if (q.url) {
+        locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source ↗</a></span>`;
+      }
+
+      const tagsHtml = (q.tags || []).slice(0, 3).map(t => `<span class="card-tag">${escHtml(t)}</span>`).join('');
+
+      const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source ↗</a>` : '';
+
+      return `
+        <div class="card">
+          <div class="card-header">
+            ${q.topic ? `<span class="topic-pill">${escHtml(q.topic)}</span>` : ''}
+            ${showTypeBadge ? `<span class="type-badge ${typeClass}">${typeLabel}</span>` : ''}
+            <div class="card-header-right">
+              ${sourceLink}
+              <button class="copy-btn" data-quote="${escAttr(q.quote)}">Copy</button>
+            </div>
+          </div>
+          <div class="card-quote">${escHtml(q.quote)}</div>
+          <div class="card-divider"></div>
+          <div class="card-attribution">
+            <div class="attribution-text">
+              <span class="attr-source">${escHtml(q.source || 'Unknown')}</span>
+              ${locationHtml}
+            </div>
+            ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
+          </div>
+        </div>`;
+    }
+
+    function escHtml(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function escAttr(str) {
+      if (!str) return '';
+      return str.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    // ========== AI Search ==========
+    const aiSearchInput = document.getElementById('aiSearch');
+    const aiSearchBtn = document.getElementById('aiSearchBtn');
+    const searchStatus = document.getElementById('searchStatus');
+
+    aiSearchBtn.addEventListener('click', doAiSearch);
+    aiSearchInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter') doAiSearch();
+    });
+
+    async function doAiSearch() {
+      const query = aiSearchInput.value.trim();
+      if (!query) {
+        aiSearchActive = false;
+        aiResults = [];
+        searchStatus.textContent = '';
+        renderCards();
+        return;
+      }
+
+      if (!embeddings || embeddings.length === 0) {
+        searchStatus.textContent = 'Embeddings not loaded. Please wait...';
+        return;
+      }
+
+      // Load model on first use
+      if (!extractor) {
+        if (modelLoading) return;
+        modelLoading = true;
+        searchStatus.textContent = 'Loading AI model (first time only)...';
+        try {
+          const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+          extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+          searchStatus.textContent = '';
+        } catch (err) {
+          searchStatus.textContent = 'Failed to load AI model. Try again.';
+          modelLoading = false;
+          console.error(err);
+          return;
+        }
+        modelLoading = false;
+      }
+
+      searchStatus.textContent = 'Searching...';
+
+      try {
+        const output = await extractor(query, { pooling: 'mean', normalize: true });
+        const queryVec = Array.from(output.data);
+
+        // Compute cosine similarity with all embeddings
+        const scores = embeddings.map((emb, idx) => {
+          let dot = 0;
+          for (let i = 0; i < queryVec.length; i++) {
+            dot += queryVec[i] * (emb[i] || 0);
+          }
+          return { idx, score: dot };
+        });
+
+        // Apply saint name boosting
+        const queryLower = query.toLowerCase();
+        scores.forEach(s => {
+          const item = allQuotes[s.idx];
+          if (item && item.source && item.source.toLowerCase().includes(queryLower)) {
+            s.score += 0.1;
+          }
+        });
+
+        // Filter and sort
+        const threshold = 0.35;
+        const results = scores
+          .filter(s => s.score >= threshold)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 50)
+          .map(s => allQuotes[s.idx]);
+
+        aiSearchActive = true;
+        aiResults = results;
+        searchStatus.textContent = `${results.length} results found across all sections`;
+        renderCards();
+      } catch (err) {
+        searchStatus.textContent = 'Search failed. Please try again.';
+        console.error(err);
+      }
+    }
+
+    // ========== Initialize ==========
+    loadData();
+  </script>
 </body>
 </html>
