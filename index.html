@@ -978,10 +978,14 @@
     });
 
     // ========== Sidebar Search ==========
+    let sidebarSearchTerm = '';
     document.querySelectorAll('[data-search]').forEach(input => {
       input.addEventListener('input', () => {
         const section = input.dataset.search;
+        sidebarSearchTerm = input.value.trim().toLowerCase();
         renderFilterList(section);
+        renderCards();
+        updateQuoteCount();
       });
     });
 
@@ -1157,6 +1161,11 @@
         if (filter.councils && q.source !== filter.councils) return false;
         if (filter.type && q.councilType !== filter.type) return false;
         if (filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        // Keyword search across quote content
+        if (sidebarSearchTerm) {
+          const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
+          if (!haystack.includes(sidebarSearchTerm)) return false;
+        }
         return true;
       });
     }
