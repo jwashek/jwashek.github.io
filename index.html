@@ -765,14 +765,17 @@
 
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
-      .header { padding: 0 12px; gap: 8px; }
-      .logo span { display: none; }
+      .header { padding: 0 12px; gap: 8px; flex-wrap: wrap; }
+      .logo { font-size: 14px; }
+      .logo .logo-icon { font-size: 18px; }
       .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
       .sidebar.hidden { width: 0; }
       .cards-grid { grid-template-columns: 1fr; }
       .search-bar-container { padding: 12px; }
-      .cards-container { padding: 0 12px 12px; }
+      .cards-container { padding: 0 12px 80px; }
       .nav-tab { padding: 6px 10px; font-size: 12px; }
+      .sidebar-backdrop { display: none; position: fixed; inset: 0; top: var(--header-height); background: rgba(0,0,0,0.4); z-index: 40; }
+      .sidebar-backdrop.active { display: block; }
     }
 
     @media (max-width: 480px) {
@@ -850,6 +853,7 @@
       </aside>
 
       <button class="sidebar-show-btn" id="sidebarShow" title="Show sidebar">&#9654;</button>
+      <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
 
       <!-- Content -->
       <main class="content">
@@ -926,14 +930,24 @@
     const sidebarState = localStorage.getItem('gm-sidebar');
     if (sidebarState === 'hidden') sidebar.classList.add('hidden');
 
+    const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+
     sidebarHide.addEventListener('click', () => {
       sidebar.classList.add('hidden');
+      sidebarBackdrop.classList.remove('active');
       localStorage.setItem('gm-sidebar', 'hidden');
     });
 
     sidebarShow.addEventListener('click', () => {
       sidebar.classList.remove('hidden');
+      sidebarBackdrop.classList.add('active');
       localStorage.setItem('gm-sidebar', 'visible');
+    });
+
+    sidebarBackdrop.addEventListener('click', () => {
+      sidebar.classList.add('hidden');
+      sidebarBackdrop.classList.remove('active');
+      localStorage.setItem('gm-sidebar', 'hidden');
     });
 
     // ========== Nav Tabs ==========
@@ -1109,7 +1123,13 @@
       });
 
       const entries = Object.entries(data)
-        .sort((a, b) => b[1] - a[1]);
+        .sort((a, b) => {
+          // Natural/numeric sort for items that start with common patterns (Canon 1, Chapter 2, etc.)
+          const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+          const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+          if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+          return a[0].localeCompare(b[0]);
+        });
 
       const activeValue = filter[tabName];
       let html = `<div class="filter-item ${activeValue === null ? 'active' : ''}" data-value="__all__">
@@ -1171,6 +1191,12 @@
           if (!haystack.includes(sidebarSearchTerm)) return false;
         }
         return true;
+      }).sort((a, b) => {
+        // Sort by numeric reference when available (Canon 1, Canon 2, etc.)
+        const numA = parseInt((a.reference && a.reference.match(/\d+/) || [])[0]);
+        const numB = parseInt((b.reference && b.reference.match(/\d+/) || [])[0]);
+        if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+        return 0;
       });
     }
 
