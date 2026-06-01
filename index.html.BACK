@@ -483,6 +483,7 @@
       transition: var(--transition);
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .card::before {
@@ -705,6 +706,63 @@
       to { transform: rotate(360deg); }
     }
 
+    /* ========== Modal ========== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+    .modal-content {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px;
+      max-width: 720px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      transition: var(--transition);
+    }
+    .modal-close:hover { border-color: var(--accent); color: var(--accent); }
+    .modal-topic { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 16px; }
+    .modal-quote { font-family: var(--font-quote); font-size: 18px; line-height: 1.9; color: var(--text-primary); margin-bottom: 24px; }
+    .modal-source { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+    .modal-reference { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+    .modal-url a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.8; }
+    .modal-url a:hover { opacity: 1; text-decoration: underline; }
+    .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); }
+    .modal-actions { display: flex; gap: 8px; margin-bottom: 16px; }
+    .modal-actions .copy-btn, .modal-actions .source-link-btn { font-size: 12px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-input); color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: var(--transition); }
+    .modal-actions .copy-btn:hover, .modal-actions .source-link-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .modal-actions .copy-btn.copied { border-color: #4caf50; color: #4caf50; }
+
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
       .header { padding: 0 12px; gap: 8px; }
@@ -809,6 +867,20 @@
     </div>
   </div>
 
+  <!-- Quote Modal -->
+  <div class="modal-overlay" id="quoteModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">×</button>
+      <div class="modal-actions" id="modalActions"></div>
+      <div class="modal-topic" id="modalTopic"></div>
+      <div class="modal-quote" id="modalQuote"></div>
+      <div class="modal-source" id="modalSource"></div>
+      <div class="modal-reference" id="modalReference"></div>
+      <div class="modal-url" id="modalUrl"></div>
+      <div class="modal-tags" id="modalTags"></div>
+    </div>
+  </div>
+
   <script>
     // Suppress unhandled promise rejections (sandbox compat)
     window.addEventListener('unhandledrejection', e => e.preventDefault());
@@ -906,10 +978,14 @@
     });
 
     // ========== Sidebar Search ==========
+    let sidebarSearchTerm = '';
     document.querySelectorAll('[data-search]').forEach(input => {
       input.addEventListener('input', () => {
         const section = input.dataset.search;
+        sidebarSearchTerm = input.value.trim().toLowerCase();
         renderFilterList(section);
+        renderCards();
+        updateQuoteCount();
       });
     });
 
@@ -1013,6 +1089,11 @@
         if (tabName !== 'councils' && filter.councils && q.source !== filter.councils) return false;
         if (tabName !== 'type' && filter.type && q.councilType !== filter.type) return false;
         if (tabName !== 'tags' && filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        // Also apply keyword search to narrow visible filter options
+        if (sidebarSearchTerm) {
+          const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
+          if (!haystack.includes(sidebarSearchTerm)) return false;
+        }
         return true;
       });
 
@@ -1028,7 +1109,6 @@
       });
 
       const entries = Object.entries(data)
-        .filter(([name]) => name.toLowerCase().includes(searchTerm))
         .sort((a, b) => b[1] - a[1]);
 
       const activeValue = filter[tabName];
@@ -1085,6 +1165,11 @@
         if (filter.councils && q.source !== filter.councils) return false;
         if (filter.type && q.councilType !== filter.type) return false;
         if (filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        // Keyword search across quote content
+        if (sidebarSearchTerm) {
+          const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
+          if (!haystack.includes(sidebarSearchTerm)) return false;
+        }
         return true;
       });
     }
@@ -1115,13 +1200,14 @@
         return;
       }
 
-      const html = `<div class="cards-grid">${quotes.map(renderCard).join('')}</div>`;
+      const html = `<div class="cards-grid">${quotes.map((q, i) => renderCard(q, i)).join('')}</div>`;
       container.innerHTML = html;
       updateQuoteCount();
 
       // Attach copy handlers
       container.querySelectorAll('.copy-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
           const text = btn.dataset.quote;
           navigator.clipboard.writeText(text).then(() => {
             btn.textContent = 'Copied!';
@@ -1133,9 +1219,22 @@
           });
         });
       });
+
+      // Attach card click handlers (open modal)
+      container.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+          const idx = parseInt(card.dataset.idx);
+          const q = quotes[idx];
+          if (q) openModal(q);
+        });
+        // Prevent source links from triggering modal
+        card.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', (e) => e.stopPropagation());
+        });
+      });
     }
 
-    function renderCard(q) {
+    function renderCard(q, idx) {
       const typeLabel = q.type === 'saint' ? 'Quote' : q.type === 'text' ? 'Text' : 'Council';
       const typeClass = q.type;
       const showTypeBadge = aiSearchActive;
@@ -1149,12 +1248,12 @@
         locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a></span>`;
       }
 
-      const tagsHtml = (q.tags || []).slice(0, 3).map(t => `<span class="card-tag">${escHtml(t)}</span>`).join('');
+      const tagsHtml = (q.tags || []).map(t => `<span class="card-tag">${escHtml(t)}</span>`).join('');
 
       const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a>` : '';
 
       return `
-        <div class="card">
+        <div class="card" data-idx="${idx}">
           <div class="card-header">
             ${q.topic ? `<span class="topic-pill">${escHtml(q.topic)}</span>` : ''}
             ${showTypeBadge ? `<span class="type-badge ${typeClass}">${typeLabel}</span>` : ''}
@@ -1288,6 +1387,53 @@
         console.error(err);
       }
     }
+
+    // ========== Quote Modal ==========
+    const modal = document.getElementById('quoteModal');
+    const modalClose = document.getElementById('modalClose');
+
+    function openModal(q) {
+      document.getElementById('modalTopic').textContent = q.topic || '';
+      document.getElementById('modalQuote').textContent = q.quote || '';
+      document.getElementById('modalSource').textContent = q.source || '';
+      document.getElementById('modalReference').textContent = q.reference || '';
+      document.getElementById('modalUrl').innerHTML = q.url
+        ? `<a href="${escHtml(q.url)}" target="_blank" rel="noopener">View Source ↗</a>`
+        : '';
+      document.getElementById('modalTags').innerHTML = (q.tags || [])
+        .map(t => `<span class="modal-tag">${escHtml(t)}</span>`).join('');
+      // Actions: Source + Copy
+      let actionsHtml = '';
+      if (q.url) {
+        actionsHtml += `<a class="source-link-btn" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source ↗</a>`;
+      }
+      actionsHtml += `<button class="copy-btn" id="modalCopyBtn">Copy Quote</button>`;
+      document.getElementById('modalActions').innerHTML = actionsHtml;
+
+      // Attach modal copy handler
+      document.getElementById('modalCopyBtn').addEventListener('click', () => {
+        navigator.clipboard.writeText(q.quote).then(() => {
+          const btn = document.getElementById('modalCopyBtn');
+          btn.textContent = 'Copied!';
+          btn.classList.add('copied');
+          setTimeout(() => { btn.textContent = 'Copy Quote'; btn.classList.remove('copied'); }, 2000);
+        });
+      });
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
 
     // ========== Initialize ==========
     loadData();
