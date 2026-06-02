@@ -84,4 +84,9 @@ The AI search uses [Transformers.js](https://huggingface.co/docs/transformers.js
 
 ## Source
 
-All quotes are attributed to their respective Saints and sources and pulled generally from [New Advent](https://www.newadvent.org/fathers/) and [CCEL](https://ccel.org/fathers). Other quotes have been pulled directly from public PDFs of Saint's works which are all linked as sources in the quotes themselves.
+All quotes are attributed to their respective Saints. Sources and pulled generally from [CCEL](https://ccel.org/fathers). Other quotes have been pulled directly from public PDFs of Saint's works which are all linked as sources in the quotes themselves.
+
+## FAQs
+
+**Q:** Why are Psalms referred to as `[Psalm 109(110):1]`?
+**A:** The convention follows the following format: `[Psalm {Chapter in the Septuagint(LXX)}{(Chapter in the Masoretic Text)}:{verse(s)}]`. Note, if you use the Septuagint or the Latin Vulgate, this will be the first number. If you are using the Masoretic text (all Protestant versions of the Bible such as KJV, NKJV, ESV, NASB, etc. will use Masoretic).
