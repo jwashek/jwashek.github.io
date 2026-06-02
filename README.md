@@ -89,4 +89,5 @@ All quotes are attributed to their respective Saints. Sources and pulled general
 ## FAQs
 
 **Q:** Why are Psalms referred to as `[Psalm 109(110):1]`?
+
 **A:** The convention follows the following format: `[Psalm {Chapter in the Septuagint(LXX)}{(Chapter in the Masoretic Text)}:{verse(s)}]`. Note, if you use the Septuagint or the Latin Vulgate, this will be the first number. If you are using the Masoretic text (all Protestant versions of the Bible such as KJV, NKJV, ESV, NASB, etc. will use Masoretic).
