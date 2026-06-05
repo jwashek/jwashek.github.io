@@ -23,8 +23,21 @@ async function main() {
 
   // Load the embedding model
   console.log('🔄 Loading embedding model (all-MiniLM-L6-v2)...');
-  const extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-  console.log('   Model loaded successfully\n');
+  let extractor;
+  const maxRetries = 5;
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+      console.log('   Model loaded successfully\n');
+      break;
+    } catch (err) {
+      if (attempt === maxRetries) throw err;
+      const delay = attempt * 15;
+      console.log(`   Warning: Model load failed (attempt ${attempt}/${maxRetries}): ${err.message}`);
+      console.log(`   Retrying in ${delay}s...`);
+      await new Promise(r => setTimeout(r, delay * 1000));
+    }
+  }
 
   // Generate embeddings
   console.log('⚡ Generating embeddings...');
