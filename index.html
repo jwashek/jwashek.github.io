@@ -784,7 +784,29 @@
     }
 
     /* ========== Section Panels ========== */
-    .section-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
+    
+    .sidebar-foot {
+      flex-shrink: 0;
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+    }
+    .clear-btn {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      color: var(--text-muted);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: var(--transition);
+    }
+    .clear-btn:hover {
+      color: var(--text-secondary);
+      background: var(--accent-dim);
+    }
+
+.section-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
     .section-panel.active { display: flex; }
   </style>
 </head>
@@ -850,6 +872,8 @@
           <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="council"></div>
           <div class="filter-list" data-list="council"></div>
         </div>
+      
+        <div class="sidebar-foot"><button class="clear-btn" id="clearFilters">✕ Clear all filters</button></div>
       </aside>
 
       <button class="sidebar-show-btn" id="sidebarShow" title="Show sidebar">&#9654;</button>
@@ -900,7 +924,7 @@
 
     let activeSection = 'saint';
     // CHANGE 1: Multi-filter state (one value per filter category)
-    let activeFilters = { saint: { tab: 'topics', topics: null, saints: null, tags: null }, text: { tab: 'documents', documents: null, topics: null, tags: null }, council: { tab: 'councils', councils: null, type: null, tags: null } };
+    let activeFilters = { saint: { tab: 'topics', topics: null, saints: null, tags: [] }, text: { tab: 'documents', documents: null, topics: null, tags: [] }, council: { tab: 'councils', councils: null, type: null, tags: [] } };
     let aiSearchActive = false;
     let aiResults = [];
 
@@ -956,6 +980,14 @@
         document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         activeSection = tab.dataset.section;
+
+        // Auto-clear all filters for the new section
+        const f = activeFilters[activeSection];
+        Object.keys(f).forEach(k => { if (k === 'tab') return; if (k === 'tags') f[k] = []; else f[k] = null; });
+        sidebarSearchTerm = '';
+        const searchInput = document.querySelector(\`[data-search="\${activeSection}"]\`);
+        if (searchInput) searchInput.value = '';
+
 
         // Switch sidebar panel
         document.querySelectorAll('.section-panel').forEach(p => p.classList.remove('active'));
@@ -1102,7 +1134,7 @@
         if (tabName !== 'documents' && filter.documents && q.source !== filter.documents) return false;
         if (tabName !== 'councils' && filter.councils && q.source !== filter.councils) return false;
         if (tabName !== 'type' && filter.type && q.councilType !== filter.type) return false;
-        if (tabName !== 'tags' && filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        if (tabName !== 'tags' && filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
         // Also apply keyword search to narrow visible filter options
         if (sidebarSearchTerm) {
           const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
@@ -1131,13 +1163,13 @@
           return a[0].localeCompare(b[0]);
         });
 
-      const activeValue = filter[tabName];
-      let html = `<div class="filter-item ${activeValue === null ? 'active' : ''}" data-value="__all__">
+      const activeValue = tabName === 'tags' ? filter.tags : filter[tabName];
+      let html = `<div class="filter-item ${(tabName === 'tags' ? activeValue.length === 0 : activeValue === null) ? 'active' : ''}" data-value="__all__">
         <span>All</span><span class="filter-item-count">${Object.keys(data).length}</span>
       </div>`;
 
       entries.forEach(([name, count]) => {
-        const isActive = activeValue === name;
+        const isActive = tabName === 'tags' ? activeValue.includes(name) : activeValue === name;
         html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
           <span>${name}</span><span class="filter-item-count">${count}</span>
         </div>`;
@@ -1149,7 +1181,20 @@
       listEl.querySelectorAll('.filter-item').forEach(item => {
         item.addEventListener('click', () => {
           const val = item.dataset.value;
-          activeFilters[section][tabName] = val === '__all__' ? null : val;
+          (() => {
+            if (tabName === 'tags') {
+              if (val === '__all__') {
+                activeFilters[section].tags = [];
+              } else {
+                const arr = activeFilters[section].tags;
+                const idx = arr.indexOf(val);
+                if (idx > -1) arr.splice(idx, 1);
+                else arr.push(val);
+              }
+            } else {
+              activeFilters[section][tabName] = val === '__all__' ? null : (activeFilters[section][tabName] === val ? null : val);
+            }
+          })();
 
           // Clear AI search when using filters
           if (aiSearchActive) {
@@ -1184,7 +1229,7 @@
         if (filter.documents && q.source !== filter.documents) return false;
         if (filter.councils && q.source !== filter.councils) return false;
         if (filter.type && q.councilType !== filter.type) return false;
-        if (filter.tags && !(q.tags || []).includes(filter.tags)) return false;
+        if (filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
         // Keyword search across quote content
         if (sidebarSearchTerm) {
           const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
@@ -1274,14 +1319,14 @@
         locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a></span>`;
       }
 
-      const tagsHtml = (q.tags || []).map(t => `<span class="card-tag">${escHtml(t)}</span>`).join('');
+      const tagsHtml = (q.tags || []).map(t => `<span class="card-tag" onclick="event.stopPropagation(); addTagFilter('${escAttr(t)}')">${escHtml(t)}</span>`).join('');
 
       const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a>` : '';
 
       return `
         <div class="card" data-idx="${idx}">
           <div class="card-header">
-            ${q.topic ? `<span class="topic-pill">${escHtml(q.topic)}</span>` : ''}
+            ${q.topic ? `<span class="topic-pill" onclick="event.stopPropagation(); setTopicFilter('${escAttr(q.topic)}')">${escHtml(q.topic)}</span>` : ''}
             ${showTypeBadge ? `<span class="type-badge ${typeClass}">${typeLabel}</span>` : ''}
             <div class="card-header-right">
               ${sourceLink}
@@ -1461,7 +1506,53 @@
       if (e.key === 'Escape') closeModal();
     });
 
-    // ========== Initialize ==========
+    
+    // ========== Card Interaction Helpers ==========
+    function addTagFilter(tag) {
+      const arr = activeFilters[activeSection].tags;
+      if (!arr.includes(tag)) arr.push(tag);
+      activeFilters[activeSection].tab = 'tags';
+      // Update sidebar tab UI
+      const panel = document.querySelector(`[data-panel="${activeSection}"]`);
+      panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === 'tags'));
+      renderFilterList(activeSection);
+      renderCards();
+      updateQuoteCount();
+    }
+
+    function setTopicFilter(topic) {
+      activeFilters[activeSection].topics = topic;
+      activeFilters[activeSection].tab = 'topics';
+      // Update sidebar tab UI
+      const panel = document.querySelector(`[data-panel="${activeSection}"]`);
+      panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === 'topics'));
+      renderFilterList(activeSection);
+      renderCards();
+      updateQuoteCount();
+    }
+
+    // ========== Clear Filters ==========
+    document.getElementById('clearFilters').addEventListener('click', () => {
+      const f = activeFilters[activeSection];
+      Object.keys(f).forEach(k => {
+        if (k === 'tab') return;
+        if (k === 'tags') f[k] = [];
+        else f[k] = null;
+      });
+      sidebarSearchTerm = '';
+      const searchInput = document.querySelector(`[data-search="${activeSection}"]`);
+      if (searchInput) searchInput.value = '';
+      // Clear AI search too
+      aiSearchActive = false;
+      aiResults = [];
+      document.getElementById('aiSearch').value = '';
+      document.getElementById('searchStatus').textContent = '';
+      renderFilterList(activeSection);
+      renderCards();
+      updateQuoteCount();
+    });
+
+// ========== Initialize ==========
     loadData();
   </script>
 </body>
