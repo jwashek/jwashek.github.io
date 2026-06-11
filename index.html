@@ -1444,14 +1444,25 @@
       
       let matchedSources = [];
       const allSources = [...new Set(allQuotes.map(q => q.source).filter(Boolean))];
-      allSources.forEach(src => {
+      
+      // Score each source by how well it matches the query
+      const sourceScores = allSources.map(src => {
         const srcLower = src.toLowerCase();
-        const srcWords = srcLower.split(/\s+/).filter(w => w.length > 3);
-        // Check if query mentions this source (2+ matching words, or one distinctive word 6+ chars)
         const matches = queryWords.filter(w => srcLower.includes(w));
-        if (matches.length >= 2) matchedSources.push(src);
-        else if (matches.length === 1 && matches[0].length >= 6 && srcWords.some(sw => sw.includes(matches[0]))) matchedSources.push(src);
-      });
+        // Weight by matched word length (longer words = more distinctive)
+        const score = matches.reduce((sum, w) => sum + w.length, 0);
+        return { src, matches: matches.length, score };
+      }).filter(s => s.matches >= 2 || (s.matches === 1 && s.score >= 6));
+      
+      if (sourceScores.length > 0) {
+        // Find the highest score
+        const maxScore = Math.max(...sourceScores.map(s => s.score));
+        // Only keep sources within 80% of the best match score
+        // This ensures "Saint John Chrysostom" (score: saint+john+chrysostom = 5+4+10 = 19) 
+        // beats "Saint John of Damascus" (score: saint+john = 5+4 = 9)
+        const threshold = maxScore * 0.7;
+        matchedSources = sourceScores.filter(s => s.score >= threshold).map(s => s.src);
+      }
 
       // === STEP 2: Pre-filter pool if a source was detected ===
       let searchPool = allQuotes;
