@@ -935,7 +935,7 @@
 
     let activeSection = 'saint';
     // CHANGE 1: Multi-filter state (one value per filter category)
-    let activeFilters = { saint: { tab: 'topics', topics: null, saints: null, tags: [] }, text: { tab: 'documents', documents: null, topics: null, tags: [] }, council: { tab: 'councils', councils: null, type: null, tags: [] } };
+    let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
     let aiSearchActive = false;
     let aiResults = [];
 
@@ -994,7 +994,7 @@
 
         // Auto-clear all filters for the new section
         const f = activeFilters[activeSection];
-        Object.keys(f).forEach(k => { if (k === 'tab') return; if (k === 'tags') f[k] = []; else f[k] = null; });
+        Object.keys(f).forEach(k => { if (k !== 'tab') f[k] = []; });
         sidebarSearchTerm = '';
         const searchInput = document.querySelector(`[data-search="${activeSection}"]`);
         if (searchInput) searchInput.value = '';
@@ -1140,12 +1140,12 @@
       // Apply all OTHER active filters (not the current tab) — cascading!
       const filter = activeFilters[section];
       items = items.filter(q => {
-        if (tabName !== 'topics' && filter.topics && q.topic !== filter.topics) return false;
-        if (tabName !== 'saints' && filter.saints && q.source !== filter.saints) return false;
-        if (tabName !== 'documents' && filter.documents && q.source !== filter.documents) return false;
-        if (tabName !== 'councils' && filter.councils && q.source !== filter.councils) return false;
-        if (tabName !== 'type' && filter.type && q.councilType !== filter.type) return false;
-        if (tabName !== 'tags' && filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
+        if (tabName !== 'topics' && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
+        if (tabName !== 'saints' && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+        if (tabName !== 'documents' && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
+        if (tabName !== 'councils' && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
+        if (tabName !== 'type' && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
+        if (tabName !== 'tags' && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
         // Also apply keyword search to narrow visible filter options
         if (sidebarSearchTerm) {
           const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
@@ -1174,13 +1174,13 @@
           return a[0].localeCompare(b[0]);
         });
 
-      const activeValue = tabName === 'tags' ? filter.tags : filter[tabName];
-      let html = `<div class="filter-item ${(tabName === 'tags' ? activeValue.length === 0 : activeValue === null) ? 'active' : ''}" data-value="__all__">
+      const activeValue = filter[tabName];
+      let html = `<div class="filter-item ${activeValue.length === 0 ? 'active' : ''}" data-value="__all__">
         <span>All</span><span class="filter-item-count">${Object.keys(data).length}</span>
       </div>`;
 
       entries.forEach(([name, count]) => {
-        const isActive = tabName === 'tags' ? activeValue.includes(name) : activeValue === name;
+        const isActive = activeValue.includes(name);
         html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
           <span>${name}</span><span class="filter-item-count">${count}</span>
         </div>`;
@@ -1193,17 +1193,13 @@
         item.addEventListener('click', () => {
           const val = item.dataset.value;
           (() => {
-            if (tabName === 'tags') {
-              if (val === '__all__') {
-                activeFilters[section].tags = [];
-              } else {
-                const arr = activeFilters[section].tags;
-                const idx = arr.indexOf(val);
-                if (idx > -1) arr.splice(idx, 1);
-                else arr.push(val);
-              }
+            const arr = activeFilters[section][tabName];
+            if (val === '__all__') {
+              activeFilters[section][tabName] = [];
             } else {
-              activeFilters[section][tabName] = val === '__all__' ? null : (activeFilters[section][tabName] === val ? null : val);
+              const idx = arr.indexOf(val);
+              if (idx > -1) arr.splice(idx, 1);
+              else arr.push(val);
             }
           })();
 
@@ -1235,12 +1231,12 @@
       const filter = activeFilters[activeSection];
 
       return items.filter(q => {
-        if (filter.topics && q.topic !== filter.topics) return false;
-        if (filter.saints && q.source !== filter.saints) return false;
-        if (filter.documents && q.source !== filter.documents) return false;
-        if (filter.councils && q.source !== filter.councils) return false;
-        if (filter.type && q.councilType !== filter.type) return false;
-        if (filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
+        if (filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
+        if (filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+        if (filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
+        if (filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
+        if (filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
+        if (filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
         // Keyword search across quote content
         if (sidebarSearchTerm) {
           const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
@@ -1549,7 +1545,8 @@
     }
 
     function setTopicFilter(topic) {
-      activeFilters[activeSection].topics = topic;
+      const arr = activeFilters[activeSection].topics;
+      if (!arr.includes(topic)) arr.push(topic);
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -1564,8 +1561,7 @@
       const f = activeFilters[activeSection];
       Object.keys(f).forEach(k => {
         if (k === 'tab') return;
-        if (k === 'tags') f[k] = [];
-        else f[k] = null;
+        f[k] = [];
       });
       sidebarSearchTerm = '';
       const searchInput = document.querySelector(`[data-search="${activeSection}"]`);
