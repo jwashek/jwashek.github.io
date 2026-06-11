@@ -985,7 +985,8 @@
     let activeSection = 'saint';
     // CHANGE 1: Multi-filter state (one value per filter category)
     let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
-    let aiSearchActive = false;
+        let pinnedQuoteId = null; // When set, this quote appears first in results
+let aiSearchActive = false;
     let aiResults = [];
 
     // ========== Theme ==========
@@ -1306,6 +1307,11 @@
         }
         return true;
       }).sort((a, b) => {
+        // Pinned quote always first
+        if (pinnedQuoteId) {
+          if (a.id === pinnedQuoteId) return -1;
+          if (b.id === pinnedQuoteId) return 1;
+        }
         // Sort by numeric reference when available (Canon 1, Canon 2, etc.)
         const numA = parseInt((a.reference && a.reference.match(/\d+/) || [])[0]);
         const numB = parseInt((b.reference && b.reference.match(/\d+/) || [])[0]);
@@ -1344,6 +1350,9 @@
       container.innerHTML = html;
       updateQuoteCount();
 
+      // Clear pinned quote after rendering
+      pinnedQuoteId = null;
+
       // Attach copy handlers
       container.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1377,6 +1386,10 @@
       container.querySelectorAll('[data-topic]').forEach(pill => {
         pill.addEventListener('click', (e) => {
           e.stopPropagation();
+          const card = pill.closest('.card');
+          const idx = card ? parseInt(card.dataset.idx) : -1;
+          const q = idx >= 0 ? quotes[idx] : null;
+          pinnedQuoteId = q ? q.id : null;
           setTopicFilter(pill.dataset.topic);
         });
       });
@@ -1385,6 +1398,10 @@
       container.querySelectorAll('[data-tag]').forEach(tag => {
         tag.addEventListener('click', (e) => {
           e.stopPropagation();
+          const card = tag.closest('.card');
+          const idx = card ? parseInt(card.dataset.idx) : -1;
+          const q = idx >= 0 ? quotes[idx] : null;
+          pinnedQuoteId = q ? q.id : null;
           addTagFilter(tag.dataset.tag);
         });
       });
