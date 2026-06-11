@@ -131,10 +131,10 @@
 
     /* ========== Header ========== */
     .header {
-      height: var(--header-height);
+      min-height: var(--header-height);
       display: flex;
       align-items: center;
-      padding: 0 24px;
+      padding: 12px 24px;
       background: var(--bg-glass);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
@@ -146,8 +146,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 18px;
-      font-weight: 600;
+    }
+
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-title { font-size: 18px; font-weight: 600; color: var(--accent); }
+
+      white-space: normal;
       color: var(--text-primary);
       white-space: nowrap;
     }
@@ -157,7 +161,29 @@
       color: var(--accent);
     }
 
-    .nav-tabs {
+    .site-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+
+    
+    .nav-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 24px;
+      background: var(--bg-glass);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      z-index: 99;
+    }
+
+.nav-tabs {
       display: flex;
       gap: 4px;
       background: var(--bg-input);
@@ -779,6 +805,7 @@
       .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; }
       .logo { font-size: 14px; }
       .logo .logo-icon { font-size: 18px; }
+      .site-desc { display: none; }
       .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
       .sidebar.hidden { width: 0; }
       .cards-grid { grid-template-columns: 1fr; }
@@ -827,20 +854,30 @@
     <header class="header">
       <div class="logo">
         <span class="logo-icon">&#9766;</span>
-        <span>Golden Mouth Database</span>
+        <div class="logo-text">
+          <span class="logo-title">Golden Mouth Database</span>
+          <span class="site-desc">A searchable database of quotes, beliefs, and topics from the Holy Saints, Sacred Texts, and Ecumenical Councils of the ancient Christian faith.</span>
+        </div>
       </div>
 
-      <nav class="nav-tabs">
-        <button class="nav-tab active" data-section="saint">Saints</button>
-        <button class="nav-tab" data-section="text">Texts</button>
-        <button class="nav-tab" data-section="council">Councils</button>
-      </nav>
+      
 
       <div class="header-right">
         <span class="quote-count" id="quoteCount">Loading...</span>
         <button class="theme-toggle" id="themeToggle" title="Toggle theme">&#127769;</button>
       </div>
+    
     </header>
+
+    <!-- Section Nav -->
+    <div class="nav-bar">
+      <nav class="nav-tabs">
+        <button class="nav-tab active" data-section="saint">Saints</button>
+        <button class="nav-tab" data-section="text">Texts</button>
+        <button class="nav-tab" data-section="council">Councils</button>
+      </nav>
+    </div>
+
 
     <!-- Main -->
     <div class="main-wrapper">
