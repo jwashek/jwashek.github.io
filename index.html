@@ -805,7 +805,7 @@
       .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; }
       .logo { font-size: 14px; }
       .logo .logo-icon { font-size: 18px; }
-      .site-desc { display: none; }
+      /* site-desc visible on mobile */
       .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
       .sidebar.hidden { width: 0; }
       .cards-grid { grid-template-columns: 1fr; }
@@ -1436,88 +1436,139 @@
         return;
       }
 
-      if (!embeddings || embeddings.length === 0) {
-        searchStatus.textContent = 'Embeddings not loaded. Please wait...';
-        return;
-      }
-
-      // Load model on first use
-      if (!extractor) {
-        if (modelLoading) return;
-        modelLoading = true;
-        searchStatus.textContent = 'Loading AI model (first time only)...';
-        try {
-          const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
-          extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-          searchStatus.textContent = '';
-        } catch (err) {
-          searchStatus.textContent = 'Failed to load AI model. Try again.';
-          modelLoading = false;
-          console.error(err);
-          return;
-        }
-        modelLoading = false;
-      }
-
       searchStatus.textContent = 'Searching...';
 
-      try {
-        const output = await extractor(query, { pooling: 'mean', normalize: true });
-        const queryVec = Array.from(output.data);
+      // === STEP 1: Detect source names in query (saint, document, council) ===
+      const queryLower = query.toLowerCase();
+      const queryWords = queryLower.split(/\s+/).filter(w => w.length > 3);
+      
+      let matchedSources = [];
+      const allSources = [...new Set(allQuotes.map(q => q.source).filter(Boolean))];
+      allSources.forEach(src => {
+        const srcLower = src.toLowerCase();
+        const srcWords = srcLower.split(/\s+/).filter(w => w.length > 3);
+        // Check if query mentions this source (2+ matching words, or one distinctive word 6+ chars)
+        const matches = queryWords.filter(w => srcLower.includes(w));
+        if (matches.length >= 2) matchedSources.push(src);
+        else if (matches.length === 1 && matches[0].length >= 6 && srcWords.some(sw => sw.includes(matches[0]))) matchedSources.push(src);
+      });
 
-        // Compute cosine similarity with all embeddings
-        const scores = embeddings.map((emb, idx) => {
-          let dot = 0;
-          for (let i = 0; i < queryVec.length; i++) {
-            dot += queryVec[i] * (emb[i] || 0);
-          }
-          return { idx, score: dot };
+      // === STEP 2: Pre-filter pool if a source was detected ===
+      let searchPool = allQuotes;
+      let preFiltered = false;
+      if (matchedSources.length > 0) {
+        searchPool = allQuotes.filter(q => matchedSources.includes(q.source));
+        preFiltered = true;
+      }
+
+      // === STEP 3: Keyword matches (exact substring in quote text) ===
+      // Extract the "topic" part of the query by removing source name words
+      let topicWords = queryWords.filter(w => {
+        return !matchedSources.some(src => src.toLowerCase().includes(w));
+      });
+      // Also remove common filler words
+      const fillers = ['what', 'does', 'said', 'about', 'have', 'that', 'from', 'there', 'their', 'which', 'would', 'could', 'something', 'anything', 'quote', 'quotes', 'saint'];
+      topicWords = topicWords.filter(w => !fillers.includes(w));
+
+      let keywordResults = [];
+      if (topicWords.length > 0) {
+        keywordResults = searchPool.filter(q => {
+          const text = (q.quote + ' ' + q.topic + ' ' + (q.tags || []).join(' ')).toLowerCase();
+          return topicWords.some(w => text.includes(w));
         });
+      }
 
-        // Apply saint name boosting
-        const queryLower = query.toLowerCase();
-        const queryWords = queryLower.split(/\s+/).filter(w => w.length > 3);
-        scores.forEach(s => {
-          const item = allQuotes[s.idx];
-          if (!item || !item.source) return;
-          const sourceLower = item.source.toLowerCase();
-          const nameMatches = queryWords.filter(w => sourceLower.includes(w));
-          if (nameMatches.length >= 2) {
-            s.score += 0.15;
-          } else if (nameMatches.length === 1 && nameMatches[0].length > 5) {
-            s.score += 0.08;
+      // === STEP 4: Semantic search (if embeddings + model available) ===
+      let semanticResults = [];
+      if (embeddings && embeddings.length > 0) {
+        // Load model on first use
+        if (!extractor) {
+          if (modelLoading) return;
+          modelLoading = true;
+          searchStatus.textContent = 'Loading AI model (first time only)...';
+          try {
+            const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+            extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+          } catch (err) {
+            searchStatus.textContent = 'AI model unavailable. Showing keyword results.';
+            modelLoading = false;
+            // Fall through to show keyword results only
           }
-        });
-
-        // Penalize results from OTHER sources when a specific source is mentioned
-        const mentionedSource = allQuotes.map(q => q.source || '').find(src =>
-          src && queryWords.filter(w => src.toLowerCase().includes(w)).length >= 2
-        );
-        if (mentionedSource) {
-          scores.forEach(s => {
-            const item = allQuotes[s.idx];
-            if (item && item.source !== mentionedSource) {
-              s.score -= 0.05;
-            }
-          });
+          modelLoading = false;
         }
 
-        // Filter and sort
-        const threshold = 0.35;
-        const results = scores
-          .filter(s => s.score >= threshold)
-          .sort((a, b) => b.score - a.score)
-          .slice(0, 50)
-          .map(s => allQuotes[s.idx]);
+        if (extractor) {
+          try {
+            const output = await extractor(query, { pooling: 'mean', normalize: true });
+            const queryVec = Array.from(output.data);
 
-        aiSearchActive = true;
-        aiResults = results;
-        searchStatus.textContent = `${results.length} results found across all sections`;
-        renderCards();
-      } catch (err) {
-        searchStatus.textContent = 'Search failed. Please try again.';
-        console.error(err);
+            const scores = allQuotes.map((q, idx) => {
+              let dot = 0;
+              const emb = embeddings[idx];
+              if (!emb) return { idx, score: 0 };
+              for (let i = 0; i < queryVec.length; i++) {
+                dot += queryVec[i] * (emb[i] || 0);
+              }
+              return { idx, score: dot };
+            });
+
+            // Apply source boost/penalty
+            scores.forEach(s => {
+              const item = allQuotes[s.idx];
+              if (!item) return;
+              if (matchedSources.length > 0) {
+                if (matchedSources.includes(item.source)) {
+                  s.score += 0.12; // Boost matching source
+                } else {
+                  s.score -= 0.08; // Penalize non-matching when source is specified
+                }
+              }
+            });
+
+            // Get top semantic results above threshold
+            semanticResults = scores
+              .filter(s => s.score >= 0.30)
+              .sort((a, b) => b.score - a.score)
+              .slice(0, 30)
+              .map(s => allQuotes[s.idx]);
+          } catch (err) {
+            console.error('Semantic search error:', err);
+          }
+        }
       }
+
+      // === STEP 5: Merge results (keyword priority, semantic fills gaps) ===
+      const seen = new Set();
+      const merged = [];
+
+      // Keyword results first (most reliable for exact matches)
+      keywordResults.forEach(q => {
+        const key = q.id || (q.quote.substring(0, 50));
+        if (!seen.has(key)) { seen.add(key); merged.push(q); }
+      });
+
+      // Then semantic results (fills in conceptual matches)
+      semanticResults.forEach(q => {
+        const key = q.id || (q.quote.substring(0, 50));
+        if (!seen.has(key)) { seen.add(key); merged.push(q); }
+      });
+
+      // If pre-filtered by source but no topic results, show all from that source
+      if (preFiltered && merged.length === 0) {
+        searchPool.forEach(q => {
+          const key = q.id || (q.quote.substring(0, 50));
+          if (!seen.has(key)) { seen.add(key); merged.push(q); }
+        });
+      }
+
+      // Limit to top 50
+      const results = merged.slice(0, 50);
+
+      aiSearchActive = true;
+      aiResults = results;
+      const sourceNote = matchedSources.length > 0 ? ` (filtered to: ${matchedSources.join(', ')})` : '';
+      searchStatus.textContent = `${results.length} results found${sourceNote}`;
+      renderCards();
     }
 
     // ========== Quote Modal ==========
