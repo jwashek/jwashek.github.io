@@ -817,6 +817,7 @@
       .logo { font-size: 14px; }
       .logo .logo-icon { font-size: 18px; }
       /* site-desc visible on mobile */
+      .site-desc { white-space: normal; overflow: visible; font-size: 10px; }
       .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
       .sidebar.hidden { width: 0; }
       .cards-grid { grid-template-columns: 1fr; }
@@ -984,7 +985,8 @@
     let activeSection = 'saint';
     // CHANGE 1: Multi-filter state (one value per filter category)
     let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
-    let aiSearchActive = false;
+        let pinnedQuoteId = null; // When set, this quote appears first in results
+let aiSearchActive = false;
     let aiResults = [];
 
     // ========== Theme ==========
@@ -1269,7 +1271,20 @@
     // ========== Rendering ==========
     // CHANGE 2: Multi-filter getFilteredQuotes
     function getFilteredQuotes() {
-      if (aiSearchActive) return aiResults;
+      if (aiSearchActive) {
+        // Apply active filters on top of AI results so users can narrow them down
+        let items = aiResults;
+        const filter = activeFilters[activeSection];
+        return items.filter(q => {
+          if (filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
+          if (filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+          if (filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
+          if (filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
+          if (filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
+          if (filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
+          return true;
+        });
+      }
 
       let items;
       if (activeSection === 'saint') items = allSaints;
@@ -1292,6 +1307,11 @@
         }
         return true;
       }).sort((a, b) => {
+        // Pinned quote always first
+        if (pinnedQuoteId) {
+          if (a.id === pinnedQuoteId) return -1;
+          if (b.id === pinnedQuoteId) return 1;
+        }
         // Sort by numeric reference when available (Canon 1, Canon 2, etc.)
         const numA = parseInt((a.reference && a.reference.match(/\d+/) || [])[0]);
         const numB = parseInt((b.reference && b.reference.match(/\d+/) || [])[0]);
@@ -1330,6 +1350,9 @@
       container.innerHTML = html;
       updateQuoteCount();
 
+      // Clear pinned quote after rendering
+      pinnedQuoteId = null;
+
       // Attach copy handlers
       container.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1363,6 +1386,10 @@
       container.querySelectorAll('[data-topic]').forEach(pill => {
         pill.addEventListener('click', (e) => {
           e.stopPropagation();
+          const card = pill.closest('.card');
+          const idx = card ? parseInt(card.dataset.idx) : -1;
+          const q = idx >= 0 ? quotes[idx] : null;
+          pinnedQuoteId = q ? q.id : null;
           setTopicFilter(pill.dataset.topic);
         });
       });
@@ -1371,6 +1398,10 @@
       container.querySelectorAll('[data-tag]').forEach(tag => {
         tag.addEventListener('click', (e) => {
           e.stopPropagation();
+          const card = tag.closest('.card');
+          const idx = card ? parseInt(card.dataset.idx) : -1;
+          const q = idx >= 0 ? quotes[idx] : null;
+          pinnedQuoteId = q ? q.id : null;
           addTagFilter(tag.dataset.tag);
         });
       });
@@ -1678,6 +1709,13 @@
       const idx = arr.indexOf(tag);
       if (idx > -1) arr.splice(idx, 1);
       else arr.push(tag);
+      // Exit AI search mode when applying a filter from a card
+      if (aiSearchActive) {
+        aiSearchActive = false;
+        aiResults = [];
+        document.getElementById('aiSearch').value = '';
+        document.getElementById('searchStatus').textContent = '';
+      }
       activeFilters[activeSection].tab = 'tags';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -1692,6 +1730,13 @@
       const idx = arr.indexOf(topic);
       if (idx > -1) arr.splice(idx, 1);
       else arr.push(topic);
+      // Exit AI search mode when applying a filter from a card
+      if (aiSearchActive) {
+        aiSearchActive = false;
+        aiResults = [];
+        document.getElementById('aiSearch').value = '';
+        document.getElementById('searchStatus').textContent = '';
+      }
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
