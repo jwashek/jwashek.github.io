@@ -695,6 +695,11 @@
       color: var(--accent);
       background: var(--accent-dim);
     }
+    .card-tag.active {
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid var(--accent-glow);
+    }
 
     /* ========== Empty State ========== */
     .empty-state {
@@ -794,7 +799,9 @@
     .modal-url a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.8; }
     .modal-url a:hover { opacity: 1; text-decoration: underline; }
     .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-    .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); }
+    .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+    .modal-tag:hover { color: var(--accent); background: var(--accent-dim); }
+    .modal-tag.active { color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-glow); }
     .modal-actions { display: flex; gap: 8px; margin-bottom: 16px; }
     .modal-actions .copy-btn, .modal-actions .source-link-btn { font-size: 12px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-input); color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: var(--transition); }
     .modal-actions .copy-btn:hover, .modal-actions .source-link-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -1380,7 +1387,10 @@
         locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a></span>`;
       }
 
-      const tagsHtml = (q.tags || []).map(t => `<span class="card-tag" data-tag="${escAttr(t)}">${escHtml(t)}</span>`).join('');
+      const tagsHtml = (q.tags || []).map(t => {
+          const isActive = activeFilters[activeSection].tags && activeFilters[activeSection].tags.includes(t);
+          return `<span class="card-tag${isActive ? ' active' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`;
+        }).join('');
 
       const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a>` : '';
 
@@ -1478,15 +1488,20 @@
         return !matchedSources.some(src => src.toLowerCase().includes(w));
       });
       // Also remove common filler words
-      const fillers = ['what', 'does', 'said', 'about', 'have', 'that', 'from', 'there', 'their', 'which', 'would', 'could', 'something', 'anything', 'quote', 'quotes', 'saint'];
+      const fillers = ['what', 'does', 'said', 'about', 'have', 'that', 'from', 'there', 'their', 'which', 'would', 'could', 'something', 'anything', 'quote', 'quotes', 'saint', 'what\'s', 'it\'s', 'they', 'this', 'with', 'like'];
       topicWords = topicWords.filter(w => !fillers.includes(w));
 
       let keywordResults = [];
       if (topicWords.length > 0) {
-        keywordResults = searchPool.filter(q => {
+        // Score each quote by how many topic words it contains
+        keywordResults = searchPool.map(q => {
           const text = (q.quote + ' ' + q.topic + ' ' + (q.tags || []).join(' ')).toLowerCase();
-          return topicWords.some(w => text.includes(w));
-        });
+          const matchCount = topicWords.filter(w => text.includes(w)).length;
+          return { item: q, matchCount };
+        })
+        .filter(r => r.matchCount > 0)
+        .sort((a, b) => b.matchCount - a.matchCount)
+        .map(r => r.item);
       }
 
       // === STEP 4: Semantic search (if embeddings + model available) ===
@@ -1594,8 +1609,31 @@
       document.getElementById('modalUrl').innerHTML = q.url
         ? `<a href="${escHtml(q.url)}" target="_blank" rel="noopener">View Source ↗</a>`
         : '';
+      const tagsArr = activeFilters[activeSection].tags || [];
       document.getElementById('modalTags').innerHTML = (q.tags || [])
-        .map(t => `<span class="modal-tag">${escHtml(t)}</span>`).join('');
+        .map(t => {
+          const isActive = tagsArr.includes(t);
+          return `<span class="modal-tag${isActive ? ' active' : ''}" data-modal-tag="${escAttr(t)}">${escHtml(t)}</span>`;
+        }).join('');
+      // Attach modal tag click handlers
+      document.querySelectorAll('[data-modal-tag]').forEach(tag => {
+        tag.addEventListener('click', () => {
+          const tagVal = tag.dataset.modalTag;
+          const arr = activeFilters[activeSection].tags;
+          if (!arr) { activeFilters[activeSection].tags = [tagVal]; }
+          else {
+            const idx = arr.indexOf(tagVal);
+            if (idx > -1) arr.splice(idx, 1);
+            else arr.push(tagVal);
+          }
+          // Update tag highlight in modal
+          tag.classList.toggle('active');
+          // Update sidebar and cards in background
+          renderFilterList(activeSection);
+          renderCards();
+          updateQuoteCount();
+        });
+      });
       // Actions: Source + Copy
       let actionsHtml = '';
       if (q.url) {
