@@ -525,6 +525,11 @@
       border-radius: 4px;
       background: var(--accent-dim);
       color: var(--accent);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .topic-pill:hover {
+      background: var(--accent-glow);
     }
 
     .type-badge {
@@ -657,6 +662,12 @@
       border-radius: 3px;
       background: var(--bg-input);
       color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .card-tag:hover {
+      color: var(--accent);
+      background: var(--accent-dim);
     }
 
     /* ========== Empty State ========== */
@@ -985,7 +996,7 @@
         const f = activeFilters[activeSection];
         Object.keys(f).forEach(k => { if (k === 'tab') return; if (k === 'tags') f[k] = []; else f[k] = null; });
         sidebarSearchTerm = '';
-        const searchInput = document.querySelector(\`[data-search="\${activeSection}"]\`);
+        const searchInput = document.querySelector(`[data-search="${activeSection}"]`);
         if (searchInput) searchInput.value = '';
 
 
@@ -1303,6 +1314,23 @@
           link.addEventListener('click', (e) => e.stopPropagation());
         });
       });
+
+      // Handle topic pill clicks
+      container.querySelectorAll('[data-topic]').forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setTopicFilter(pill.dataset.topic);
+        });
+      });
+
+      // Handle tag clicks
+      container.querySelectorAll('[data-tag]').forEach(tag => {
+        tag.addEventListener('click', (e) => {
+          e.stopPropagation();
+          addTagFilter(tag.dataset.tag);
+        });
+      });
+
     }
 
     function renderCard(q, idx) {
@@ -1319,14 +1347,14 @@
         locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a></span>`;
       }
 
-      const tagsHtml = (q.tags || []).map(t => `<span class="card-tag" onclick="event.stopPropagation(); addTagFilter('${escAttr(t)}')">${escHtml(t)}</span>`).join('');
+      const tagsHtml = (q.tags || []).map(t => `<span class="card-tag" data-tag="${escAttr(t)}">${escHtml(t)}</span>`).join('');
 
       const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a>` : '';
 
       return `
         <div class="card" data-idx="${idx}">
           <div class="card-header">
-            ${q.topic ? `<span class="topic-pill" onclick="event.stopPropagation(); setTopicFilter('${escAttr(q.topic)}')">${escHtml(q.topic)}</span>` : ''}
+            ${q.topic ? `<span class="topic-pill" data-topic="${escAttr(q.topic)}">${escHtml(q.topic)}</span>` : ''}
             ${showTypeBadge ? `<span class="type-badge ${typeClass}">${typeLabel}</span>` : ''}
             <div class="card-header-right">
               ${sourceLink}
