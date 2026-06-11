@@ -1140,12 +1140,12 @@
       // Apply all OTHER active filters (not the current tab) — cascading!
       const filter = activeFilters[section];
       items = items.filter(q => {
-        if (tabName !== 'topics' && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
-        if (tabName !== 'saints' && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
-        if (tabName !== 'documents' && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
-        if (tabName !== 'councils' && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
-        if (tabName !== 'type' && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
-        if (tabName !== 'tags' && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
+        if (tabName !== 'topics' && filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
+        if (tabName !== 'saints' && filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+        if (tabName !== 'documents' && filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
+        if (tabName !== 'councils' && filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
+        if (tabName !== 'type' && filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
+        if (tabName !== 'tags' && filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
         // Also apply keyword search to narrow visible filter options
         if (sidebarSearchTerm) {
           const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
@@ -1231,12 +1231,12 @@
       const filter = activeFilters[activeSection];
 
       return items.filter(q => {
-        if (filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
-        if (filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
-        if (filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
-        if (filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
-        if (filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
-        if (filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
+        if (filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
+        if (filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+        if (filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
+        if (filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
+        if (filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
+        if (filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
         // Keyword search across quote content
         if (sidebarSearchTerm) {
           const haystack = (q.quote + ' ' + q.source + ' ' + q.reference + ' ' + (q.tags || []).join(' ')).toLowerCase();
