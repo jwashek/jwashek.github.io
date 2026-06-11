@@ -557,6 +557,10 @@
     .topic-pill:hover {
       background: var(--accent-glow);
     }
+    .topic-pill.active {
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+    }
 
     .type-badge {
       font-size: 10px;
@@ -1397,7 +1401,7 @@
       return `
         <div class="card" data-idx="${idx}">
           <div class="card-header">
-            ${q.topic ? `<span class="topic-pill" data-topic="${escAttr(q.topic)}">${escHtml(q.topic)}</span>` : ''}
+            ${q.topic ? `<span class="topic-pill${(activeFilters[activeSection].topics && activeFilters[activeSection].topics.includes(q.topic)) ? ' active' : ''}" data-topic="${escAttr(q.topic)}">${escHtml(q.topic)}</span>` : ''}
             ${showTypeBadge ? `<span class="type-badge ${typeClass}">${typeLabel}</span>` : ''}
             <div class="card-header-right">
               ${sourceLink}
@@ -1671,7 +1675,9 @@
     // ========== Card Interaction Helpers ==========
     function addTagFilter(tag) {
       const arr = activeFilters[activeSection].tags;
-      if (!arr.includes(tag)) arr.push(tag);
+      const idx = arr.indexOf(tag);
+      if (idx > -1) arr.splice(idx, 1);
+      else arr.push(tag);
       activeFilters[activeSection].tab = 'tags';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -1683,7 +1689,9 @@
 
     function setTopicFilter(topic) {
       const arr = activeFilters[activeSection].topics;
-      if (!arr.includes(topic)) arr.push(topic);
+      const idx = arr.indexOf(topic);
+      if (idx > -1) arr.splice(idx, 1);
+      else arr.push(topic);
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
