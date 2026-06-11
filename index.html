@@ -1692,6 +1692,13 @@
       const idx = arr.indexOf(tag);
       if (idx > -1) arr.splice(idx, 1);
       else arr.push(tag);
+      // Exit AI search mode when applying a filter from a card
+      if (aiSearchActive) {
+        aiSearchActive = false;
+        aiResults = [];
+        document.getElementById('aiSearch').value = '';
+        document.getElementById('searchStatus').textContent = '';
+      }
       activeFilters[activeSection].tab = 'tags';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -1706,6 +1713,13 @@
       const idx = arr.indexOf(topic);
       if (idx > -1) arr.splice(idx, 1);
       else arr.push(topic);
+      // Exit AI search mode when applying a filter from a card
+      if (aiSearchActive) {
+        aiSearchActive = false;
+        aiResults = [];
+        document.getElementById('aiSearch').value = '';
+        document.getElementById('searchStatus').textContent = '';
+      }
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
