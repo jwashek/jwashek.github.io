@@ -920,7 +920,6 @@
             <button class="filter-tab active" data-filter="topics">Topics</button>
             <button class="filter-tab" data-filter="saints">Saints</button>
             <button class="filter-tab" data-filter="texts">Texts</button>
-            <button class="filter-tab" data-filter="subTexts">Sub-Texts</button>
             <button class="filter-tab" data-filter="tags">Tags</button>
           </div>
           <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="saint"></div>
@@ -1598,8 +1597,56 @@
       document.getElementById('modalUrl').innerHTML = q.url
         ? `<a href="${escHtml(q.url)}" target="_blank" rel="noopener">View Source ↗</a>`
         : '';
-      document.getElementById('modalTags').innerHTML = (q.tags || [])
-        .map(t => `<span class="modal-tag">${escHtml(t)}</span>`).join('');
+      // Render Text/Sub-Text in modal
+      let modalTextsHtml = '';
+      if (q.text) {
+        const isTextActive = activeFilters[activeSection].texts && activeFilters[activeSection].texts.includes(q.text);
+        modalTextsHtml += `<span class="modal-tag modal-text-tag${isTextActive ? ' active' : ''}" data-modal-text="${escAttr(q.text)}">${escHtml(q.text)}</span>`;
+      }
+      if (q.subText) {
+        const isSubActive = activeFilters[activeSection].subTexts && activeFilters[activeSection].subTexts.includes(q.subText);
+        modalTextsHtml += `<span class="modal-tag modal-text-tag${isSubActive ? ' active' : ''}" data-modal-subtext="${escAttr(q.subText)}">${escHtml(q.subText)}</span>`;
+      }
+
+      // Render Tags in modal (interactive)
+      const tagsArr = activeFilters[activeSection].tags || [];
+      const modalTagsHtml = (q.tags || []).map(t => {
+        const isActive = tagsArr.includes(t);
+        return `<span class="modal-tag${isActive ? ' active' : ''}" data-modal-tag="${escAttr(t)}">${escHtml(t)}</span>`;
+      }).join('');
+
+      document.getElementById('modalTags').innerHTML = modalTextsHtml + modalTagsHtml;
+
+      // Attach modal tag click handlers
+      document.querySelectorAll('[data-modal-tag]').forEach(tag => {
+        tag.addEventListener('click', () => {
+          const tagVal = tag.dataset.modalTag;
+          const arr = activeFilters[activeSection].tags;
+          const idx = arr.indexOf(tagVal);
+          if (idx > -1) arr.splice(idx, 1);
+          else arr.push(tagVal);
+          tag.classList.toggle('active');
+          renderFilterList(activeSection);
+          renderCards();
+          updateQuoteCount();
+        });
+      });
+
+      // Attach modal text click handlers
+      document.querySelectorAll('[data-modal-text]').forEach(el => {
+        el.addEventListener('click', () => {
+          toggleArrayFilter('texts', el.dataset.modalText);
+          el.classList.toggle('active');
+        });
+      });
+
+      // Attach modal sub-text click handlers
+      document.querySelectorAll('[data-modal-subtext]').forEach(el => {
+        el.addEventListener('click', () => {
+          toggleArrayFilter('subTexts', el.dataset.modalSubtext);
+          el.classList.toggle('active');
+        });
+      });
       // Actions: Source + Copy
       let actionsHtml = '';
       if (q.url) {
@@ -1649,7 +1696,7 @@
         document.getElementById('searchStatus').textContent = '';
       }
       activeFilters[activeSection].tab = filterKey;
-      const panel = document.querySelector(`[data-panel="\${activeSection}"]`);
+      const panel = document.querySelector(`[data-panel="${activeSection}"]`);
       panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === filterKey));
       renderFilterList(activeSection);
       renderCards();
