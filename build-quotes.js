@@ -96,6 +96,8 @@ function processSaints(pages) {
     const quote = extractText(props['Full Quote and Reference']).trim();
     const reference = extractText(props['Reference']).trim();
     const saint = extractText(props['Saint']).replace(/,\s*$/, '').trim();
+    const text = extractText(props['Text']).trim();
+    const subText = extractText(props['Sub-Text']).trim();
     const url = (props['URL'] && props['URL'].url) || '';
 
     return {
@@ -106,7 +108,9 @@ function processSaints(pages) {
       reference,
       source: saint,
       tags,
-      url
+      url,
+      text,
+      subText
     };
   }).filter(item => item.quote.trim() !== '');
 }
