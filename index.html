@@ -677,6 +677,31 @@
       text-decoration: underline;
     }
 
+    .attr-texts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .attr-text {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    .attr-text:hover {
+      background: var(--accent-glow);
+    }
+    .attr-text.active {
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+    }
+
+
     .card-tags {
       display: flex;
       flex-wrap: wrap;
@@ -1375,6 +1400,30 @@
         });
       });
 
+      // Handle text clicks
+      container.querySelectorAll('[data-text]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.card');
+          const cardIdx = card ? parseInt(card.dataset.idx) : -1;
+          const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
+          pinnedQuoteId = q ? q.id : null;
+          toggleArrayFilter('texts', el.dataset.text);
+        });
+      });
+
+      // Handle sub-text clicks
+      container.querySelectorAll('[data-subtext]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.card');
+          const cardIdx = card ? parseInt(card.dataset.idx) : -1;
+          const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
+          pinnedQuoteId = q ? q.id : null;
+          toggleArrayFilter('subTexts', el.dataset.subtext);
+        });
+      });
+
     }
 
     function renderCard(q, idx) {
@@ -1391,8 +1440,8 @@
         locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a></span>`;
       }
 
-      const textHtml = q.text ? `<span class="card-tag${(activeFilters[activeSection].texts && activeFilters[activeSection].texts.includes(q.text)) ? ' active' : ''}" data-text="${escAttr(q.text)}">${escHtml(q.text)}</span>` : '';
-      const subTextHtml = q.subText ? `<span class="card-tag${(activeFilters[activeSection].subTexts && activeFilters[activeSection].subTexts.includes(q.subText)) ? ' active' : ''}" data-subtext="${escAttr(q.subText)}">${escHtml(q.subText)}</span>` : '';
+      const textHtml = q.text ? `<span class="attr-text${(activeFilters[activeSection].texts && activeFilters[activeSection].texts.includes(q.text)) ? ' active' : ''}" data-text="${escAttr(q.text)}">${escHtml(q.text)}</span>` : '';
+      const subTextHtml = q.subText ? `<span class="attr-text attr-subtext${(activeFilters[activeSection].subTexts && activeFilters[activeSection].subTexts.includes(q.subText)) ? ' active' : ''}" data-subtext="${escAttr(q.subText)}">${escHtml(q.subText)}</span>` : '';
       const tagsHtml = (q.tags || []).map(t => {
         const isActive = activeFilters[activeSection].tags && activeFilters[activeSection].tags.includes(t);
         return `<span class="card-tag${isActive ? ' active' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`;
@@ -1416,8 +1465,9 @@
             <div class="attribution-text">
               <span class="attr-source">${escHtml(q.source || 'Unknown')}</span>
               ${locationHtml}
+              ${(textHtml || subTextHtml) ? `<div class="attr-texts">${textHtml}${subTextHtml}</div>` : ''}
             </div>
-            ${(textHtml || subTextHtml || tagsHtml) ? `<div class="card-tags">${textHtml}${subTextHtml}${tagsHtml}</div>` : ''}
+            ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
           </div>
         </div>`;
     }
