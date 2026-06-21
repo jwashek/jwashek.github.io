@@ -1232,7 +1232,7 @@
         if (tabName !== 'sections' && tabName !== 'texts' && tabName !== 'subTexts' && filter.sections && filter.sections.length > 0 && !filter.sections.includes(q.section)) return false;
         if (tabName !== 'documents' && filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
         if (tabName !== 'councils' && filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
-        if (tabName !== 'type' && filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
+        if (tabName !== 'type' && tabName !== 'councils' && filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
         if (tabName !== 'tags' && filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
         // Also apply keyword search to narrow visible filter options
         if (sidebarSearchTerm) {
