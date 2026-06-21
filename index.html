@@ -156,9 +156,9 @@
       white-space: nowrap;
     }
 
-    .logo-icon {
-      font-size: 24px;
-      color: var(--accent);
+    .logo-img {
+      height: 40px;
+      width: auto;
     }
 
     .site-desc {
@@ -557,10 +557,6 @@
     .topic-pill:hover {
       background: var(--accent-glow);
     }
-    .topic-pill.active {
-      background: var(--accent-glow);
-      border: 1px solid var(--accent);
-    }
 
     .type-badge {
       font-size: 10px;
@@ -699,11 +695,6 @@
       color: var(--accent);
       background: var(--accent-dim);
     }
-    .card-tag.active {
-      color: var(--accent);
-      background: var(--accent-dim);
-      border: 1px solid var(--accent-glow);
-    }
 
     /* ========== Empty State ========== */
     .empty-state {
@@ -803,9 +794,7 @@
     .modal-url a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.8; }
     .modal-url a:hover { opacity: 1; text-decoration: underline; }
     .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-    .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); cursor: pointer; transition: var(--transition); }
-    .modal-tag:hover { color: var(--accent); background: var(--accent-dim); }
-    .modal-tag.active { color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-glow); }
+    .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); }
     .modal-actions { display: flex; gap: 8px; margin-bottom: 16px; }
     .modal-actions .copy-btn, .modal-actions .source-link-btn { font-size: 12px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-input); color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: var(--transition); }
     .modal-actions .copy-btn:hover, .modal-actions .source-link-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -815,9 +804,8 @@
     @media (max-width: 768px) {
       .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; }
       .logo { font-size: 14px; }
-      .logo .logo-icon { font-size: 18px; }
-      /* site-desc visible on mobile */
-      .site-desc { white-space: normal; overflow: visible; font-size: 10px; }
+      .logo-img { height: 28px; }
+      .site-desc { display: none; }
       .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
       .sidebar.hidden { width: 0; }
       .cards-grid { grid-template-columns: 1fr; }
@@ -859,13 +847,15 @@
 .section-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
     .section-panel.active { display: flex; }
   </style>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon-192.png">
 </head>
 <body>
   <div class="app">
     <!-- Header -->
     <header class="header">
       <div class="logo">
-        <span class="logo-icon">&#9766;</span>
+        <img src="logo.png" alt="Golden Mouth" class="logo-img">
         <div class="logo-text">
           <span class="logo-title">Golden Mouth Database</span>
           <span class="site-desc">A searchable database of quotes, beliefs, and topics from the Holy Saints, Sacred Texts, and Ecumenical Councils of the ancient Christian faith.</span>
@@ -905,6 +895,8 @@
           <div class="filter-tabs">
             <button class="filter-tab active" data-filter="topics">Topics</button>
             <button class="filter-tab" data-filter="saints">Saints</button>
+            <button class="filter-tab" data-filter="texts">Texts</button>
+            <button class="filter-tab" data-filter="subTexts">Sub-Texts</button>
             <button class="filter-tab" data-filter="tags">Tags</button>
           </div>
           <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="saint"></div>
@@ -984,9 +976,8 @@
 
     let activeSection = 'saint';
     // CHANGE 1: Multi-filter state (one value per filter category)
-    let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
-        let pinnedQuoteId = null; // When set, this quote appears first in results
-let aiSearchActive = false;
+    let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], texts: [], subTexts: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
+    let aiSearchActive = false;
     let aiResults = [];
 
     // ========== Theme ==========
@@ -1146,14 +1137,16 @@ let aiSearchActive = false;
     let filterData = { saint: {}, text: {}, council: {} };
 
     function buildFilterData() {
-      // Saints: topics, saints, tags
-      const saintTopics = {}, saintSources = {}, saintTags = {};
+      // Saints: topics, saints, texts, subTexts, tags
+      const saintTopics = {}, saintSources = {}, saintTexts = {}, saintSubTexts = {}, saintTags = {};
       allSaints.forEach(q => {
         if (q.topic) saintTopics[q.topic] = (saintTopics[q.topic] || 0) + 1;
         if (q.source) saintSources[q.source] = (saintSources[q.source] || 0) + 1;
+        if (q.text) saintTexts[q.text] = (saintTexts[q.text] || 0) + 1;
+        if (q.subText) saintSubTexts[q.subText] = (saintSubTexts[q.subText] || 0) + 1;
         (q.tags || []).forEach(t => { saintTags[t] = (saintTags[t] || 0) + 1; });
       });
-      filterData.saint = { topics: saintTopics, saints: saintSources, tags: saintTags };
+      filterData.saint = { topics: saintTopics, saints: saintSources, texts: saintTexts, subTexts: saintSubTexts, tags: saintTags };
 
       // Texts: documents, topics, tags
       const textDocs = {}, textTopics = {}, textTags = {};
@@ -1192,6 +1185,8 @@ let aiSearchActive = false;
       items = items.filter(q => {
         if (tabName !== 'topics' && filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
         if (tabName !== 'saints' && filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+        if (tabName !== 'texts' && filter.texts && filter.texts.length > 0 && !filter.texts.includes(q.text)) return false;
+        if (tabName !== 'subTexts' && filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
         if (tabName !== 'documents' && filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
         if (tabName !== 'councils' && filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
         if (tabName !== 'type' && filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
@@ -1209,6 +1204,8 @@ let aiSearchActive = false;
       items.forEach(q => {
         if (tabName === 'topics' && q.topic) data[q.topic] = (data[q.topic] || 0) + 1;
         else if (tabName === 'saints' && q.source) data[q.source] = (data[q.source] || 0) + 1;
+        else if (tabName === 'texts' && q.text) data[q.text] = (data[q.text] || 0) + 1;
+        else if (tabName === 'subTexts' && q.subText) data[q.subText] = (data[q.subText] || 0) + 1;
         else if (tabName === 'documents' && q.source) data[q.source] = (data[q.source] || 0) + 1;
         else if (tabName === 'councils' && q.source) data[q.source] = (data[q.source] || 0) + 1;
         else if (tabName === 'type' && q.councilType) data[q.councilType] = (data[q.councilType] || 0) + 1;
@@ -1271,20 +1268,7 @@ let aiSearchActive = false;
     // ========== Rendering ==========
     // CHANGE 2: Multi-filter getFilteredQuotes
     function getFilteredQuotes() {
-      if (aiSearchActive) {
-        // Apply active filters on top of AI results so users can narrow them down
-        let items = aiResults;
-        const filter = activeFilters[activeSection];
-        return items.filter(q => {
-          if (filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
-          if (filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
-          if (filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
-          if (filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
-          if (filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
-          if (filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
-          return true;
-        });
-      }
+      if (aiSearchActive) return aiResults;
 
       let items;
       if (activeSection === 'saint') items = allSaints;
@@ -1296,6 +1280,8 @@ let aiSearchActive = false;
       return items.filter(q => {
         if (filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
         if (filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+        if (filter.texts && filter.texts.length > 0 && !filter.texts.includes(q.text)) return false;
+        if (filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
         if (filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
         if (filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
         if (filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
@@ -1307,11 +1293,6 @@ let aiSearchActive = false;
         }
         return true;
       }).sort((a, b) => {
-        // Pinned quote always first
-        if (pinnedQuoteId) {
-          if (a.id === pinnedQuoteId) return -1;
-          if (b.id === pinnedQuoteId) return 1;
-        }
         // Sort by numeric reference when available (Canon 1, Canon 2, etc.)
         const numA = parseInt((a.reference && a.reference.match(/\d+/) || [])[0]);
         const numB = parseInt((b.reference && b.reference.match(/\d+/) || [])[0]);
@@ -1350,9 +1331,6 @@ let aiSearchActive = false;
       container.innerHTML = html;
       updateQuoteCount();
 
-      // Clear pinned quote after rendering
-      pinnedQuoteId = null;
-
       // Attach copy handlers
       container.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1386,10 +1364,6 @@ let aiSearchActive = false;
       container.querySelectorAll('[data-topic]').forEach(pill => {
         pill.addEventListener('click', (e) => {
           e.stopPropagation();
-          const card = pill.closest('.card');
-          const idx = card ? parseInt(card.dataset.idx) : -1;
-          const q = idx >= 0 ? quotes[idx] : null;
-          pinnedQuoteId = q ? q.id : null;
           setTopicFilter(pill.dataset.topic);
         });
       });
@@ -1398,10 +1372,6 @@ let aiSearchActive = false;
       container.querySelectorAll('[data-tag]').forEach(tag => {
         tag.addEventListener('click', (e) => {
           e.stopPropagation();
-          const card = tag.closest('.card');
-          const idx = card ? parseInt(card.dataset.idx) : -1;
-          const q = idx >= 0 ? quotes[idx] : null;
-          pinnedQuoteId = q ? q.id : null;
           addTagFilter(tag.dataset.tag);
         });
       });
@@ -1422,17 +1392,19 @@ let aiSearchActive = false;
         locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a></span>`;
       }
 
+      const textHtml = q.text ? `<span class="card-tag${(activeFilters[activeSection].texts && activeFilters[activeSection].texts.includes(q.text)) ? ' active' : ''}" data-text="${escAttr(q.text)}">${escHtml(q.text)}</span>` : '';
+      const subTextHtml = q.subText ? `<span class="card-tag${(activeFilters[activeSection].subTexts && activeFilters[activeSection].subTexts.includes(q.subText)) ? ' active' : ''}" data-subtext="${escAttr(q.subText)}">${escHtml(q.subText)}</span>` : '';
       const tagsHtml = (q.tags || []).map(t => {
-          const isActive = activeFilters[activeSection].tags && activeFilters[activeSection].tags.includes(t);
-          return `<span class="card-tag${isActive ? ' active' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`;
-        }).join('');
+        const isActive = activeFilters[activeSection].tags && activeFilters[activeSection].tags.includes(t);
+        return `<span class="card-tag${isActive ? ' active' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`;
+      }).join('');
 
       const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a>` : '';
 
       return `
         <div class="card" data-idx="${idx}">
           <div class="card-header">
-            ${q.topic ? `<span class="topic-pill${(activeFilters[activeSection].topics && activeFilters[activeSection].topics.includes(q.topic)) ? ' active' : ''}" data-topic="${escAttr(q.topic)}">${escHtml(q.topic)}</span>` : ''}
+            ${q.topic ? `<span class="topic-pill" data-topic="${escAttr(q.topic)}">${escHtml(q.topic)}</span>` : ''}
             ${showTypeBadge ? `<span class="type-badge ${typeClass}">${typeLabel}</span>` : ''}
             <div class="card-header-right">
               ${sourceLink}
@@ -1446,7 +1418,7 @@ let aiSearchActive = false;
               <span class="attr-source">${escHtml(q.source || 'Unknown')}</span>
               ${locationHtml}
             </div>
-            ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
+            ${(textHtml || subTextHtml || tagsHtml) ? `<div class="card-tags">${textHtml}${subTextHtml}${tagsHtml}</div>` : ''}
           </div>
         </div>`;
     }
@@ -1481,155 +1453,88 @@ let aiSearchActive = false;
         return;
       }
 
+      if (!embeddings || embeddings.length === 0) {
+        searchStatus.textContent = 'Embeddings not loaded. Please wait...';
+        return;
+      }
+
+      // Load model on first use
+      if (!extractor) {
+        if (modelLoading) return;
+        modelLoading = true;
+        searchStatus.textContent = 'Loading AI model (first time only)...';
+        try {
+          const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+          extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+          searchStatus.textContent = '';
+        } catch (err) {
+          searchStatus.textContent = 'Failed to load AI model. Try again.';
+          modelLoading = false;
+          console.error(err);
+          return;
+        }
+        modelLoading = false;
+      }
+
       searchStatus.textContent = 'Searching...';
 
-      // === STEP 1: Detect source names in query (saint, document, council) ===
-      const queryLower = query.toLowerCase();
-      const queryWords = queryLower.split(/\s+/).filter(w => w.length > 3);
-      
-      let matchedSources = [];
-      const allSources = [...new Set(allQuotes.map(q => q.source).filter(Boolean))];
-      
-      // Score each source by how well it matches the query
-      const sourceScores = allSources.map(src => {
-        const srcLower = src.toLowerCase();
-        const matches = queryWords.filter(w => srcLower.includes(w));
-        // Weight by matched word length (longer words = more distinctive)
-        const score = matches.reduce((sum, w) => sum + w.length, 0);
-        return { src, matches: matches.length, score };
-      }).filter(s => s.matches >= 2 || (s.matches === 1 && s.score >= 6));
-      
-      if (sourceScores.length > 0) {
-        // Find the highest score
-        const maxScore = Math.max(...sourceScores.map(s => s.score));
-        // Only keep sources within 80% of the best match score
-        // This ensures "Saint John Chrysostom" (score: saint+john+chrysostom = 5+4+10 = 19) 
-        // beats "Saint John of Damascus" (score: saint+john = 5+4 = 9)
-        const threshold = maxScore * 0.7;
-        matchedSources = sourceScores.filter(s => s.score >= threshold).map(s => s.src);
-      }
+      try {
+        const output = await extractor(query, { pooling: 'mean', normalize: true });
+        const queryVec = Array.from(output.data);
 
-      // === STEP 2: Pre-filter pool if a source was detected ===
-      let searchPool = allQuotes;
-      let preFiltered = false;
-      if (matchedSources.length > 0) {
-        searchPool = allQuotes.filter(q => matchedSources.includes(q.source));
-        preFiltered = true;
-      }
-
-      // === STEP 3: Keyword matches (exact substring in quote text) ===
-      // Extract the "topic" part of the query by removing source name words
-      let topicWords = queryWords.filter(w => {
-        return !matchedSources.some(src => src.toLowerCase().includes(w));
-      });
-      // Also remove common filler words
-      const fillers = ['what', 'does', 'said', 'about', 'have', 'that', 'from', 'there', 'their', 'which', 'would', 'could', 'something', 'anything', 'quote', 'quotes', 'saint', 'what\'s', 'it\'s', 'they', 'this', 'with', 'like'];
-      topicWords = topicWords.filter(w => !fillers.includes(w));
-
-      let keywordResults = [];
-      if (topicWords.length > 0) {
-        // Score each quote by how many topic words it contains
-        keywordResults = searchPool.map(q => {
-          const text = (q.quote + ' ' + q.topic + ' ' + (q.tags || []).join(' ')).toLowerCase();
-          const matchCount = topicWords.filter(w => text.includes(w)).length;
-          return { item: q, matchCount };
-        })
-        .filter(r => r.matchCount > 0)
-        .sort((a, b) => b.matchCount - a.matchCount)
-        .map(r => r.item);
-      }
-
-      // === STEP 4: Semantic search (if embeddings + model available) ===
-      let semanticResults = [];
-      if (embeddings && embeddings.length > 0) {
-        // Load model on first use
-        if (!extractor) {
-          if (modelLoading) return;
-          modelLoading = true;
-          searchStatus.textContent = 'Loading AI model (first time only)...';
-          try {
-            const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
-            extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-          } catch (err) {
-            searchStatus.textContent = 'AI model unavailable. Showing keyword results.';
-            modelLoading = false;
-            // Fall through to show keyword results only
+        // Compute cosine similarity with all embeddings
+        const scores = embeddings.map((emb, idx) => {
+          let dot = 0;
+          for (let i = 0; i < queryVec.length; i++) {
+            dot += queryVec[i] * (emb[i] || 0);
           }
-          modelLoading = false;
-        }
-
-        if (extractor) {
-          try {
-            const output = await extractor(query, { pooling: 'mean', normalize: true });
-            const queryVec = Array.from(output.data);
-
-            const scores = allQuotes.map((q, idx) => {
-              let dot = 0;
-              const emb = embeddings[idx];
-              if (!emb) return { idx, score: 0 };
-              for (let i = 0; i < queryVec.length; i++) {
-                dot += queryVec[i] * (emb[i] || 0);
-              }
-              return { idx, score: dot };
-            });
-
-            // Apply source boost/penalty
-            scores.forEach(s => {
-              const item = allQuotes[s.idx];
-              if (!item) return;
-              if (matchedSources.length > 0) {
-                if (matchedSources.includes(item.source)) {
-                  s.score += 0.12; // Boost matching source
-                } else {
-                  s.score -= 0.08; // Penalize non-matching when source is specified
-                }
-              }
-            });
-
-            // Get top semantic results above threshold
-            semanticResults = scores
-              .filter(s => s.score >= 0.30)
-              .sort((a, b) => b.score - a.score)
-              .slice(0, 30)
-              .map(s => allQuotes[s.idx]);
-          } catch (err) {
-            console.error('Semantic search error:', err);
-          }
-        }
-      }
-
-      // === STEP 5: Merge results (keyword priority, semantic fills gaps) ===
-      const seen = new Set();
-      const merged = [];
-
-      // Keyword results first (most reliable for exact matches)
-      keywordResults.forEach(q => {
-        const key = q.id || (q.quote.substring(0, 50));
-        if (!seen.has(key)) { seen.add(key); merged.push(q); }
-      });
-
-      // Then semantic results (fills in conceptual matches)
-      semanticResults.forEach(q => {
-        const key = q.id || (q.quote.substring(0, 50));
-        if (!seen.has(key)) { seen.add(key); merged.push(q); }
-      });
-
-      // If pre-filtered by source but no topic results, show all from that source
-      if (preFiltered && merged.length === 0) {
-        searchPool.forEach(q => {
-          const key = q.id || (q.quote.substring(0, 50));
-          if (!seen.has(key)) { seen.add(key); merged.push(q); }
+          return { idx, score: dot };
         });
+
+        // Apply saint name boosting
+        const queryLower = query.toLowerCase();
+        const queryWords = queryLower.split(/\s+/).filter(w => w.length > 3);
+        scores.forEach(s => {
+          const item = allQuotes[s.idx];
+          if (!item || !item.source) return;
+          const sourceLower = item.source.toLowerCase();
+          const nameMatches = queryWords.filter(w => sourceLower.includes(w));
+          if (nameMatches.length >= 2) {
+            s.score += 0.15;
+          } else if (nameMatches.length === 1 && nameMatches[0].length > 5) {
+            s.score += 0.08;
+          }
+        });
+
+        // Penalize results from OTHER sources when a specific source is mentioned
+        const mentionedSource = allQuotes.map(q => q.source || '').find(src =>
+          src && queryWords.filter(w => src.toLowerCase().includes(w)).length >= 2
+        );
+        if (mentionedSource) {
+          scores.forEach(s => {
+            const item = allQuotes[s.idx];
+            if (item && item.source !== mentionedSource) {
+              s.score -= 0.05;
+            }
+          });
+        }
+
+        // Filter and sort
+        const threshold = 0.35;
+        const results = scores
+          .filter(s => s.score >= threshold)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 50)
+          .map(s => allQuotes[s.idx]);
+
+        aiSearchActive = true;
+        aiResults = results;
+        searchStatus.textContent = `${results.length} results found across all sections`;
+        renderCards();
+      } catch (err) {
+        searchStatus.textContent = 'Search failed. Please try again.';
+        console.error(err);
       }
-
-      // Limit to top 50
-      const results = merged.slice(0, 50);
-
-      aiSearchActive = true;
-      aiResults = results;
-      const sourceNote = matchedSources.length > 0 ? ` (filtered to: ${matchedSources.join(', ')})` : '';
-      searchStatus.textContent = `${results.length} results found${sourceNote}`;
-      renderCards();
     }
 
     // ========== Quote Modal ==========
@@ -1644,31 +1549,8 @@ let aiSearchActive = false;
       document.getElementById('modalUrl').innerHTML = q.url
         ? `<a href="${escHtml(q.url)}" target="_blank" rel="noopener">View Source ↗</a>`
         : '';
-      const tagsArr = activeFilters[activeSection].tags || [];
       document.getElementById('modalTags').innerHTML = (q.tags || [])
-        .map(t => {
-          const isActive = tagsArr.includes(t);
-          return `<span class="modal-tag${isActive ? ' active' : ''}" data-modal-tag="${escAttr(t)}">${escHtml(t)}</span>`;
-        }).join('');
-      // Attach modal tag click handlers
-      document.querySelectorAll('[data-modal-tag]').forEach(tag => {
-        tag.addEventListener('click', () => {
-          const tagVal = tag.dataset.modalTag;
-          const arr = activeFilters[activeSection].tags;
-          if (!arr) { activeFilters[activeSection].tags = [tagVal]; }
-          else {
-            const idx = arr.indexOf(tagVal);
-            if (idx > -1) arr.splice(idx, 1);
-            else arr.push(tagVal);
-          }
-          // Update tag highlight in modal
-          tag.classList.toggle('active');
-          // Update sidebar and cards in background
-          renderFilterList(activeSection);
-          renderCards();
-          updateQuoteCount();
-        });
-      });
+        .map(t => `<span class="modal-tag">${escHtml(t)}</span>`).join('');
       // Actions: Source + Copy
       let actionsHtml = '';
       if (q.url) {
@@ -1704,18 +1586,30 @@ let aiSearchActive = false;
 
     
     // ========== Card Interaction Helpers ==========
-    function addTagFilter(tag) {
-      const arr = activeFilters[activeSection].tags;
-      const idx = arr.indexOf(tag);
+    function toggleArrayFilter(filterKey, value) {
+      const arr = activeFilters[activeSection][filterKey];
+      if (!arr) return;
+      const idx = arr.indexOf(value);
       if (idx > -1) arr.splice(idx, 1);
-      else arr.push(tag);
-      // Exit AI search mode when applying a filter from a card
+      else arr.push(value);
+      // Exit AI search mode
       if (aiSearchActive) {
         aiSearchActive = false;
         aiResults = [];
         document.getElementById('aiSearch').value = '';
         document.getElementById('searchStatus').textContent = '';
       }
+      activeFilters[activeSection].tab = filterKey;
+      const panel = document.querySelector(`[data-panel="\${activeSection}"]`);
+      panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === filterKey));
+      renderFilterList(activeSection);
+      renderCards();
+      updateQuoteCount();
+    }
+
+    function addTagFilter(tag) {
+      const arr = activeFilters[activeSection].tags;
+      if (!arr.includes(tag)) arr.push(tag);
       activeFilters[activeSection].tab = 'tags';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -1727,16 +1621,7 @@ let aiSearchActive = false;
 
     function setTopicFilter(topic) {
       const arr = activeFilters[activeSection].topics;
-      const idx = arr.indexOf(topic);
-      if (idx > -1) arr.splice(idx, 1);
-      else arr.push(topic);
-      // Exit AI search mode when applying a filter from a card
-      if (aiSearchActive) {
-        aiSearchActive = false;
-        aiResults = [];
-        document.getElementById('aiSearch').value = '';
-        document.getElementById('searchStatus').textContent = '';
-      }
+      if (!arr.includes(topic)) arr.push(topic);
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
