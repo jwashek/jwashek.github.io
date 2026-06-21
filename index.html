@@ -405,6 +405,10 @@
       background: var(--accent-dim);
       color: var(--accent);
     }
+    .filter-subitem {
+      padding-left: 28px;
+      font-size: 12px;
+    }
 
     .filter-item-count {
       font-size: 11px;
@@ -558,6 +562,10 @@
     }
     .topic-pill:hover {
       background: var(--accent-glow);
+    }
+    .topic-pill.active {
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
     }
 
     .type-badge {
@@ -1259,8 +1267,28 @@
       entries.forEach(([name, count]) => {
         const isActive = activeValue.includes(name);
         html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
-          <span>${name}</span><span class="filter-item-count">${count}</span>
+          <span>${isActive && tabName === 'texts' ? '▾ ' : ''}${name}</span><span class="filter-item-count">${count}</span>
         </div>`;
+        // Accordion: if this is the Texts tab and this text is selected, show Sub-Texts
+        if (tabName === 'texts' && isActive) {
+          const subTexts = {};
+          items.filter(q => q.text === name).forEach(q => {
+            if (q.subText) subTexts[q.subText] = (subTexts[q.subText] || 0) + 1;
+          });
+          const subEntries = Object.entries(subTexts).sort((a, b) => {
+            const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+            const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+            if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+            return a[0].localeCompare(b[0]);
+          });
+          const activeSubTexts = filter.subTexts || [];
+          subEntries.forEach(([subName, subCount]) => {
+            const isSubActive = activeSubTexts.includes(subName);
+            html += `<div class="filter-item filter-subitem ${isSubActive ? 'active' : ''}" data-subvalue="${subName.replace(/"/g, '&quot;')}">
+              <span>${subName}</span><span class="filter-item-count">${subCount}</span>
+            </div>`;
+          });
+        }
       });
 
       listEl.innerHTML = html;
@@ -1268,6 +1296,18 @@
       // Attach click handlers
       listEl.querySelectorAll('.filter-item').forEach(item => {
         item.addEventListener('click', () => {
+          // Handle sub-text items (accordion children)
+          if (item.dataset.subvalue !== undefined) {
+            const subVal = item.dataset.subvalue;
+            const arr = activeFilters[section].subTexts || [];
+            const subIdx = arr.indexOf(subVal);
+            if (subIdx > -1) arr.splice(subIdx, 1);
+            else arr.push(subVal);
+            renderFilterList(section);
+            renderCards();
+            updateQuoteCount();
+            return;
+          }
           const val = item.dataset.value;
           (() => {
             const arr = activeFilters[section][tabName];
@@ -1458,7 +1498,7 @@
       return `
         <div class="card" data-idx="${idx}">
           <div class="card-header">
-            ${q.topic ? `<span class="topic-pill" data-topic="${escAttr(q.topic)}">${escHtml(q.topic)}</span>` : ''}
+            ${q.topic ? `<span class="topic-pill${(activeFilters[activeSection].topics && activeFilters[activeSection].topics.includes(q.topic)) ? ' active' : ''}" data-topic="${escAttr(q.topic)}">${escHtml(q.topic)}</span>` : ''}
             ${showTypeBadge ? `<span class="type-badge ${typeClass}">${typeLabel}</span>` : ''}
             <div class="card-header-right">
               ${sourceLink}
@@ -1716,7 +1756,9 @@
 
     function addTagFilter(tag) {
       const arr = activeFilters[activeSection].tags;
-      if (!arr.includes(tag)) arr.push(tag);
+      const tagIdx = arr.indexOf(tag);
+      if (tagIdx > -1) arr.splice(tagIdx, 1);
+      else arr.push(tag);
       activeFilters[activeSection].tab = 'tags';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -1728,7 +1770,9 @@
 
     function setTopicFilter(topic) {
       const arr = activeFilters[activeSection].topics;
-      if (!arr.includes(topic)) arr.push(topic);
+      const topicIdx = arr.indexOf(topic);
+      if (topicIdx > -1) arr.splice(topicIdx, 1);
+      else arr.push(topic);
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
