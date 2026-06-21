@@ -1272,7 +1272,7 @@
       entries.forEach(([name, count]) => {
         const isActive = activeValue.includes(name);
         html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
-          <span>${isActive && tabName === 'texts' ? '▾ ' : ''}${name}</span><span class="filter-item-count">${count}</span>
+          <span>${isActive && (tabName === 'texts' || tabName === 'councils') ? '▾ ' : ''}${name}</span><span class="filter-item-count">${count}</span>
         </div>`;
         // Accordion: if this is the Texts tab and this text is selected, show Sub-Texts
         if (tabName === 'texts' && isActive) {
@@ -1314,6 +1314,21 @@
             }
           });
         }
+        // Accordion: if this is the Councils tab and this council is selected, show Types
+        if (tabName === 'councils' && isActive) {
+          const types = {};
+          items.filter(q => q.source === name && q.councilType).forEach(q => {
+            types[q.councilType] = (types[q.councilType] || 0) + 1;
+          });
+          const typeEntries = Object.entries(types).sort((a, b) => a[0].localeCompare(b[0]));
+          const activeTypes = filter.type || [];
+          typeEntries.forEach(([typeName, typeCount]) => {
+            const isTypeActive = activeTypes.includes(typeName);
+            html += `<div class="filter-item filter-subitem ${isTypeActive ? 'active' : ''}" data-typevalue="${typeName.replace(/"/g, '&quot;')}">
+              <span>${typeName}</span><span class="filter-item-count">${typeCount}</span>
+            </div>`;
+          });
+        }
       });
 
       listEl.innerHTML = html;
@@ -1321,6 +1336,18 @@
       // Attach click handlers
       listEl.querySelectorAll('.filter-item').forEach(item => {
         item.addEventListener('click', () => {
+          // Handle type items (council accordion children)
+          if (item.dataset.typevalue !== undefined) {
+            const typeVal = item.dataset.typevalue;
+            const arr = activeFilters[section].type || [];
+            const typeIdx = arr.indexOf(typeVal);
+            if (typeIdx > -1) arr.splice(typeIdx, 1);
+            else arr.push(typeVal);
+            renderFilterList(section);
+            renderCards();
+            updateQuoteCount();
+            return;
+          }
           // Handle section items (third level accordion)
           if (item.dataset.sectionvalue !== undefined) {
             const secVal = item.dataset.sectionvalue;
