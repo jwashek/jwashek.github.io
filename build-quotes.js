@@ -98,6 +98,7 @@ function processSaints(pages) {
     const saint = extractText(props['Saint']).replace(/,\s*$/, '').trim();
     const text = extractText(props['Text']).trim();
     const subText = extractText(props['Sub-Text']).trim();
+    const section = extractText(props['Section']).trim();
     const url = (props['URL'] && props['URL'].url) || '';
 
     return {
@@ -110,7 +111,8 @@ function processSaints(pages) {
       tags,
       url,
       text,
-      subText
+      subText,
+      section
     };
   }).filter(item => item.quote.trim() !== '');
 }
