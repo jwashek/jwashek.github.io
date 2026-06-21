@@ -409,6 +409,10 @@
       padding-left: 28px;
       font-size: 12px;
     }
+    .filter-subsubitem {
+      padding-left: 44px;
+      font-size: 11.5px;
+    }
 
     .filter-item-count {
       font-size: 11px;
@@ -1014,7 +1018,7 @@
 
     let activeSection = 'saint';
     // CHANGE 1: Multi-filter state (one value per filter category)
-    let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], texts: [], subTexts: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
+    let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], texts: [], subTexts: [], sections: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
     let aiSearchActive = false;
     let aiResults = [];
 
@@ -1224,7 +1228,8 @@
         if (tabName !== 'topics' && filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
         if (tabName !== 'saints' && filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
         if (tabName !== 'texts' && filter.texts && filter.texts.length > 0 && !filter.texts.includes(q.text)) return false;
-        if (tabName !== 'subTexts' && filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
+        if (tabName !== 'subTexts' && tabName !== 'texts' && filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
+        if (tabName !== 'sections' && tabName !== 'texts' && tabName !== 'subTexts' && filter.sections && filter.sections.length > 0 && !filter.sections.includes(q.section)) return false;
         if (tabName !== 'documents' && filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
         if (tabName !== 'councils' && filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
         if (tabName !== 'type' && filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
@@ -1285,8 +1290,28 @@
           subEntries.forEach(([subName, subCount]) => {
             const isSubActive = activeSubTexts.includes(subName);
             html += `<div class="filter-item filter-subitem ${isSubActive ? 'active' : ''}" data-subvalue="${subName.replace(/"/g, '&quot;')}">
-              <span>${subName}</span><span class="filter-item-count">${subCount}</span>
+              <span>${isSubActive ? '▾ ' : ''}${subName}</span><span class="filter-item-count">${subCount}</span>
             </div>`;
+            // Third level: Sections under selected Sub-Texts
+            if (isSubActive) {
+              const sections = {};
+              items.filter(q => q.text === name && q.subText === subName && q.section).forEach(q => {
+                sections[q.section] = (sections[q.section] || 0) + 1;
+              });
+              const sectionEntries = Object.entries(sections).sort((a, b) => {
+                const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+                const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+                if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                return a[0].localeCompare(b[0]);
+              });
+              const activeSections = filter.sections || [];
+              sectionEntries.forEach(([secName, secCount]) => {
+                const isSecActive = activeSections.includes(secName);
+                html += `<div class="filter-item filter-subsubitem ${isSecActive ? 'active' : ''}" data-sectionvalue="${secName.replace(/"/g, '&quot;')}">
+                  <span>${secName}</span><span class="filter-item-count">${secCount}</span>
+                </div>`;
+              });
+            }
           });
         }
       });
@@ -1296,6 +1321,18 @@
       // Attach click handlers
       listEl.querySelectorAll('.filter-item').forEach(item => {
         item.addEventListener('click', () => {
+          // Handle section items (third level accordion)
+          if (item.dataset.sectionvalue !== undefined) {
+            const secVal = item.dataset.sectionvalue;
+            const arr = activeFilters[section].sections || [];
+            const secIdx = arr.indexOf(secVal);
+            if (secIdx > -1) arr.splice(secIdx, 1);
+            else arr.push(secVal);
+            renderFilterList(section);
+            renderCards();
+            updateQuoteCount();
+            return;
+          }
           // Handle sub-text items (accordion children)
           if (item.dataset.subvalue !== undefined) {
             const subVal = item.dataset.subvalue;
@@ -1352,6 +1389,7 @@
         if (filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
         if (filter.texts && filter.texts.length > 0 && !filter.texts.includes(q.text)) return false;
         if (filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
+        if (filter.sections && filter.sections.length > 0 && !filter.sections.includes(q.section)) return false;
         if (filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
         if (filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
         if (filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
@@ -1458,6 +1496,18 @@
         });
       });
 
+      // Handle section clicks
+      container.querySelectorAll('[data-section]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.card');
+          const cardIdx = card ? parseInt(card.dataset.idx) : -1;
+          const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
+          pinnedQuoteId = q ? q.id : null;
+          toggleArrayFilter('sections', el.dataset.section);
+        });
+      });
+
       // Handle sub-text clicks
       container.querySelectorAll('[data-subtext]').forEach(el => {
         el.addEventListener('click', (e) => {
@@ -1488,6 +1538,7 @@
 
       const textHtml = q.text ? `<span class="attr-text${(activeFilters[activeSection].texts && activeFilters[activeSection].texts.includes(q.text)) ? ' active' : ''}" data-text="${escAttr(q.text)}">${escHtml(q.text)}</span>` : '';
       const subTextHtml = q.subText ? `<span class="attr-text attr-subtext${(activeFilters[activeSection].subTexts && activeFilters[activeSection].subTexts.includes(q.subText)) ? ' active' : ''}" data-subtext="${escAttr(q.subText)}">${escHtml(q.subText)}</span>` : '';
+      const sectionHtml = q.section ? `<span class="attr-text attr-section${(activeFilters[activeSection].sections && activeFilters[activeSection].sections.includes(q.section)) ? ' active' : ''}" data-section="${escAttr(q.section)}">${escHtml(q.section)}</span>` : '';
       const tagsHtml = (q.tags || []).map(t => {
         const isActive = activeFilters[activeSection].tags && activeFilters[activeSection].tags.includes(t);
         return `<span class="card-tag${isActive ? ' active' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`;
@@ -1511,7 +1562,7 @@
             <div class="attribution-text">
               <span class="attr-source">${escHtml(q.source || 'Unknown')}</span>
               ${locationHtml}
-              ${(textHtml || subTextHtml) ? `<div class="attr-texts">${textHtml}${subTextHtml}</div>` : ''}
+              ${(textHtml || subTextHtml || sectionHtml) ? `<div class="attr-texts">${textHtml}${subTextHtml}${sectionHtml}</div>` : ''}
             </div>
             ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
           </div>
