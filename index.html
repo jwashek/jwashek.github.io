@@ -821,7 +821,9 @@
     .modal-url a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.8; }
     .modal-url a:hover { opacity: 1; text-decoration: underline; }
     .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
-    .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); }
+    .modal-tag { font-size: 11px; padding: 3px 8px; border-radius: 4px; background: var(--bg-input); color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+    .modal-tag:hover { color: var(--accent); background: var(--accent-dim); }
+    .modal-tag.active { color: var(--accent); background: var(--accent-dim); border: 1px solid var(--accent-glow); }
     .modal-actions { display: flex; gap: 8px; margin-bottom: 16px; }
     .modal-actions .copy-btn, .modal-actions .source-link-btn { font-size: 12px; padding: 6px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg-input); color: var(--text-secondary); cursor: pointer; text-decoration: none; transition: var(--transition); }
     .modal-actions .copy-btn:hover, .modal-actions .source-link-btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -1618,7 +1620,7 @@
       document.getElementById('modalTags').innerHTML = modalTextsHtml + modalTagsHtml;
 
       // Attach modal tag click handlers
-      document.querySelectorAll('[data-modal-tag]').forEach(tag => {
+      document.getElementById('modalTags').querySelectorAll('[data-modal-tag]').forEach(tag => {
         tag.addEventListener('click', () => {
           const tagVal = tag.dataset.modalTag;
           const arr = activeFilters[activeSection].tags;
@@ -1633,7 +1635,7 @@
       });
 
       // Attach modal text click handlers
-      document.querySelectorAll('[data-modal-text]').forEach(el => {
+      document.getElementById('modalTags').querySelectorAll('[data-modal-text]').forEach(el => {
         el.addEventListener('click', () => {
           toggleArrayFilter('texts', el.dataset.modalText);
           el.classList.toggle('active');
@@ -1641,7 +1643,7 @@
       });
 
       // Attach modal sub-text click handlers
-      document.querySelectorAll('[data-modal-subtext]').forEach(el => {
+      document.getElementById('modalTags').querySelectorAll('[data-modal-subtext]').forEach(el => {
         el.addEventListener('click', () => {
           toggleArrayFilter('subTexts', el.dataset.modalSubtext);
           el.classList.toggle('active');
@@ -1695,9 +1697,13 @@
         document.getElementById('aiSearch').value = '';
         document.getElementById('searchStatus').textContent = '';
       }
-      activeFilters[activeSection].tab = filterKey;
+      // Only switch sidebar tab if there's a matching tab button (don't switch for subTexts)
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
-      panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === filterKey));
+      const matchingTab = panel.querySelector(`[data-filter="${filterKey}"]`);
+      if (matchingTab) {
+        activeFilters[activeSection].tab = filterKey;
+        panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === filterKey));
+      }
       renderFilterList(activeSection);
       renderCards();
       updateQuoteCount();
