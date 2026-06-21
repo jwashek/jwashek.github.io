@@ -149,7 +149,7 @@
     }
 
     .logo-text { display: flex; flex-direction: column; }
-    .logo-title { font-size: 18px; font-weight: 600; color: var(--accent); }
+    
 
       white-space: normal;
       color: var(--text-primary);
@@ -157,8 +157,10 @@
     }
 
     .logo-img {
-      height: 40px;
+      height: 48px;
       width: auto;
+      max-height: 48px;
+      object-fit: contain;
     }
 
     .site-desc {
@@ -804,7 +806,7 @@
     @media (max-width: 768px) {
       .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; }
       .logo { font-size: 14px; }
-      .logo-img { height: 28px; }
+      .logo-img { height: 32px; max-height: 32px; }
       .site-desc { display: none; }
       .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
       .sidebar.hidden { width: 0; }
@@ -856,10 +858,7 @@
     <header class="header">
       <div class="logo">
         <img src="logo.png" alt="Golden Mouth" class="logo-img">
-        <div class="logo-text">
-          <span class="logo-title">Golden Mouth Database</span>
-          <span class="site-desc">A searchable database of quotes, beliefs, and topics from the Holy Saints, Sacred Texts, and Ecumenical Councils of the ancient Christian faith.</span>
-        </div>
+        <span class="site-desc">A searchable database of quotes, beliefs, and topics from the Holy Saints, Sacred Texts, and Ecumenical Councils of the ancient Christian faith.</span>
       </div>
 
       
