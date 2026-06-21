@@ -1339,7 +1339,8 @@
           // Handle type items (council accordion children)
           if (item.dataset.typevalue !== undefined) {
             const typeVal = item.dataset.typevalue;
-            const arr = activeFilters[section].type || [];
+            if (!activeFilters[section].type) activeFilters[section].type = [];
+            const arr = activeFilters[section].type;
             const typeIdx = arr.indexOf(typeVal);
             if (typeIdx > -1) arr.splice(typeIdx, 1);
             else arr.push(typeVal);
@@ -1351,7 +1352,8 @@
           // Handle section items (third level accordion)
           if (item.dataset.sectionvalue !== undefined) {
             const secVal = item.dataset.sectionvalue;
-            const arr = activeFilters[section].sections || [];
+            if (!activeFilters[section].sections) activeFilters[section].sections = [];
+            const arr = activeFilters[section].sections;
             const secIdx = arr.indexOf(secVal);
             if (secIdx > -1) arr.splice(secIdx, 1);
             else arr.push(secVal);
@@ -1363,7 +1365,8 @@
           // Handle sub-text items (accordion children)
           if (item.dataset.subvalue !== undefined) {
             const subVal = item.dataset.subvalue;
-            const arr = activeFilters[section].subTexts || [];
+            if (!activeFilters[section].subTexts) activeFilters[section].subTexts = [];
+            const arr = activeFilters[section].subTexts;
             const subIdx = arr.indexOf(subVal);
             if (subIdx > -1) arr.splice(subIdx, 1);
             else arr.push(subVal);
