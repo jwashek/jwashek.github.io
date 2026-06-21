@@ -1227,9 +1227,9 @@
       items = items.filter(q => {
         if (tabName !== 'topics' && filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
         if (tabName !== 'saints' && filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
-        if (tabName !== 'texts' && filter.texts && filter.texts.length > 0 && !filter.texts.includes(q.text)) return false;
-        if (tabName !== 'subTexts' && tabName !== 'texts' && filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
-        if (tabName !== 'sections' && tabName !== 'texts' && tabName !== 'subTexts' && filter.sections && filter.sections.length > 0 && !filter.sections.includes(q.section)) return false;
+        if (tabName !== 'texts' && tabName !== 'saints' && filter.texts && filter.texts.length > 0 && !filter.texts.includes(q.text)) return false;
+        if (tabName !== 'subTexts' && tabName !== 'texts' && tabName !== 'saints' && filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
+        if (tabName !== 'sections' && tabName !== 'texts' && tabName !== 'subTexts' && tabName !== 'saints' && filter.sections && filter.sections.length > 0 && !filter.sections.includes(q.section)) return false;
         if (tabName !== 'documents' && filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
         if (tabName !== 'councils' && filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
         if (tabName !== 'type' && tabName !== 'councils' && filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
@@ -1272,7 +1272,7 @@
       entries.forEach(([name, count]) => {
         const isActive = activeValue.includes(name);
         html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
-          <span>${isActive && (tabName === 'texts' || tabName === 'councils') ? '▾ ' : ''}${name}</span><span class="filter-item-count">${count}</span>
+          <span>${isActive && (tabName === 'texts' || tabName === 'councils' || tabName === 'saints') ? '▾ ' : ''}${name}</span><span class="filter-item-count">${count}</span>
         </div>`;
         // Accordion: if this is the Texts tab and this text is selected, show Sub-Texts
         if (tabName === 'texts' && isActive) {
@@ -1314,7 +1314,64 @@
             }
           });
         }
-        // Accordion: if this is the Councils tab and this council is selected, show Types
+        
+        // Accordion: if this is the Saints tab and a saint is selected, show Texts → Sub-Texts → Sections
+        if (tabName === 'saints' && isActive) {
+          // Show Texts by this saint
+          const saintTexts = {};
+          items.filter(q => q.source === name && q.text).forEach(q => {
+            saintTexts[q.text] = (saintTexts[q.text] || 0) + 1;
+          });
+          const saintTextEntries = Object.entries(saintTexts).sort((a, b) => a[0].localeCompare(b[0]));
+          const activeTexts = filter.texts || [];
+          saintTextEntries.forEach(([textName, textCount]) => {
+            const isTextActive = activeTexts.includes(textName);
+            html += `<div class="filter-item filter-subitem ${isTextActive ? 'active' : ''}" data-textvalue="${textName.replace(/"/g, '&quot;')}">
+              <span>${isTextActive ? '▾ ' : ''}${textName}</span><span class="filter-item-count">${textCount}</span>
+            </div>`;
+            // Sub-Texts under selected Text
+            if (isTextActive) {
+              const saintSubTexts = {};
+              items.filter(q => q.source === name && q.text === textName && q.subText).forEach(q => {
+                saintSubTexts[q.subText] = (saintSubTexts[q.subText] || 0) + 1;
+              });
+              const saintSubEntries = Object.entries(saintSubTexts).sort((a, b) => {
+                const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+                const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+                if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                return a[0].localeCompare(b[0]);
+              });
+              const activeSubTexts = filter.subTexts || [];
+              saintSubEntries.forEach(([subName, subCount]) => {
+                const isSubActive = activeSubTexts.includes(subName);
+                html += `<div class="filter-item filter-subsubitem ${isSubActive ? 'active' : ''}" data-subvalue="${subName.replace(/"/g, '&quot;')}">
+                  <span>${isSubActive ? '▾ ' : ''}${subName}</span><span class="filter-item-count">${subCount}</span>
+                </div>`;
+                // Sections under selected Sub-Text
+                if (isSubActive) {
+                  const saintSections = {};
+                  items.filter(q => q.source === name && q.text === textName && q.subText === subName && q.section).forEach(q => {
+                    saintSections[q.section] = (saintSections[q.section] || 0) + 1;
+                  });
+                  const saintSecEntries = Object.entries(saintSections).sort((a, b) => {
+                    const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+                    const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+                    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                    return a[0].localeCompare(b[0]);
+                  });
+                  const activeSections = filter.sections || [];
+                  saintSecEntries.forEach(([secName, secCount]) => {
+                    const isSecActive = activeSections.includes(secName);
+                    html += `<div class="filter-item filter-subsubitem ${isSecActive ? 'active' : ''}" data-sectionvalue="${secName.replace(/"/g, '&quot;')}" style="padding-left:60px;">
+                      <span>${secName}</span><span class="filter-item-count">${secCount}</span>
+                    </div>`;
+                  });
+                }
+              });
+            }
+          });
+        }
+// Accordion: if this is the Councils tab and this council is selected, show Types
         if (tabName === 'councils' && isActive) {
           const types = {};
           items.filter(q => q.source === name && q.councilType).forEach(q => {
@@ -1336,6 +1393,19 @@
       // Attach click handlers
       listEl.querySelectorAll('.filter-item').forEach(item => {
         item.addEventListener('click', () => {
+          // Handle text items under saints (saints accordion children)
+          if (item.dataset.textvalue !== undefined) {
+            const textVal = item.dataset.textvalue;
+            if (!activeFilters[section].texts) activeFilters[section].texts = [];
+            const arr = activeFilters[section].texts;
+            const textIdx = arr.indexOf(textVal);
+            if (textIdx > -1) arr.splice(textIdx, 1);
+            else arr.push(textVal);
+            renderFilterList(section);
+            renderCards();
+            updateQuoteCount();
+            return;
+          }
           // Handle type items (council accordion children)
           if (item.dataset.typevalue !== undefined) {
             const typeVal = item.dataset.typevalue;
