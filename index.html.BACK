@@ -149,16 +149,18 @@
     }
 
     .logo-text { display: flex; flex-direction: column; }
-    .logo-title { font-size: 18px; font-weight: 600; color: var(--accent); }
+    
 
       white-space: normal;
       color: var(--text-primary);
       white-space: nowrap;
     }
 
-    .logo-icon {
-      font-size: 24px;
-      color: var(--accent);
+    .logo-img {
+      height: 48px;
+      width: auto;
+      max-height: 48px;
+      object-fit: contain;
     }
 
     .site-desc {
@@ -402,6 +404,14 @@
     .filter-item.active {
       background: var(--accent-dim);
       color: var(--accent);
+    }
+    .filter-subitem {
+      padding-left: 28px;
+      font-size: 12px;
+    }
+    .filter-subsubitem {
+      padding-left: 44px;
+      font-size: 11.5px;
     }
 
     .filter-item-count {
@@ -655,6 +665,15 @@
       font-size: 13px;
       font-weight: 600;
       color: var(--accent);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .attr-source:hover {
+      opacity: 0.8;
+    }
+    .attr-source.active {
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     .attr-reference {
@@ -679,6 +698,31 @@
       text-decoration: underline;
     }
 
+    .attr-texts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 4px;
+    }
+    .attr-text {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--accent-dim);
+      color: var(--accent);
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 500;
+    }
+    .attr-text:hover {
+      background: var(--accent-glow);
+    }
+    .attr-text.active {
+      background: var(--accent-glow);
+      border: 1px solid var(--accent);
+    }
+
+
     .card-tags {
       display: flex;
       flex-wrap: wrap;
@@ -702,7 +746,7 @@
     .card-tag.active {
       color: var(--accent);
       background: var(--accent-dim);
-      border: 1px solid var(--accent-glow);
+      border-color: var(--accent);
     }
 
     /* ========== Empty State ========== */
@@ -799,6 +843,9 @@
     .modal-topic { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 16px; }
     .modal-quote { font-family: var(--font-quote); font-size: 18px; line-height: 1.9; color: var(--text-primary); margin-bottom: 24px; }
     .modal-source { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
+    .modal-source-link { cursor: pointer; transition: var(--transition); }
+    .modal-source-link:hover { opacity: 0.8; }
+    .modal-source-link.active { text-decoration: underline; text-underline-offset: 3px; }
     .modal-reference { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
     .modal-url a { font-size: 12px; color: var(--accent); text-decoration: none; opacity: 0.8; }
     .modal-url a:hover { opacity: 1; text-decoration: underline; }
@@ -815,9 +862,8 @@
     @media (max-width: 768px) {
       .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; }
       .logo { font-size: 14px; }
-      .logo .logo-icon { font-size: 18px; }
-      /* site-desc visible on mobile */
-      .site-desc { white-space: normal; overflow: visible; font-size: 10px; }
+      .logo-img { height: 32px; max-height: 32px; }
+      .site-desc { display: none; }
       .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
       .sidebar.hidden { width: 0; }
       .cards-grid { grid-template-columns: 1fr; }
@@ -859,17 +905,16 @@
 .section-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
     .section-panel.active { display: flex; }
   </style>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon-192.png">
 </head>
 <body>
   <div class="app">
     <!-- Header -->
     <header class="header">
       <div class="logo">
-        <span class="logo-icon">&#9766;</span>
-        <div class="logo-text">
-          <span class="logo-title">Golden Mouth Database</span>
-          <span class="site-desc">A searchable database of quotes, beliefs, and topics from the Holy Saints, Sacred Texts, and Ecumenical Councils of the ancient Christian faith.</span>
-        </div>
+        <img src="logo.png" alt="Golden Mouth" class="logo-img" style="height:48px;max-height:48px;width:auto;">
+        <span class="site-desc">A searchable database of quotes, beliefs, and topics from the Holy Saints, Sacred Texts, and Ecumenical Councils of the ancient Christian faith.</span>
       </div>
 
       
@@ -905,6 +950,7 @@
           <div class="filter-tabs">
             <button class="filter-tab active" data-filter="topics">Topics</button>
             <button class="filter-tab" data-filter="saints">Saints</button>
+            <button class="filter-tab" data-filter="texts">Texts</button>
             <button class="filter-tab" data-filter="tags">Tags</button>
           </div>
           <div class="sidebar-search"><input type="text" placeholder="Search filters..." data-search="saint"></div>
@@ -984,9 +1030,8 @@
 
     let activeSection = 'saint';
     // CHANGE 1: Multi-filter state (one value per filter category)
-    let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
-        let pinnedQuoteId = null; // When set, this quote appears first in results
-let aiSearchActive = false;
+    let activeFilters = { saint: { tab: 'topics', topics: [], saints: [], texts: [], subTexts: [], sections: [], tags: [] }, text: { tab: 'documents', documents: [], topics: [], tags: [] }, council: { tab: 'councils', councils: [], type: [], tags: [] } };
+    let aiSearchActive = false;
     let aiResults = [];
 
     // ========== Theme ==========
@@ -1146,14 +1191,16 @@ let aiSearchActive = false;
     let filterData = { saint: {}, text: {}, council: {} };
 
     function buildFilterData() {
-      // Saints: topics, saints, tags
-      const saintTopics = {}, saintSources = {}, saintTags = {};
+      // Saints: topics, saints, texts, subTexts, tags
+      const saintTopics = {}, saintSources = {}, saintTexts = {}, saintSubTexts = {}, saintTags = {};
       allSaints.forEach(q => {
         if (q.topic) saintTopics[q.topic] = (saintTopics[q.topic] || 0) + 1;
         if (q.source) saintSources[q.source] = (saintSources[q.source] || 0) + 1;
+        if (q.text) saintTexts[q.text] = (saintTexts[q.text] || 0) + 1;
+        if (q.subText) saintSubTexts[q.subText] = (saintSubTexts[q.subText] || 0) + 1;
         (q.tags || []).forEach(t => { saintTags[t] = (saintTags[t] || 0) + 1; });
       });
-      filterData.saint = { topics: saintTopics, saints: saintSources, tags: saintTags };
+      filterData.saint = { topics: saintTopics, saints: saintSources, texts: saintTexts, subTexts: saintSubTexts, tags: saintTags };
 
       // Texts: documents, topics, tags
       const textDocs = {}, textTopics = {}, textTags = {};
@@ -1192,9 +1239,12 @@ let aiSearchActive = false;
       items = items.filter(q => {
         if (tabName !== 'topics' && filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
         if (tabName !== 'saints' && filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+        if (tabName !== 'texts' && tabName !== 'saints' && filter.texts && filter.texts.length > 0 && !filter.texts.includes(q.text)) return false;
+        if (tabName !== 'subTexts' && tabName !== 'texts' && tabName !== 'saints' && filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
+        if (tabName !== 'sections' && tabName !== 'texts' && tabName !== 'subTexts' && tabName !== 'saints' && filter.sections && filter.sections.length > 0 && !filter.sections.includes(q.section)) return false;
         if (tabName !== 'documents' && filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
         if (tabName !== 'councils' && filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
-        if (tabName !== 'type' && filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
+        if (tabName !== 'type' && tabName !== 'councils' && filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
         if (tabName !== 'tags' && filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
         // Also apply keyword search to narrow visible filter options
         if (sidebarSearchTerm) {
@@ -1209,6 +1259,8 @@ let aiSearchActive = false;
       items.forEach(q => {
         if (tabName === 'topics' && q.topic) data[q.topic] = (data[q.topic] || 0) + 1;
         else if (tabName === 'saints' && q.source) data[q.source] = (data[q.source] || 0) + 1;
+        else if (tabName === 'texts' && q.text) data[q.text] = (data[q.text] || 0) + 1;
+        else if (tabName === 'subTexts' && q.subText) data[q.subText] = (data[q.subText] || 0) + 1;
         else if (tabName === 'documents' && q.source) data[q.source] = (data[q.source] || 0) + 1;
         else if (tabName === 'councils' && q.source) data[q.source] = (data[q.source] || 0) + 1;
         else if (tabName === 'type' && q.councilType) data[q.councilType] = (data[q.councilType] || 0) + 1;
@@ -1232,8 +1284,120 @@ let aiSearchActive = false;
       entries.forEach(([name, count]) => {
         const isActive = activeValue.includes(name);
         html += `<div class="filter-item ${isActive ? 'active' : ''}" data-value="${name.replace(/"/g, '&quot;')}">
-          <span>${name}</span><span class="filter-item-count">${count}</span>
+          <span>${isActive && (tabName === 'texts' || tabName === 'councils' || tabName === 'saints') ? '▾ ' : ''}${name}</span><span class="filter-item-count">${count}</span>
         </div>`;
+        // Accordion: if this is the Texts tab and this text is selected, show Sub-Texts
+        if (tabName === 'texts' && isActive) {
+          const subTexts = {};
+          items.filter(q => q.text === name).forEach(q => {
+            if (q.subText) subTexts[q.subText] = (subTexts[q.subText] || 0) + 1;
+          });
+          const subEntries = Object.entries(subTexts).sort((a, b) => {
+            const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+            const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+            if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+            return a[0].localeCompare(b[0]);
+          });
+          const activeSubTexts = filter.subTexts || [];
+          subEntries.forEach(([subName, subCount]) => {
+            const isSubActive = activeSubTexts.includes(subName);
+            html += `<div class="filter-item filter-subitem ${isSubActive ? 'active' : ''}" data-subvalue="${subName.replace(/"/g, '&quot;')}">
+              <span>${isSubActive ? '▾ ' : ''}${subName}</span><span class="filter-item-count">${subCount}</span>
+            </div>`;
+            // Third level: Sections under selected Sub-Texts
+            if (isSubActive) {
+              const sections = {};
+              items.filter(q => q.text === name && q.subText === subName && q.section).forEach(q => {
+                sections[q.section] = (sections[q.section] || 0) + 1;
+              });
+              const sectionEntries = Object.entries(sections).sort((a, b) => {
+                const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+                const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+                if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                return a[0].localeCompare(b[0]);
+              });
+              const activeSections = filter.sections || [];
+              sectionEntries.forEach(([secName, secCount]) => {
+                const isSecActive = activeSections.includes(secName);
+                html += `<div class="filter-item filter-subsubitem ${isSecActive ? 'active' : ''}" data-sectionvalue="${secName.replace(/"/g, '&quot;')}">
+                  <span>${secName}</span><span class="filter-item-count">${secCount}</span>
+                </div>`;
+              });
+            }
+          });
+        }
+        
+        // Accordion: if this is the Saints tab and a saint is selected, show Texts → Sub-Texts → Sections
+        if (tabName === 'saints' && isActive) {
+          // Show Texts by this saint
+          const saintTexts = {};
+          items.filter(q => q.source === name && q.text).forEach(q => {
+            saintTexts[q.text] = (saintTexts[q.text] || 0) + 1;
+          });
+          const saintTextEntries = Object.entries(saintTexts).sort((a, b) => a[0].localeCompare(b[0]));
+          const activeTexts = filter.texts || [];
+          saintTextEntries.forEach(([textName, textCount]) => {
+            const isTextActive = activeTexts.includes(textName);
+            html += `<div class="filter-item filter-subitem ${isTextActive ? 'active' : ''}" data-textvalue="${textName.replace(/"/g, '&quot;')}">
+              <span>${isTextActive ? '▾ ' : ''}${textName}</span><span class="filter-item-count">${textCount}</span>
+            </div>`;
+            // Sub-Texts under selected Text
+            if (isTextActive) {
+              const saintSubTexts = {};
+              items.filter(q => q.source === name && q.text === textName && q.subText).forEach(q => {
+                saintSubTexts[q.subText] = (saintSubTexts[q.subText] || 0) + 1;
+              });
+              const saintSubEntries = Object.entries(saintSubTexts).sort((a, b) => {
+                const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+                const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+                if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                return a[0].localeCompare(b[0]);
+              });
+              const activeSubTexts = filter.subTexts || [];
+              saintSubEntries.forEach(([subName, subCount]) => {
+                const isSubActive = activeSubTexts.includes(subName);
+                html += `<div class="filter-item filter-subsubitem ${isSubActive ? 'active' : ''}" data-subvalue="${subName.replace(/"/g, '&quot;')}">
+                  <span>${isSubActive ? '▾ ' : ''}${subName}</span><span class="filter-item-count">${subCount}</span>
+                </div>`;
+                // Sections under selected Sub-Text
+                if (isSubActive) {
+                  const saintSections = {};
+                  items.filter(q => q.source === name && q.text === textName && q.subText === subName && q.section).forEach(q => {
+                    saintSections[q.section] = (saintSections[q.section] || 0) + 1;
+                  });
+                  const saintSecEntries = Object.entries(saintSections).sort((a, b) => {
+                    const numA = parseInt((a[0].match(/\d+/) || [])[0]);
+                    const numB = parseInt((b[0].match(/\d+/) || [])[0]);
+                    if (!isNaN(numA) && !isNaN(numB)) return numA - numB;
+                    return a[0].localeCompare(b[0]);
+                  });
+                  const activeSections = filter.sections || [];
+                  saintSecEntries.forEach(([secName, secCount]) => {
+                    const isSecActive = activeSections.includes(secName);
+                    html += `<div class="filter-item filter-subsubitem ${isSecActive ? 'active' : ''}" data-sectionvalue="${secName.replace(/"/g, '&quot;')}" style="padding-left:60px;">
+                      <span>${secName}</span><span class="filter-item-count">${secCount}</span>
+                    </div>`;
+                  });
+                }
+              });
+            }
+          });
+        }
+// Accordion: if this is the Councils tab and this council is selected, show Types
+        if (tabName === 'councils' && isActive) {
+          const types = {};
+          items.filter(q => q.source === name && q.councilType).forEach(q => {
+            types[q.councilType] = (types[q.councilType] || 0) + 1;
+          });
+          const typeEntries = Object.entries(types).sort((a, b) => a[0].localeCompare(b[0]));
+          const activeTypes = filter.type || [];
+          typeEntries.forEach(([typeName, typeCount]) => {
+            const isTypeActive = activeTypes.includes(typeName);
+            html += `<div class="filter-item filter-subitem ${isTypeActive ? 'active' : ''}" data-typevalue="${typeName.replace(/"/g, '&quot;')}">
+              <span>${typeName}</span><span class="filter-item-count">${typeCount}</span>
+            </div>`;
+          });
+        }
       });
 
       listEl.innerHTML = html;
@@ -1241,6 +1405,58 @@ let aiSearchActive = false;
       // Attach click handlers
       listEl.querySelectorAll('.filter-item').forEach(item => {
         item.addEventListener('click', () => {
+          // Handle text items under saints (saints accordion children)
+          if (item.dataset.textvalue !== undefined) {
+            const textVal = item.dataset.textvalue;
+            if (!activeFilters[section].texts) activeFilters[section].texts = [];
+            const arr = activeFilters[section].texts;
+            const textIdx = arr.indexOf(textVal);
+            if (textIdx > -1) arr.splice(textIdx, 1);
+            else arr.push(textVal);
+            renderFilterList(section);
+            renderCards();
+            updateQuoteCount();
+            return;
+          }
+          // Handle type items (council accordion children)
+          if (item.dataset.typevalue !== undefined) {
+            const typeVal = item.dataset.typevalue;
+            if (!activeFilters[section].type) activeFilters[section].type = [];
+            const arr = activeFilters[section].type;
+            const typeIdx = arr.indexOf(typeVal);
+            if (typeIdx > -1) arr.splice(typeIdx, 1);
+            else arr.push(typeVal);
+            renderFilterList(section);
+            renderCards();
+            updateQuoteCount();
+            return;
+          }
+          // Handle section items (third level accordion)
+          if (item.dataset.sectionvalue !== undefined) {
+            const secVal = item.dataset.sectionvalue;
+            if (!activeFilters[section].sections) activeFilters[section].sections = [];
+            const arr = activeFilters[section].sections;
+            const secIdx = arr.indexOf(secVal);
+            if (secIdx > -1) arr.splice(secIdx, 1);
+            else arr.push(secVal);
+            renderFilterList(section);
+            renderCards();
+            updateQuoteCount();
+            return;
+          }
+          // Handle sub-text items (accordion children)
+          if (item.dataset.subvalue !== undefined) {
+            const subVal = item.dataset.subvalue;
+            if (!activeFilters[section].subTexts) activeFilters[section].subTexts = [];
+            const arr = activeFilters[section].subTexts;
+            const subIdx = arr.indexOf(subVal);
+            if (subIdx > -1) arr.splice(subIdx, 1);
+            else arr.push(subVal);
+            renderFilterList(section);
+            renderCards();
+            updateQuoteCount();
+            return;
+          }
           const val = item.dataset.value;
           (() => {
             const arr = activeFilters[section][tabName];
@@ -1271,20 +1487,7 @@ let aiSearchActive = false;
     // ========== Rendering ==========
     // CHANGE 2: Multi-filter getFilteredQuotes
     function getFilteredQuotes() {
-      if (aiSearchActive) {
-        // Apply active filters on top of AI results so users can narrow them down
-        let items = aiResults;
-        const filter = activeFilters[activeSection];
-        return items.filter(q => {
-          if (filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
-          if (filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
-          if (filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
-          if (filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
-          if (filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
-          if (filter.tags && filter.tags.length > 0 && !filter.tags.every(ft => (q.tags || []).includes(ft))) return false;
-          return true;
-        });
-      }
+      if (aiSearchActive) return aiResults;
 
       let items;
       if (activeSection === 'saint') items = allSaints;
@@ -1296,6 +1499,9 @@ let aiSearchActive = false;
       return items.filter(q => {
         if (filter.topics && filter.topics.length > 0 && !filter.topics.includes(q.topic)) return false;
         if (filter.saints && filter.saints.length > 0 && !filter.saints.includes(q.source)) return false;
+        if (filter.texts && filter.texts.length > 0 && !filter.texts.includes(q.text)) return false;
+        if (filter.subTexts && filter.subTexts.length > 0 && !filter.subTexts.includes(q.subText)) return false;
+        if (filter.sections && filter.sections.length > 0 && !filter.sections.includes(q.section)) return false;
         if (filter.documents && filter.documents.length > 0 && !filter.documents.includes(q.source)) return false;
         if (filter.councils && filter.councils.length > 0 && !filter.councils.includes(q.source)) return false;
         if (filter.type && filter.type.length > 0 && !filter.type.includes(q.councilType)) return false;
@@ -1307,11 +1513,6 @@ let aiSearchActive = false;
         }
         return true;
       }).sort((a, b) => {
-        // Pinned quote always first
-        if (pinnedQuoteId) {
-          if (a.id === pinnedQuoteId) return -1;
-          if (b.id === pinnedQuoteId) return 1;
-        }
         // Sort by numeric reference when available (Canon 1, Canon 2, etc.)
         const numA = parseInt((a.reference && a.reference.match(/\d+/) || [])[0]);
         const numB = parseInt((b.reference && b.reference.match(/\d+/) || [])[0]);
@@ -1350,9 +1551,6 @@ let aiSearchActive = false;
       container.innerHTML = html;
       updateQuoteCount();
 
-      // Clear pinned quote after rendering
-      pinnedQuoteId = null;
-
       // Attach copy handlers
       container.querySelectorAll('.copy-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
@@ -1386,11 +1584,38 @@ let aiSearchActive = false;
       container.querySelectorAll('[data-topic]').forEach(pill => {
         pill.addEventListener('click', (e) => {
           e.stopPropagation();
-          const card = pill.closest('.card');
-          const idx = card ? parseInt(card.dataset.idx) : -1;
-          const q = idx >= 0 ? quotes[idx] : null;
-          pinnedQuoteId = q ? q.id : null;
           setTopicFilter(pill.dataset.topic);
+        });
+      });
+
+      // Handle saint name clicks
+      container.querySelectorAll('[data-saint]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.card');
+          const cardIdx = card ? parseInt(card.dataset.idx) : -1;
+          const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
+          pinnedQuoteId = q ? q.id : null;
+          // Toggle saint filter
+          const arr = activeFilters[activeSection].saints;
+          if (arr) {
+            const sIdx = arr.indexOf(el.dataset.saint);
+            if (sIdx > -1) arr.splice(sIdx, 1);
+            else arr.push(el.dataset.saint);
+          }
+          // Exit AI search mode
+          if (aiSearchActive) {
+            aiSearchActive = false;
+            aiResults = [];
+            document.getElementById('aiSearch').value = '';
+            document.getElementById('searchStatus').textContent = '';
+          }
+          activeFilters[activeSection].tab = 'saints';
+          const panel = document.querySelector(`[data-panel="${activeSection}"]`);
+          panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === 'saints'));
+          renderFilterList(activeSection);
+          renderCards();
+          updateQuoteCount();
         });
       });
 
@@ -1398,11 +1623,43 @@ let aiSearchActive = false;
       container.querySelectorAll('[data-tag]').forEach(tag => {
         tag.addEventListener('click', (e) => {
           e.stopPropagation();
-          const card = tag.closest('.card');
-          const idx = card ? parseInt(card.dataset.idx) : -1;
-          const q = idx >= 0 ? quotes[idx] : null;
-          pinnedQuoteId = q ? q.id : null;
           addTagFilter(tag.dataset.tag);
+        });
+      });
+
+      // Handle text clicks
+      container.querySelectorAll('[data-text]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.card');
+          const cardIdx = card ? parseInt(card.dataset.idx) : -1;
+          const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
+          pinnedQuoteId = q ? q.id : null;
+          toggleArrayFilter('texts', el.dataset.text);
+        });
+      });
+
+      // Handle section clicks
+      container.querySelectorAll('[data-section]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.card');
+          const cardIdx = card ? parseInt(card.dataset.idx) : -1;
+          const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
+          pinnedQuoteId = q ? q.id : null;
+          toggleArrayFilter('sections', el.dataset.section);
+        });
+      });
+
+      // Handle sub-text clicks
+      container.querySelectorAll('[data-subtext]').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const card = el.closest('.card');
+          const cardIdx = card ? parseInt(card.dataset.idx) : -1;
+          const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
+          pinnedQuoteId = q ? q.id : null;
+          toggleArrayFilter('subTexts', el.dataset.subtext);
         });
       });
 
@@ -1422,10 +1679,13 @@ let aiSearchActive = false;
         locationHtml = `<span class="attr-location"><a href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a></span>`;
       }
 
+      const textHtml = q.text ? `<span class="attr-text${(activeFilters[activeSection].texts && activeFilters[activeSection].texts.includes(q.text)) ? ' active' : ''}" data-text="${escAttr(q.text)}">${escHtml(q.text)}</span>` : '';
+      const subTextHtml = q.subText ? `<span class="attr-text attr-subtext${(activeFilters[activeSection].subTexts && activeFilters[activeSection].subTexts.includes(q.subText)) ? ' active' : ''}" data-subtext="${escAttr(q.subText)}">${escHtml(q.subText)}</span>` : '';
+      const sectionHtml = q.section ? `<span class="attr-text attr-section${(activeFilters[activeSection].sections && activeFilters[activeSection].sections.includes(q.section)) ? ' active' : ''}" data-section="${escAttr(q.section)}">${escHtml(q.section)}</span>` : '';
       const tagsHtml = (q.tags || []).map(t => {
-          const isActive = activeFilters[activeSection].tags && activeFilters[activeSection].tags.includes(t);
-          return `<span class="card-tag${isActive ? ' active' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`;
-        }).join('');
+        const isActive = activeFilters[activeSection].tags && activeFilters[activeSection].tags.includes(t);
+        return `<span class="card-tag${isActive ? ' active' : ''}" data-tag="${escAttr(t)}">${escHtml(t)}</span>`;
+      }).join('');
 
       const sourceLink = q.url ? `<a class="source-link" href="${escHtml(q.url)}" target="_blank" rel="noopener">Source \u2197</a>` : '';
 
@@ -1443,8 +1703,9 @@ let aiSearchActive = false;
           <div class="card-divider"></div>
           <div class="card-attribution">
             <div class="attribution-text">
-              <span class="attr-source">${escHtml(q.source || 'Unknown')}</span>
+              <span class="attr-source${(activeFilters[activeSection].saints && activeFilters[activeSection].saints.includes(q.source)) ? ' active' : ''}" data-saint="${escAttr(q.source)}">${escHtml(q.source || 'Unknown')}</span>
               ${locationHtml}
+              ${(textHtml || subTextHtml || sectionHtml) ? `<div class="attr-texts">${textHtml}${subTextHtml}${sectionHtml}</div>` : ''}
             </div>
             ${tagsHtml ? `<div class="card-tags">${tagsHtml}</div>` : ''}
           </div>
@@ -1481,155 +1742,88 @@ let aiSearchActive = false;
         return;
       }
 
+      if (!embeddings || embeddings.length === 0) {
+        searchStatus.textContent = 'Embeddings not loaded. Please wait...';
+        return;
+      }
+
+      // Load model on first use
+      if (!extractor) {
+        if (modelLoading) return;
+        modelLoading = true;
+        searchStatus.textContent = 'Loading AI model (first time only)...';
+        try {
+          const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
+          extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
+          searchStatus.textContent = '';
+        } catch (err) {
+          searchStatus.textContent = 'Failed to load AI model. Try again.';
+          modelLoading = false;
+          console.error(err);
+          return;
+        }
+        modelLoading = false;
+      }
+
       searchStatus.textContent = 'Searching...';
 
-      // === STEP 1: Detect source names in query (saint, document, council) ===
-      const queryLower = query.toLowerCase();
-      const queryWords = queryLower.split(/\s+/).filter(w => w.length > 3);
-      
-      let matchedSources = [];
-      const allSources = [...new Set(allQuotes.map(q => q.source).filter(Boolean))];
-      
-      // Score each source by how well it matches the query
-      const sourceScores = allSources.map(src => {
-        const srcLower = src.toLowerCase();
-        const matches = queryWords.filter(w => srcLower.includes(w));
-        // Weight by matched word length (longer words = more distinctive)
-        const score = matches.reduce((sum, w) => sum + w.length, 0);
-        return { src, matches: matches.length, score };
-      }).filter(s => s.matches >= 2 || (s.matches === 1 && s.score >= 6));
-      
-      if (sourceScores.length > 0) {
-        // Find the highest score
-        const maxScore = Math.max(...sourceScores.map(s => s.score));
-        // Only keep sources within 80% of the best match score
-        // This ensures "Saint John Chrysostom" (score: saint+john+chrysostom = 5+4+10 = 19) 
-        // beats "Saint John of Damascus" (score: saint+john = 5+4 = 9)
-        const threshold = maxScore * 0.7;
-        matchedSources = sourceScores.filter(s => s.score >= threshold).map(s => s.src);
-      }
+      try {
+        const output = await extractor(query, { pooling: 'mean', normalize: true });
+        const queryVec = Array.from(output.data);
 
-      // === STEP 2: Pre-filter pool if a source was detected ===
-      let searchPool = allQuotes;
-      let preFiltered = false;
-      if (matchedSources.length > 0) {
-        searchPool = allQuotes.filter(q => matchedSources.includes(q.source));
-        preFiltered = true;
-      }
-
-      // === STEP 3: Keyword matches (exact substring in quote text) ===
-      // Extract the "topic" part of the query by removing source name words
-      let topicWords = queryWords.filter(w => {
-        return !matchedSources.some(src => src.toLowerCase().includes(w));
-      });
-      // Also remove common filler words
-      const fillers = ['what', 'does', 'said', 'about', 'have', 'that', 'from', 'there', 'their', 'which', 'would', 'could', 'something', 'anything', 'quote', 'quotes', 'saint', 'what\'s', 'it\'s', 'they', 'this', 'with', 'like'];
-      topicWords = topicWords.filter(w => !fillers.includes(w));
-
-      let keywordResults = [];
-      if (topicWords.length > 0) {
-        // Score each quote by how many topic words it contains
-        keywordResults = searchPool.map(q => {
-          const text = (q.quote + ' ' + q.topic + ' ' + (q.tags || []).join(' ')).toLowerCase();
-          const matchCount = topicWords.filter(w => text.includes(w)).length;
-          return { item: q, matchCount };
-        })
-        .filter(r => r.matchCount > 0)
-        .sort((a, b) => b.matchCount - a.matchCount)
-        .map(r => r.item);
-      }
-
-      // === STEP 4: Semantic search (if embeddings + model available) ===
-      let semanticResults = [];
-      if (embeddings && embeddings.length > 0) {
-        // Load model on first use
-        if (!extractor) {
-          if (modelLoading) return;
-          modelLoading = true;
-          searchStatus.textContent = 'Loading AI model (first time only)...';
-          try {
-            const { pipeline } = await import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2');
-            extractor = await pipeline('feature-extraction', 'Xenova/all-MiniLM-L6-v2');
-          } catch (err) {
-            searchStatus.textContent = 'AI model unavailable. Showing keyword results.';
-            modelLoading = false;
-            // Fall through to show keyword results only
+        // Compute cosine similarity with all embeddings
+        const scores = embeddings.map((emb, idx) => {
+          let dot = 0;
+          for (let i = 0; i < queryVec.length; i++) {
+            dot += queryVec[i] * (emb[i] || 0);
           }
-          modelLoading = false;
-        }
-
-        if (extractor) {
-          try {
-            const output = await extractor(query, { pooling: 'mean', normalize: true });
-            const queryVec = Array.from(output.data);
-
-            const scores = allQuotes.map((q, idx) => {
-              let dot = 0;
-              const emb = embeddings[idx];
-              if (!emb) return { idx, score: 0 };
-              for (let i = 0; i < queryVec.length; i++) {
-                dot += queryVec[i] * (emb[i] || 0);
-              }
-              return { idx, score: dot };
-            });
-
-            // Apply source boost/penalty
-            scores.forEach(s => {
-              const item = allQuotes[s.idx];
-              if (!item) return;
-              if (matchedSources.length > 0) {
-                if (matchedSources.includes(item.source)) {
-                  s.score += 0.12; // Boost matching source
-                } else {
-                  s.score -= 0.08; // Penalize non-matching when source is specified
-                }
-              }
-            });
-
-            // Get top semantic results above threshold
-            semanticResults = scores
-              .filter(s => s.score >= 0.30)
-              .sort((a, b) => b.score - a.score)
-              .slice(0, 30)
-              .map(s => allQuotes[s.idx]);
-          } catch (err) {
-            console.error('Semantic search error:', err);
-          }
-        }
-      }
-
-      // === STEP 5: Merge results (keyword priority, semantic fills gaps) ===
-      const seen = new Set();
-      const merged = [];
-
-      // Keyword results first (most reliable for exact matches)
-      keywordResults.forEach(q => {
-        const key = q.id || (q.quote.substring(0, 50));
-        if (!seen.has(key)) { seen.add(key); merged.push(q); }
-      });
-
-      // Then semantic results (fills in conceptual matches)
-      semanticResults.forEach(q => {
-        const key = q.id || (q.quote.substring(0, 50));
-        if (!seen.has(key)) { seen.add(key); merged.push(q); }
-      });
-
-      // If pre-filtered by source but no topic results, show all from that source
-      if (preFiltered && merged.length === 0) {
-        searchPool.forEach(q => {
-          const key = q.id || (q.quote.substring(0, 50));
-          if (!seen.has(key)) { seen.add(key); merged.push(q); }
+          return { idx, score: dot };
         });
+
+        // Apply saint name boosting
+        const queryLower = query.toLowerCase();
+        const queryWords = queryLower.split(/\s+/).filter(w => w.length > 3);
+        scores.forEach(s => {
+          const item = allQuotes[s.idx];
+          if (!item || !item.source) return;
+          const sourceLower = item.source.toLowerCase();
+          const nameMatches = queryWords.filter(w => sourceLower.includes(w));
+          if (nameMatches.length >= 2) {
+            s.score += 0.15;
+          } else if (nameMatches.length === 1 && nameMatches[0].length > 5) {
+            s.score += 0.08;
+          }
+        });
+
+        // Penalize results from OTHER sources when a specific source is mentioned
+        const mentionedSource = allQuotes.map(q => q.source || '').find(src =>
+          src && queryWords.filter(w => src.toLowerCase().includes(w)).length >= 2
+        );
+        if (mentionedSource) {
+          scores.forEach(s => {
+            const item = allQuotes[s.idx];
+            if (item && item.source !== mentionedSource) {
+              s.score -= 0.05;
+            }
+          });
+        }
+
+        // Filter and sort
+        const threshold = 0.35;
+        const results = scores
+          .filter(s => s.score >= threshold)
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 50)
+          .map(s => allQuotes[s.idx]);
+
+        aiSearchActive = true;
+        aiResults = results;
+        searchStatus.textContent = `${results.length} results found across all sections`;
+        renderCards();
+      } catch (err) {
+        searchStatus.textContent = 'Search failed. Please try again.';
+        console.error(err);
       }
-
-      // Limit to top 50
-      const results = merged.slice(0, 50);
-
-      aiSearchActive = true;
-      aiResults = results;
-      const sourceNote = matchedSources.length > 0 ? ` (filtered to: ${matchedSources.join(', ')})` : '';
-      searchStatus.textContent = `${results.length} results found${sourceNote}`;
-      renderCards();
     }
 
     // ========== Quote Modal ==========
@@ -1639,34 +1833,77 @@ let aiSearchActive = false;
     function openModal(q) {
       document.getElementById('modalTopic').textContent = q.topic || '';
       document.getElementById('modalQuote').textContent = q.quote || '';
-      document.getElementById('modalSource').textContent = q.source || '';
+      const isSaintActive = activeFilters[activeSection].saints && activeFilters[activeSection].saints.includes(q.source);
+      document.getElementById('modalSource').innerHTML = q.source ? `<span class="modal-source-link${isSaintActive ? ' active' : ''}" data-modal-saint="${escAttr(q.source)}">${escHtml(q.source)}</span>` : '';
+
+      // Attach modal saint click handler
+      const modalSaintEl = document.querySelector('[data-modal-saint]');
+      if (modalSaintEl) {
+        modalSaintEl.addEventListener('click', () => {
+          const arr = activeFilters[activeSection].saints;
+          if (arr) {
+            const sIdx = arr.indexOf(q.source);
+            if (sIdx > -1) arr.splice(sIdx, 1);
+            else arr.push(q.source);
+          }
+          modalSaintEl.classList.toggle('active');
+          renderFilterList(activeSection);
+          renderCards();
+          updateQuoteCount();
+        });
+      }
       document.getElementById('modalReference').textContent = q.reference || '';
       document.getElementById('modalUrl').innerHTML = q.url
         ? `<a href="${escHtml(q.url)}" target="_blank" rel="noopener">View Source ↗</a>`
         : '';
+      // Render Text/Sub-Text in modal
+      let modalTextsHtml = '';
+      if (q.text) {
+        const isTextActive = activeFilters[activeSection].texts && activeFilters[activeSection].texts.includes(q.text);
+        modalTextsHtml += `<span class="modal-tag modal-text-tag${isTextActive ? ' active' : ''}" data-modal-text="${escAttr(q.text)}">${escHtml(q.text)}</span>`;
+      }
+      if (q.subText) {
+        const isSubActive = activeFilters[activeSection].subTexts && activeFilters[activeSection].subTexts.includes(q.subText);
+        modalTextsHtml += `<span class="modal-tag modal-text-tag${isSubActive ? ' active' : ''}" data-modal-subtext="${escAttr(q.subText)}">${escHtml(q.subText)}</span>`;
+      }
+
+      // Render Tags in modal (interactive)
       const tagsArr = activeFilters[activeSection].tags || [];
-      document.getElementById('modalTags').innerHTML = (q.tags || [])
-        .map(t => {
-          const isActive = tagsArr.includes(t);
-          return `<span class="modal-tag${isActive ? ' active' : ''}" data-modal-tag="${escAttr(t)}">${escHtml(t)}</span>`;
-        }).join('');
+      const modalTagsHtml = (q.tags || []).map(t => {
+        const isActive = tagsArr.includes(t);
+        return `<span class="modal-tag${isActive ? ' active' : ''}" data-modal-tag="${escAttr(t)}">${escHtml(t)}</span>`;
+      }).join('');
+
+      document.getElementById('modalTags').innerHTML = modalTextsHtml + modalTagsHtml;
+
       // Attach modal tag click handlers
-      document.querySelectorAll('[data-modal-tag]').forEach(tag => {
+      document.getElementById('modalTags').querySelectorAll('[data-modal-tag]').forEach(tag => {
         tag.addEventListener('click', () => {
           const tagVal = tag.dataset.modalTag;
           const arr = activeFilters[activeSection].tags;
-          if (!arr) { activeFilters[activeSection].tags = [tagVal]; }
-          else {
-            const idx = arr.indexOf(tagVal);
-            if (idx > -1) arr.splice(idx, 1);
-            else arr.push(tagVal);
-          }
-          // Update tag highlight in modal
+          const idx = arr.indexOf(tagVal);
+          if (idx > -1) arr.splice(idx, 1);
+          else arr.push(tagVal);
           tag.classList.toggle('active');
-          // Update sidebar and cards in background
           renderFilterList(activeSection);
           renderCards();
           updateQuoteCount();
+        });
+      });
+
+      // Attach modal text click handlers
+      document.getElementById('modalTags').querySelectorAll('[data-modal-text]').forEach(el => {
+        el.addEventListener('click', () => {
+          toggleArrayFilter('texts', el.dataset.modalText);
+          el.classList.toggle('active');
+        });
+      });
+
+      // Attach modal sub-text click handlers
+      document.getElementById('modalTags').querySelectorAll('[data-modal-subtext]').forEach(el => {
+        el.addEventListener('click', () => {
+          toggleArrayFilter('subTexts', el.dataset.modalSubtext);
+          el.classList.toggle('active');
         });
       });
       // Actions: Source + Copy
@@ -1704,18 +1941,36 @@ let aiSearchActive = false;
 
     
     // ========== Card Interaction Helpers ==========
-    function addTagFilter(tag) {
-      const arr = activeFilters[activeSection].tags;
-      const idx = arr.indexOf(tag);
+    function toggleArrayFilter(filterKey, value) {
+      const arr = activeFilters[activeSection][filterKey];
+      if (!arr) return;
+      const idx = arr.indexOf(value);
       if (idx > -1) arr.splice(idx, 1);
-      else arr.push(tag);
-      // Exit AI search mode when applying a filter from a card
+      else arr.push(value);
+      // Exit AI search mode
       if (aiSearchActive) {
         aiSearchActive = false;
         aiResults = [];
         document.getElementById('aiSearch').value = '';
         document.getElementById('searchStatus').textContent = '';
       }
+      // Only switch sidebar tab if there's a matching tab button (don't switch for subTexts)
+      const panel = document.querySelector(`[data-panel="${activeSection}"]`);
+      const matchingTab = panel.querySelector(`[data-filter="${filterKey}"]`);
+      if (matchingTab) {
+        activeFilters[activeSection].tab = filterKey;
+        panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === filterKey));
+      }
+      renderFilterList(activeSection);
+      renderCards();
+      updateQuoteCount();
+    }
+
+    function addTagFilter(tag) {
+      const arr = activeFilters[activeSection].tags;
+      const tagIdx = arr.indexOf(tag);
+      if (tagIdx > -1) arr.splice(tagIdx, 1);
+      else arr.push(tag);
       activeFilters[activeSection].tab = 'tags';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -1727,16 +1982,9 @@ let aiSearchActive = false;
 
     function setTopicFilter(topic) {
       const arr = activeFilters[activeSection].topics;
-      const idx = arr.indexOf(topic);
-      if (idx > -1) arr.splice(idx, 1);
+      const topicIdx = arr.indexOf(topic);
+      if (topicIdx > -1) arr.splice(topicIdx, 1);
       else arr.push(topic);
-      // Exit AI search mode when applying a filter from a card
-      if (aiSearchActive) {
-        aiSearchActive = false;
-        aiResults = [];
-        document.getElementById('aiSearch').value = '';
-        document.getElementById('searchStatus').textContent = '';
-      }
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
