@@ -873,8 +873,9 @@
 
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
-      .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; }
+      .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; flex-direction: row; justify-content: space-between; }
       .logo { flex-direction: row; align-items: center; gap: 8px; }
+      .header-right { position: static; transform: none; }
       .logo-desktop { display: none !important; }
       .logo-mobile { display: block !important; }
       .logo-img { height: 32px; max-height: 32px; }
