@@ -226,15 +226,7 @@
       color: var(--accent);
     }
 
-    .header-right {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
+    
 
     /* Header collapse button */
     .header-collapse-btn {
@@ -516,6 +508,15 @@
       flex-direction: column;
       overflow: hidden;
       z-index: 1;
+    }
+
+    .content-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 8px 24px 0;
+      flex-shrink: 0;
     }
 
     .search-bar-container {
@@ -949,7 +950,7 @@
     @media (max-width: 768px) {
       .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; flex-direction: row; justify-content: space-between; }
       .logo { flex-direction: row; align-items: center; gap: 8px; }
-      .header-right { position: static; transform: none; }
+      
       .logo-desktop { display: none !important; }
       .logo-mobile { display: block !important; }
       .logo-img { height: 32px; max-height: 32px; }
@@ -1011,10 +1012,7 @@
 
       
 
-      <div class="header-right">
-        <span class="quote-count" id="quoteCount">Loading...</span>
-        <button class="theme-toggle" id="themeToggle" title="Toggle theme">&#127769;</button>
-      </div>
+      
     
     </header>
 
@@ -1080,6 +1078,10 @@
 
       <!-- Content -->
       <main class="content">
+        <div class="content-toolbar">
+          <span class="quote-count" id="quoteCount">Loading...</span>
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">&#127769;</button>
+        </div>
         <div class="search-bar-container">
           <div class="search-bar">
             <input type="text" id="aiSearch" placeholder="AI semantic search across all sections...">
@@ -1689,6 +1691,13 @@
           const cardIdx = card ? parseInt(card.dataset.idx) : -1;
           const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
           pinnedQuoteId = q ? q.id : null;
+          // Exit AI search mode
+          if (aiSearchActive) {
+            aiSearchActive = false;
+            aiResults = [];
+            document.getElementById('aiSearch').value = '';
+            document.getElementById('searchStatus').textContent = '';
+          }
           // Toggle saint filter
           const arr = activeFilters[activeSection].saints;
           if (arr) {
@@ -2064,6 +2073,13 @@
       const tagIdx = arr.indexOf(tag);
       if (tagIdx > -1) arr.splice(tagIdx, 1);
       else arr.push(tag);
+      // Exit AI search mode — apply filter to ALL quotes
+      if (aiSearchActive) {
+        aiSearchActive = false;
+        aiResults = [];
+        document.getElementById('aiSearch').value = '';
+        document.getElementById('searchStatus').textContent = '';
+      }
       activeFilters[activeSection].tab = 'tags';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -2078,6 +2094,13 @@
       const topicIdx = arr.indexOf(topic);
       if (topicIdx > -1) arr.splice(topicIdx, 1);
       else arr.push(topic);
+      // Exit AI search mode — apply filter to ALL quotes
+      if (aiSearchActive) {
+        aiSearchActive = false;
+        aiResults = [];
+        document.getElementById('aiSearch').value = '';
+        document.getElementById('searchStatus').textContent = '';
+      }
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
