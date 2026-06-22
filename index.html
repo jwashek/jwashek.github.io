@@ -237,16 +237,24 @@
 
     /* Header hide on scroll */
     .header, .nav-bar {
-      transition: transform 0.3s ease, opacity 0.2s ease;
+      transition: max-height 0.3s ease, min-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+      overflow: hidden;
     }
     .header-hidden .header {
-      transform: translateY(-100%);
+      max-height: 0;
+      min-height: 0;
       opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-bottom: none;
       pointer-events: none;
     }
     .header-hidden .nav-bar {
-      transform: translateY(-100%);
+      max-height: 0;
       opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-bottom: none;
       pointer-events: none;
     }
 
