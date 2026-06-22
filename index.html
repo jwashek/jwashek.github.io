@@ -193,6 +193,7 @@
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       z-index: 99;
+      position: relative;
     }
 
 .nav-tabs {
@@ -233,6 +234,59 @@
       display: flex;
       align-items: center;
       gap: 16px;
+    }
+
+    /* Header collapse button */
+    .header-collapse-btn {
+      position: absolute;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      transition: var(--transition);
+    }
+    .header-collapse-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .header-hidden .header-collapse-btn {
+      display: none;
+    }
+
+    /* Header expand button (shown when collapsed) */
+    .header-expand-btn {
+      display: none;
+      position: fixed;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 4px 16px;
+      border-radius: 0 0 8px 8px;
+      border: 1px solid var(--border);
+      border-top: none;
+      background: var(--bg-glass);
+      backdrop-filter: blur(10px);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 11px;
+      font-family: var(--font-ui);
+      z-index: 200;
+      transition: var(--transition);
+    }
+    .header-expand-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .header-hidden .header-expand-btn {
+      display: block;
     }
 
     /* Header hide on scroll */
@@ -904,13 +958,13 @@
       .logo-mobile { display: block !important; }
       .logo-img { height: 32px; max-height: 32px; }
       .site-desc { display: none; }
-      .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
+      .sidebar { position: fixed; left: 0; top: 0; bottom: 0; z-index: 150; width: var(--sidebar-width); }
       .sidebar.hidden { width: 0; }
       .cards-grid { grid-template-columns: 1fr; }
       .search-bar-container { padding: 12px; }
       .cards-container { padding: 0 12px 80px; }
       .nav-tab { padding: 6px 10px; font-size: 12px; }
-      .sidebar-backdrop { display: none; position: fixed; inset: 0; top: var(--header-height); background: rgba(0,0,0,0.4); z-index: 40; }
+      .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 140; }
       .sidebar-backdrop.active { display: block; }
     }
 
@@ -951,6 +1005,7 @@
 <body>
   <div class="app">
     <!-- Header -->
+    <button class="header-expand-btn" id="headerExpandBtn">▼ Show Header</button>
     <header class="header">
       <div class="logo">
         <img src="logo-desktop.png" alt="Golden Mouth" class="logo-img logo-desktop">
@@ -974,6 +1029,8 @@
         <button class="nav-tab" data-section="text">Texts</button>
         <button class="nav-tab" data-section="council">Councils</button>
       </nav>
+    
+      <button class="header-collapse-btn" id="headerCollapseBtn" title="Collapse header">▲</button>
     </div>
 
 
@@ -2056,21 +2113,13 @@
     });
 
 
-    // ========== Hide Header on Scroll ==========
-    let lastScrollTop = 0;
-    const cardsContainer = document.getElementById('cardsContainer');
+    // ========== Header Collapse Toggle ==========
     const appEl = document.querySelector('.app');
-    
-    cardsContainer.addEventListener('scroll', () => {
-      const st = cardsContainer.scrollTop;
-      if (st > lastScrollTop && st > 80) {
-        // Scrolling down — hide header
-        appEl.classList.add('header-hidden');
-      } else {
-        // Scrolling up — show header
-        appEl.classList.remove('header-hidden');
-      }
-      lastScrollTop = st <= 0 ? 0 : st;
+    document.getElementById('headerCollapseBtn').addEventListener('click', () => {
+      appEl.classList.add('header-hidden');
+    });
+    document.getElementById('headerExpandBtn').addEventListener('click', () => {
+      appEl.classList.remove('header-hidden');
     });
 
 // ========== Initialize ==========
