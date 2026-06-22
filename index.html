@@ -235,6 +235,22 @@
       gap: 16px;
     }
 
+    /* Header hide on scroll */
+    .header, .nav-bar {
+      transition: transform 0.3s ease, opacity 0.2s ease;
+    }
+    .header-hidden .header {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .header-hidden .nav-bar {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+
     .quote-count {
       font-size: 12px;
       color: var(--text-muted);
@@ -2029,6 +2045,24 @@
       renderFilterList(activeSection);
       renderCards();
       updateQuoteCount();
+    });
+
+
+    // ========== Hide Header on Scroll ==========
+    let lastScrollTop = 0;
+    const cardsContainer = document.getElementById('cardsContainer');
+    const appEl = document.querySelector('.app');
+    
+    cardsContainer.addEventListener('scroll', () => {
+      const st = cardsContainer.scrollTop;
+      if (st > lastScrollTop && st > 80) {
+        // Scrolling down — hide header
+        appEl.classList.add('header-hidden');
+      } else {
+        // Scrolling up — show header
+        appEl.classList.remove('header-hidden');
+      }
+      lastScrollTop = st <= 0 ? 0 : st;
     });
 
 // ========== Initialize ==========
