@@ -134,18 +134,20 @@
       min-height: var(--header-height);
       display: flex;
       align-items: center;
-      padding: 12px 24px;
+      justify-content: center;
+      padding: 16px 24px 12px;
+      position: relative;
       background: var(--bg-glass);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
-      gap: 20px;
     }
 
     .logo {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 10px;
+      gap: 4px;
     }
 
     .logo-text { display: flex; flex-direction: column; }
@@ -157,20 +159,28 @@
     }
 
     .logo-img {
-      height: 48px;
-      width: auto;
-      max-height: 48px;
       object-fit: contain;
+    }
+    .logo-desktop {
+      height: 52px;
+      width: auto;
+      max-height: 52px;
+    }
+    .logo-mobile {
+      display: none;
+      height: 36px;
+      width: auto;
+      max-height: 36px;
     }
 
     .site-desc {
       font-size: 11px;
       color: var(--text-muted);
       font-weight: 400;
+      text-align: center;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-top: 1px;
     }
 
     
@@ -216,7 +226,10 @@
     }
 
     .header-right {
-      margin-left: auto;
+      position: absolute;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
       display: flex;
       align-items: center;
       gap: 16px;
@@ -860,8 +873,11 @@
 
     /* ========== Responsive ========== */
     @media (max-width: 768px) {
-      .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; }
-      .logo { font-size: 14px; }
+      .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; flex-direction: row; justify-content: space-between; }
+      .logo { flex-direction: row; align-items: center; gap: 8px; }
+      .header-right { position: static; transform: none; }
+      .logo-desktop { display: none !important; }
+      .logo-mobile { display: block !important; }
       .logo-img { height: 32px; max-height: 32px; }
       .site-desc { display: none; }
       .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
@@ -913,7 +929,8 @@
     <!-- Header -->
     <header class="header">
       <div class="logo">
-        <img src="logo.png" alt="Golden Mouth" class="logo-img" style="height:48px;max-height:48px;width:auto;">
+        <img src="logo-desktop.png" alt="Golden Mouth" class="logo-img logo-desktop">
+        <img src="logo.png" alt="Golden Mouth" class="logo-img logo-mobile">
         <span class="site-desc">A searchable database of quotes, beliefs, and topics from the Holy Saints, Sacred Texts, and Ecumenical Councils of the ancient Christian faith.</span>
       </div>
 
