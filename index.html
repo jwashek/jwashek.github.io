@@ -238,19 +238,19 @@
 
     /* Header collapse button */
     .header-collapse-btn {
-      position: fixed;
-      top: 8px;
+      position: absolute;
+      bottom: -14px;
       left: 50%;
       transform: translateX(-50%);
-      padding: 4px 16px;
-      border-radius: 0 0 8px 8px;
+      padding: 2px 12px;
+      border-radius: 0 0 6px 6px;
       border: 1px solid var(--border);
       border-top: none;
       background: var(--bg-glass);
       backdrop-filter: blur(10px);
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 11px;
+      font-size: 10px;
       font-family: var(--font-ui);
       z-index: 200;
       transition: var(--transition);
@@ -267,18 +267,18 @@
     .header-expand-btn {
       display: none;
       position: fixed;
-      top: 8px;
+      top: 0;
       left: 50%;
       transform: translateX(-50%);
-      padding: 4px 16px;
-      border-radius: 0 0 8px 8px;
+      padding: 3px 14px;
+      border-radius: 0 0 6px 6px;
       border: 1px solid var(--border);
       border-top: none;
       background: var(--bg-glass);
       backdrop-filter: blur(10px);
       color: var(--text-muted);
       cursor: pointer;
-      font-size: 11px;
+      font-size: 10px;
       font-family: var(--font-ui);
       z-index: 200;
       transition: var(--transition);
@@ -1007,7 +1007,6 @@
 <body>
   <div class="app">
     <!-- Header -->
-    <button class="header-collapse-btn" id="headerCollapseBtn">▲ Hide Header</button>
     <button class="header-expand-btn" id="headerExpandBtn">▼ Show Header</button>
     <header class="header">
       <div class="logo">
@@ -1032,6 +1031,7 @@
         <button class="nav-tab" data-section="text">Texts</button>
         <button class="nav-tab" data-section="council">Councils</button>
       </nav>
+      <button class="header-collapse-btn" id="headerCollapseBtn">▲ Hide</button>
     </div>
 
 
