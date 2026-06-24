@@ -1510,8 +1510,11 @@
             const textIdx = arr.indexOf(textVal);
             if (textIdx > -1) arr.splice(textIdx, 1);
             else arr.push(textVal);
+            console.log('TEXT FILTER TOGGLED:', textVal, 'Current texts:', JSON.stringify(arr), 'Section:', section);
             renderFilterList(section);
             renderCards();
+            const filtered = getFilteredQuotes();
+            console.log('FILTERED RESULTS:', filtered.length, 'texts filter:', JSON.stringify(activeFilters[section].texts));
             updateQuoteCount();
             return;
           }
