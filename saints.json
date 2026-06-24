@@ -3,9 +3,9 @@
     "id": "saint-0",
     "type": "saint",
     "topic": "On God",
-    "quote": "\"But God is the cause of injury to no one.\" -- Saint Methodius of Olympus (250-311 AD), Banquet of the Ten Virgins, Discourse 8, Chapter 16",
+    "quote": "\"But God is the cause of injury to no one.\" -- Saint Methodius of Olympus (died 311 AD), Banquet of the Ten Virgins, Discourse 8, Chapter 16",
     "reference": "Banquet of the Ten Virgins, Discourse 8, Chapter 16",
-    "source": "Saint Methodius of Olympus (250-311 AD)",
+    "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
       "God is not the author of evil",
       "attributes of God",
@@ -87,8 +87,8 @@
       "against faith alone"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.iv.html#:~:text=for%20we,hate%20pride",
-    "text": "",
-    "subText": "",
+    "text": "Festal Letters",
+    "subText": "Letter 4",
     "section": ""
   },
   {
@@ -208,8 +208,8 @@
       "against eternal security"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.iii.html#:~:text=for%20so,are%20without%20understanding",
-    "text": "",
-    "subText": "",
+    "text": "Festal Letters",
+    "subText": "Letter 3",
     "section": ""
   },
   {
@@ -249,8 +249,8 @@
       "eternal fire"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.iii.html#:~:text=but%20such,of%20the%20unthankful",
-    "text": "",
-    "subText": "",
+    "text": "Festal Letters",
+    "subText": "Letter 3",
     "section": ""
   },
   {
@@ -267,8 +267,8 @@
       "praise"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.iii.html#:~:text=but%20the%20faithful,thanks%20unto%20the%20Lord",
-    "text": "",
-    "subText": "",
+    "text": "Festal Letters",
+    "subText": "Letter 3",
     "section": ""
   },
   {
@@ -412,9 +412,9 @@
       "thanksgiving",
       "gratitude"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.iii.html#:~:text=being%20gr,will%20give%20thanks",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.iii.html#:~:text=being%20grievously,will%20give%20thanks",
+    "text": "Festal Letters",
+    "subText": "Letter 3",
     "section": ""
   },
   {
@@ -455,8 +455,8 @@
       "christian living"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.iii.html#:~:text=nor%20do,degrade%20them",
-    "text": "",
-    "subText": "",
+    "text": "Festal Letters",
+    "subText": "Letter 3",
     "section": ""
   },
   {
@@ -582,9 +582,9 @@
       "deposit of faith",
       "against Sola Scriptura"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.ii.html#:~:text=But%20after%20him,1%20power",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.ii.html#:~:text=But%20after%20him,power.",
+    "text": "Festal Letters",
+    "subText": "Letter 3",
     "section": ""
   },
   {
@@ -815,9 +815,9 @@
       "grace",
       "silence"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xix.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xix.html#:~:text=and%20enter,salt",
+    "text": "Personal Letters",
+    "subText": "Letter 64",
     "section": ""
   },
   {
@@ -840,9 +840,9 @@
       "final judgment",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xvii.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xvii.html#:~:text=but%20do%20you,day%20of%20judgment",
+    "text": "Personal Letters",
+    "subText": "Letter 62",
     "section": ""
   },
   {
@@ -860,9 +860,9 @@
       "preservation of true faith",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xvii.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xvii.html#:~:text=let%20the%20apostle,some%20new%20thing",
+    "text": "Personal Letters",
+    "subText": "Letter 62",
     "section": ""
   },
   {
@@ -882,8 +882,8 @@
       "blasphemy against the Holy Spirit"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xvi.html#:~:text=for%20let,His%20Holy%20Spirit",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 61",
     "section": ""
   },
   {
@@ -977,8 +977,8 @@
       "false Christians"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xvi.html#:~:text=but%20if%20even,wisdom%20of%20God",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 61",
     "section": ""
   },
   {
@@ -1201,8 +1201,8 @@
       "prayer"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ix.html#:~:text=if%20arius,life%20together",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 54",
     "section": ""
   },
   {
@@ -1219,8 +1219,8 @@
       "judgment"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ix.html#:~:text=Arius%20had,thy%20oath",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 54",
     "section": ""
   },
   {
@@ -1240,8 +1240,8 @@
       "avoiding heretics"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.viii.html#:~:text=and%20we%20are,him%20avoid",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 53",
     "section": ""
   },
   {
@@ -1294,8 +1294,8 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ix.html#:~:text=so%20the%20antichristian,their%20opinions",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 54",
     "section": ""
   },
   {
@@ -1313,8 +1313,8 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ix.html#:~:text=and%20will%20not,enemy%20of%20Christ",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 54",
     "section": ""
   },
   {
@@ -1332,8 +1332,8 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ix.html#:~:text=4.%20Such,human%20judgments",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 54",
     "section": ""
   },
   {
@@ -1354,8 +1354,8 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.x.html#:~:text=let%20then,that%20one",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 55",
     "section": ""
   },
   {
@@ -1371,8 +1371,8 @@
       "deity of Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xi.html#:~:text=certain%20heretics,thing%20made%20and%20changeable",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 56",
     "section": ""
   },
   {
@@ -1393,8 +1393,8 @@
       "Macedonianism"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xi.html#:~:text=but%20since,by%20the%20Son",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 56",
     "section": ""
   },
   {
@@ -1529,8 +1529,8 @@
       "Apollinarianism"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=For%20the%20statements,apostolic%20teaching",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -1550,8 +1550,8 @@
       "refuting Apollinarianism"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=while%20in%20saying%20that,and%20ransom%20itself",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -1666,8 +1666,8 @@
       "Arianism"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ii.html#:~:text=On%20account,evil%20against%20the%20churches",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 47",
     "section": ""
   },
   {
@@ -1746,8 +1746,8 @@
       "Manichean"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=For%20if%20the%20Word%20were,salvation%20in%20the%20Word%20Himself",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -1802,8 +1802,8 @@
       "refuting Apollinarianism"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=For%20if%20(,causes%20a%20Tetrad%20instead%20of%20a%20Triad",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -1819,8 +1819,8 @@
       "Apollinarianism"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=or%20who%20devised,Essence%20of%20Wisdom",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -1838,8 +1838,8 @@
       "Apollinarianism"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=and%20how,receive%20an%20addition",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -1892,8 +1892,8 @@
       "how heretics operate"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ii.html#:~:text=For%20you%20yourselves,they%20committed%20against%20the%20churches",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 47",
     "section": ""
   },
   {
@@ -1912,8 +1912,8 @@
       "false doctrine"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=What%20lower%20region,not%20in%20nature",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -1934,8 +1934,8 @@
       "Christology"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=Or%20who%20have%20been%20so%20venturesome,Word%20of%20God%20another",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -1957,8 +1957,8 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ii.html#:~:text=For%20what,fictitious",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 47",
     "section": ""
   },
   {
@@ -1975,8 +1975,8 @@
       "God's mercy"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.ii.html#:~:text=Those%20who%20believe%20in%20Him%20ought%20not%20to%20be%20ungrateful%20for%20His%20many%20benefits",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 47",
     "section": ""
   },
   {
@@ -1996,8 +1996,8 @@
       "Arianism"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.i.html#:~:text=Formerly,communion%20of%20all",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 46",
     "section": ""
   },
   {
@@ -2274,7 +2274,7 @@
       "apokatastasis"
     ],
     "url": "https://ccel.org/ccel/methodius/banquet/anf06.xi.viii.html#:~:text=did%20He%20come,from%20light",
-    "text": "",
+    "text": "Oration Concerning Simeon and Anna",
     "subText": "",
     "section": ""
   },
@@ -2715,8 +2715,8 @@
       "heretics"
     ],
     "url": "https://ccel.org/ccel/methodius/banquet/anf06.xi.vi.ii.html#:~:text=He%20says%20that%20Origen,trifles",
-    "text": "",
-    "subText": "",
+    "text": "Fragments",
+    "subText": "Extracts from the Work on Things Created",
     "section": ""
   },
   {
@@ -2753,8 +2753,8 @@
       "Aristotle"
     ],
     "url": "https://ccel.org/ccel/methodius/banquet/anf06.xi.vi.ii.html#:~:text=let%20us%20suppose,of%20an%20artificer",
-    "text": "",
-    "subText": "",
+    "text": "Fragments",
+    "subText": "Extracts from the Work on Things Created",
     "section": ""
   },
   {
@@ -2771,8 +2771,8 @@
       "co-eternal creation"
     ],
     "url": "https://ccel.org/ccel/methodius/banquet/anf06.xi.vi.ii.html#:~:text=origen%20says%20that,not%20so%20by%20himself",
-    "text": "",
-    "subText": "",
+    "text": "Fragments",
+    "subText": "Extracts from the Work on Things Created",
     "section": ""
   },
   {
@@ -3198,7 +3198,7 @@
       "theosis",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=our%20part",
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=our%20part,stripped%20of%20his%20virtue.",
     "text": "Homilies",
     "subText": "Homilies on Ephesians",
     "section": "Homily 13"
@@ -3217,7 +3217,7 @@
       "against faith alone",
       "way of life"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=already",
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=how%20does,life%20and%20from%20works",
     "text": "Homilies",
     "subText": "Homilies on Ephesians",
     "section": "Homily 13"
@@ -3656,9 +3656,9 @@
       "acquiring the virtues"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.x.html#:~:text=But%20how%20is%20it",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 9"
   },
   {
     "id": "saint-194",
@@ -5296,9 +5296,9 @@
       "the devil",
       "heresy"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxxxii.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxxxii.html#:~:text=for%20many,put%20into%20their%20hearts",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 82",
     "section": ""
   },
   {
@@ -5871,9 +5871,9 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.ii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Fragments",
+    "subText": "Fragments from the Lost Writings of Irenaeus",
+    "section": "Fragment 2"
   },
   {
     "id": "saint-309",
@@ -5914,10 +5914,10 @@
       "the Church",
       "presbyters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.ii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.ii.html#:~:text=these4798,down%20to%20thee",
+    "text": "Fragments",
+    "subText": "Fragments from the Lost Writings of Irenaeus",
+    "section": "Fragment 2"
   },
   {
     "id": "saint-311",
@@ -5934,10 +5934,10 @@
       "against eternal security",
       "Docetism"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iv.xi.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iv.xi.html#:~:text=flee,planting%20of%20the%20Father",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Trallians",
+    "section": "Chapter 11"
   },
   {
     "id": "saint-312",
@@ -6227,10 +6227,10 @@
       "faith alone",
       "against eternal security"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.v.html#:~:text=only%20comfort",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.v.html#:~:text=there%20is%20but%20one,which%20shall%20avail%20to%20save%20us",
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 4"
   },
   {
     "id": "saint-327",
@@ -6262,10 +6262,10 @@
       "losing salvation",
       "against eternal security"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.v.html#:~:text=in%20Hell%20we",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.v.html#:~:text=in%20Hell%20we,shall%20feel%20the%20difference",
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 4"
   },
   {
     "id": "saint-329",
@@ -6372,7 +6372,7 @@
       "against faith alone",
       "against eternal security"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.v.html#:~:text=not%20merely%20that",
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.v.html#:~:text=not%20merely%20that,it%20would%20profit%20us%20nothing",
     "text": "Homilies",
     "subText": "Homilies on Ephesians",
     "section": "Homily 4"
@@ -6391,7 +6391,7 @@
       "against faith alone",
       "faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.v.html#:~:text=is%20justified",
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.v.html#:~:text=but%20no%20one,we%20were%20not",
     "text": "Homilies",
     "subText": "Homilies on Ephesians",
     "section": "Homily 4"
@@ -6732,7 +6732,7 @@
       "faith alone",
       "good works"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.iii.html#:~:text=earnest%20is",
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.iii.html#:~:text=an%20earnest%20is,He%20will%20add%20the%20rest",
     "text": "Homilies",
     "subText": "Homilies on Ephesians",
     "section": "Homily 2"
@@ -6824,10 +6824,10 @@
       "works",
       "against imputed righteousness"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.ii.html#:~:text=Himself%20rendered",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.ii.html#:~:text=He%20hath%20Himself%20rendered,eye%20of%20God%20may%20look",
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 1"
   },
   {
     "id": "saint-358",
@@ -6900,9 +6900,9 @@
       "twisting scripture",
       "hardness of heart"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.lxviii.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxviii.html#:~:text=for%20some,to%20explain%20them",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 68",
     "section": ""
   },
   {
@@ -7474,8 +7474,8 @@
       "how heretics operate",
       "martyrdom"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xii.ii.vii.html#:~:text=persecutions",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xii.ii.vii.html#:~:text=the%20arian%20madmen%20they%20caused,in%20the%20Churches",
+    "text": "Encyclical Letter",
     "subText": "",
     "section": ""
   },
@@ -7492,8 +7492,8 @@
       "martyrdom",
       "persecution"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xii.ii.iv.html#:~:text=impious",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xii.ii.iv.html#:~:text=and%20the%20impious,were%20keeping%20fast",
+    "text": "Encyclical Letter",
     "subText": "",
     "section": ""
   },
@@ -7860,9 +7860,9 @@
       "doctrines",
       "good"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iii.ix.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iii.ix.html#:~:text=we%20know,while%20others%20are%20good",
+    "text": "The Second Apology",
+    "subText": "Chapter 9",
     "section": ""
   },
   {
@@ -7879,9 +7879,9 @@
       "eternal fire",
       "fear"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iii.ix.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iii.ix.html#:~:text=and%20that%20no,vice%20is%20anything",
+    "text": "The Second Apology",
+    "subText": "Chapter 9",
     "section": ""
   },
   {
@@ -7978,9 +7978,9 @@
       "deity of Christ",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.lxiii.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.lxiii.html#:~:text=for%20they%20who,is%20even%20God",
+    "text": "The First Apology",
+    "subText": "Chapter 63",
     "section": ""
   },
   {
@@ -8278,9 +8278,9 @@
       "heretics",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xxvi.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xxvi.html#:~:text=and%20he,called%20Christians",
+    "text": "The First Apology",
+    "subText": "Chapter 26",
     "section": ""
   },
   {
@@ -8344,8 +8344,8 @@
       "blasphemy against the Holy Spirit",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxiii.ii.html#:~:text=for%20those%20who",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxiii.ii.html#:~:text=for%20those%20who,manichaeans",
+    "text": "Tome to the Antiochians",
     "subText": "",
     "section": ""
   },
@@ -8484,7 +8484,7 @@
       "atonement"
     ],
     "url": "https://www.scribd.com/document/966236858/Disputations-With-Pyrrhus-Maximus-2#page=44",
-    "text": "",
+    "text": "The Disputation with Pyrrhus",
     "subText": "",
     "section": ""
   },
@@ -8549,7 +8549,7 @@
       "Docetism"
     ],
     "url": "https://www.scribd.com/document/966236858/Disputations-With-Pyrrhus-Maximus-2#page=38",
-    "text": "",
+    "text": "The Disputation with Pyrrhus",
     "subText": "",
     "section": ""
   },
@@ -8612,7 +8612,7 @@
       "nature"
     ],
     "url": "https://www.scribd.com/document/966236858/Disputations-With-Pyrrhus-Maximus-2#page=33",
-    "text": "",
+    "text": "The Disputation with Pyrrhus",
     "subText": "",
     "section": ""
   },
@@ -8651,7 +8651,7 @@
       "ecumenical council"
     ],
     "url": "https://www.scribd.com/document/966236858/Disputations-With-Pyrrhus-Maximus-2#page=28",
-    "text": "",
+    "text": "The Disputation with Pyrrhus",
     "subText": "",
     "section": ""
   },
@@ -8709,7 +8709,7 @@
       "doctrine matters"
     ],
     "url": "https://www.scribd.com/document/966236858/Disputations-With-Pyrrhus-Maximus-2#page=23",
-    "text": "",
+    "text": "The Disputation with Pyrrhus",
     "subText": "",
     "section": ""
   },
@@ -8771,8 +8771,8 @@
       "hypostases",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xi.ii.vi.html#:~:text=away",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xi.ii.vi.html#:~:text=but%20away,which%20is%20to%20come",
+    "text": "On Luke 10:22 and Matthew 11:27",
     "subText": "",
     "section": ""
   },
@@ -8793,8 +8793,8 @@
       "delusion",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xi.ii.v.html#:~:text=torture",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xi.ii.v.html#:~:text=and%20the%20arians,modern%20jews",
+    "text": "On Luke 10:22 and Matthew 11:27",
     "subText": "",
     "section": ""
   },
@@ -9070,8 +9070,8 @@
       "apostasy",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=Christians",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=for%20it%20becomes,charged%20us",
+    "text": "The Deposition of Arius",
     "subText": "",
     "section": ""
   },
@@ -9095,8 +9095,8 @@
       "apostasy",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=heresies",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=there%20have%20been,sprung%20away",
+    "text": "The Deposition of Arius",
     "subText": "",
     "section": ""
   },
@@ -9115,8 +9115,8 @@
       "scripture interpretation",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=who%20that%20has%20heard%20the",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=who%20that%20has%20heard%20the,and%20for%20ever",
+    "text": "The Deposition of Arius",
     "subText": "",
     "section": ""
   },
@@ -9135,8 +9135,8 @@
       "the truth",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=but%20Eusebius",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=but%20Eusebius,Christ%20with%20Belial",
+    "text": "The Deposition of Arius",
     "subText": "",
     "section": ""
   },
@@ -9157,8 +9157,8 @@
       "deposit of faith",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=novelties",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=and%20the%20novelties,wished%20to%20create%20us",
+    "text": "The Deposition of Arius",
     "subText": "",
     "section": ""
   },
@@ -9176,8 +9176,8 @@
       "Arianism",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=lawless",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.viii.ii.html#:~:text=now%20there%20are,antichristian%20heresy",
+    "text": "The Deposition of Arius",
     "subText": "",
     "section": ""
   },
@@ -9234,10 +9234,10 @@
       "the devil",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.xvii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.xvii.html#:~:text=for%20this%20end,set%20before%20you",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Ephesians",
+    "section": "Chapter 17"
   },
   {
     "id": "saint-477",
@@ -9259,10 +9259,10 @@
       "against eternal security",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.xvi.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.xvi.html#:~:text=do%20not%20err,hearkens%20unto%20him",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Ephesians",
+    "section": "Chapter 16"
   },
   {
     "id": "saint-478",
@@ -9362,10 +9362,10 @@
       "against eternal security",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.vii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.vii.html#:~:text=for%20some,scarcely%20be%20cured",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Ephesians",
+    "section": "Chapter 7"
   },
   {
     "id": "saint-483",
@@ -9398,12 +9398,16 @@
       "heresy",
       "heretics",
       "doctrine matters",
-      "against eternal security"
+      "against eternal security",
+      "against Dispensationalism",
+      "Israel fulfilled in the Church",
+      "the True Israel",
+      "Spiritual Israel"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iii.x.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iii.x.html#:~:text=for%20were%20He,but%20Judaism%20Christianity",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Magnesians",
+    "section": "Chapter 10"
   },
   {
     "id": "saint-485",
@@ -9422,10 +9426,10 @@
       "Old Testament Saints believed in Christ",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iii.viii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iii.viii.html#:~:text=be%20not%20deceived,Who%20is%20His%20eternal%20Word",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Magnesians",
+    "section": "Chapter 8"
   },
   {
     "id": "saint-486",
@@ -9440,10 +9444,10 @@
       "Docetism",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iv.x.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iv.x.html#:~:text=But%20if,seeming%20to%20exist)",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Trallians",
+    "section": "Chapter 10"
   },
   {
     "id": "saint-487",
@@ -9459,10 +9463,10 @@
       "doctrine matters",
       "against eternal security"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iv.vi.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.iv.vi.html#:~:text=i%20therefore,his%20own%20death",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Trallians",
+    "section": "Chapter 6"
   },
   {
     "id": "saint-488",
@@ -9550,12 +9554,16 @@
       "the Church",
       "heresy",
       "doctrines",
-      "doctrine matters"
+      "doctrine matters",
+      "against \"Spiritual Church\" Protestant doctrine",
+      "against faith alone",
+      "unity",
+      "Church unity"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vi.viii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vi.viii.html#:~:text=for%20where,dwell",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Philadelphians",
+    "section": "Chapter 8"
   },
   {
     "id": "saint-493",
@@ -9570,10 +9578,10 @@
       "Mosaic Law",
       "Judaizers"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vi.vi.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vi.vi.html#:~:text=But%20if%20any,uncircumcised",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Philadelphians",
+    "section": "Chapter 6"
   },
   {
     "id": "saint-494",
@@ -9617,10 +9625,10 @@
       "doctrine matters",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vi.iii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vi.iii.html#:~:text=keep%20yourselves,Christ.]",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Philadelphians",
+    "section": "Chapter 3"
   },
   {
     "id": "saint-496",
@@ -9655,10 +9663,10 @@
       "doctrine matters",
       "proto-protestant ideology"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vii.vii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vii.vii.html#:~:text=They%20abstain,in%20public",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Smyrnaeans",
+    "section": "Chapter 7"
   },
   {
     "id": "saint-498",
@@ -9676,10 +9684,10 @@
       "blasphemy",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vii.v.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vii.v.html#:~:text=for%20what,in%20death",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Smyrnaeans",
+    "section": "Chapter 5"
   },
   {
     "id": "saint-499",
@@ -9696,10 +9704,10 @@
       "unrepentant",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vii.iv.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vii.iv.html#:~:text=But%20I,very%20difficult",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Smyrnaeans",
+    "section": "Chapter 4"
   },
   {
     "id": "saint-500",
@@ -9716,10 +9724,10 @@
       "evil",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vii.ii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.vii.ii.html#:~:text=now,mere%20evil%20spirits",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Smyrnaeans",
+    "section": "Chapter 2"
   },
   {
     "id": "saint-501",
@@ -9734,7 +9742,7 @@
       "rewards",
       "merit and deeds"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.viii.vi.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.viii.vi.html#:~:text=let%20your%20works%20be%20the%20charge1102,a%20worthy%20recompense",
     "text": "Epistles of Ignatius",
     "subText": "Epistle to Polycarp",
     "section": "Chapter 6"
@@ -10337,7 +10345,7 @@
       "glory",
       "virtue"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=measure%20of%20good%20deeds%20equivalent",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=if%20we%20do%20not%20store,have%20a%20place%20in%20Heaven",
     "text": "Two Exhortations to Theodore After His Fall",
     "subText": "Letter 1",
     "section": ""
@@ -10426,7 +10434,7 @@
       "works",
       "remission of sin"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=brings%20so%20much%20consolation",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=now%20if%20the%20confession,means%20of%20our%20deeds",
     "text": "Two Exhortations to Theodore After His Fall",
     "subText": "Letter 1",
     "section": ""
@@ -10591,9 +10599,9 @@
       "hell",
       "exclusion from the kingdom of Heaven"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=exclusion%20from%20the%20glory%20of",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=i%20say%20that,respect%20of%20punishment",
+    "text": "Two Exhortations to Theodore After His Fall",
+    "subText": "Letter 1",
     "section": ""
   },
   {
@@ -10610,9 +10618,9 @@
       "glory",
       "angels"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=all%20things%20serene%20and%20tranquil",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=all%20will%20be%20in%20a,obtain%20this%20promise?",
+    "text": "Two Exhortations to Theodore After His Fall",
+    "subText": "Letter 1",
     "section": ""
   },
   {
@@ -10672,9 +10680,9 @@
       "final judgment",
       "outer darkness"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=when%20you%20hear%20of%20fire",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=For%20when%20you%20hear%20of%20fire,souls%20from%20the%20darkness?",
+    "text": "Two Exhortations to Theodore After His Fall",
+    "subText": "Letter 1",
     "section": ""
   },
   {
@@ -11867,8 +11875,8 @@
       "against imputed righteousness"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.ii.ii.xxx.html",
-    "text": "",
-    "subText": "",
+    "text": "The First Epistle of Clement to the Corinthians",
+    "subText": "Chapter 30",
     "section": ""
   },
   {
@@ -11954,8 +11962,8 @@
       "the Church"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.ii.ii.xvi.html",
-    "text": "",
-    "subText": "",
+    "text": "The First Epistle of Clement to the Corinthians",
+    "subText": "Chapter 16",
     "section": ""
   },
   {
@@ -12142,7 +12150,7 @@
       "hypocrisy",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.iv.ii.vi.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.iv.ii.vi.html#:~:text=let%20us%20be,into%20error",
     "text": "Epistle of Polycarp to the Philippians",
     "subText": "Chapter 6",
     "section": ""
@@ -12408,7 +12416,7 @@
       "patience",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.iv.xii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.iv.xii.html#:~:text=7.%20Such,in%20the%20first%20book",
     "text": "Against Heresies",
     "subText": "Book 3",
     "section": "Chapter 11"
@@ -12594,10 +12602,10 @@
       "torment",
       "sinners"
     ],
-    "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf#:~:text=I%20also%20maintain%20that%20those%20who,bitter%20regret",
+    "text": "Homilies",
+    "subText": "Ascetical Homilies",
+    "section": "Homily 28"
   },
   {
     "id": "saint-652",
@@ -12659,8 +12667,8 @@
     "id": "saint-655",
     "type": "saint",
     "topic": "On Heresy and Heretics",
-    "quote": "\"But here some one perhaps will ask, Since the canon of Scripture is complete, and sufficient of itself for everything, and more than sufficient, what need is there to join with it the authority of the Church's interpretation? For this reason — because, owing to the depth of Holy Scripture, all do not accept it in one and the same sense, but one understands its words in one way, another in another; so that it seems to be capable of as many interpretations as there are interpreters. For Novatian expounds it one way, Sabellius another, Donatus another, Arius, Eunomius, Macedonius, another, Photinus, Apollinaris, Priscillian, another, Iovinian, Pelagius, Celestius, another, lastly, Nestorius another. Therefore, it is very necessary, on account of so great intricacies of such various error, that the rule for the right understanding of the prophets and apostles should be framed in accordance with the standard of Ecclesiastical and Catholic interpretation.\" -- Saint Vincent of Lerins (died ~450 AD), Commonitory, Chapter 2, Section 6",
-    "reference": "Commonitory, Chapter 2, Section 6",
+    "quote": "\"But here some one perhaps will ask, Since the canon of Scripture is complete, and sufficient of itself for everything, and more than sufficient, what need is there to join with it the authority of the Church's interpretation? For this reason — because, owing to the depth of Holy Scripture, all do not accept it in one and the same sense, but one understands its words in one way, another in another; so that it seems to be capable of as many interpretations as there are interpreters. For Novatian expounds it one way, Sabellius another, Donatus another, Arius, Eunomius, Macedonius, another, Photinus, Apollinaris, Priscillian, another, Iovinian, Pelagius, Celestius, another, lastly, Nestorius another. Therefore, it is very necessary, on account of so great intricacies of such various error, that the rule for the right understanding of the prophets and apostles should be framed in accordance with the standard of Ecclesiastical and Catholic interpretation.\" -- Saint Vincent of Lerins (died ~450 AD), Commonitory, Chapter 2, Section 5",
+    "reference": "Commonitory, Chapter 2, Section 5",
     "source": "Saint Vincent of Lerins (died ~450 AD)",
     "tags": [
       "heretics",
@@ -12669,11 +12677,13 @@
       "twisting scripture",
       "tradition",
       "against Sola Scriptura",
-      "the Church"
+      "the Church",
+      "against faith alone",
+      "refuting Protestantism"
     ],
-    "url": "https://www.newadvent.org/fathers/3506.htm",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf211/npnf211.iii.iii.html#:~:text=but%20here,catholic%20interpretation",
+    "text": "Commonitory",
+    "subText": "Chapter 2",
     "section": ""
   },
   {
@@ -12827,9 +12837,9 @@
       "against eternal security",
       "heresy"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=41.%20let%20all%20of%20us,lovers.",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 5",
     "section": ""
   },
   {
@@ -12848,7 +12858,7 @@
       "against eternal security",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.ii.xxvi.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.ii.xxvi.html#:~:text=but%20they,practise%20them",
     "text": "Against Heresies",
     "subText": "Book 1",
     "section": "Chapter 25"
@@ -12869,9 +12879,9 @@
       "perverting the passions",
       "doctrine matters"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=God%20is%20not%20the%20cause%20or,this%20against%20our%20neighbour",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 26",
     "section": ""
   },
   {
@@ -12888,16 +12898,16 @@
       "Gnosticism",
       "doctrine matters"
     ],
-    "url": "https://www.newadvent.org/fathers/32012.htm",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.viii.iii.html#:~:text=it%20is%20equally,maker%20of%20health",
+    "text": "Hexaemeron",
+    "subText": "Homily 2",
     "section": ""
   },
   {
     "id": "saint-667",
     "type": "saint",
     "topic": "On Doctrine and Spiritual Teachings",
-    "quote": "\"Whoever has the least intelligence will confess that God is good, righteous, wise, true, helpful, not the cause of evils, free from passion, and everything of that kind. And if the righteous be better than the unrighteous, and unrighteousness be abominable to them, God, being righteous, rejoices in righteousness, and unrighteousness is hateful to Him, being opposed and hostile to righteousness. Therefore God is not the author of unrighteousness.\" -- Saint Methodius of Olympus (250-311 AD), Banquet of the Ten Virgins, Discourse 8, Chapter 16",
+    "quote": "\"Whoever has the least intelligence will confess that God is good, righteous, wise, true, helpful, not the cause of evils, free from passion, and everything of that kind. And if the righteous be better than the unrighteous, and unrighteousness be abominable to them, God, being righteous, rejoices in righteousness, and unrighteousness is hateful to Him, being opposed and hostile to righteousness. Therefore God is not the author of unrighteousness.\" -- Saint Methodius of Olympus (died 311 AD), Banquet of the Ten Virgins, Discourse 8, Chapter 16",
     "reference": "Banquet of the Ten Virgins, Discourse 8, Chapter 16",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
@@ -12915,7 +12925,7 @@
     "id": "saint-668",
     "type": "saint",
     "topic": "On Free Will",
-    "quote": "\"Now those who decide that man is not possessed of free-will, and affirm that he is governed by the unavoidable necessities of fate, and her unwritten commands, are guilty of impiety towards God Himself, making Him out to be the cause and author of human evils. For if He harmoniously orders the whole circular motion of the stars, with a wisdom which man can neither express nor comprehend, directing the course of the universe; and the stars produce the qualities of virtue and vice in human life, dragging men to these things by the chains of necessity; then they declare God to be the Cause and Giver of evils.\" -- Saint Methodius of Olympus (250-311 AD), Banquet of the Ten Virgins, Discourse 8, Chapter 16",
+    "quote": "\"Now those who decide that man is not possessed of free-will, and affirm that he is governed by the unavoidable necessities of fate, and her unwritten commands, are guilty of impiety towards God Himself, making Him out to be the cause and author of human evils. For if He harmoniously orders the whole circular motion of the stars, with a wisdom which man can neither express nor comprehend, directing the course of the universe; and the stars produce the qualities of virtue and vice in human life, dragging men to these things by the chains of necessity; then they declare God to be the Cause and Giver of evils.\" -- Saint Methodius of Olympus (died 311 AD), Banquet of the Ten Virgins, Discourse 8, Chapter 16",
     "reference": "Banquet of the Ten Virgins, Discourse 8, Chapter 16",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
@@ -12969,9 +12979,9 @@
       "against Sin Nature",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf207/npnf207.ii.xi.html#:~:text=for%20we%20shall%20not%20tolerate%20those",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf207/npnf207.ii.xi.html#:~:text=for%20we%20shall%20not%20tolerate%20those,some%20to%20be%20lost",
+    "text": "Catechetical Lectures",
+    "subText": "Lecture 7",
     "section": ""
   },
   {
@@ -12990,7 +13000,7 @@
       "misunderstanding scripture",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.iv.xiii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.iv.xiii.html#:~:text=but%20all%20the%20rest,interpretations",
     "text": "Against Heresies",
     "subText": "Book 3",
     "section": "Chapter 12"
@@ -12999,7 +13009,7 @@
     "id": "saint-672",
     "type": "saint",
     "topic": "On Heresy and Heretics",
-    "quote": "\"And, indeed, the followers of Marcion do directly blaspheme the Creator, alleging Him to be the creator of evils.\" -- Saint Irenaeus (120-200 AD), Against Heresies, Book 3, Chapter 12, Section 12",
+    "quote": "\"The followers of Marcion do directly blaspheme the Creator, alleging Him to be the creator of evils.\" -- Saint Irenaeus (120-200 AD), Against Heresies, Book 3, Chapter 12, Section 12",
     "reference": "Against Heresies, Book 3, Chapter 12, Section 12",
     "source": "Saint Irenaeus (120-200 AD)",
     "tags": [
@@ -13011,7 +13021,7 @@
       "Gnosticism",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.iv.xiii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.iv.xiii.html#:~:text=the%20followers,creator%20of%20evils",
     "text": "Against Heresies",
     "subText": "Book 3",
     "section": "Chapter 12"
@@ -13033,7 +13043,7 @@
       "Gnosticism",
       "against Sin Nature"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.ii.xxv.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.ii.xxv.html#:~:text=this%20heretic,of%20the%20good",
     "text": "Against Heresies",
     "subText": "Book 1",
     "section": "Chapter 24"
@@ -13054,7 +13064,7 @@
       "Gnosticism",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.ii.xxviii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.ii.xxviii.html#:~:text=Marcion%20of,author%20of%20evils",
     "text": "Against Heresies",
     "subText": "Book 1",
     "section": "Chapter 27"
@@ -13063,7 +13073,7 @@
     "id": "saint-675",
     "type": "saint",
     "topic": "On Heresy and Heretics",
-    "quote": "\"[The heretics] utter blasphemy, also, against our Lord, by cutting off and dividing Jesus from Christ, and Christ from the Savior, and again the Savior from the Word, and the Word from the Only-begotten.\" -- Saint Irenaeus (120-200 AD), Against Heresies, Book 4, Preface, Section 3",
+    "quote": "\"They [i.e., the heretics] utter blasphemy, also, against our Lord, by cutting off and dividing Jesus from Christ, and Christ from the Savior, and again the Savior from the Word, and the Word from the Only-begotten.\" -- Saint Irenaeus (120-200 AD), Against Heresies, Book 4, Preface, Section 3",
     "reference": "Against Heresies, Book 4, Preface, Section 3",
     "source": "Saint Irenaeus (120-200 AD)",
     "tags": [
@@ -13075,7 +13085,7 @@
       "Nestorianism",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.vi.i.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.vi.i.html#:~:text=They%20utter,begotten",
     "text": "Against Heresies",
     "subText": "Book 4",
     "section": "Preface"
@@ -13084,8 +13094,8 @@
     "id": "saint-676",
     "type": "saint",
     "topic": "On Heresy and Heretics",
-    "quote": "\"Hoodwinking therefore multitudes, he [i.e., Marcus, a heretic who carried out false baptism] led on (into enormities) many (dupes) of this description who had become his disciples, by teaching them that they were prone, no doubt, to sin, but beyond the reach of danger, from the fact of their belonging to the perfect power.\" -- Saint Hippolytus of Rome (170-235 AD), Refutation of All Heresies, Book 4, Chapter 36",
-    "reference": "Refutation of All Heresies, Book 4, Chapter 36",
+    "quote": "\"Hoodwinking therefore multitudes, he [i.e., Marcus, a heretic who carried out false baptism] led on (into enormities) many (dupes) of this description who had become his disciples, by teaching them that they were prone, no doubt, to sin, but beyond the reach of danger, from the fact of their belonging to the perfect power.\" -- Saint Hippolytus of Rome (170-235 AD), Refutation of All Heresies, Book 6, Chapter 36",
+    "reference": "Refutation of All Heresies, Book 6, Chapter 36",
     "source": "Saint Hippolytus of Rome (170-235 AD)",
     "tags": [
       "heretics",
@@ -13099,10 +13109,10 @@
       "doctrine matters",
       "proto-Calvinism"
     ],
-    "url": "https://www.newadvent.org/fathers/050106.htm",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iii.iii.iv.xxxvii.html#:~:text=hoodwinking,perfect%20power",
+    "text": "Refutation of All Heresies",
+    "subText": "Book 6",
+    "section": "Chapter 36"
   },
   {
     "id": "saint-677",
@@ -13232,9 +13242,9 @@
       "deification",
       "against imputed righteousness"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xxi.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xxi.html#:~:text=and%20we%20have%20learned,everlasting%20fire",
+    "text": "The First Apology",
+    "subText": "Chapter 21",
     "section": ""
   },
   {
@@ -13924,7 +13934,7 @@
       "against faith alone",
       "against eternal security"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf207/npnf207.ii.xi.html#:~:text=for%20it%20profiteth",
+    "url": "https://ccel.org/ccel/schaff/npnf207/npnf207.ii.xi.html#:~:text=for%20it%20profiteth,sojourning%20here%20in%20fear",
     "text": "Catechetical Lectures",
     "subText": "Lecture 7",
     "section": ""
@@ -13980,7 +13990,7 @@
       "works",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.vi.xxxv.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.vi.xxxv.html#:~:text=for%20the%20matters,not%20in%20words",
     "text": "Horatory Address to the Greeks",
     "subText": "Chapter 35",
     "section": ""
@@ -14000,7 +14010,7 @@
       "justification",
       "works"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ii.ii.xxx.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ii.ii.xxx.html#:~:text=let%20us%20clothe,not%20our%20words",
     "text": "The First Epistle of Clement to the Corinthians",
     "subText": "Chapter 30",
     "section": ""
@@ -14307,7 +14317,7 @@
       "good works",
       "forgiveness"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=as%20one%20spark,multitude%20of%20great%20sins",
     "text": "The Ladder of Divine Ascent",
     "subText": "Brief Summary of All the Previous Steps",
     "section": ""
@@ -14728,9 +14738,9 @@
       "perfection"
     ],
     "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Homilies",
+    "subText": "Ascetical Homilies",
+    "section": "Homily 8"
   },
   {
     "id": "saint-763",
@@ -15225,7 +15235,7 @@
       "merit and deeds",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.xiv.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.xiv.html#:~:text=the%20tree%20is%20made,faith%20to%20the%20end",
     "text": "Epistles of Ignatius",
     "subText": "Epistle to the Ephesians",
     "section": "Chapter 14"
@@ -15353,9 +15363,11 @@
       "false Christians",
       "works",
       "kingdom of heaven",
-      "will of God"
+      "will of God",
+      "against faith alone",
+      "against eternal security"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xvi.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xvi.html#:~:text=and%20let%20those,My%20Father%20which%20is%20in%20heaven.",
     "text": "The First Apology",
     "subText": "Chapter 16",
     "section": ""
@@ -15410,7 +15422,7 @@
       "freedom",
       "free will"
     ],
-    "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
+    "url": "https://www.scribd.com/document/658857686/Wounded-by-Love#page=103",
     "text": "Wounded by Love",
     "subText": "",
     "section": ""
@@ -15484,7 +15496,7 @@
       "anger",
       "humility"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=let%20us%20pay%20close,for%20theirs%20is%20the%20kingdom%20of%20heaven",
     "text": "The Ladder of Divine Ascent",
     "subText": "Step 2",
     "section": ""
@@ -15683,8 +15695,8 @@
       "humility"
     ],
     "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 26",
     "section": ""
   },
   {
@@ -15702,8 +15714,8 @@
       "courage"
     ],
     "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 25",
     "section": ""
   },
   {
@@ -15738,8 +15750,8 @@
       "deliverance"
     ],
     "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 25",
     "section": ""
   },
   {
@@ -15757,8 +15769,8 @@
       "virtue"
     ],
     "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 23",
     "section": ""
   },
   {
@@ -15794,9 +15806,9 @@
       "evil"
     ],
     "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Homilies",
+    "subText": "Ascetical Homilies",
+    "section": "Homily 69"
   },
   {
     "id": "saint-821",
@@ -15810,9 +15822,9 @@
       "peace"
     ],
     "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Homilies",
+    "subText": "Ascetical Homilies",
+    "section": "Homily 51"
   },
   {
     "id": "saint-822",
@@ -15827,9 +15839,9 @@
       "examine yourself"
     ],
     "url": "https://stvladimirs.ca/letters-of-elder-macarius-of-optina/",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Letters of Elder Macarius of Optina",
+    "subText": "Blessed are the Poor in Spirit: For theirs is the Kingdom of Heaven",
+    "section": "Chapter 4"
   },
   {
     "id": "saint-823",
@@ -15847,9 +15859,9 @@
       "pride"
     ],
     "url": "https://stvladimirs.ca/letters-of-elder-macarius-of-optina/",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Letters of Elder Macarius of Optina",
+    "subText": "Blessed are the Poor in Spirit: For theirs is the Kingdom of Heaven",
+    "section": "Chapter 2"
   },
   {
     "id": "saint-824",
@@ -15865,9 +15877,9 @@
       "pride"
     ],
     "url": "https://stvladimirs.ca/letters-of-elder-macarius-of-optina/",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Letters of Elder Macarius of Optina",
+    "subText": "Blessed are the Poor in Spirit: For theirs is the Kingdom of Heaven",
+    "section": "Chapter 2"
   },
   {
     "id": "saint-825",
@@ -16028,7 +16040,7 @@
       "evil"
     ],
     "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -16047,7 +16059,7 @@
       "divine grace"
     ],
     "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -16100,8 +16112,8 @@
       "darkness"
     ],
     "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 25",
     "section": ""
   },
   {
@@ -16120,9 +16132,9 @@
       "joy"
     ],
     "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Homilies",
+    "subText": "Ascetical Homilies",
+    "section": "Homily 42"
   },
   {
     "id": "saint-839",
@@ -16135,8 +16147,8 @@
       "humility"
     ],
     "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 25",
     "section": ""
   },
   {
@@ -16225,7 +16237,7 @@
       "what hell is"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf205/npnf205.x.iii.ii.html#:~:text=surely%20the%20%22hell%22%20which,soul%20resides",
-    "text": "",
+    "text": "On the Soul and the Resurrection",
     "subText": "",
     "section": ""
   },
@@ -16320,9 +16332,9 @@
       "punishment",
       "prayers for the dead"
     ],
-    "url": "https://www.newadvent.org/fathers/0520.htm",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iii.iv.ii.iii.html#:~:text=since%20to%20those,friends%20will%20profit%20them",
+    "text": "Against Plato",
+    "subText": "On the Cause of the Universe",
     "section": ""
   },
   {
@@ -16356,10 +16368,10 @@
       "hell",
       "final judgment"
     ],
-    "url": "https://www.newadvent.org/fathers/0502.htm",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iii.iv.i.vi.i.html#:~:text=But%20the%20souls,the%20flame%20of%20torment",
+    "text": "Fragments",
+    "subText": "Fragments from the Scriptural Commentaries of Hippolytus",
+    "section": "On Proverbs"
   },
   {
     "id": "saint-852",
@@ -16522,9 +16534,9 @@
       "merit and deeds",
       "eternal fire"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xvii.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xvii.html#:~:text=every%20man%20will,received%20from%20God",
+    "text": "The First Apology",
+    "subText": "Chapter 17",
     "section": ""
   },
   {
@@ -16638,9 +16650,9 @@
       "fear",
       "christian living"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=do%20not%20cease%20to%20picture,radiates%20beyond%20any%20fire",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 7",
     "section": ""
   },
   {
@@ -16717,7 +16729,7 @@
     "id": "saint-870",
     "type": "saint",
     "topic": "On Death",
-    "quote": "\"And, therefore, God invented death for our sakes, that He might destroy sin, lest rising up in us immortals, as I said, it should be immortal.\" -- Saint Methodius of Olympus (250-311 AD), From the Discourse on the Resurrection, Part 3, A Synopsis of Some Apostolic Words from the Same Discourse, Paragraph 2",
+    "quote": "\"And, therefore, God invented death for our sakes, that He might destroy sin, lest rising up in us immortals, as I said, it should be immortal.\" -- Saint Methodius of Olympus (died 311 AD), From the Discourse on the Resurrection, Part 3, A Synopsis of Some Apostolic Words from the Same Discourse, Paragraph 2",
     "reference": "From the Discourse on the Resurrection, Part 3, A Synopsis of Some Apostolic Words from the Same Discourse, Paragraph 2",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
@@ -16734,7 +16746,7 @@
     "id": "saint-871",
     "type": "saint",
     "topic": "On Death",
-    "quote": "\"Since it was for this reason that death was appointed by God for the sinner, that evil might not remain forever.\" -- Saint Methodius of Olympus (250-311 AD), From the Discourse on the Resurrection, Part 3, Paragraph 10",
+    "quote": "\"Since it was for this reason that death was appointed by God for the sinner, that evil might not remain forever.\" -- Saint Methodius of Olympus (died 311 AD), From the Discourse on the Resurrection, Part 3, Paragraph 10",
     "reference": "From the Discourse on the Resurrection, Part 3, Paragraph 10",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
@@ -16752,7 +16764,7 @@
     "id": "saint-872",
     "type": "saint",
     "topic": "On Thoughts",
-    "quote": "\"For no one can boast of being so free from sin as not even to have an evil thought.\" -- Saint Methodius of Olympus (250-311 AD), From the Discourse on the Resurrection, Part 1, Paragraph 5",
+    "quote": "\"For no one can boast of being so free from sin as not even to have an evil thought.\" -- Saint Methodius of Olympus (died 311 AD), From the Discourse on the Resurrection, Part 1, Paragraph 5",
     "reference": "From the Discourse on the Resurrection, Part 1, Paragraph 5",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
@@ -16769,7 +16781,7 @@
     "id": "saint-873",
     "type": "saint",
     "topic": "On Death",
-    "quote": "\"For while the body still lives, before it has passed through death, sin must also live with it, as it has its roots concealed within us even though it be externally checked by the wounds inflicted by corrections and warnings; since, otherwise, it would not happen that we do wrong after baptism, as we should be entirely and absolutely free from sin.\" -- Saint Methodius of Olympus (250-311 AD), From the Discourse on the Resurrection, Part 1, Paragraph 5",
+    "quote": "\"For while the body still lives, before it has passed through death, sin must also live with it, as it has its roots concealed within us even though it be externally checked by the wounds inflicted by corrections and warnings; since, otherwise, it would not happen that we do wrong after baptism, as we should be entirely and absolutely free from sin.\" -- Saint Methodius of Olympus Saint Methodius of Olympus (died 311 AD), From the Discourse on the Resurrection, Part 1, Paragraph 5",
     "reference": "From the Discourse on the Resurrection, Part 1, Paragraph 5",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
@@ -16789,7 +16801,7 @@
     "id": "saint-874",
     "type": "saint",
     "topic": "On Death",
-    "quote": "\"God putting an end to sin by means of death, lest man immortal, living a sinner, and sin living in him, should be liable to eternal curse. Wherefore he died, although he had not been created liable to death or corruption, and the soul was separated from the flesh, that sin might perish by death, not being able to live longer in one dead.\" -- Saint Methodius of Olympus (250-311 AD), Banquet of the Ten Virgins, Discourse 9, Chapter 2",
+    "quote": "\"God putting an end to sin by means of death, lest man immortal, living a sinner, and sin living in him, should be liable to eternal curse. Wherefore he died, although he had not been created liable to death or corruption, and the soul was separated from the flesh, that sin might perish by death, not being able to live longer in one dead.\" -- Saint Methodius of Olympus (died 311 AD), Banquet of the Ten Virgins, Discourse 9, Chapter 2",
     "reference": "Banquet of the Ten Virgins, Discourse 9, Chapter 2",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
@@ -16807,7 +16819,7 @@
     "id": "saint-875",
     "type": "saint",
     "topic": "On Death",
-    "quote": "\"But when it came to pass that, by transgressing the commandment (of God), he suffered a terrible and destructive fall, being thus reduced to a state of death, for this reason the Lord says that He came from heaven into (a human) life, leaving the ranks and the armies of angels. For the mountains are to be explained by the heavens, and the ninety and nine sheep by the principalities and powers which the Captain and Shepherd left when He went down to seek the lost one.\" -- Saint Methodius of Olympus (250-311 AD), Banquet of the Ten Virgins, Discourse 3, Chapter 6, Parable of the Lost Sheep Explained",
+    "quote": "\"But when it came to pass that, by transgressing the commandment (of God), he suffered a terrible and destructive fall, being thus reduced to a state of death, for this reason the Lord says that He came from heaven into (a human) life, leaving the ranks and the armies of angels. For the mountains are to be explained by the heavens, and the ninety and nine sheep by the principalities and powers which the Captain and Shepherd left when He went down to seek the lost one.\" -- Saint Methodius of Olympus (died 311 AD), Banquet of the Ten Virgins, Discourse 3, Chapter 6, Parable of the Lost Sheep Explained",
     "reference": "Banquet of the Ten Virgins, Discourse 3, Chapter 6, Parable of the Lost Sheep Explained",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
@@ -17035,7 +17047,7 @@
       "paradise"
     ],
     "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -17593,9 +17605,9 @@
       "forgiveness",
       "hell"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=let%20us%20break,pardon%20our%20debts",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 29",
     "section": ""
   },
   {
@@ -18076,7 +18088,7 @@
       "worship",
       "faith"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.v.v.html#:~:text=when%20you%20have%20once%20departed",
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.v.v.html#:~:text=when%20you%20have%20once%20departed,fruits%20of%20faith",
     "text": "Treatises",
     "subText": "Treatise 5",
     "section": ""
@@ -18093,7 +18105,7 @@
       "salvation",
       "emulate"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.v.ix.html#:~:text=9.%20But",
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.v.ix.html#:~:text=9.%20But,example%20of%20Christ",
     "text": "Treatises",
     "subText": "Treatise 9",
     "section": ""
@@ -18693,9 +18705,9 @@
       "how heretics operate",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.iii.html#:~:text=exactitude",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.iii.html#:~:text=the%20petty,variation%20in%20nature",
+    "text": "On the Holy Spirit",
+    "subText": "Chapter 2",
     "section": ""
   },
   {
@@ -18798,7 +18810,7 @@
       "obedience"
     ],
     "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -18960,10 +18972,10 @@
       "doctrine matters",
       "against \"Spiritual Church\" Protestant doctrine"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf110/npnf110.iii.iv.html#:~:text=for%20many%20sects",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf110/npnf110.iii.iv.html#:~:text=for%20many%20sects,shall%20not%20stand",
+    "text": "Homilies",
+    "subText": "Homilies on Matthew",
+    "section": "Homily 1"
   },
   {
     "id": "saint-991",
@@ -19936,9 +19948,9 @@
       "heretics",
       "dealing with heresy"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=in%20the%20case%20of%20those%20who%20malevolently,establishment%20of%20our%20own%20heart",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 26",
     "section": ""
   },
   {
