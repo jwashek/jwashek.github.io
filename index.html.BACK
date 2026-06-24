@@ -7,6 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <style>
     /* ========== CSS Variables ========== */
     :root {
@@ -193,6 +197,7 @@
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       z-index: 99;
+      position: relative;
     }
 
 .nav-tabs {
@@ -225,15 +230,80 @@
       color: var(--accent);
     }
 
-    .header-right {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      align-items: center;
-      gap: 16px;
+    
+
+    /* Header collapse button */
+    .header-collapse-btn {
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--bg-input);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 10px;
+      font-family: var(--font-ui);
+      transition: var(--transition);
+      margin-left: 8px;
     }
+    .header-collapse-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .header-hidden .header-collapse-btn {
+      display: none;
+    }
+
+    /* Header expand button (shown when collapsed) */
+    .header-expand-btn {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 3px 14px;
+      border-radius: 0 0 6px 6px;
+      border: 1px solid var(--border);
+      border-top: none;
+      background: var(--bg-glass);
+      backdrop-filter: blur(10px);
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 10px;
+      font-family: var(--font-ui);
+      z-index: 200;
+      transition: var(--transition);
+    }
+    .header-expand-btn:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .header-hidden .header-expand-btn {
+      display: block;
+    }
+
+    /* Header hide on scroll */
+    .header, .nav-bar {
+      transition: max-height 0.3s ease, min-height 0.3s ease, opacity 0.2s ease, padding 0.3s ease;
+      overflow: hidden;
+    }
+    .header-hidden .header {
+      max-height: 0;
+      min-height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+      pointer-events: none;
+    }
+    .header-hidden .nav-bar {
+      max-height: 0;
+      opacity: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+      pointer-events: none;
+    }
+
 
     .quote-count {
       font-size: 12px;
@@ -442,6 +512,15 @@
       flex-direction: column;
       overflow: hidden;
       z-index: 1;
+    }
+
+    .content-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      padding: 8px 24px 0;
+      flex-shrink: 0;
     }
 
     .search-bar-container {
@@ -875,18 +954,18 @@
     @media (max-width: 768px) {
       .header { padding: 12px; gap: 8px; flex-wrap: wrap; height: auto; flex-direction: row; justify-content: space-between; }
       .logo { flex-direction: row; align-items: center; gap: 8px; }
-      .header-right { position: static; transform: none; }
+      
       .logo-desktop { display: none !important; }
       .logo-mobile { display: block !important; }
       .logo-img { height: 32px; max-height: 32px; }
       .site-desc { display: none; }
-      .sidebar { position: absolute; left: 0; top: var(--header-height); bottom: 0; z-index: 50; }
+      .sidebar { position: fixed; left: 0; top: 0; bottom: 0; z-index: 150; width: var(--sidebar-width); }
       .sidebar.hidden { width: 0; }
       .cards-grid { grid-template-columns: 1fr; }
       .search-bar-container { padding: 12px; }
       .cards-container { padding: 0 12px 80px; }
       .nav-tab { padding: 6px 10px; font-size: 12px; }
-      .sidebar-backdrop { display: none; position: fixed; inset: 0; top: var(--header-height); background: rgba(0,0,0,0.4); z-index: 40; }
+      .sidebar-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 140; }
       .sidebar-backdrop.active { display: block; }
     }
 
@@ -921,12 +1000,11 @@
 .section-panel { display: none; flex-direction: column; flex: 1; overflow: hidden; }
     .section-panel.active { display: flex; }
   </style>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon-192.png">
-</head>
+  </head>
 <body>
   <div class="app">
     <!-- Header -->
+    <button class="header-expand-btn" id="headerExpandBtn">▼ Show Header</button>
     <header class="header">
       <div class="logo">
         <img src="logo-desktop.png" alt="Golden Mouth" class="logo-img logo-desktop">
@@ -936,10 +1014,7 @@
 
       
 
-      <div class="header-right">
-        <span class="quote-count" id="quoteCount">Loading...</span>
-        <button class="theme-toggle" id="themeToggle" title="Toggle theme">&#127769;</button>
-      </div>
+      
     
     </header>
 
@@ -950,6 +1025,7 @@
         <button class="nav-tab" data-section="text">Texts</button>
         <button class="nav-tab" data-section="council">Councils</button>
       </nav>
+      <button class="header-collapse-btn" id="headerCollapseBtn">▲ Hide</button>
     </div>
 
 
@@ -1004,6 +1080,10 @@
 
       <!-- Content -->
       <main class="content">
+        <div class="content-toolbar">
+          <span class="quote-count" id="quoteCount">Loading...</span>
+          <button class="theme-toggle" id="themeToggle" title="Toggle theme">&#127769;</button>
+        </div>
         <div class="search-bar-container">
           <div class="search-bar">
             <input type="text" id="aiSearch" placeholder="AI semantic search across all sections...">
@@ -1430,8 +1510,11 @@
             const textIdx = arr.indexOf(textVal);
             if (textIdx > -1) arr.splice(textIdx, 1);
             else arr.push(textVal);
+            console.log('TEXT FILTER TOGGLED:', textVal, 'Current texts:', JSON.stringify(arr), 'Section:', section);
             renderFilterList(section);
             renderCards();
+            const filtered = getFilteredQuotes();
+            console.log('FILTERED RESULTS:', filtered.length, 'texts filter:', JSON.stringify(activeFilters[section].texts));
             updateQuoteCount();
             return;
           }
@@ -1613,6 +1696,13 @@
           const cardIdx = card ? parseInt(card.dataset.idx) : -1;
           const q = cardIdx >= 0 ? getFilteredQuotes()[cardIdx] : null;
           pinnedQuoteId = q ? q.id : null;
+          // Exit AI search mode
+          if (aiSearchActive) {
+            aiSearchActive = false;
+            aiResults = [];
+            document.getElementById('aiSearch').value = '';
+            document.getElementById('searchStatus').textContent = '';
+          }
           // Toggle saint filter
           const arr = activeFilters[activeSection].saints;
           if (arr) {
@@ -1988,6 +2078,13 @@
       const tagIdx = arr.indexOf(tag);
       if (tagIdx > -1) arr.splice(tagIdx, 1);
       else arr.push(tag);
+      // Exit AI search mode — apply filter to ALL quotes
+      if (aiSearchActive) {
+        aiSearchActive = false;
+        aiResults = [];
+        document.getElementById('aiSearch').value = '';
+        document.getElementById('searchStatus').textContent = '';
+      }
       activeFilters[activeSection].tab = 'tags';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -2002,6 +2099,13 @@
       const topicIdx = arr.indexOf(topic);
       if (topicIdx > -1) arr.splice(topicIdx, 1);
       else arr.push(topic);
+      // Exit AI search mode — apply filter to ALL quotes
+      if (aiSearchActive) {
+        aiSearchActive = false;
+        aiResults = [];
+        document.getElementById('aiSearch').value = '';
+        document.getElementById('searchStatus').textContent = '';
+      }
       activeFilters[activeSection].tab = 'topics';
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
@@ -2029,6 +2133,16 @@
       renderFilterList(activeSection);
       renderCards();
       updateQuoteCount();
+    });
+
+
+    // ========== Header Collapse Toggle ==========
+    const appEl = document.querySelector('.app');
+    document.getElementById('headerCollapseBtn').addEventListener('click', () => {
+      appEl.classList.add('header-hidden');
+    });
+    document.getElementById('headerExpandBtn').addEventListener('click', () => {
+      appEl.classList.remove('header-hidden');
     });
 
 // ========== Initialize ==========
