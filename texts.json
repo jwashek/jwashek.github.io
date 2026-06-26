@@ -12,7 +12,7 @@
       "how to spot false prophets",
       "blasphemy against the Holy Spirit"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xi.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xi.html#:~:text=let%20every,false%20prophet.%2011",
     "chapterSection": "Chapter 11"
   },
   {
@@ -30,14 +30,14 @@
       "way of darkness",
       "way of death"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.i.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.i.html#:~:text=there%20are%20two,another%20do%20not%20do",
     "chapterSection": "Chapter 1"
   },
   {
     "id": "text-2",
     "type": "text",
     "topic": "On the Ways of Light and Darkness",
-    "quote": "\"And of these sayings the teaching is this: Bless those who curse you, and pray for your enemies, and fast for those who persecute you. For what reward is there, if you love those who love you? Do not also the Gentiles do the same? But love those who hate you, and you shall not have an enemy. Abstain from fleshly and worldly lusts. If someone gives you a blow upon your right cheek, turn to him the other also, and you shall be perfect. If someone impresses you for one mile, go with him two. If someone takes away your cloak, give him also your coat. If someone takes from you what is yours, ask it not back.\" -- The Didache (c. 40-150 AD), Chapter 1",
+    "quote": "\"And of these sayings the teaching is this: Bless them that curse you, and pray for your enemies, and fast for them that persecute you [Matthew 5:44]. For what thank is there, if ye love them that love you? Do not also the Gentiles do the same [Matthew 5:46-47]? But do ye love them that hate you; and ye shall not have an enemy [1 Peter 3:13]. Abstain thou from fleshly and worldly lusts [1 Peter 2:11]. If one give thee a blow upon thy right cheek, turn to him the other also [Matthew 5:39]; and thou shalt be perfect. If one impress thee for one mile, go with him two [Matthew 5:41]. If one take away thy cloak, give him also thy coat [Matthew 5:40]. If one take from thee thine own, ask it not back, for indeed thou art not able. Give to every one that asketh thee, and ask it not back [Luke 6:30].\" -- The Didache (c. 40-150 AD), Chapter 1",
     "reference": "Chapter 1",
     "source": "The Didache (c. 40-150 AD)",
     "tags": [
@@ -48,9 +48,10 @@
       "love",
       "loving others",
       "hate",
-      "desires"
+      "desires",
+      "Beatitudes"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.i.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.i.html#:~:text=and%20of%20these,ask%20it%20not%20back;",
     "chapterSection": "Chapter 1"
   },
   {
@@ -113,7 +114,7 @@
       "obedience",
       "according to our strength"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.vi.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.vi.html#:~:text=see%20that,able%20that%20do",
     "chapterSection": "Chapter 6"
   },
   {
@@ -129,7 +130,7 @@
       "good deeds",
       "works"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xv.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xv.html#:~:text=but%20your%20prayers,Gospel%20of%20our%20Lord",
     "chapterSection": "Chapter 15"
   },
   {
@@ -148,7 +149,7 @@
       "Second Advent",
       "losing salvation"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xvi.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xvi.html#:~:text=watch%20for,last%20time",
     "chapterSection": "Chapter 16"
   },
   {
@@ -170,7 +171,7 @@
       "scripture interpretation",
       "fulfilled prophecy"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xv.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xiv.html",
     "chapterSection": "Chapter 15"
   },
   {
@@ -203,7 +204,7 @@
       "the Eschaton",
       "Second Advent"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xvi.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xvi.html#:~:text=and%20then%20shall%20appear%20the%20signs,clouds%20of%20heaven",
     "chapterSection": "Chapter 16"
   },
   {
@@ -217,9 +218,10 @@
       "the Church",
       "bishop",
       "deacons",
-      "episcopacy"
+      "episcopacy",
+      "against \"Spiritual Church\" Protestant doctrine"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xiv.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xv.html#:~:text=1.%20,the%20prophets%20and%20teachers.",
     "chapterSection": "Chapter 14"
   },
   {
@@ -240,7 +242,7 @@
       "lying",
       "stealing"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iii.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iii.html#:~:text=My%20child,blasphemies%20are%20engendered",
     "chapterSection": "Chapter 3"
   },
   {
@@ -254,9 +256,11 @@
       "prayer",
       "how to pray",
       "the Lord's Prayer",
-      "hypocrisy"
+      "hypocrisy",
+      "hypocrits",
+      "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.viii.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.viii.html#:~:text=neither,thus%20pray.",
     "chapterSection": "Chapter 8"
   },
   {
@@ -272,7 +276,7 @@
       "fear of God",
       "teaching"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iv.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iv.html#:~:text=thou%20shalt%20not%20remove,fear%20of%20God",
     "chapterSection": "Chapter 4"
   },
   {
@@ -284,9 +288,10 @@
     "source": "The Didache (c. 40-150 AD)",
     "tags": [
       "obedience",
-      "commandments"
+      "commandments",
+      "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iv.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iv.html#:~:text=Do%20thou,therefrom",
     "chapterSection": "Chapter 4"
   },
   {
@@ -301,7 +306,7 @@
       "hypocrisy",
       "when to fast"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.viii.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.viii.html#:~:text=but%20let,(Friday)",
     "chapterSection": "Chapter 8"
   },
   {
@@ -314,9 +319,10 @@
     "tags": [
       "faith",
       "enduring faith",
-      "salvation"
+      "salvation",
+      "against eternal security"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xvi.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xvi.html#:~:text=they%20that%20endure,curse%20itself.",
     "chapterSection": "Chapter 16"
   },
   {
@@ -332,7 +338,7 @@
       "heresy",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xi.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.xi.html#:~:text=whosoever,hear%20him%20not",
     "chapterSection": "Chapter 11"
   },
   {
@@ -347,7 +353,7 @@
       "gifts",
       "divine grace"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iii.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iii.html#:~:text=the%20workings,nothing%20cometh%20to%20pass",
     "chapterSection": "Chapter 3"
   },
   {
@@ -363,7 +369,7 @@
       "conscience",
       "prayer"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iv.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iv.html#:~:text=in%20the%20church,conscience",
     "chapterSection": "Chapter 4"
   },
   {
@@ -386,15 +392,16 @@
     "id": "text-22",
     "type": "text",
     "topic": "On Almsgiving",
-    "quote": "\"If you have anything, through your hands you shall give ransom for your sins. You shall not hesitate to give, nor murmur when you give; for you shall know who is the good repayer of the hire. You shall not turn away from him that is in want, but you shall share all things with your brother.\" -- The Didache (c. 40-150 AD), Chapter 4",
+    "quote": "\"If thou hast aught, through thy hands thou shalt give ransom for thy sins. Thou shalt not hesitate to give, nor murmur when thou givest; for thou shalt know who is the good repayer of the hire. Thou shalt not turn away from him that is in want, but thou shalt share all things with thy brother.\" -- The Didache (c. 40-150 AD), Chapter 4",
     "reference": "Chapter 4",
     "source": "The Didache (c. 40-150 AD)",
     "tags": [
       "almsgiving",
       "complaining",
-      "rewards"
+      "rewards",
+      "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iv.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.iv.html#:~:text=if%20thou,brother",
     "chapterSection": "Chapter 4"
   },
   {
@@ -411,7 +418,7 @@
       "gifts",
       "providence"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.i.html",
+    "url": "https://ccel.org/ccel/schaff/anf07/anf07.viii.iii.i.html#:~:text=give%20to%20every,shouldst%20give",
     "chapterSection": "Chapter 1"
   }
 ]
