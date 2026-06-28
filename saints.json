@@ -388,8 +388,8 @@
       "piety"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iii.iii.html#:~:text=for%20a%20servant,able%20to%20draw%20near%20to%20God",
-    "text": "",
-    "subText": "",
+    "text": "Festal Letters",
+    "subText": "Letter 3",
     "section": ""
   },
   {
@@ -1712,8 +1712,8 @@
       "way of life"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.iv.html#:~:text=For%20we%20ought%20to%20walk,of%20their%20fellowship",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 49",
     "section": ""
   },
   {
@@ -2080,8 +2080,8 @@
       "one God"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.xxv.iii.iv.xiv.html#:~:text=In%20the%20Triad,the%20Father%20of%20the%20Word",
-    "text": "",
-    "subText": "",
+    "text": "Personal Letters",
+    "subText": "Letter 59",
     "section": ""
   },
   {
@@ -2362,7 +2362,7 @@
       "christian living"
     ],
     "url": "https://ccel.org/ccel/methodius/banquet/anf06.xi.viii.html#:~:text=Put%20off,ignorant",
-    "text": "",
+    "text": "Oration Concerning Simeon and Anna",
     "subText": "",
     "section": ""
   },
@@ -2811,8 +2811,8 @@
       "Holy Spirit"
     ],
     "url": "https://ccel.org/ccel/methodius/banquet/anf06.xi.viii.html#:~:text=the%20sacred%20Trinity,essence%20with%20Him",
-    "text": "",
-    "subText": "",
+    "text": "Oration Concerning Simeon and Anna",
+    "subText": "Section 2",
     "section": ""
   },
   {
@@ -3069,16 +3069,16 @@
       "present (time)"
     ],
     "url": "https://ccel.org/ccel/methodius/banquet/anf06.xi.vi.i.html#:~:text=For%20in,only%20the%20present",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Fragments",
+    "subText": "On the History of Jonah",
+    "section": "From the Book on the Resurrection"
   },
   {
     "id": "saint-159",
     "type": "saint",
     "topic": "On the Resurrection",
     "quote": "\"As, then, Jonah spent three days and as many nights in the whale’s belly, and was delivered up sound again, so shall we all, who have passed through the three stages of our present life on earth—I mean the beginning, the middle, and the end, of which all this present time consists—rise again.\" -- Saint Methodius of Olympus (died 311 AD), Fragments, On the History of Jonah, From the Book on the Resurrection, Section 2",
-    "reference": "On the History of Jonah, From the Book on the Resurrection, Section 2",
+    "reference": "Fragments, On the History of Jonah, From the Book on the Resurrection, Section 2",
     "source": "Saint Methodius of Olympus (died 311 AD)",
     "tags": [
       "typology",
@@ -3086,9 +3086,9 @@
       "resurrection"
     ],
     "url": "https://ccel.org/ccel/methodius/banquet/anf06.xi.vi.i.html#:~:text=II.%20As,rise%20again",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Fragments",
+    "subText": "On the History of Jonah",
+    "section": "From the Book on the Resurrection"
   },
   {
     "id": "saint-160",
@@ -3237,10 +3237,10 @@
       "gratitude",
       "silence"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xv.html#:~:text=elsewhere",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xv.html#:~:text=what%20is%20%22corrupt,never%20to%20speak%20at%20all",
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 14"
   },
   {
     "id": "saint-168",
@@ -3478,10 +3478,10 @@
       "good works",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=undress",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=now%20as%20to,should%20we%20be",
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 13"
   },
   {
     "id": "saint-181",
@@ -3499,10 +3499,10 @@
       "sin",
       "doctrines"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=terms",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=it%20was%20not%20on,but%20a%20right%20life%20is%20truth",
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 13"
   },
   {
     "id": "saint-182",
@@ -3517,10 +3517,10 @@
       "hardness of heart",
       "free will"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=cause%20of%20their%20hardening",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.xiv.html#:~:text=%22Who%20being%20past%20feeling,want%20of%20feeling.",
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 13"
   },
   {
     "id": "saint-183",
@@ -4234,8 +4234,8 @@
     "id": "saint-220",
     "type": "saint",
     "topic": "On the Scriptures",
-    "quote": "\"Why, then, was holy Scripture given? To this end, that divine revelation might be preserved more exactly and unchangeably. In holy Scripture we read the words of the Prophets and Apostles precisely as if we were living with them and listening to them, although the latest of the sacred books were written a thousand and some hundred years before our time.\" -- Saint Philaret of Moscow (1782-1867 AD), The Longer Catechism of the Eastern Orthodox Church, Introduction to the Orthodox Catechism, On Holy Tradition and Holy Scripture, Section 18",
-    "reference": "The Longer Catechism of the Eastern Orthodox Church, Introduction to the Orthodox Catechism, On Holy Tradition and Holy Scripture, Section 18",
+    "quote": "\"Why, then, was holy Scripture given? To this end, that divine revelation might be preserved more exactly and unchangeably. In holy Scripture we read the words of the Prophets and Apostles precisely as if we were living with them and listening to them, although the latest of the sacred books were written a thousand and some hundred years before our time.\" -- Saint Philaret of Moscow (1782-1867 AD), The Longer Catechism of the Eastern Orthodox Church, Introduction to the Orthodox Catechism, On Holy Tradition and Holy Scripture, Section 22",
+    "reference": "The Longer Catechism of the Eastern Orthodox Church, Introduction to the Orthodox Catechism, On Holy Tradition and Holy Scripture, Section 22",
     "source": "Saint Philaret of Moscow (1782-1867 AD)",
     "tags": [
       "scriptures",
@@ -4245,8 +4245,8 @@
       "doctrine matters"
     ],
     "url": "https://www.pravoslavieto.com/docs/eng/Orthodox_Catechism_of_Philaret.htm#:~:text=Scripture%20given?",
-    "text": "",
-    "subText": "",
+    "text": "The Longer Catechism of the Eastern Orthodox Church",
+    "subText": "On Holy Tradition and Holy Scriptures",
     "section": ""
   },
   {
@@ -4816,9 +4816,9 @@
       "scriptures",
       "Messiah"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.cxx.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.cxx.html#:~:text=I%20have%20not,wooden%20saw",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 120",
     "section": ""
   },
   {
@@ -4873,7 +4873,7 @@
       "eternal fire",
       "hell"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.cxvii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.cxvii.html#:~:text=He%20shall,punishment%20of%20fire",
     "text": "Dialogue with Trypho",
     "subText": "Chapter 117",
     "section": ""
@@ -5052,9 +5052,9 @@
       "history of the Septuagint",
       "Septuagint"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.vi.xiii.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.vi.xiii.html#:~:text=but%20if%20any%20one,their%20own%20country",
+    "text": "Horatory Address to the Greeks",
+    "subText": "Chapter 13",
     "section": ""
   },
   {
@@ -5740,7 +5740,7 @@
       "kingdom of heaven",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.xxxvi.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.xxxvi.html#:~:text=for%20truly,not%20be%20forsaken",
     "text": "Fragments",
     "subText": "Fragments from the Lost Writings of Irenaeus",
     "section": "Fragment 36"
@@ -5843,7 +5843,7 @@
       "unbelievers",
       "final judgment"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.xii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.xii.html#:~:text=but%20as%20they,faithfully%20judged",
     "text": "Fragments",
     "subText": "Fragments from the Lost Writings of Irenaeus",
     "section": "Fragment 12"
@@ -5861,7 +5861,7 @@
       "death",
       "the body"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.xii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.viii.xii.html#:~:text=we%20therefore,resurrection%20of%20the%20body",
     "text": "Fragments",
     "subText": "Fragments from the Lost Writings of Irenaeus",
     "section": "Fragment 12"
@@ -6209,9 +6209,9 @@
       "twisting scripture",
       "the Cross"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.lx.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.lx.html#:~:text=and%20the%20physiological,God%20was%20placed%20crosswise%20in%20the%20universe",
+    "text": "The First Apology",
+    "subText": "Chapter 60",
     "section": ""
   },
   {
@@ -6348,9 +6348,9 @@
       "scriptures",
       "twisting scripture"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxxiii.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxxiii.html#:~:text=and%20from%20the,raised%20again",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 73",
     "section": ""
   },
   {
@@ -6366,7 +6366,7 @@
       "scriptures",
       "scripture interpretation"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxxii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxxii.html#:~:text=from%20the%20statements,his%20own%20salvation",
     "text": "Dialogue with Trypho",
     "subText": "Chapter 72",
     "section": ""
@@ -6741,7 +6741,7 @@
       "King of kings",
       "uncleanness"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.iv.html#:~:text=thou%20present%20thyself",
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.iv.html#:~:text=and%20how%20shalt,unclean%20soul",
     "text": "Homilies",
     "subText": "Homilies on Ephesians",
     "section": "Homily 3"
@@ -6886,10 +6886,10 @@
       "resurrection",
       "persuasion"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.iv.html#:~:text=that%20through%20His",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/npnf113/npnf113.iii.iv.iv.html#:~:text=that%20through%20His,raise%20a%20dead%20body",
+    "text": "Homilies",
+    "subText": "Homilies on Ephesians",
+    "section": "Homily 3"
   },
   {
     "id": "saint-357",
@@ -7175,9 +7175,9 @@
       "contradictions",
       "misunderstanding scripture"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxv.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxv.html#:~:text=if%20a%20scripture,as%20myself",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 65",
     "section": ""
   },
   {
@@ -7263,8 +7263,8 @@
       "Old Testament Saints believed in Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxii.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 62",
     "section": ""
   },
   {
@@ -7280,8 +7280,8 @@
       "Trinity"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxii.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 62",
     "section": ""
   },
   {
@@ -7303,8 +7303,8 @@
       "Old Testament Saints believed in Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lxi.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 61",
     "section": ""
   },
   {
@@ -7324,8 +7324,8 @@
       "Old Testament Saints believed in Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lix.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 59",
     "section": ""
   },
   {
@@ -7345,8 +7345,8 @@
       "Old Testament Saints believed in Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lviii.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 58",
     "section": ""
   },
   {
@@ -7364,8 +7364,8 @@
       "refuting the Jews"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lvi.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 56",
     "section": ""
   },
   {
@@ -7407,8 +7407,8 @@
       "refuting the Jews"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lvi.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 56",
     "section": ""
   },
   {
@@ -7429,8 +7429,8 @@
       "Old Testament Saints believed in Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lvi.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 56",
     "section": ""
   },
   {
@@ -7447,8 +7447,8 @@
       "Jesus in the Old Testament"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lvi.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 56",
     "section": ""
   },
   {
@@ -7466,8 +7466,8 @@
       "Old Testament Saints believed in Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.lvi.html",
-    "text": "",
-    "subText": "",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 56",
     "section": ""
   },
   {
@@ -7998,9 +7998,9 @@
       "punishment",
       "unbegotten"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.v.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iv.v.html#:~:text=God%20alone,if%20they%20be%20unbegotten",
+    "text": "Dialogue with Trypho",
+    "subText": "Chapter 5",
     "section": ""
   },
   {
@@ -8131,8 +8131,8 @@
       "will of God"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.iii.vi.html",
-    "text": "",
-    "subText": "",
+    "text": "The Second Apology",
+    "subText": "Chapter 6",
     "section": ""
   },
   {
@@ -8231,8 +8231,8 @@
       "Jesus in the Old Testament"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.lxiii.html",
-    "text": "",
-    "subText": "",
+    "text": "The First Apology",
+    "subText": "Chapter 63",
     "section": ""
   },
   {
@@ -8250,9 +8250,9 @@
       "scripture interpretation",
       "borrowing from scripture"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.lix.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.lix.html#:~:text=plato%20borrowed,before%20by%20moses",
+    "text": "The First Apology",
+    "subText": "Chapter 59",
     "section": ""
   },
   {
@@ -8475,9 +8475,9 @@
       "prophecy",
       "Messiah"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xxxi.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xxxi.html#:~:text=in%20these%20books,the%20Son%20of%20God",
+    "text": "The First Apology",
+    "subText": "Chapter 31",
     "section": ""
   },
   {
@@ -8492,9 +8492,9 @@
       "scriptures",
       "Septuagint"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xxxi.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xxxi.html#:~:text=they%20had,understand%20what%20is%20said",
+    "text": "The First Apology",
+    "subText": "Chapter 31",
     "section": ""
   },
   {
@@ -8624,8 +8624,8 @@
       "mysteries"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xiii.html",
-    "text": "",
-    "subText": "",
+    "text": "The First Apology",
+    "subText": "Chapter 13",
     "section": ""
   },
   {
@@ -8638,9 +8638,9 @@
     "tags": [
       "kingdom of heaven"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xi.html",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.viii.ii.xi.html#:~:text=and%20when,of%20a%20human%20kingdom",
+    "text": "The First Apology",
+    "subText": "Chapter 11",
     "section": ""
   },
   {
@@ -9167,7 +9167,7 @@
       "Trinity example"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.x.ii.html#:~:text=Father%20to%20beget",
-    "text": "",
+    "text": "Statement of Faith",
     "subText": "",
     "section": ""
   },
@@ -9235,7 +9235,7 @@
       "deity of Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.x.ii.html#:~:text=just%20as%20a%20river",
-    "text": "",
+    "text": "Statement of Faith",
     "subText": "",
     "section": ""
   },
@@ -9271,7 +9271,7 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf204/npnf204.x.ii.html#:~:text=1.%20",
-    "text": "",
+    "text": "Statement of Faith",
     "subText": "",
     "section": ""
   },
@@ -9514,10 +9514,10 @@
       "false Christians",
       "omniscience"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.xv.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.xv.html#:~:text=it%20is%20better,near%20to%20Him",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Ephesians",
+    "section": "Chapter 15"
   },
   {
     "id": "saint-487",
@@ -9559,10 +9559,10 @@
       "spreading the Gospel through actions",
       "doctrine matters"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.x.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.ii.x.html#:~:text=and%20pray,true%20kindness",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Ephesians",
+    "section": "Chapter 10"
   },
   {
     "id": "saint-489",
@@ -9737,10 +9737,10 @@
       "christian living",
       "against faith alone"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.v.vii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.v.vii.html#:~:text=do%20not%20speak,desires%20on%20the%20world",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Romans",
+    "section": "Chapter 7"
   },
   {
     "id": "saint-498",
@@ -9774,9 +9774,9 @@
       "deity of Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.v.iii.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to the Romans",
+    "section": "Chapter 3"
   },
   {
     "id": "saint-500",
@@ -10003,10 +10003,10 @@
       "love",
       "patience"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.viii.vi.html",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.v.viii.vi.html#:~:text=let%20your%20baptism,panoply",
+    "text": "Epistles of Ignatius",
+    "subText": "Epistle to Polycarp",
+    "section": "Chapter 6"
   },
   {
     "id": "saint-511",
@@ -10452,7 +10452,7 @@
       "hell",
       "future blessings"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iv.html#:~:text=terrible%20tribunal%20which%20awaits",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iv.html#:~:text=there%20is%20a%20resurrection,if%20you%20please",
     "text": "Two Exhortations to Theodore After His Fall",
     "subText": "Letter 2",
     "section": ""
@@ -10467,9 +10467,9 @@
     "tags": [
       "soul"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iv.html#:~:text=Nothing%20is%20more%20precious",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iv.html#:~:text=Nothing%20is%20more%20precious,heathen%20poet",
+    "text": "Two Exhortations to Theodore After His Fall",
+    "subText": "Letter 2",
     "section": ""
   },
   {
@@ -10500,7 +10500,7 @@
       "merit and deeds",
       "works"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iv.html#:~:text=according%20to%20the%20outward",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iv.html#:~:text=in%20that%20day,according%20to%20his%20works",
     "text": "Two Exhortations to Theodore After His Fall",
     "subText": "Letter 2",
     "section": ""
@@ -10520,7 +10520,7 @@
       "merit and deeds",
       "thoughts"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iv.html#:~:text=And%20He%20will%20then",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iv.html#:~:text=And%20He%20will,intents%20of%20the%20heart",
     "text": "Two Exhortations to Theodore After His Fall",
     "subText": "Letter 2",
     "section": ""
@@ -10823,7 +10823,7 @@
       "merit and deeds",
       "final judgment"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=believe%20do%20the%20deeds",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=for%20when%20we,will%20be%20left",
     "text": "Two Exhortations to Theodore After His Fall",
     "subText": "Letter 1",
     "section": ""
@@ -10839,9 +10839,9 @@
       "soul",
       "the body"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=fascinates%20and%20excites%20the",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf109/npnf109.v.iii.html#:~:text=for%20if%20beauty,gracefulness%20of%20the%20soul",
+    "text": "Two Exhortations to Theodore After His Fall",
+    "subText": "Letter 1",
     "section": ""
   },
   {
@@ -11717,7 +11717,7 @@
       "righteousness",
       "wickedness"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.vi.ii.iv.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.vi.ii.iv.html#:~:text=the%20Lord%20will%20judge,is%20before%20him",
     "text": "The Epistle of Barnabas",
     "subText": "Chapter 4",
     "section": ""
@@ -12157,8 +12157,8 @@
       "typology"
     ],
     "url": "https://ccel.org/ccel/schaff/anf01/anf01.ii.ii.xxiv.html",
-    "text": "",
-    "subText": "",
+    "text": "The First Epistle of Clement to the Corinthians",
+    "subText": "Chapter 24",
     "section": ""
   },
   {
@@ -14449,9 +14449,9 @@
       "divine grace"
     ],
     "url": "https://www.pravoslavieto.com/docs/eng/Orthodox_Catechism_of_Philaret.htm#:~:text=236.",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "The Longer Catechism of the Eastern Orthodox Church",
+    "subText": "On the Articles of the Creed",
+    "section": "On the Seventh Article"
   },
   {
     "id": "saint-740",
@@ -14757,8 +14757,8 @@
       "evil",
       "anger"
     ],
-    "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "url": "https://www.scribd.com/document/658857686/Wounded-by-Love#page=116",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -14810,9 +14810,9 @@
       "remembrance of God",
       "christian living"
     ],
-    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1",
-    "text": "",
-    "subText": "",
+    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1#page=201",
+    "text": "The Spiritual Life and How to Be Attuned to It",
+    "subText": "Chapter 45",
     "section": ""
   },
   {
@@ -14828,9 +14828,9 @@
       "remembrance of God",
       "ceaseless prayer"
     ],
-    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1",
-    "text": "",
-    "subText": "",
+    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1#page=201",
+    "text": "The Spiritual Life and How to Be Attuned to It",
+    "subText": "Chapter 45",
     "section": ""
   },
   {
@@ -14902,16 +14902,16 @@
       "examine yourself",
       "knowing your sins"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=in%20every%20passion,or%20at%20the%20end?",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 26",
     "section": ""
   },
   {
     "id": "saint-765",
     "type": "saint",
     "topic": "On the Spiritual Life",
-    "quote": "\"We should constantly be examining and comparing ourselves with the holy Fathers and the lights who lived before us, and we should then find that we have not yet entered upon the path of the aesthetic life.\" -- Saint John of the Ladder (579-649 AD), The Ladder of Divine Ascent, Step 23, Section 21",
+    "quote": "\"We should constantly be examining and comparing ourselves with the holy Fathers and the lights who lived before us, and we should then find that we have not yet entered upon the path of the ascetic life.\" -- Saint John of the Ladder (579-649 AD), The Ladder of Divine Ascent, Step 23, Section 21",
     "reference": "The Ladder of Divine Ascent, Step 23, Section 21",
     "source": "Saint John of the Ladder (579-649 AD)",
     "tags": [
@@ -14920,9 +14920,9 @@
       "comparing",
       "asceticism"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=we%20should%20constantly,path%20of%20the%20ascetic%20life",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 23",
     "section": ""
   },
   {
@@ -15015,10 +15015,10 @@
       "knowing your sins",
       "sin"
     ],
-    "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf#:~:text=blessed%20is%20the%20man%20who%20knows,and%20the%20beginning%20of%20all%20goodness",
+    "text": "Homilies",
+    "subText": "Ascetical Homilies",
+    "section": "Homily 8"
   },
   {
     "id": "saint-771",
@@ -15052,9 +15052,9 @@
       "suffering"
     ],
     "url": "https://www.pravoslavieto.com/docs/eng/Orthodox_Catechism_of_Philaret.htm#:~:text=167.",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "The Longer Catechism of the Eastern Orthodox Church",
+    "subText": "On the Articles of the Creed",
+    "section": "On the Third Article"
   },
   {
     "id": "saint-773",
@@ -15104,9 +15104,9 @@
       "will of God",
       "purity"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=discernment%20in%20beginners,body%20and%20in%20mouth",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 26",
     "section": ""
   },
   {
@@ -15122,9 +15122,9 @@
       "reproof",
       "exhortation"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=if%20you%20want,but%20he%20did%20not%20say%20'beat'",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 8",
     "section": ""
   },
   {
@@ -15280,9 +15280,9 @@
       "persons"
     ],
     "url": "https://www.pravoslavieto.com/docs/eng/Orthodox_Catechism_of_Philaret.htm#:~:text=94.%20What%20difference",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "text": "The Longer Catechism of the Eastern Orthodox Church",
+    "subText": "On the Articles of the Creed",
+    "section": "On the First Article"
   },
   {
     "id": "saint-785",
@@ -15452,7 +15452,7 @@
       "judgment",
       "apostasy"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.vi.xxxiv.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.vi.xxxiv.html#:~:text=on%20the%20other%20hand,most%20righteous%20judgment",
     "text": "Against Heresies",
     "subText": "Book 4",
     "section": "Chapter 33"
@@ -15690,8 +15690,8 @@
       "thoughts",
       "love"
     ],
-    "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "url": "https://www.scribd.com/document/658857686/Wounded-by-Love#page=116",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -15729,8 +15729,8 @@
       "love",
       "christian living"
     ],
-    "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "url": "https://www.scribd.com/document/658857686/Wounded-by-Love#page=102",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -16022,9 +16022,9 @@
       "death",
       "punishment"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=we%20should%20unceasingly,subjected%20to%20heavy%20punishment",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 25",
     "section": ""
   },
   {
@@ -16133,7 +16133,7 @@
       "God is not the author of evil"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf205/npnf205.x.iii.ii.html#:~:text=we%20will%20say%20that%20the%20resurrection,broke%20in%20upon%20him",
-    "text": "",
+    "text": "On the Soul and the Resurrection",
     "subText": "",
     "section": ""
   },
@@ -16153,7 +16153,7 @@
       "virtue"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf205/npnf205.x.iii.ii.html#:~:text=such%20being%20the%20differences,mysteries%20of%20the%20interior",
-    "text": "",
+    "text": "On the Soul and the Resurrection",
     "subText": "",
     "section": ""
   },
@@ -16170,8 +16170,8 @@
       "death",
       "the Church"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf205/npnf205.x.iii.ii.html#:~:text=power%20of%20the%20Spirit,spirit%20of%20prophecy",
-    "text": "",
+    "url": "https://ccel.org/ccel/schaff/npnf205/npnf205.x.iii.ii.html#:~:text=He%20says%20that%20a%20power%20of%20the%20Spirit,spirit%20of%20prophecy",
+    "text": "On the Soul and the Resurrection",
     "subText": "",
     "section": ""
   },
@@ -16242,7 +16242,7 @@
       "passions"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf205/npnf205.x.iii.ii.html#:~:text=just%20as%20those%20who%20refine%20gold,keen%20intolerable%20anguish",
-    "text": "",
+    "text": "On the Soul and the Resurrection",
     "subText": "",
     "section": ""
   },
@@ -16331,10 +16331,10 @@
       "examine yourself",
       "judgmentalism"
     ],
-    "url": "https://www.holybooks.com/wp-content/uploads/Philokalia.pdf#:~:text=concern%20yourself%20with%20your%20own%20sins",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://www.holybooks.com/wp-content/uploads/Philokalia.pdf#:~:text=concern%20yourself%20with%20your%20own%20sins,intellect%20will%20not%20be%20robbed",
+    "text": "Philokalia (Volume I)",
+    "subText": "On the Spiritual Law",
+    "section": "Two Hundred Texts"
   },
   {
     "id": "saint-841",
@@ -16440,7 +16440,7 @@
       "virtue"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf205/npnf205.x.iii.ii.html#:~:text=I%20think%20our%20Lord%20teaches,swift%20and%20unimpeded",
-    "text": "",
+    "text": "On the Soul and the Resurrection",
     "subText": "",
     "section": ""
   },
@@ -16586,7 +16586,7 @@
       "hell",
       "paradise"
     ],
-    "url": "https://www.newadvent.org/fathers/0502.htm",
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iii.iv.i.x.iii.html#:~:text=Until%20the%20ancient,enjoyment%20of%20good",
     "text": "Fragments",
     "subText": "Fragments from the Scriptural Commentaries of Hippolytus",
     "section": "On Daniel"
@@ -16624,7 +16624,7 @@
       "judgment",
       "will of God"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.vii.xxviii.html",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.ix.vii.xxviii.html#:~:text=the%20advent%20of%20the%20Son,and%20a%20free%20understanding",
     "text": "Against Heresies",
     "subText": "Book 5",
     "section": "Chapter 27"
@@ -16643,7 +16643,7 @@
       "Gospel",
       "apostolic"
     ],
-    "url": "https://ccel.org/ccel/s/schaff/anf01/cache/anf01.pdf",
+    "url": "https://ccel.org/ccel/schaff/anf01/anf01.iv.ii.vi.html#:~:text=we%20must,taught%20us]",
     "text": "Epistle of Polycarp to the Philippians",
     "subText": "Chapter 6",
     "section": ""
@@ -16692,7 +16692,7 @@
       "hell",
       "paradise"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.v.viii.html#:~:text=when%20the%20servant",
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.v.viii.html#:~:text=when%20the%20servant,poor%20be%20supplied",
     "text": "Treatises",
     "subText": "Treatise 8",
     "section": ""
@@ -16713,7 +16713,7 @@
       "punishment",
       "torment"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.v.v.html#:~:text=when%20the%20day",
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.v.v.html#:~:text=when%20the%20day,tortures%20for%20suffering",
     "text": "Treatises",
     "subText": "Treatise 5",
     "section": ""
@@ -16733,7 +16733,7 @@
       "hell",
       "eternal fire"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.iv.lv.html#:~:text=10.%20Oh",
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.iv.lv.html#:~:text=10.%20Oh,faith%20and%20devotion",
     "text": "Epistles of Cyprian of Carthage",
     "subText": "Epistle 55",
     "section": ""
@@ -16751,7 +16751,7 @@
       "hell",
       "outer darkness"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=17.%20Do%20not%20be,cast%20out%20into%20the%20outer%20darkness",
     "text": "The Ladder of Divine Ascent",
     "subText": "Step 23",
     "section": ""
@@ -16788,7 +16788,7 @@
       "judgment",
       "conscience"
     ],
-    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1",
+    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1#page=166",
     "text": "The Spiritual Life and How to Be Attuned to It",
     "subText": "Chapter 36",
     "section": ""
@@ -16827,7 +16827,7 @@
       "wisdom",
       "fear of God"
     ],
-    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1",
+    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1#page=294",
     "text": "The Spiritual Life and How to Be Attuned to It",
     "subText": "Chapter 72",
     "section": ""
@@ -16844,7 +16844,7 @@
       "fear",
       "judgment"
     ],
-    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1",
+    "url": "https://www.scribd.com/document/808937958/St-Theophan-the-Recluse-The-Spiritual-Life-and-How-to-Be-Attuned-to-It-1#page=204",
     "text": "The Spiritual Life and How to Be Attuned to It",
     "subText": "Chapter 46",
     "section": ""
@@ -16895,18 +16895,19 @@
     "id": "saint-870",
     "type": "saint",
     "topic": "On the Spiritual Life",
-    "quote": "\"He who has mounted [i.e., the remembrance of death] will never sin again. ‘Remember thy last end and thou shalt never sin [Ecclesiasticus 7:36]’.\" -- Saint John of the Ladder (579-649 AD), The Ladder of Divine Ascent, Step 6, Section 24",
+    "quote": "\"He who has mounted [i.e., the remembrance of death] will never sin again. ‘Remember thy last end and thou shalt never sin [Sirach 7:36]’.\" -- Saint John of the Ladder (579-649 AD), The Ladder of Divine Ascent, Step 6, Section 24",
     "reference": "The Ladder of Divine Ascent, Step 6, Section 24",
     "source": "Saint John of the Ladder (579-649 AD)",
     "tags": [
       "remembrance of death",
       "sin",
       "sinlessness",
-      "dispassion"
+      "dispassion",
+      "deuterocanon"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=he%20who%20has%20mounted,shalt%20never%20sin",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 6",
     "section": ""
   },
   {
@@ -16921,9 +16922,9 @@
       "spiritual life",
       "christian living"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=24.%20it%20is%20impossible,we%20regard%20it%20as%20the%20last%20of%20our%20whole%20life",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 6",
     "section": ""
   },
   {
@@ -16938,9 +16939,9 @@
       "angels",
       "death"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=acquire%20an%20inseparable,who%20seek%20the%20Lord",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 3",
     "section": ""
   },
   {
@@ -17248,8 +17249,8 @@
       "loving others",
       "love"
     ],
-    "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "url": "https://www.scribd.com/document/658857686/Wounded-by-Love#page=54",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -17266,8 +17267,8 @@
       "christian living",
       "studying"
     ],
-    "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "url": "https://www.scribd.com/document/658857686/Wounded-by-Love#page=91",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -17791,9 +17792,9 @@
       "anger",
       "hate"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=he%20who%20says%20that%20he%20loves,who%20dreams%20that%20he%20is%20running",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 30",
     "section": ""
   },
   {
@@ -17860,9 +17861,9 @@
       "virtue",
       "perfection"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=a%20king's%20diadem,however%20ordinary",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 29",
     "section": ""
   },
   {
@@ -17878,9 +17879,9 @@
       "resurrection",
       "angels"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=4.%20some%20say,second%20only%20to%20that%20of%20the%20angels",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 29",
     "section": ""
   },
   {
@@ -18137,9 +18138,9 @@
       "ammendment of life",
       "turning from sin"
     ],
-    "url": "https://ccel.org/ccel/schaff/npnf207/npnf207.ii.vi.html#:~:text=does%20the%20serpent",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/npnf207/npnf207.ii.vi.html#:~:text=does%20the%20serpent,but%20the%20will%20also%20is%20required",
+    "text": "Catechetical Lectures",
+    "subText": "Lecture 2",
     "section": ""
   },
   {
@@ -18179,9 +18180,9 @@
       "afflictions",
       "sinners"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=a%20characteristic,food%20that%20does%20not%20cloy",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 7",
     "section": ""
   },
   {
@@ -18513,9 +18514,9 @@
       "healing",
       "knowing your sins"
     ],
-    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.iv.liv.html#:~:text=The%20highest%20degree",
-    "text": "",
-    "subText": "",
+    "url": "https://ccel.org/ccel/schaff/anf05/anf05.iv.iv.liv.html#:~:text=The%20highest%20degree,medicine%20to%20heal%20us",
+    "text": "Epistles of Cyprian of Carthage",
+    "subText": "Epistle 54",
     "section": ""
   },
   {
@@ -18801,8 +18802,8 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.xxv.html#:~:text=who%20is%20so%20contentious",
-    "text": "",
-    "subText": "",
+    "text": "On the Holy Spirit",
+    "subText": "Chapter 24",
     "section": ""
   },
   {
@@ -18825,8 +18826,8 @@
       "scripture interpretation"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.xxii.html#:~:text=we%20have%20learnt",
-    "text": "",
-    "subText": "",
+    "text": "On the Holy Spirit",
+    "subText": "Chapter 21",
     "section": ""
   },
   {
@@ -18851,8 +18852,8 @@
       "Godhead"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.xix.html#:~:text=for%20we%20do%20not%20count",
-    "text": "",
-    "subText": "",
+    "text": "On the Holy Spirit",
+    "subText": "Chapter 18",
     "section": ""
   },
   {
@@ -18872,8 +18873,8 @@
       "doctrine matters"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.xviii.html#:~:text=do%20you%20maintain",
-    "text": "",
-    "subText": "",
+    "text": "On the Holy Spirit",
+    "subText": "Chapter 17",
     "section": ""
   },
   {
@@ -18890,8 +18891,8 @@
       "homoousios"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.ix.html#:~:text=rather%20was",
-    "text": "",
-    "subText": "",
+    "text": "On the Holy Spirit",
+    "subText": "Chapter 8",
     "section": ""
   },
   {
@@ -18912,8 +18913,8 @@
       "deuterocanon"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.vii.html#:~:text=Standing%20and%20sitting",
-    "text": "",
-    "subText": "",
+    "text": "On the Holy Spirit",
+    "subText": "Chapter 6",
     "section": ""
   },
   {
@@ -18934,8 +18935,8 @@
       "deity of Christ"
     ],
     "url": "https://ccel.org/ccel/schaff/npnf208/npnf208.vii.vii.html#:~:text=consistent",
-    "text": "",
-    "subText": "",
+    "text": "On the Holy Spirit",
+    "subText": "Chapter 6",
     "section": ""
   },
   {
@@ -19185,8 +19186,8 @@
       "spiritual life",
       "purity"
     ],
-    "url": "https://maypoleofwisdom.com/wp-content/uploads/2024/08/658857686-wounded-by-love.pdf",
-    "text": "",
+    "url": "https://www.scribd.com/document/658857686/Wounded-by-Love#page=80",
+    "text": "Wounded by Love",
     "subText": "",
     "section": ""
   },
@@ -19272,9 +19273,9 @@
       "love",
       "sacrifice"
     ],
-    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf",
-    "text": "",
-    "subText": "",
+    "url": "http://www.prudencetrue.com/images/TheLadderofDivineAscent.pdf#:~:text=let%20us%20love,in%20order%20to%20regain%20their%20former%20love",
+    "text": "The Ladder of Divine Ascent",
+    "subText": "Step 1",
     "section": ""
   },
   {
@@ -19418,7 +19419,7 @@
     "id": "saint-1006",
     "type": "saint",
     "topic": "On the Spiritual Life",
-    "quote": "\"He who hates his sins will cease to sin, and he who confesses them will receive forgiveness. It is impossible for a man to forsake the habit of sin if he does not first acquire a hatred of sin; and it is impossible to receive forgiveness before a confession of iniquities. With the latter (i.e. confession) there is real abasement, and with the former (i.e. hatred of sin) there is remorse arising from shame that cleaves to the heart.\" -- Saint Isaac the Syrian (613-700 AD), Ascetical Homilies, Homily 32, Page 152",
+    "quote": "\"He who hates his sins will cease to sin, and he who confesses them will receive forgiveness.\" -- Saint Isaac the Syrian (613-700 AD), Ascetical Homilies, Homily 32, Page 152",
     "reference": "Ascetical Homilies, Homily 32, Page 152",
     "source": "Saint Isaac the Syrian (613-700 AD)",
     "tags": [
@@ -19429,10 +19430,10 @@
       "confession",
       "forgiveness"
     ],
-    "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf#:~:text=he%20who%20hates,who%20confesses%20them%20will%20receive%20forgiveness",
+    "text": "Homilies",
+    "subText": "Ascetical Homilies",
+    "section": "Homily 32"
   },
   {
     "id": "saint-1007",
@@ -19532,10 +19533,10 @@
       "christian living",
       "works"
     ],
-    "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://cdn.subsplash.com/documents/9XTSHD/_source/adfa0743-1e31-4430-9669-b506c79906fa/document.pdf#:~:text=if%20you%20compel%20your%20body,bring%20greater%20confusion%20upon%20her",
+    "text": "Homilies",
+    "subText": "Ascetical Homilies",
+    "section": "Homily 48"
   },
   {
     "id": "saint-1013",
@@ -19841,10 +19842,10 @@
       "intelligence",
       "will of God"
     ],
-    "url": "https://www.holybooks.com/wp-content/uploads/Philokalia.pdf#:~:text=intelligent%20men%20have",
-    "text": "",
-    "subText": "",
-    "section": ""
+    "url": "https://www.holybooks.com/wp-content/uploads/Philokalia.pdf#:~:text=intelligent%20men%20have,For%20in%20this%20way%20men%20regain%20life%20and%20eternal%20light",
+    "text": "Philokalia (Volume I)",
+    "subText": "On the Character of Men and on the Virtuous Life",
+    "section": "One Hundred and Seventy Texts"
   },
   {
     "id": "saint-1030",
