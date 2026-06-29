@@ -933,6 +933,9 @@
     }
     .modal-close:hover { border-color: var(--accent); color: var(--accent); }
     .modal-topic { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); margin-bottom: 16px; }
+    .modal-topic-link { cursor: pointer; transition: var(--transition); }
+    .modal-topic-link:hover { opacity: 0.7; }
+    .modal-topic-link.active { text-decoration: underline; text-underline-offset: 3px; }
     .modal-quote { font-family: var(--font-quote); font-size: 18px; line-height: 1.9; color: var(--text-primary); margin-bottom: 24px; }
     .modal-source { font-size: 14px; font-weight: 600; color: var(--accent); margin-bottom: 4px; }
     .modal-source-link { cursor: pointer; transition: var(--transition); }
@@ -1940,7 +1943,18 @@
     const modalClose = document.getElementById('modalClose');
 
     function openModal(q) {
-      document.getElementById('modalTopic').textContent = q.topic || '';
+      // Render topic in modal (clickable)
+      if (q.topic) {
+        const topicKey = activeSection === 'council' ? 'type' : 'topics';
+        const isTopicActive = activeFilters[activeSection][topicKey] && activeFilters[activeSection][topicKey].includes(q.topic);
+        document.getElementById('modalTopic').innerHTML = `<span class="modal-topic-link${isTopicActive ? ' active' : ''}" data-modal-topic="${escAttr(q.topic)}">${escHtml(q.topic)}</span>`;
+        document.querySelector('[data-modal-topic]').addEventListener('click', () => {
+          setTopicFilter(q.topic);
+          document.querySelector('[data-modal-topic]').classList.toggle('active');
+        });
+      } else {
+        document.getElementById('modalTopic').textContent = '';
+      }
       document.getElementById('modalQuote').textContent = q.quote || '';
       const isSaintActive = activeFilters[activeSection].saints && activeFilters[activeSection].saints.includes(q.source);
       document.getElementById('modalSource').innerHTML = q.source ? `<span class="modal-source-link${isSaintActive ? ' active' : ''}" data-modal-saint="${escAttr(q.source)}">${escHtml(q.source)}</span>` : '';
@@ -2111,10 +2125,12 @@
         document.getElementById('aiSearch').value = '';
         document.getElementById('searchStatus').textContent = '';
       }
-      activeFilters[activeSection].tab = 'topics';
+      // Switch to the appropriate sidebar tab
+      const sidebarTab = activeSection === 'council' ? 'councils' : 'topics';
+      activeFilters[activeSection].tab = sidebarTab;
       // Update sidebar tab UI
       const panel = document.querySelector(`[data-panel="${activeSection}"]`);
-      panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === 'topics'));
+      panel.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === sidebarTab));
       renderFilterList(activeSection);
       renderCards();
       updateQuoteCount();
