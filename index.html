@@ -1956,14 +1956,16 @@
         document.getElementById('modalTopic').textContent = '';
       }
       document.getElementById('modalQuote').textContent = q.quote || '';
-      const isSaintActive = activeFilters[activeSection].saints && activeFilters[activeSection].saints.includes(q.source);
+      const modalSourceKey = activeSection === 'text' ? 'documents' : activeSection === 'council' ? 'councils' : 'saints';
+      const isSaintActive = activeFilters[activeSection][modalSourceKey] && activeFilters[activeSection][modalSourceKey].includes(q.source);
       document.getElementById('modalSource').innerHTML = q.source ? `<span class="modal-source-link${isSaintActive ? ' active' : ''}" data-modal-saint="${escAttr(q.source)}">${escHtml(q.source)}</span>` : '';
 
       // Attach modal saint click handler
       const modalSaintEl = document.querySelector('[data-modal-saint]');
       if (modalSaintEl) {
         modalSaintEl.addEventListener('click', () => {
-          const arr = activeFilters[activeSection].saints;
+          const sourceKey = activeSection === 'text' ? 'documents' : activeSection === 'council' ? 'councils' : 'saints';
+          const arr = activeFilters[activeSection][sourceKey];
           if (arr) {
             const sIdx = arr.indexOf(q.source);
             if (sIdx > -1) arr.splice(sIdx, 1);
